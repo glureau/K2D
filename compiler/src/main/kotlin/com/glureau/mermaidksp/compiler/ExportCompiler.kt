@@ -1,22 +1,6 @@
-/*
- * Copyright 2022 Deezer.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-
 package com.glureau.mermaidksp.compiler
 
+import MermaidGraph
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.isPublic
 import com.google.devtools.ksp.processing.Dependencies
@@ -30,7 +14,9 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSDeclaration
 import com.google.devtools.ksp.symbol.KSFile
+import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.symbol.KSPropertyDeclaration
+import com.google.devtools.ksp.symbol.KSType
 import com.google.devtools.ksp.symbol.KSVisitorVoid
 import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 
@@ -50,28 +36,47 @@ class ExportCompiler(private val environment: SymbolProcessorEnvironment) : Symb
     override fun process(resolver: Resolver): List<KSAnnotated> {
 
         Logger.warn("process")
-        val exportVisitor = ExportVisitor(resolver)
-        /*resolver.getSymbolsWithAnnotation(
-            annotationName = KustomExport::class.qualifiedName!!,
+        resolver.getSymbolsWithAnnotation(
+            annotationName = MermaidGraph::class.qualifiedName!!,
             inDepth = true
         )
-            .forEach { it.accept(exportVisitor, Unit) }
-        */
+            .forEach { annotated ->
+                annotated.annotations
+                    .filter { it.annotationType.resolve().declaration.qualifiedName?.asString() == MermaidGraph::class.qualifiedName }
+                    .forEach { annotation ->
+                        val name = annotation.getArg<String>(MermaidGraph::name)
+                        val klasses = annotation.getArg<List<KSType>>(MermaidGraph::klasses)
+                        generate(resolver, klasses.map { it.declaration }.asSequence(), name)
+                    }
+            }
 
-        resolver.getAllFiles().forEach { it.accept(exportVisitor, Unit) }
-
-        val content = exportVisitor.stringBuilder.toString() + "```"
-        environment.codeGenerator.createNewFile(
-            Dependencies(false, *exportVisitor.allFiles.toTypedArray()),
-            "",
-            "MermaidUml",
-            "md"
-        ).use {
-            it.write(content.toByteArray())
-            it.close()
-        }
+        val nodeSequence: Sequence<KSNode> = resolver.getAllFiles()
+        generate(resolver, nodeSequence, "MermaidUml")
 
         return emptyList()
+    }
+
+    private fun generate(
+        resolver: Resolver,
+        nodeSequence: Sequence<KSNode>,
+        fileName: String
+    ) {
+        val exportVisitor = ExportVisitor(resolver)
+        nodeSequence.forEach { it.accept(exportVisitor, Unit) }
+        val content = exportVisitor.stringBuilder.toString() + "```"
+        try {
+            environment.codeGenerator.createNewFile(
+                Dependencies(false, *exportVisitor.allFiles.toTypedArray()),
+                "",
+                fileName,
+                "md"
+            ).use {
+                it.write(content.toByteArray())
+                it.close()
+            }
+        } catch (t: Throwable) {
+            // TODO: to be checked later...
+        }
     }
 
     @KotlinPoetKspPreview

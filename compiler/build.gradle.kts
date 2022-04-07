@@ -33,7 +33,7 @@ sourceSets.main {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "deezer.kustomexport"
+            groupId = "com.glureau.mermaidksp"
             artifactId = "compiler"
 
             from(components["java"])

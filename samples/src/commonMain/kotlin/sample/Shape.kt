@@ -1,6 +1,11 @@
 package sample
 
+import MermaidGraph
+
 data class Position(val x: Float, val y: Float)
+
+@MermaidGraph("Shapes", [Shape::class, Polygon::class, Circle::class, Rectangle::class])
+@MermaidGraph("SquareToShape", [Shape::class, Polygon::class, Square::class])
 interface Shape {
     val originPosition: Position
     fun computeSurface(): Float {

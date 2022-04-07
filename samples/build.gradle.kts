@@ -12,14 +12,9 @@ kotlin {
             languageSettings.optIn("kotlin.js.ExperimentalJsExport")
         }
         val commonMain by getting {
-            // KSP issue is limiting JS generation at the moment
-            // https://github.com/google/ksp/issues/728
-            /*
-            kotlin.srcDir("build/generated/ksp/commonMain/kotlin")
-
             dependencies {
                 implementation(project(":lib"))
-            }*/
+            }
         }
     }
 }

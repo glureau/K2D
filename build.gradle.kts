@@ -23,8 +23,8 @@ plugins {
 }
 
 allprojects {
-    group = "deezer.kustomexport"
-    version = "0.5.0"
+    group = "com.glureau.mermaidksp"
+    version = "0.1.0"
 
     repositories {
         mavenLocal()
@@ -81,7 +81,7 @@ tasks.create<Sync>("copyMavenLocalArtifacts") {
 }
 
 gitPublish {
-    repoUri.set("git@github.com:deezer/KustomExport.git")
+    repoUri.set("git@github.com:glureau/MermaidKsp.git")
     branch.set("mvn-repo")
     contents.from("$buildDir/mvn-repo")
     preserve { include("**") }
