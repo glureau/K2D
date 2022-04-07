@@ -1,0 +1,5 @@
+.idea
+**/build
+samples/node_modules/
+local.properties
+kotlin-js-store
