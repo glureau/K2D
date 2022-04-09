@@ -38,11 +38,11 @@ rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJ
     rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().nodeVersion = "16.0.0"
 }
 
-if (localProperties.getProperty("REPOSITORY_URL") != null)
-    subprojects {
-        apply(plugin = "maven-publish")
-        publishing {
-            repositories {
+subprojects {
+    apply(plugin = "maven-publish")
+    publishing {
+        repositories {
+            if (localProperties.getProperty("REPOSITORY_URL") != null) {
                 maven {
                     url = uri(localProperties.getProperty("REPOSITORY_URL"))
                     credentials {
@@ -53,6 +53,7 @@ if (localProperties.getProperty("REPOSITORY_URL") != null)
             }
         }
     }
+}
 
 val gitUser = System.getenv("GIT_USER")
 val gitPassword = System.getenv("GIT_PASSWORD")
