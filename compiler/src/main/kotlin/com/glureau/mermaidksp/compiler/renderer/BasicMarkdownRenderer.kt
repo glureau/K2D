@@ -1,16 +1,13 @@
 package com.glureau.mermaidksp.compiler.renderer
 
 import com.glureau.mermaidksp.compiler.MermaidClass
-import com.google.devtools.ksp.processing.Dependencies
+import com.glureau.mermaidksp.compiler.writeMarkdown
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
-import com.google.devtools.ksp.symbol.KSFile
 
 class BasicMarkdownRenderer(private val environment: SymbolProcessorEnvironment) {
     fun render(data: MutableMap<String, MermaidClass>, fileName: String) {
         val stringBuilder = StringBuilder()
         stringBuilder.append("# Mermaid & KSP\n")
-        stringBuilder.append("${environment.options.entries.joinToString()}\n\n")
-        stringBuilder.append("${environment.options.values.joinToString()}\n\n")
         stringBuilder.append("```mermaid\n")
         stringBuilder.append(MermaidClassRenderer().renderClassDiagram(data))
         stringBuilder.append("```\n")
@@ -55,18 +52,7 @@ class BasicMarkdownRenderer(private val environment: SymbolProcessorEnvironment)
 
         val content = stringBuilder.toString().toByteArray()
 
-        environment.writeMarkdown(content, fileName, files)
-    }
-}
-
-private fun SymbolProcessorEnvironment.writeMarkdown(content: ByteArray, fileName: String, dependencies: List<KSFile>) {
-    codeGenerator.createNewFile(
-        Dependencies(false, *dependencies.toTypedArray()),
-        "",
-        fileName,
-        "md"
-    ).use {
-        it.write(content)
-        it.close()
+        environment.logger.warn("Rendering markdown $fileName")
+        environment.writeMarkdown(content, "", fileName, files)
     }
 }

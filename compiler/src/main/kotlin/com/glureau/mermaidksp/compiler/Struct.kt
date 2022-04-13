@@ -85,6 +85,7 @@ sealed interface MermaidClassOrBasic {
 data class Basic(override val className: String) : MermaidClassOrBasic
 data class MermaidClass(
     val qualifiedName: String, // Should be unique for a given class
+    val packageName:String,
     val originFile: KSFile?,
     val visibility: MermaidVisibility,
     override val className: String,

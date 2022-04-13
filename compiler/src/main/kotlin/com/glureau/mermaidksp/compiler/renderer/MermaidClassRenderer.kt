@@ -38,7 +38,7 @@ class MermaidClassRenderer(
             }
             c.functions.forEach { f ->
                 if (f.shouldDisplay())
-                    stringBuilder.append("${f.visibility}${f.funcName}(${f.parameters.joinToString { it.className }}) ${f.returnType?.className ?: ""}\n")
+                    stringBuilder.append("    ${f.visibility}${f.funcName}(${f.parameters.joinToString { it.className }}) ${f.returnType?.className ?: ""}\n")
             }
             stringBuilder.append("  }\n")
             if (conf.showImplements) {
@@ -55,6 +55,10 @@ class MermaidClassRenderer(
                         stringBuilder.append("  ${c.className} ${Relationship.Composition} ${p.type.className} : has\n")
                     }
                 }
+            }
+            c.originFile?.let {
+                //https://github.deezerdev.com/pages/Deezer/KMPP-documentation/KMPP/1.0.0/models/XModels/com.deezer.kmp.player.models/index.html
+                stringBuilder.append("  click ${c.className} href \"file://${it.filePath}\" \"Open ${c.className}\"\n")
             }
         }
         return stringBuilder.toString()

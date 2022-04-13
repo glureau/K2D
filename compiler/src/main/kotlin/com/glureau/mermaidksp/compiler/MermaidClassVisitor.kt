@@ -49,6 +49,7 @@ class MermaidClassVisitor(val resolver: Resolver) : KSVisitorVoid() {
         classes[qualifiedName]?.let { return it }
         val klass = MermaidClass(
             qualifiedName = qualifiedName,
+            packageName = classDeclaration.packageName.asString(),
             originFile = classDeclaration.containingFile,
             visibility = classDeclaration.getMermaidVisibility(),
             className = classDeclaration.simpleName.asString(),
