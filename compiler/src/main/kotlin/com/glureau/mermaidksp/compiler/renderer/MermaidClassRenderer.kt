@@ -1,6 +1,8 @@
 package com.glureau.mermaidksp.compiler.renderer
 
+import com.glureau.mermaidksp.compiler.Logger
 import com.glureau.mermaidksp.compiler.MermaidClass
+import com.glureau.mermaidksp.compiler.MermaidClassType
 import com.glureau.mermaidksp.compiler.MermaidFunction
 import com.glureau.mermaidksp.compiler.MermaidProperty
 import com.glureau.mermaidksp.compiler.MermaidVisibility
@@ -30,15 +32,27 @@ class MermaidClassRenderer(
         val stringBuilder = StringBuilder()
         stringBuilder.append("classDiagram\n")
         classes.values.forEach { c ->
+
+            if (c.classType == MermaidClassType.EnumEntry && c.properties.size == 2 && c.functions.size == 5) return@forEach
+
             stringBuilder.append("  class ${c.className} {\n")
             if (conf.showClassType) stringBuilder.append("    ${c.classType}\n")
             c.properties.forEach { p ->
-                if (p.shouldDisplay())
+                if (p.shouldDisplay() && (c.classType != MermaidClassType.Enum || p.propName !in listOf(
+                        "name",
+                        "ordinal"
+                    ))
+                )
                     stringBuilder.append("    ${p.visibility}${p.propName} ${p.type.className}\n")
             }
             c.functions.forEach { f ->
                 if (f.shouldDisplay())
                     stringBuilder.append("    ${f.visibility}${f.funcName}(${f.parameters.joinToString { it.className }}) ${f.returnType?.className ?: ""}\n")
+            }
+            if (c.classType == MermaidClassType.Enum) {
+                c.inners.forEach { i ->
+                    stringBuilder.append("    [[ ${i.className} ]]\n")
+                }
             }
             stringBuilder.append("  }\n")
             if (conf.showImplements) {

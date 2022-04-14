@@ -44,7 +44,7 @@ object Relationship {
     val ImplementReverse =
         MermaidRelationShip(MermaidRelationType.Inheritance, MermaidRelationLink.Solid, MermaidRelationType.None)
     val Composition =
-        MermaidRelationShip(MermaidRelationType.None, MermaidRelationLink.Solid, MermaidRelationType.Composition)
+        MermaidRelationShip(MermaidRelationType.None, MermaidRelationLink.Dashed, MermaidRelationType.Composition)
     val Aggregation =
         MermaidRelationShip(MermaidRelationType.None, MermaidRelationLink.Solid, MermaidRelationType.Aggregation)
     // Do we need more? https://mermaid-js.github.io/mermaid/#/classDiagram?id=defining-relationship
@@ -54,7 +54,9 @@ enum class MermaidClassType(private val txt: String) {
     Interface("<<interface>>"),
     Enum("<<enum>>"),
     EnumEntry("<<enum entry>>"),
-    Sealed("<<sealed>>"),
+    SealedClass("<<sealed>>"),
+    DataClass("<<data class>>"),
+    ValueClass("<<value class>>"),
     Class("<<class>>"),
     Object("<<object>>"),
     Annotation("<<annotation>>"),
@@ -83,9 +85,9 @@ sealed interface MermaidClassOrBasic {
 }
 
 data class Basic(override val className: String) : MermaidClassOrBasic
-data class MermaidClass(
+data class MermaidClass constructor(
     val qualifiedName: String, // Should be unique for a given class
-    val packageName:String,
+    val packageName: String,
     val originFile: KSFile?,
     val visibility: MermaidVisibility,
     override val className: String,
@@ -93,4 +95,5 @@ data class MermaidClass(
     var supers: List<MermaidClassOrBasic> = emptyList(),
     var properties: List<MermaidProperty> = emptyList(),
     var functions: List<MermaidFunction> = emptyList(),
+    var inners: List<MermaidClass> = emptyList(),
 ) : MermaidClassOrBasic

@@ -18,7 +18,6 @@
 package com.glureau.mermaidksp.compiler
 
 import com.google.devtools.ksp.getVisibility
-import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.ClassKind
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSDeclaration
@@ -32,8 +31,9 @@ import com.google.devtools.ksp.symbol.Visibility
 import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 
 @KotlinPoetKspPreview
-class MermaidClassVisitor(val resolver: Resolver) : KSVisitorVoid() {
+class MermaidClassVisitor : KSVisitorVoid() {
     val classes = mutableMapOf<String, MermaidClass>()
+    val moduleClasses = mutableSetOf<String>()
 
     override fun visitFile(file: KSFile, data: Unit) {
         file.declarations.forEach { it.accept(this, Unit) }
@@ -42,10 +42,11 @@ class MermaidClassVisitor(val resolver: Resolver) : KSVisitorVoid() {
     override fun visitClassDeclaration(classDeclaration: KSClassDeclaration, data: Unit) {
         scan(classDeclaration)
         classDeclaration.declarations.forEach { it.accept(this, Unit) }
+        moduleClasses.add(classDeclaration.qualifiedName!!.asString()) // TODO: null to be handled later
     }
 
     private fun scan(classDeclaration: KSClassDeclaration): MermaidClass {
-        val qualifiedName = classDeclaration.qualifiedName!!.asString()
+        val qualifiedName = classDeclaration.qualifiedName!!.asString() // TODO: null to be handled later
         classes[qualifiedName]?.let { return it }
         val klass = MermaidClass(
             qualifiedName = qualifiedName,
@@ -55,11 +56,15 @@ class MermaidClassVisitor(val resolver: Resolver) : KSVisitorVoid() {
             className = classDeclaration.simpleName.asString(),
             classType = classDeclaration.getMermaidClassType(),
         )
+        if (classDeclaration.classKind == ClassKind.ENUM_ENTRY) {
+            classDeclaration.declarations
+        }
         // Store BEFORE visiting other prop/func so that it can be retrieved from the map (and avoid infinite loop)
         classes[qualifiedName] = klass
         klass.properties = classDeclaration.getAllProperties().mapNotNull { it.toMermaidProperty() }.toList()
         klass.functions = classDeclaration.getAllFunctions().mapNotNull { it.toMermaidFunction() }.toList()
         klass.supers = classDeclaration.superTypes.mapNotNull { it.getMermaidClass() }.toList()
+        klass.inners = classDeclaration.declarations.mapNotNull { if (it is KSClassDeclaration) scan(it) else null }.toList()
         return klass
     }
 
@@ -68,7 +73,7 @@ class MermaidClassVisitor(val resolver: Resolver) : KSVisitorVoid() {
         val qualifiedName = decl.qualifiedName?.asString() ?: return null
 
         val mermaidClass = if (
-            qualifiedName.startsWith("kotlin.") ||
+            qualifiedName.startsWith("kotlin.") || // TODO: User option to be parameterized?
             qualifiedName.startsWith("java.")
         ) {
             Basic(decl.simpleName.asString())
@@ -84,6 +89,7 @@ class MermaidClassVisitor(val resolver: Resolver) : KSVisitorVoid() {
         )
     }
 
+    // TODO: User option to be parameterized?
     private val ignoredFunctionNames = listOf("copy", "<init>") + (1..30).map { "component$it" }
     private fun KSFunctionDeclaration.toMermaidFunction(): MermaidFunction? {
         if (this.simpleName.asString() in ignoredFunctionNames) return null
@@ -100,7 +106,7 @@ class MermaidClassVisitor(val resolver: Resolver) : KSVisitorVoid() {
         val decl = resolve().declaration
         val qualifiedName = decl.qualifiedName?.asString() ?: return null
         return if (
-            qualifiedName.startsWith("kotlin.") ||
+            qualifiedName.startsWith("kotlin.") ||  // TODO: User option to be parameterized?
             qualifiedName.startsWith("java.") ||
             decl !is KSClassDeclaration
         ) {
@@ -123,7 +129,14 @@ class MermaidClassVisitor(val resolver: Resolver) : KSVisitorVoid() {
     private fun KSClassDeclaration.getMermaidClassType(): MermaidClassType =
         when (classKind) {
             ClassKind.INTERFACE -> MermaidClassType.Interface
-            ClassKind.CLASS -> MermaidClassType.Class
+            ClassKind.CLASS -> {
+                when {
+                    modifiers.contains(Modifier.SEALED) -> MermaidClassType.SealedClass
+                    modifiers.contains(Modifier.DATA) -> MermaidClassType.DataClass
+                    modifiers.contains(Modifier.VALUE) -> MermaidClassType.ValueClass
+                    else -> MermaidClassType.Class
+                }
+            }
             ClassKind.ENUM_CLASS -> MermaidClassType.Enum
             ClassKind.ENUM_ENTRY -> MermaidClassType.EnumEntry
             ClassKind.OBJECT -> MermaidClassType.Object
