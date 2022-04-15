@@ -17,7 +17,7 @@ class PackageMarkdownRenderer(private val environment: SymbolProcessorEnvironmen
                 val stringBuilder = StringBuilder()
                 stringBuilder.append("# Package $packageName\n\n")
                 stringBuilder.append("```mermaid\n")
-                stringBuilder.append(MermaidClassRenderer().renderClassDiagram(classes))
+                stringBuilder.append(MermaidClassRenderer(MermaidRendererConfiguration(baseUrl = "..")).renderClassDiagram(classes))
                 stringBuilder.append("```\n")
                 val content = stringBuilder.toString().toByteArray()
 

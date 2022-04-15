@@ -21,7 +21,9 @@ data class MermaidRendererConfiguration(
     val showImplements: Boolean = true,
     val showHas: Boolean = true,
 
-    val basicIsDown: Boolean = true
+    val basicIsDown: Boolean = false,
+
+    val baseUrl: String = "."
 )
 
 class MermaidClassRenderer(
@@ -33,16 +35,15 @@ class MermaidClassRenderer(
         stringBuilder.append("classDiagram\n")
         classes.values.forEach { c ->
 
-            if (c.classType == MermaidClassType.EnumEntry && c.properties.size == 2 && c.functions.size == 5) return@forEach
+            if (!conf.showInternal && c.visibility == MermaidVisibility.Internal) return@forEach
+
+            //if (c.classType == MermaidClassType.EnumEntry && c.properties.all { it.overrides } && c.functions.all { it.overrides }) return@forEach
+            if (c.classType == MermaidClassType.EnumEntry) return@forEach // Ignoring for now...
 
             stringBuilder.append("  class ${c.className} {\n")
             if (conf.showClassType) stringBuilder.append("    ${c.classType}\n")
             c.properties.forEach { p ->
-                if (p.shouldDisplay() && (c.classType != MermaidClassType.Enum || p.propName !in listOf(
-                        "name",
-                        "ordinal"
-                    ))
-                )
+                if (p.shouldDisplay(c))
                     stringBuilder.append("    ${p.visibility}${p.propName} ${p.type.className}\n")
             }
             c.functions.forEach { f ->
@@ -65,27 +66,41 @@ class MermaidClassRenderer(
             }
             if (conf.showHas) {
                 c.properties.forEach { p ->
-                    if (p.type is MermaidClass) {
+                    val shouldDisplay = p.shouldDisplay(c)
+                    Logger.warn("Should display? ${c.className}->${p.type.className} ${p.type is MermaidClass} && $shouldDisplay")
+                    if (p.type is MermaidClass && shouldDisplay) {
                         stringBuilder.append("  ${c.className} ${Relationship.Composition} ${p.type.className} : has\n")
                     }
                 }
             }
-            c.originFile?.let {
-                //https://github.deezerdev.com/pages/Deezer/KMPP-documentation/KMPP/1.0.0/models/XModels/com.deezer.kmp.player.models/index.html
-                stringBuilder.append("  click ${c.className} href \"file://${it.filePath}\" \"Open ${c.className}\"\n")
-            }
+            // Cannot write a tooltip for now when using generics: https://github.com/mermaid-js/mermaid/issues/2944
+            stringBuilder.append("  click ${c.className} href \"${conf.baseUrl}/${c.packageName}/${c.className.asDokkaHtmlPageFormat()}\"\n")// \"Open ${c.className.substringBefore("~")}\"\n")
         }
         return stringBuilder.toString()
     }
 
-    private fun MermaidProperty.shouldDisplay(): Boolean =
-        when (visibility) {
+    private fun MermaidProperty.shouldDisplay(containerClass: MermaidClass): Boolean {
+        Logger.warn(
+            "Class=${containerClass.className}\n" +
+                "conf.showOverride=${conf.showOverride}\n" +
+                "overrides=$overrides\n" +
+                "propName=$propName\n" +
+                "visibility=$visibility\n" +
+                "conf.showPublic=${conf.showPublic}"
+        )
+        if (!conf.showOverride && overrides) return false.also {
+            Logger.warn("OVERRIDE IS OUT")
+        }
+        if (containerClass.classType == MermaidClassType.Enum && propName in listOf("name", "ordinal")) return false.also {
+            Logger.warn("ENUM IS OUT")
+        }
+        return when (visibility) {
             MermaidVisibility.Public -> conf.showPublic
             MermaidVisibility.Private -> conf.showPrivate
             MermaidVisibility.Protected -> conf.showProtected
             MermaidVisibility.Internal -> conf.showInternal
-        } &&
-            (conf.showOverride || !overrides)
+        }
+    }
 
     private fun MermaidFunction.shouldDisplay(): Boolean =
         when (visibility) {
@@ -96,3 +111,13 @@ class MermaidClassRenderer(
         } &&
             (conf.showOverride || !overrides)
 }
+
+private fun String.asDokkaHtmlPageFormat(): String {
+    var str = this.substringBefore("~")
+    while (str.contains(Regex("[A-Z]"))) {
+        val index = str.indexOfFirst { it in 'A'..'Z' }
+        str = str.substring(0, index) + "-" + str[index].lowercase() + str.substring(index + 1, str.length)
+    }
+    return "$str/index.html"
+}
+

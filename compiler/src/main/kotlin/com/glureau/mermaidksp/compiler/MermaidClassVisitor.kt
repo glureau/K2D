@@ -53,7 +53,7 @@ class MermaidClassVisitor : KSVisitorVoid() {
             packageName = classDeclaration.packageName.asString(),
             originFile = classDeclaration.containingFile,
             visibility = classDeclaration.getMermaidVisibility(),
-            className = classDeclaration.simpleName.asString(),
+            className = classDeclaration.getMermaidClassName(),
             classType = classDeclaration.getMermaidClassType(),
         )
         if (classDeclaration.classKind == ClassKind.ENUM_ENTRY) {
@@ -61,14 +61,16 @@ class MermaidClassVisitor : KSVisitorVoid() {
         }
         // Store BEFORE visiting other prop/func so that it can be retrieved from the map (and avoid infinite loop)
         classes[qualifiedName] = klass
-        klass.properties = classDeclaration.getAllProperties().mapNotNull { it.toMermaidProperty() }.toList()
+        klass.properties =
+            classDeclaration.getAllProperties().mapNotNull { it.toMermaidProperty(classDeclaration.classKind) }.toList()
         klass.functions = classDeclaration.getAllFunctions().mapNotNull { it.toMermaidFunction() }.toList()
         klass.supers = classDeclaration.superTypes.mapNotNull { it.getMermaidClass() }.toList()
-        klass.inners = classDeclaration.declarations.mapNotNull { if (it is KSClassDeclaration) scan(it) else null }.toList()
+        klass.inners =
+            classDeclaration.declarations.mapNotNull { if (it is KSClassDeclaration) scan(it) else null }.toList()
         return klass
     }
 
-    private fun KSPropertyDeclaration.toMermaidProperty(): MermaidProperty? {
+    private fun KSPropertyDeclaration.toMermaidProperty(classKind: ClassKind): MermaidProperty? {
         val decl = type.resolve().declaration
         val qualifiedName = decl.qualifiedName?.asString() ?: return null
 
@@ -81,11 +83,13 @@ class MermaidClassVisitor : KSVisitorVoid() {
             this.type.getMermaidClass()!!
         }
 
+        val propName = this.simpleName.asString()
+        val overrides = (classKind == ClassKind.ENUM_ENTRY) || this.modifiers.contains(Modifier.OVERRIDE) || this.findOverridee() != null
         return MermaidProperty(
             visibility = this.getMermaidVisibility(),
-            propName = this.simpleName.asString(),
+            propName = propName,
             type = mermaidClass,
-            overrides = this.modifiers.contains(Modifier.OVERRIDE),
+            overrides = overrides,
         )
     }
 
@@ -96,6 +100,7 @@ class MermaidClassVisitor : KSVisitorVoid() {
         return MermaidFunction(
             visibility = this.getMermaidVisibility(),
             funcName = this.simpleName.asString(),
+            // We could retrieve the name of parameters...
             parameters = this.parameters.mapNotNull { it.type.getMermaidClass() },
             returnType = this.returnType?.getMermaidClass(),
             overrides = this.modifiers.contains(Modifier.OVERRIDE)
@@ -110,7 +115,8 @@ class MermaidClassVisitor : KSVisitorVoid() {
             qualifiedName.startsWith("java.") ||
             decl !is KSClassDeclaration
         ) {
-            Basic(decl.simpleName.asString())
+            Basic(toString())
+            //Basic(decl.getMermaidClassName())
         } else {
             scan(decl)
         }
@@ -125,6 +131,34 @@ class MermaidClassVisitor : KSVisitorVoid() {
             Visibility.LOCAL -> MermaidVisibility.Private
             Visibility.JAVA_PACKAGE -> MermaidVisibility.Private
         }
+
+    private val functionTypeNames = (0..22).map { "Function$it" }
+    private fun KSDeclaration.getMermaidClassName(): String {
+        if (this is KSClassDeclaration) {
+            if (this.typeParameters.isNotEmpty()) {
+                fun Sequence<KSTypeReference>.cleanString(): String {
+                    val list = toList()
+                    if (list.isEmpty()) return ""
+                    return joinToString(
+                        prefix = ":"
+                    ) { b -> b.element.toString() }
+                }
+                if (functionTypeNames.contains(simpleName.asString())) {
+                    // Not sure if this is required here after all...
+                    val returnType = typeParameters.last().getMermaidClassName()
+                    val params = typeParameters.dropLast(1).joinToString { tp ->
+                        tp.getMermaidClassName() + tp.bounds.cleanString()
+                    }
+                    return "($params)->$returnType"
+                } else {
+                    return simpleName.asString() + "~" + typeParameters.joinToString { tp ->
+                        tp.getMermaidClassName() + tp.bounds.cleanString()
+                    } + "~"
+                }
+            }
+        }
+        return simpleName.asString()
+    }
 
     private fun KSClassDeclaration.getMermaidClassType(): MermaidClassType =
         when (classKind) {

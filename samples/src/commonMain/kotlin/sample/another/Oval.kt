@@ -6,6 +6,7 @@ import sample.Rectangle
 import sample.Shape
 import sample.Square
 
+@Suppress("Unused")
 data class Oval(
     override val originPosition: Position,
     val distanceBetweenPoints: Float,
@@ -26,6 +27,7 @@ data class Oval(
     }
 }
 
+@Suppress("Unused")
 class TheTrap {
     val foo: Int = 0
 }

@@ -14,7 +14,6 @@ class ModuleMarkdownRenderer(private val environment: SymbolProcessorEnvironment
 
         // Guess to find the module name...
         val packageAsPath = firstOriginFile.packageName.asString().replace(".", File.separator)
-        Logger.warn("packageAsPath=$packageAsPath")
         val moduleName = firstOriginFile.filePath
             .substringBeforeLast(File.separator + packageAsPath + File.separator)
             // Hoping that such a trick could help support non-KMP project, to be tested...
@@ -27,7 +26,10 @@ class ModuleMarkdownRenderer(private val environment: SymbolProcessorEnvironment
         val stringBuilder = StringBuilder()
         stringBuilder.append("# Module $moduleName\n\n")
         stringBuilder.append("```mermaid\n")
-        stringBuilder.append(MermaidClassRenderer().renderClassDiagram(classes))
+        stringBuilder.append(
+            MermaidClassRenderer(MermaidRendererConfiguration(baseUrl = "."))
+                .renderClassDiagram(classes)
+        )
         stringBuilder.append("```\n")
         val content = stringBuilder.toString().toByteArray()
 
