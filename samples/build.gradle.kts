@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.google.devtools.ksp")
+    id("org.jetbrains.dokka") version "1.6.20"
     id("com.glureau.kflounder") version "0.1.0"
 }
 
@@ -21,5 +22,5 @@ kotlin {
 }
 
 dependencies {
-    add("kspMetadata", project(":compiler"))
+    //add("kspMetadata", project(":compiler"))
 }

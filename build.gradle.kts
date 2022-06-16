@@ -23,7 +23,7 @@ plugins {
 }
 
 allprojects {
-    group = "com.glureau.mermaidksp"
+    group = "com.glureau.kflounder"
     version = "0.1.0"
 
     repositories {
@@ -33,21 +33,18 @@ allprojects {
     }
 }
 
-// Required by M1 for now (no node build for v14 on M1)
-rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
-    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().nodeVersion = "16.0.0"
-}
-
 subprojects {
-    apply(plugin = "maven-publish")
-    publishing {
-        repositories {
-            if (localProperties.getProperty("REPOSITORY_URL") != null) {
-                maven {
-                    url = uri(localProperties.getProperty("REPOSITORY_URL"))
-                    credentials {
-                        username = localProperties.getProperty("REPOSITORY_USERNAME")
-                        password = localProperties.getProperty("REPOSITORY_PASSWORD")
+    if (project.name in listOf("lib", "compiler")) {
+        apply(plugin = "maven-publish")
+        publishing {
+            repositories {
+                if (localProperties.getProperty("REPOSITORY_URL") != null) {
+                    maven {
+                        url = uri(localProperties.getProperty("REPOSITORY_URL"))
+                        credentials {
+                            username = localProperties.getProperty("REPOSITORY_USERNAME")
+                            password = localProperties.getProperty("REPOSITORY_PASSWORD")
+                        }
                     }
                 }
             }
