@@ -1,6 +1,5 @@
 package com.glureau.mermaidksp.compiler.renderer
 
-import com.glureau.mermaidksp.compiler.Logger
 import com.glureau.mermaidksp.compiler.MermaidClass
 import com.glureau.mermaidksp.compiler.MermaidClassType
 import com.glureau.mermaidksp.compiler.MermaidFunction
@@ -67,7 +66,6 @@ class MermaidClassRenderer(
             if (conf.showHas) {
                 c.properties.forEach { p ->
                     val shouldDisplay = p.shouldDisplay(c)
-                    Logger.warn("Should display? ${c.className}->${p.type.className} ${p.type is MermaidClass} && $shouldDisplay")
                     if (p.type is MermaidClass && shouldDisplay) {
                         stringBuilder.append("  ${c.className} ${Relationship.Composition} ${p.type.className} : has\n")
                     }
@@ -80,20 +78,8 @@ class MermaidClassRenderer(
     }
 
     private fun MermaidProperty.shouldDisplay(containerClass: MermaidClass): Boolean {
-        Logger.warn(
-            "Class=${containerClass.className}\n" +
-                "conf.showOverride=${conf.showOverride}\n" +
-                "overrides=$overrides\n" +
-                "propName=$propName\n" +
-                "visibility=$visibility\n" +
-                "conf.showPublic=${conf.showPublic}"
-        )
-        if (!conf.showOverride && overrides) return false.also {
-            Logger.warn("OVERRIDE IS OUT")
-        }
-        if (containerClass.classType == MermaidClassType.Enum && propName in listOf("name", "ordinal")) return false.also {
-            Logger.warn("ENUM IS OUT")
-        }
+        if (!conf.showOverride && overrides) return false
+        if (containerClass.classType == MermaidClassType.Enum && propName in listOf("name", "ordinal")) return false
         return when (visibility) {
             MermaidVisibility.Public -> conf.showPublic
             MermaidVisibility.Private -> conf.showPrivate

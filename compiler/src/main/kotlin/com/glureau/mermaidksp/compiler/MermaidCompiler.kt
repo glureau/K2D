@@ -3,7 +3,6 @@ package com.glureau.mermaidksp.compiler
 import com.glureau.mermaidksp.compiler.renderer.ModuleMarkdownRenderer
 import com.glureau.mermaidksp.compiler.renderer.PackageMarkdownRenderer
 import com.google.devtools.ksp.KspExperimental
-import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
@@ -42,15 +41,6 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
                     }
             }
         */
-
-        // https://github.com/google/ksp/issues/720
-        // Fixed in https://github.com/google/ksp/pull/875, delivered in the 1.6.20-1.0.5
-        // 1.6.20 creates some blocking issues for Deezer, and Dokka is on 1.6.10, so for now we stay on 1.6.10.
-        try {
-            environment.codeGenerator.createNewFile(Dependencies(false), "", "placeholder_mermaid")
-        } catch (faee: FileAlreadyExistsException) {
-            // To be investigated why we do 2 passes...
-        }
 
         val nodeSequence: Sequence<KSNode> = resolver.getNewFiles()
         generate(nodeSequence)

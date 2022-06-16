@@ -64,7 +64,10 @@ class MermaidClassVisitor : KSVisitorVoid() {
         klass.properties =
             classDeclaration.getAllProperties().mapNotNull { it.toMermaidProperty(classDeclaration.classKind) }.toList()
         klass.functions = classDeclaration.getAllFunctions().mapNotNull { it.toMermaidFunction() }.toList()
-        klass.supers = classDeclaration.superTypes.mapNotNull { it.getMermaidClass() }.toList()
+        klass.supers = classDeclaration.superTypes.mapNotNull { it.getMermaidClass() }
+            // Because KSP consider now that every class extends Any, but we don't care about that in graphs.
+            .filter { it.qualifiedName != "kotlin.Any" }
+            .toList()
         klass.inners =
             classDeclaration.declarations.mapNotNull { if (it is KSClassDeclaration) scan(it) else null }.toList()
         return klass
@@ -78,13 +81,18 @@ class MermaidClassVisitor : KSVisitorVoid() {
             qualifiedName.startsWith("kotlin.") || // TODO: User option to be parameterized?
             qualifiedName.startsWith("java.")
         ) {
-            Basic(decl.simpleName.asString())
+            Basic(
+                qualifiedName = qualifiedName,
+                packageName = decl.packageName.asString(),
+                className = decl.simpleName.asString()
+            )
         } else {
             this.type.getMermaidClass()!!
         }
 
         val propName = this.simpleName.asString()
-        val overrides = (classKind == ClassKind.ENUM_ENTRY) || this.modifiers.contains(Modifier.OVERRIDE) || this.findOverridee() != null
+        val overrides =
+            (classKind == ClassKind.ENUM_ENTRY) || this.modifiers.contains(Modifier.OVERRIDE) || this.findOverridee() != null
         return MermaidProperty(
             visibility = this.getMermaidVisibility(),
             propName = propName,
@@ -115,7 +123,11 @@ class MermaidClassVisitor : KSVisitorVoid() {
             qualifiedName.startsWith("java.") ||
             decl !is KSClassDeclaration
         ) {
-            Basic(toString())
+            Basic(
+                qualifiedName = qualifiedName,
+                packageName = decl.packageName.asString(),
+                className = decl.simpleName.asString()
+            )
             //Basic(decl.getMermaidClassName())
         } else {
             scan(decl)

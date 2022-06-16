@@ -81,16 +81,23 @@ data class MermaidFunction(
 )
 
 sealed interface MermaidClassOrBasic {
+    val qualifiedName: String // Should be unique for a given class
+    val packageName: String
     val className: String
 }
 
-data class Basic(override val className: String) : MermaidClassOrBasic
+data class Basic(
+    override val qualifiedName: String,
+    override val packageName: String,
+    override val className: String,
+) : MermaidClassOrBasic
+
 data class MermaidClass constructor(
-    val qualifiedName: String, // Should be unique for a given class
-    val packageName: String,
+    override val qualifiedName: String,
+    override val packageName: String,
+    override val className: String,
     val originFile: KSFile?,
     val visibility: MermaidVisibility,
-    override val className: String,
     val classType: MermaidClassType,
     var supers: List<MermaidClassOrBasic> = emptyList(),
     var properties: List<MermaidProperty> = emptyList(),

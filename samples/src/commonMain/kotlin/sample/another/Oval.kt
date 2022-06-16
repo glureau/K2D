@@ -1,8 +1,6 @@
 package sample.another
 
-import sample.Polygon
 import sample.Position
-import sample.Rectangle
 import sample.Shape
 import sample.Square
 
