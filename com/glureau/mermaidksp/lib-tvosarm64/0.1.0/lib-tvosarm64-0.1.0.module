@@ -1,0 +1,79 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../lib/0.1.0/lib-0.1.0.module",
+    "group": "com.glureau.mermaidksp",
+    "module": "lib",
+    "version": "0.1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "tvosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.6.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lib.klib",
+          "url": "lib-tvosarm64-0.1.0.klib",
+          "size": 4615,
+          "sha512": "46a7f27efba3fb5871fa7a786eebcc65ffc157ceb8331b7eecb2da014525939c7e3ad78c288b49ef619f86d39bf2d0ab602d9be29fee955912b902cced12e0aa",
+          "sha256": "adf5cc666b72e35301b84962fbaa79b51794fe5c9e09b87180de2d08d7f89cbc",
+          "sha1": "85d0c08f4941e0e636ad88f533328bd6e882bc0c",
+          "md5": "38e9d73986ba2d00cad0fa0968ed7b65"
+        }
+      ]
+    },
+    {
+      "name": "tvosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.6.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lib-tvosarm64-0.1.0-metadata.jar",
+          "url": "lib-tvosarm64-0.1.0-metadata.jar",
+          "size": 261,
+          "sha512": "096f8237cfe13e3f6d7c3f3ce63752cf145e0c7ddd9c9aa522a61c80fbe546a165225aeb8525e83c4645efef4fa5f9188d25914c23cb8f82efa516743209ed77",
+          "sha256": "21869e16fbae77dfe243b06366a11957e9d7fa72823cdc2c2f1b9481fec0e9e1",
+          "sha1": "374202c74911cf282dbbad05de7c95f59748cb0c",
+          "md5": "822d62d73b51c4e9314155a57216e7e1"
+        }
+      ]
+    }
+  ]
+}
