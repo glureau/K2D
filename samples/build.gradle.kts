@@ -29,9 +29,7 @@ dependencies {
     add("kspCommonMainMetadata", project(":compiler"))
 }
 
-println(" -- HEY")
 afterEvaluate {
-    println(" -- afterEvaluate")
     val dokkaPlugin = this.configurations.findByName("dokkaPlugin")
     if (dokkaPlugin != null) {
         dependencies.add(dokkaPlugin.name, "com.glureau:html-mermaid-dokka-plugin:0.3.0")
@@ -39,10 +37,8 @@ afterEvaluate {
     val tree = fileTree(buildDir.absolutePath + "/generated/ksp/")
     tree.include("**/package.md")
     tree.include("**/module.md")
-    println(" -- Configuring: $this -> ${buildDir.absolutePath + "/generated/ksp/"}")
 
     tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
-        println("-Configuring: $this")
         dokkaSourceSets {
             configureEach {
                 includes.from(tree.files)
@@ -50,7 +46,6 @@ afterEvaluate {
         }
     }
     tasks.withType<org.jetbrains.dokka.gradle.DokkaTaskPartial>().configureEach {
-        println("-Configuring: $this")
         dokkaSourceSets {
             configureEach {
                 includes.from(tree.files)

@@ -1,3 +1,4 @@
+rootProject.name = "mermaid-ksp"
 pluginManagement {
     val kspVersion: String by settings
 

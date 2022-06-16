@@ -24,7 +24,7 @@ plugins {
 
 allprojects {
     group = "com.glureau.mermaidksp"
-    version = "0.1.0"
+    version = "0.1.1"
 
     repositories {
         mavenLocal()
@@ -63,7 +63,7 @@ tasks.create<Delete>("cleanMavenLocalArtifacts") {
 
 tasks.create<Sync>("copyMavenLocalArtifacts") {
     group = "publishing"
-    dependsOn(":compiler:publishToMavenLocal", ":lib:publishToMavenLocal", ":lib-coroutines:publishToMavenLocal")
+    dependsOn(":compiler:publishToMavenLocal", ":lib:publishToMavenLocal")
 
     val userHome = System.getProperty("user.home")
     val groupDir = project.group.toString().replace('.', '/')
