@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>sample.errors</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../dokka-mermaid.js" async="async"></script>
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../index.html">
+                    <span>samples</span>
+            </a>
+    </div>
+    <div>
+0.1.1    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageIds="samples::sample.errors////PointingToDeclaration//1808549481">
+  <div class="breadcrumbs"><a href="../../index.html">samples</a><span class="delimiter">/</span><a href="index.html">sample.errors</a></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package</span></span> <span>sample.</span><wbr></wbr><span>errors</span></h1>
+    <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="sample-container"><div id="mermaid-container-225dj43io8gce"></div></div><script>
+window.addEventListener('load', function() {
+  var graphDef =  `classDiagram
+  class PlayerExceptionType {
+    <<enum>>
+    [[ AUDIO_FETCHING_ERROR ]]
+    [[ UNEXPECTED_ERROR ]]
+    [[ AUDIO_PLAYBACK_ERROR ]]
+  }
+  click PlayerExceptionType href \"../sample.errors/-player-exception-type/index.html\"
+  class PlayerExceptionSubType {
+    <<enum>>
+    [[ NONE ]]
+    [[ NETWORK_ERROR ]]
+    [[ DATA_ERROR ]]
+    [[ SERVER_ERROR ]]
+    [[ PARSING_ERROR ]]
+    [[ RESPONSE_ERROR ]]
+    [[ INVALID_RESPONSE_ERROR ]]
+    [[ MEDIA_ERROR ]]
+    [[ TOKEN_ERROR ]]
+    [[ DECRYPTION_ERROR ]]
+    [[ STREAM_BLANK_ERROR ]]
+  }
+  click PlayerExceptionSubType href \"../sample.errors/-player-exception-sub-type/index.html\"
+  class PlayerException {
+    <<sealed>>
+    +type PlayerExceptionType
+    +subtype PlayerExceptionSubType
+  }
+  Exception <|-- PlayerException : implements
+  PlayerException ..* PlayerExceptionType : has
+  PlayerException ..* PlayerExceptionSubType : has
+  click PlayerException href \"../sample.errors/-player-exception/index.html\"
+  class PlayerAudioFetchingException {
+    <<sealed>>
+  }
+  PlayerException <|-- PlayerAudioFetchingException : implements
+  click PlayerAudioFetchingException href \"../sample.errors/-player-audio-fetching-exception/index.html\"
+  class NetworkStatus {
+    <<enum>>
+    [[ UNAVAILABLE_NETWORK ]]
+    [[ TIMEOUT ]]
+    [[ OTHER ]]
+  }
+  click NetworkStatus href \"../sample.errors/-network-status/index.html\"
+  class PlayerNetworkException {
+    <<class>>
+    +networkStatus NetworkStatus
+  }
+  PlayerAudioFetchingException <|-- PlayerNetworkException : implements
+  PlayerNetworkException ..* NetworkStatus : has
+  click PlayerNetworkException href \"../sample.errors/-player-network-exception/index.html\"
+  class MissingData {
+    <<enum>>
+    [[ NO_URL_FOR_MEDIA_SERVICE ]]
+    [[ NO_LICENSE_TOKEN ]]
+    [[ NO_TRACK_TOKEN ]]
+    [[ NO_FORMAT_REQUESTED ]]
+    [[ UNAVAILABLE_TRACK ]]
+    [[ OTHER ]]
+  }
+  click MissingData href \"../sample.errors/-missing-data/index.html\"
+  class PlayerDataException {
+    <<class>>
+    +missingData MissingData
+  }
+  PlayerAudioFetchingException <|-- PlayerDataException : implements
+  PlayerDataException ..* MissingData : has
+  click PlayerDataException href \"../sample.errors/-player-data-exception/index.html\"
+  class PlayerServerException {
+    <<class>>
+    +httpStatus String
+  }
+  PlayerAudioFetchingException <|-- PlayerServerException : implements
+  click PlayerServerException href \"../sample.errors/-player-server-exception/index.html\"
+  class ParsingError {
+    <<enum>>
+    [[ DOES_NOT_CONFORM_TO_SCHEMA ]]
+    [[ PARSING_ERROR ]]
+  }
+  click ParsingError href \"../sample.errors/-parsing-error/index.html\"
+  class PlayerParsingException {
+    <<class>>
+    +parsingError ParsingError
+  }
+  PlayerAudioFetchingException <|-- PlayerParsingException : implements
+  PlayerParsingException ..* ParsingError : has
+  click PlayerParsingException href \"../sample.errors/-player-parsing-exception/index.html\"
+  class ResponseError {
+    <<enum>>
+    [[ API_DEPRECATED ]]
+    [[ INVALID_LICENSE_TOKEN ]]
+    [[ EXPIRED_LICENSE_TOKEN ]]
+    [[ UNAUTHORIZED_LICENSE_TOKEN ]]
+    [[ UNKNOWN_CODE ]]
+  }
+  click ResponseError href \"../sample.errors/-response-error/index.html\"
+  class PlayerResponseException {
+    <<class>>
+    +responseError ResponseError
+  }
+  PlayerAudioFetchingException <|-- PlayerResponseException : implements
+  PlayerResponseException ..* ResponseError : has
+  click PlayerResponseException href \"../sample.errors/-player-response-exception/index.html\"
+  class PlayerInvalidResponseException {
+    <<class>>
+    +numberOfMediaReceived Int
+    +numberOfMediaRequested Int
+  }
+  PlayerAudioFetchingException <|-- PlayerInvalidResponseException : implements
+  click PlayerInvalidResponseException href \"../sample.errors/-player-invalid-response-exception/index.html\"
+  class MediaError {
+    <<enum>>
+    [[ NO_FORMAT ]]
+    [[ ALREADY_EXPIRED ]]
+    [[ EMPTY_SOURCE ]]
+  }
+  click MediaError href \"../sample.errors/-media-error/index.html\"
+  class PlayerMediaException {
+    <<class>>
+    +mediaError MediaError
+  }
+  PlayerAudioFetchingException <|-- PlayerMediaException : implements
+  PlayerMediaException ..* MediaError : has
+  click PlayerMediaException href \"../sample.errors/-player-media-exception/index.html\"
+  class TokenError {
+    <<enum>>
+    [[ INVALID_TRACK_TOKEN ]]
+    [[ EXPIRED_TRACK_TOKEN ]]
+    [[ UNAUTHORIZED_TRACK_TOKEN ]]
+    [[ COUNTRY_MISMATCH ]]
+    [[ UNKNOWN_CODE ]]
+  }
+  click TokenError href \"../sample.errors/-token-error/index.html\"
+  class PlayerTokenException {
+    <<class>>
+    +tokenError TokenError
+  }
+  PlayerAudioFetchingException <|-- PlayerTokenException : implements
+  PlayerTokenException ..* TokenError : has
+  click PlayerTokenException href \"../sample.errors/-player-token-exception/index.html\"
+  class PlayerUnexpectedException {
+    <<class>>
+  }
+  PlayerException <|-- PlayerUnexpectedException : implements
+  click PlayerUnexpectedException href \"../sample.errors/-player-unexpected-exception/index.html\"
+  class PlayerAudioPlaybackException {
+    <<sealed>>
+  }
+  PlayerException <|-- PlayerAudioPlaybackException : implements
+  click PlayerAudioPlaybackException href \"../sample.errors/-player-audio-playback-exception/index.html\"
+  class PlayerDecryptionException {
+    <<class>>
+  }
+  PlayerAudioPlaybackException <|-- PlayerDecryptionException : implements
+  click PlayerDecryptionException href \"../sample.errors/-player-decryption-exception/index.html\"
+  class PlayerStreamBlankException {
+    <<class>>
+  }
+  PlayerAudioPlaybackException <|-- PlayerStreamBlankException : implements
+  click PlayerStreamBlankException href \"../sample.errors/-player-stream-blank-exception/index.html\"`;
+  var container = document.getElementById('mermaid-container-225dj43io8gce');
+  container.innerHTML = '<div id="mermaid-target-225dj43io8gce"></div>';
+  var cb225dj43io8gce = function(svgGraph) {
+    container.innerHTML = svgGraph;
+    // Trick to make the graph takes only the required height.
+    document.getElementById('mermaid-target-225dj43io8gce').removeAttribute('height')
+  };
+  var updateGraph225dj43io8gce = function() {
+    // setTimeout required or else the 1st render could be done before mermaid.initialize() has applied the theme.
+    // Also required because we can't listen to localStorage events reliably, and it's changed on the same click event...
+    setTimeout(() => {
+      var dokkaDarkModeItem = localStorage.getItem("dokka-dark-mode");
+      var isDarkMode = dokkaDarkModeItem ? JSON.parse(dokkaDarkModeItem) : false
+      var theme = 'default';
+      if (isDarkMode === true) {
+        theme = 'dark';
+      }
+      mermaid.initialize({'theme': theme});
+      mermaid.mermaidAPI.render('mermaid-target-225dj43io8gce', graphDef, cb225dj43io8gce);
+    }, 0);
+  }
+  updateGraph225dj43io8gce();
+  
+  var themeToggleButton = document.getElementById('theme-toggle-button');
+  themeToggleButton.addEventListener('click', () => {
+    // This detection mechanism is shitty, please tell me if you know better.
+    updateGraph225dj43io8gce();
+  });
+});</script></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button></div>
+    <div class="tabs-section-body">
+      <h2 class="">Types</h2>
+      <div class="table" data-togglable="Types"><a data-name="-611027923%2FClasslikes%2F1808549481" anchor-label="MediaError" id="-611027923%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-media-error/index.html"><span>Media</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-611027923%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-media-error/index.html">MediaError</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-media-error/index.html">MediaError</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-104814591%2FClasslikes%2F1808549481" anchor-label="MissingData" id="-104814591%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-missing-data/index.html"><span>Missing</span><wbr></wbr><span><span>Data</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-104814591%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-missing-data/index.html">MissingData</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-missing-data/index.html">MissingData</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="576622705%2FClasslikes%2F1808549481" anchor-label="NetworkStatus" id="576622705%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-network-status/index.html"><span>Network</span><wbr></wbr><span><span>Status</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="576622705%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-network-status/index.html">NetworkStatus</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-network-status/index.html">NetworkStatus</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1771171321%2FClasslikes%2F1808549481" anchor-label="ParsingError" id="1771171321%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-parsing-error/index.html"><span>Parsing</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1771171321%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-parsing-error/index.html">ParsingError</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-parsing-error/index.html">ParsingError</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1322565857%2FClasslikes%2F1808549481" anchor-label="PlayerAudioFetchingException" id="-1322565857%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-audio-fetching-exception/index.html"><span>Player</span><wbr></wbr><span>Audio</span><wbr></wbr><span>Fetching</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1322565857%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">class </span><a href="-player-audio-fetching-exception/index.html">PlayerAudioFetchingException</a> : <a href="-player-exception/index.html">PlayerException</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1507469714%2FClasslikes%2F1808549481" anchor-label="PlayerAudioPlaybackException" id="1507469714%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-audio-playback-exception/index.html"><span>Player</span><wbr></wbr><span>Audio</span><wbr></wbr><span>Playback</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1507469714%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">class </span><a href="-player-audio-playback-exception/index.html">PlayerAudioPlaybackException</a> : <a href="-player-exception/index.html">PlayerException</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-89243059%2FClasslikes%2F1808549481" anchor-label="PlayerDataException" id="-89243059%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-data-exception/index.html"><span>Player</span><wbr></wbr><span>Data</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-89243059%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-player-data-exception/index.html">PlayerDataException</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>missingData<span class="token operator">: </span><a href="-missing-data/index.html">MissingData</a><span class="token punctuation">, </span></span><span class="parameter ">cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a></span></span><span class="token punctuation">)</span> : <a href="-player-audio-fetching-exception/index.html">PlayerAudioFetchingException</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1931089666%2FClasslikes%2F1808549481" anchor-label="PlayerDecryptionException" id="-1931089666%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-decryption-exception/index.html"><span>Player</span><wbr></wbr><span>Decryption</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1931089666%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-player-decryption-exception/index.html">PlayerDecryptionException</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a></span></span><span class="token punctuation">)</span> : <a href="-player-audio-playback-exception/index.html">PlayerAudioPlaybackException</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-562919037%2FClasslikes%2F1808549481" anchor-label="PlayerException" id="-562919037%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-exception/index.html"><span>Player</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-562919037%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">class </span><a href="-player-exception/index.html">PlayerException</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="634234469%2FClasslikes%2F1808549481" anchor-label="PlayerExceptionSubType" id="634234469%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-exception-sub-type/index.html"><span>Player</span><wbr></wbr><span>Exception</span><wbr></wbr><span>Sub</span><wbr></wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="634234469%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-player-exception-sub-type/index.html">PlayerExceptionSubType</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-player-exception-sub-type/index.html">PlayerExceptionSubType</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1557997161%2FClasslikes%2F1808549481" anchor-label="PlayerExceptionType" id="1557997161%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-exception-type/index.html"><span>Player</span><wbr></wbr><span>Exception</span><wbr></wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1557997161%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-player-exception-type/index.html">PlayerExceptionType</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-player-exception-type/index.html">PlayerExceptionType</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="161267545%2FClasslikes%2F1808549481" anchor-label="PlayerInvalidResponseException" id="161267545%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-invalid-response-exception/index.html"><span>Player</span><wbr></wbr><span>Invalid</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="161267545%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-player-invalid-response-exception/index.html">PlayerInvalidResponseException</a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>numberOfMediaReceived<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>numberOfMediaRequested<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a></span></span><span class="token punctuation">)</span> : <a href="-player-audio-fetching-exception/index.html">PlayerAudioFetchingException</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="296653733%2FClasslikes%2F1808549481" anchor-label="PlayerMediaException" id="296653733%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-media-exception/index.html"><span>Player</span><wbr></wbr><span>Media</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="296653733%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-player-media-exception/index.html">PlayerMediaException</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>mediaError<span class="token operator">: </span><a href="-media-error/index.html">MediaError</a><span class="token punctuation">, </span></span><span class="parameter ">cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a></span></span><span class="token punctuation">)</span> : <a href="-player-audio-fetching-exception/index.html">PlayerAudioFetchingException</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1207963729%2FClasslikes%2F1808549481" anchor-label="PlayerNetworkException" id="-1207963729%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-network-exception/index.html"><span>Player</span><wbr></wbr><span>Network</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1207963729%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-player-network-exception/index.html">PlayerNetworkException</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>networkStatus<span class="token operator">: </span><a href="-network-status/index.html">NetworkStatus</a><span class="token punctuation">, </span></span><span class="parameter ">cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a></span></span><span class="token punctuation">)</span> : <a href="-player-audio-fetching-exception/index.html">PlayerAudioFetchingException</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="2066566065%2FClasslikes%2F1808549481" anchor-label="PlayerParsingException" id="2066566065%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-parsing-exception/index.html"><span>Player</span><wbr></wbr><span>Parsing</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2066566065%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-player-parsing-exception/index.html">PlayerParsingException</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>parsingError<span class="token operator">: </span><a href="-parsing-error/index.html">ParsingError</a><span class="token punctuation">, </span></span><span class="parameter ">cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a></span></span><span class="token punctuation">)</span> : <a href="-player-audio-fetching-exception/index.html">PlayerAudioFetchingException</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="921729188%2FClasslikes%2F1808549481" anchor-label="PlayerResponseException" id="921729188%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-response-exception/index.html"><span>Player</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="921729188%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-player-response-exception/index.html">PlayerResponseException</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>responseError<span class="token operator">: </span><a href="-response-error/index.html">ResponseError</a><span class="token punctuation">, </span></span><span class="parameter ">cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a></span></span><span class="token punctuation">)</span> : <a href="-player-audio-fetching-exception/index.html">PlayerAudioFetchingException</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-553103514%2FClasslikes%2F1808549481" anchor-label="PlayerServerException" id="-553103514%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-server-exception/index.html"><span>Player</span><wbr></wbr><span>Server</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-553103514%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-player-server-exception/index.html">PlayerServerException</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>httpStatus<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a></span></span><span class="token punctuation">)</span> : <a href="-player-audio-fetching-exception/index.html">PlayerAudioFetchingException</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-247001547%2FClasslikes%2F1808549481" anchor-label="PlayerStreamBlankException" id="-247001547%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-stream-blank-exception/index.html"><span>Player</span><wbr></wbr><span>Stream</span><wbr></wbr><span>Blank</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-247001547%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-player-stream-blank-exception/index.html">PlayerStreamBlankException</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a></span></span><span class="token punctuation">)</span> : <a href="-player-audio-playback-exception/index.html">PlayerAudioPlaybackException</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1334515834%2FClasslikes%2F1808549481" anchor-label="PlayerTokenException" id="1334515834%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-token-exception/index.html"><span>Player</span><wbr></wbr><span>Token</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1334515834%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-player-token-exception/index.html">PlayerTokenException</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>tokenError<span class="token operator">: </span><a href="-token-error/index.html">TokenError</a><span class="token punctuation">, </span></span><span class="parameter ">cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a></span></span><span class="token punctuation">)</span> : <a href="-player-audio-fetching-exception/index.html">PlayerAudioFetchingException</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="136519796%2FClasslikes%2F1808549481" anchor-label="PlayerUnexpectedException" id="136519796%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-player-unexpected-exception/index.html"><span>Player</span><wbr></wbr><span>Unexpected</span><wbr></wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="136519796%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-player-unexpected-exception/index.html">PlayerUnexpectedException</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a></span></span><span class="token punctuation">)</span> : <a href="-player-exception/index.html">PlayerException</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1992911926%2FClasslikes%2F1808549481" anchor-label="ResponseError" id="-1992911926%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-response-error/index.html"><span>Response</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1992911926%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-response-error/index.html">ResponseError</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-response-error/index.html">ResponseError</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1857465218%2FClasslikes%2F1808549481" anchor-label="TokenError" id="1857465218%2FClasslikes%2F1808549481" data-filterable-set=":samples:dokkaHtml/commonMain"></a>
+        <div class="table-row" data-filterable-current=":samples:dokkaHtml/commonMain" data-filterable-set=":samples:dokkaHtml/commonMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-token-error/index.html"><span>Token</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1857465218%2FClasslikes%2F1808549481"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-token-error/index.html">TokenError</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-token-error/index.html">TokenError</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
