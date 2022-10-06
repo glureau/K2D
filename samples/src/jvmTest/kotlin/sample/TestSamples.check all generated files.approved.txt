@@ -1,0 +1,558 @@
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/module.md
+# Module samples
+
+```mermaid
+classDiagram
+  class Position {
+    <<data class>>
+    +x Float
+    +y Float
+  }
+  click Position href "./sample/-position/index.html"
+  class Shape {
+    <<interface>>
+    +originPosition Position
+    +computeSurface() Float
+  }
+  Shape ..* Position : has
+  click Shape href "./sample/-shape/index.html"
+  class Rectangle {
+    <<interface>>
+    +width Float
+    +height Float
+    +rotate(Float) Unit
+  }
+  Shape <|-- Rectangle : implements
+  click Rectangle href "./sample/-rectangle/index.html"
+  class Polygon {
+    <<interface>>
+    +howMuchSides() Int
+  }
+  Shape <|-- Polygon : implements
+  click Polygon href "./sample/-polygon/index.html"
+  class Square {
+    <<class>>
+    +sideSize Float
+    +publicFun() Unit
+  }
+  Polygon <|-- Square : implements
+  click Square href "./sample/-square/index.html"
+  class Circle {
+    <<data class>>
+    +radius Float
+  }
+  Shape <|-- Circle : implements
+  click Circle href "./sample/-circle/index.html"
+  class Oval {
+    <<data class>>
+    +centerOne Position
+    +centerTwo Position
+    +distanceBetweenPoints Float
+    +angle Float
+    +radius Float
+  }
+  Shape <|-- Oval : implements
+  Oval ..* Position : has
+  Oval ..* Position : has
+  click Oval href "./sample.another/-oval/index.html"
+  class InnerOval {
+    <<class>>
+    +square Square
+  }
+  InnerOval ..* Square : has
+  click InnerOval href "./sample.another/-inner-oval/index.html"
+  class Builder {
+    <<object>>
+    +build() Oval
+  }
+  click Builder href "./sample.another/-builder/index.html"
+  class TheTrap {
+    <<class>>
+    +foo Int
+  }
+  click TheTrap href "./sample.another/-the-trap/index.html"
+  class BinaryIntCalculator {
+    <<class>>
+    +reg1 Int
+    +reg2 Int
+    +calculate(Function2) Int
+  }
+  click BinaryIntCalculator href "./sample.calculator/-binary-int-calculator/index.html"
+  class GenericFoo~T:Number~ {
+    <<interface>>
+    +add(T) Unit
+  }
+  click GenericFoo~T:Number~ href "./sample.calculator/-generic-foo/index.html"
+  class Direction {
+    <<enum>>
+    [[ UP ]]
+    [[ DOWN ]]
+    [[ LEFT ]]
+    [[ RIGHT ]]
+  }
+  click Direction href "./sample.enums/-direction/index.html"
+  class DeviceKind {
+    <<enum>>
+    +userAgent String
+    +index Int
+    [[ Smartphone ]]
+    [[ Computer ]]
+    [[ Tablet ]]
+    [[ Smartwatches ]]
+    [[ Chromebook ]]
+  }
+  click DeviceKind href "./sample.enums/-device-kind/index.html"
+  class PlayerExceptionType {
+    <<enum>>
+    [[ AUDIO_FETCHING_ERROR ]]
+    [[ UNEXPECTED_ERROR ]]
+    [[ AUDIO_PLAYBACK_ERROR ]]
+  }
+  click PlayerExceptionType href "./sample.errors/-player-exception-type/index.html"
+  class PlayerExceptionSubType {
+    <<enum>>
+    [[ NONE ]]
+    [[ NETWORK_ERROR ]]
+    [[ DATA_ERROR ]]
+    [[ SERVER_ERROR ]]
+    [[ PARSING_ERROR ]]
+    [[ RESPONSE_ERROR ]]
+    [[ INVALID_RESPONSE_ERROR ]]
+    [[ MEDIA_ERROR ]]
+    [[ TOKEN_ERROR ]]
+    [[ DECRYPTION_ERROR ]]
+    [[ STREAM_BLANK_ERROR ]]
+  }
+  click PlayerExceptionSubType href "./sample.errors/-player-exception-sub-type/index.html"
+  class PlayerException {
+    <<sealed>>
+    +type PlayerExceptionType
+    +subtype PlayerExceptionSubType
+  }
+  Exception <|-- PlayerException : implements
+  PlayerException ..* PlayerExceptionType : has
+  PlayerException ..* PlayerExceptionSubType : has
+  click PlayerException href "./sample.errors/-player-exception/index.html"
+  class PlayerAudioFetchingException {
+    <<sealed>>
+  }
+  PlayerException <|-- PlayerAudioFetchingException : implements
+  click PlayerAudioFetchingException href "./sample.errors/-player-audio-fetching-exception/index.html"
+  class NetworkStatus {
+    <<enum>>
+    [[ UNAVAILABLE_NETWORK ]]
+    [[ TIMEOUT ]]
+    [[ OTHER ]]
+  }
+  click NetworkStatus href "./sample.errors/-network-status/index.html"
+  class PlayerNetworkException {
+    <<class>>
+    +networkStatus NetworkStatus
+  }
+  PlayerAudioFetchingException <|-- PlayerNetworkException : implements
+  PlayerNetworkException ..* NetworkStatus : has
+  click PlayerNetworkException href "./sample.errors/-player-network-exception/index.html"
+  class MissingData {
+    <<enum>>
+    [[ NO_URL_FOR_MEDIA_SERVICE ]]
+    [[ NO_LICENSE_TOKEN ]]
+    [[ NO_TRACK_TOKEN ]]
+    [[ NO_FORMAT_REQUESTED ]]
+    [[ UNAVAILABLE_TRACK ]]
+    [[ OTHER ]]
+  }
+  click MissingData href "./sample.errors/-missing-data/index.html"
+  class PlayerDataException {
+    <<class>>
+    +missingData MissingData
+  }
+  PlayerAudioFetchingException <|-- PlayerDataException : implements
+  PlayerDataException ..* MissingData : has
+  click PlayerDataException href "./sample.errors/-player-data-exception/index.html"
+  class PlayerServerException {
+    <<class>>
+    +httpStatus String
+  }
+  PlayerAudioFetchingException <|-- PlayerServerException : implements
+  click PlayerServerException href "./sample.errors/-player-server-exception/index.html"
+  class ParsingError {
+    <<enum>>
+    [[ DOES_NOT_CONFORM_TO_SCHEMA ]]
+    [[ PARSING_ERROR ]]
+  }
+  click ParsingError href "./sample.errors/-parsing-error/index.html"
+  class PlayerParsingException {
+    <<class>>
+    +parsingError ParsingError
+  }
+  PlayerAudioFetchingException <|-- PlayerParsingException : implements
+  PlayerParsingException ..* ParsingError : has
+  click PlayerParsingException href "./sample.errors/-player-parsing-exception/index.html"
+  class ResponseError {
+    <<enum>>
+    [[ API_DEPRECATED ]]
+    [[ INVALID_LICENSE_TOKEN ]]
+    [[ EXPIRED_LICENSE_TOKEN ]]
+    [[ UNAUTHORIZED_LICENSE_TOKEN ]]
+    [[ UNKNOWN_CODE ]]
+  }
+  click ResponseError href "./sample.errors/-response-error/index.html"
+  class PlayerResponseException {
+    <<class>>
+    +responseError ResponseError
+  }
+  PlayerAudioFetchingException <|-- PlayerResponseException : implements
+  PlayerResponseException ..* ResponseError : has
+  click PlayerResponseException href "./sample.errors/-player-response-exception/index.html"
+  class PlayerInvalidResponseException {
+    <<class>>
+    +numberOfMediaReceived Int
+    +numberOfMediaRequested Int
+  }
+  PlayerAudioFetchingException <|-- PlayerInvalidResponseException : implements
+  click PlayerInvalidResponseException href "./sample.errors/-player-invalid-response-exception/index.html"
+  class MediaError {
+    <<enum>>
+    [[ NO_FORMAT ]]
+    [[ ALREADY_EXPIRED ]]
+    [[ EMPTY_SOURCE ]]
+  }
+  click MediaError href "./sample.errors/-media-error/index.html"
+  class PlayerMediaException {
+    <<class>>
+    +mediaError MediaError
+  }
+  PlayerAudioFetchingException <|-- PlayerMediaException : implements
+  PlayerMediaException ..* MediaError : has
+  click PlayerMediaException href "./sample.errors/-player-media-exception/index.html"
+  class TokenError {
+    <<enum>>
+    [[ INVALID_TRACK_TOKEN ]]
+    [[ EXPIRED_TRACK_TOKEN ]]
+    [[ UNAUTHORIZED_TRACK_TOKEN ]]
+    [[ COUNTRY_MISMATCH ]]
+    [[ UNKNOWN_CODE ]]
+  }
+  click TokenError href "./sample.errors/-token-error/index.html"
+  class PlayerTokenException {
+    <<class>>
+    +tokenError TokenError
+  }
+  PlayerAudioFetchingException <|-- PlayerTokenException : implements
+  PlayerTokenException ..* TokenError : has
+  click PlayerTokenException href "./sample.errors/-player-token-exception/index.html"
+  class PlayerUnexpectedException {
+    <<class>>
+  }
+  PlayerException <|-- PlayerUnexpectedException : implements
+  click PlayerUnexpectedException href "./sample.errors/-player-unexpected-exception/index.html"
+  class PlayerAudioPlaybackException {
+    <<sealed>>
+  }
+  PlayerException <|-- PlayerAudioPlaybackException : implements
+  click PlayerAudioPlaybackException href "./sample.errors/-player-audio-playback-exception/index.html"
+  class PlayerDecryptionException {
+    <<class>>
+  }
+  PlayerAudioPlaybackException <|-- PlayerDecryptionException : implements
+  click PlayerDecryptionException href "./sample.errors/-player-decryption-exception/index.html"
+  class PlayerStreamBlankException {
+    <<class>>
+  }
+  PlayerAudioPlaybackException <|-- PlayerStreamBlankException : implements
+  click PlayerStreamBlankException href "./sample.errors/-player-stream-blank-exception/index.html"
+```
+
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/calculator/package.md
+# Package sample.calculator
+
+```mermaid
+classDiagram
+  class BinaryIntCalculator {
+    <<class>>
+    +reg1 Int
+    +reg2 Int
+    +calculate(Function2) Int
+  }
+  click BinaryIntCalculator href "../sample.calculator/-binary-int-calculator/index.html"
+  class GenericFoo~T:Number~ {
+    <<interface>>
+    +add(T) Unit
+  }
+  click GenericFoo~T:Number~ href "../sample.calculator/-generic-foo/index.html"
+```
+
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/enums/package.md
+# Package sample.enums
+
+```mermaid
+classDiagram
+  class Direction {
+    <<enum>>
+    [[ UP ]]
+    [[ DOWN ]]
+    [[ LEFT ]]
+    [[ RIGHT ]]
+  }
+  click Direction href "../sample.enums/-direction/index.html"
+  class DeviceKind {
+    <<enum>>
+    +userAgent String
+    +index Int
+    [[ Smartphone ]]
+    [[ Computer ]]
+    [[ Tablet ]]
+    [[ Smartwatches ]]
+    [[ Chromebook ]]
+  }
+  click DeviceKind href "../sample.enums/-device-kind/index.html"
+```
+
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/package.md
+# Package sample
+
+```mermaid
+classDiagram
+  class Position {
+    <<data class>>
+    +x Float
+    +y Float
+  }
+  click Position href "../sample/-position/index.html"
+  class Shape {
+    <<interface>>
+    +originPosition Position
+    +computeSurface() Float
+  }
+  Shape ..* Position : has
+  click Shape href "../sample/-shape/index.html"
+  class Rectangle {
+    <<interface>>
+    +width Float
+    +height Float
+    +rotate(Float) Unit
+  }
+  Shape <|-- Rectangle : implements
+  click Rectangle href "../sample/-rectangle/index.html"
+  class Polygon {
+    <<interface>>
+    +howMuchSides() Int
+  }
+  Shape <|-- Polygon : implements
+  click Polygon href "../sample/-polygon/index.html"
+  class Square {
+    <<class>>
+    +sideSize Float
+    +publicFun() Unit
+  }
+  Polygon <|-- Square : implements
+  click Square href "../sample/-square/index.html"
+  class Circle {
+    <<data class>>
+    +radius Float
+  }
+  Shape <|-- Circle : implements
+  click Circle href "../sample/-circle/index.html"
+```
+
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/errors/package.md
+# Package sample.errors
+
+```mermaid
+classDiagram
+  class PlayerExceptionType {
+    <<enum>>
+    [[ AUDIO_FETCHING_ERROR ]]
+    [[ UNEXPECTED_ERROR ]]
+    [[ AUDIO_PLAYBACK_ERROR ]]
+  }
+  click PlayerExceptionType href "../sample.errors/-player-exception-type/index.html"
+  class PlayerExceptionSubType {
+    <<enum>>
+    [[ NONE ]]
+    [[ NETWORK_ERROR ]]
+    [[ DATA_ERROR ]]
+    [[ SERVER_ERROR ]]
+    [[ PARSING_ERROR ]]
+    [[ RESPONSE_ERROR ]]
+    [[ INVALID_RESPONSE_ERROR ]]
+    [[ MEDIA_ERROR ]]
+    [[ TOKEN_ERROR ]]
+    [[ DECRYPTION_ERROR ]]
+    [[ STREAM_BLANK_ERROR ]]
+  }
+  click PlayerExceptionSubType href "../sample.errors/-player-exception-sub-type/index.html"
+  class PlayerException {
+    <<sealed>>
+    +type PlayerExceptionType
+    +subtype PlayerExceptionSubType
+  }
+  Exception <|-- PlayerException : implements
+  PlayerException ..* PlayerExceptionType : has
+  PlayerException ..* PlayerExceptionSubType : has
+  click PlayerException href "../sample.errors/-player-exception/index.html"
+  class PlayerAudioFetchingException {
+    <<sealed>>
+  }
+  PlayerException <|-- PlayerAudioFetchingException : implements
+  click PlayerAudioFetchingException href "../sample.errors/-player-audio-fetching-exception/index.html"
+  class NetworkStatus {
+    <<enum>>
+    [[ UNAVAILABLE_NETWORK ]]
+    [[ TIMEOUT ]]
+    [[ OTHER ]]
+  }
+  click NetworkStatus href "../sample.errors/-network-status/index.html"
+  class PlayerNetworkException {
+    <<class>>
+    +networkStatus NetworkStatus
+  }
+  PlayerAudioFetchingException <|-- PlayerNetworkException : implements
+  PlayerNetworkException ..* NetworkStatus : has
+  click PlayerNetworkException href "../sample.errors/-player-network-exception/index.html"
+  class MissingData {
+    <<enum>>
+    [[ NO_URL_FOR_MEDIA_SERVICE ]]
+    [[ NO_LICENSE_TOKEN ]]
+    [[ NO_TRACK_TOKEN ]]
+    [[ NO_FORMAT_REQUESTED ]]
+    [[ UNAVAILABLE_TRACK ]]
+    [[ OTHER ]]
+  }
+  click MissingData href "../sample.errors/-missing-data/index.html"
+  class PlayerDataException {
+    <<class>>
+    +missingData MissingData
+  }
+  PlayerAudioFetchingException <|-- PlayerDataException : implements
+  PlayerDataException ..* MissingData : has
+  click PlayerDataException href "../sample.errors/-player-data-exception/index.html"
+  class PlayerServerException {
+    <<class>>
+    +httpStatus String
+  }
+  PlayerAudioFetchingException <|-- PlayerServerException : implements
+  click PlayerServerException href "../sample.errors/-player-server-exception/index.html"
+  class ParsingError {
+    <<enum>>
+    [[ DOES_NOT_CONFORM_TO_SCHEMA ]]
+    [[ PARSING_ERROR ]]
+  }
+  click ParsingError href "../sample.errors/-parsing-error/index.html"
+  class PlayerParsingException {
+    <<class>>
+    +parsingError ParsingError
+  }
+  PlayerAudioFetchingException <|-- PlayerParsingException : implements
+  PlayerParsingException ..* ParsingError : has
+  click PlayerParsingException href "../sample.errors/-player-parsing-exception/index.html"
+  class ResponseError {
+    <<enum>>
+    [[ API_DEPRECATED ]]
+    [[ INVALID_LICENSE_TOKEN ]]
+    [[ EXPIRED_LICENSE_TOKEN ]]
+    [[ UNAUTHORIZED_LICENSE_TOKEN ]]
+    [[ UNKNOWN_CODE ]]
+  }
+  click ResponseError href "../sample.errors/-response-error/index.html"
+  class PlayerResponseException {
+    <<class>>
+    +responseError ResponseError
+  }
+  PlayerAudioFetchingException <|-- PlayerResponseException : implements
+  PlayerResponseException ..* ResponseError : has
+  click PlayerResponseException href "../sample.errors/-player-response-exception/index.html"
+  class PlayerInvalidResponseException {
+    <<class>>
+    +numberOfMediaReceived Int
+    +numberOfMediaRequested Int
+  }
+  PlayerAudioFetchingException <|-- PlayerInvalidResponseException : implements
+  click PlayerInvalidResponseException href "../sample.errors/-player-invalid-response-exception/index.html"
+  class MediaError {
+    <<enum>>
+    [[ NO_FORMAT ]]
+    [[ ALREADY_EXPIRED ]]
+    [[ EMPTY_SOURCE ]]
+  }
+  click MediaError href "../sample.errors/-media-error/index.html"
+  class PlayerMediaException {
+    <<class>>
+    +mediaError MediaError
+  }
+  PlayerAudioFetchingException <|-- PlayerMediaException : implements
+  PlayerMediaException ..* MediaError : has
+  click PlayerMediaException href "../sample.errors/-player-media-exception/index.html"
+  class TokenError {
+    <<enum>>
+    [[ INVALID_TRACK_TOKEN ]]
+    [[ EXPIRED_TRACK_TOKEN ]]
+    [[ UNAUTHORIZED_TRACK_TOKEN ]]
+    [[ COUNTRY_MISMATCH ]]
+    [[ UNKNOWN_CODE ]]
+  }
+  click TokenError href "../sample.errors/-token-error/index.html"
+  class PlayerTokenException {
+    <<class>>
+    +tokenError TokenError
+  }
+  PlayerAudioFetchingException <|-- PlayerTokenException : implements
+  PlayerTokenException ..* TokenError : has
+  click PlayerTokenException href "../sample.errors/-player-token-exception/index.html"
+  class PlayerUnexpectedException {
+    <<class>>
+  }
+  PlayerException <|-- PlayerUnexpectedException : implements
+  click PlayerUnexpectedException href "../sample.errors/-player-unexpected-exception/index.html"
+  class PlayerAudioPlaybackException {
+    <<sealed>>
+  }
+  PlayerException <|-- PlayerAudioPlaybackException : implements
+  click PlayerAudioPlaybackException href "../sample.errors/-player-audio-playback-exception/index.html"
+  class PlayerDecryptionException {
+    <<class>>
+  }
+  PlayerAudioPlaybackException <|-- PlayerDecryptionException : implements
+  click PlayerDecryptionException href "../sample.errors/-player-decryption-exception/index.html"
+  class PlayerStreamBlankException {
+    <<class>>
+  }
+  PlayerAudioPlaybackException <|-- PlayerStreamBlankException : implements
+  click PlayerStreamBlankException href "../sample.errors/-player-stream-blank-exception/index.html"
+```
+
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/package.md
+# Package sample.another
+
+```mermaid
+classDiagram
+  class Oval {
+    <<data class>>
+    +centerOne Position
+    +centerTwo Position
+    +distanceBetweenPoints Float
+    +angle Float
+    +radius Float
+  }
+  Shape <|-- Oval : implements
+  Oval ..* Position : has
+  Oval ..* Position : has
+  click Oval href "../sample.another/-oval/index.html"
+  class InnerOval {
+    <<class>>
+    +square Square
+  }
+  InnerOval ..* Square : has
+  click InnerOval href "../sample.another/-inner-oval/index.html"
+  class Builder {
+    <<object>>
+    +build() Oval
+  }
+  click Builder href "../sample.another/-builder/index.html"
+  class TheTrap {
+    <<class>>
+    +foo Int
+  }
+  click TheTrap href "../sample.another/-the-trap/index.html"
+```
+

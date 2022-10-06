@@ -1,5 +1,6 @@
 package com.glureau.mermaidksp.compiler
 
+import MermaidGraph
 import com.glureau.mermaidksp.compiler.renderer.ModuleMarkdownRenderer
 import com.glureau.mermaidksp.compiler.renderer.PackageMarkdownRenderer
 import com.google.devtools.ksp.KspExperimental

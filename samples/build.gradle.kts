@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.gitPublish
-
 plugins {
     kotlin("multiplatform")
     id("com.google.devtools.ksp")
@@ -7,7 +5,9 @@ plugins {
     id("org.ajoberstar.git-publish")
     id("org.ajoberstar.grgit")
 }
-
+repositories {
+    mavenCentral()
+}
 dependencies {
     dokkaPlugin("com.glureau:html-mermaid-dokka-plugin:0.3.2")
 }
@@ -23,6 +23,20 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":lib"))
+            }
+        }
+        commonTest {
+            dependencies {
+                //implementation(kotlin("test-common"))
+                //implementation(kotlin("test-annotations-common"))
+            }
+        }
+        val jvmTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+                implementation("org.junit.platform:junit-platform-runner:1.9.1")
+                implementation("org.junit.jupiter:junit-jupiter:5.9.1")
+                implementation("com.approvaltests:approvaltests:18.4.0")
             }
         }
     }
@@ -69,3 +83,4 @@ gitPublish {
 
 tasks["dokkaHtml"].dependsOn("generateMetadataFileForKotlinMultiplatformPublication")
 tasks["gitPublishCopy"].dependsOn("dokkaHtml")
+tasks["jvmTest"].dependsOn("compileCommonMainKotlinMetadata")
