@@ -1,26 +1,6 @@
-package com.glureau.mermaidksp.compiler.mermaid.renderer
+package com.glureau.mermaidksp.compiler.mermaid
 
 import com.glureau.mermaidksp.compiler.*
-import com.glureau.mermaidksp.compiler.mermaid.Relationship
-import com.glureau.mermaidksp.compiler.mermaid.asMermaid
-
-data class MermaidRendererConfiguration(
-    val showClassType: Boolean = true,
-
-    val showPublic: Boolean = true,
-    val showPrivate: Boolean = false,
-    val showProtected: Boolean = false,
-    val showInternal: Boolean = false,
-
-    val showOverride: Boolean = false,
-
-    val showImplements: Boolean = true,
-    val showHas: Boolean = true,
-
-    val basicIsDown: Boolean = false,
-
-    val baseUrl: String = "."
-)
 
 class MermaidClassRenderer(
     private val conf: MermaidRendererConfiguration = MermaidRendererConfiguration()
@@ -36,7 +16,15 @@ class MermaidClassRenderer(
             //if (c.classType == MermaidClassType.EnumEntry && c.properties.all { it.overrides } && c.functions.all { it.overrides }) return@forEach
             if (c.classType == GClassType.EnumEntry) return@forEach // Ignoring for now...
 
-            stringBuilder.append("  class ${c.symbolName} {\n")
+            val generics = c.generics.let {
+                if (it.isEmpty()) "" else it.joinToString(
+                    prefix = "~",
+                    transform = { it.name + ":" + it.klassOrBasic.symbolName },
+                    postfix = "~"
+                )
+            }
+            val fullName = c.symbolName + generics
+            stringBuilder.append("  class $fullName {\n")
             if (conf.showClassType) stringBuilder.append("    ${c.classType.asMermaid}\n")
             c.properties.forEach { p ->
                 if (p.shouldDisplay(c))
@@ -69,7 +57,7 @@ class MermaidClassRenderer(
                 }
             }
             // Cannot write a tooltip for now when using generics: https://github.com/mermaid-js/mermaid/issues/2944
-            stringBuilder.append("  click ${c.symbolName} href \"${conf.baseUrl}/${c.packageName}/${c.symbolName.asDokkaHtmlPageFormat()}\"\n")// \"Open ${c.className.substringBefore("~")}\"\n")
+            stringBuilder.append("  click $fullName href \"${conf.baseUrl}/${c.packageName}/${c.symbolName.asDokkaHtmlPageFormat()}\"\n")// \"Open ${c.className.substringBefore("~")}\"\n")
         }
         return stringBuilder.toString()
     }
@@ -95,6 +83,7 @@ class MermaidClassRenderer(
                 (conf.showOverride || !overrides)
 }
 
+// TODO: To be injected via a LinkGenerator interface
 private fun String.asDokkaHtmlPageFormat(): String {
     var str = this.substringBefore("~")
     while (str.contains(Regex("[A-Z]"))) {

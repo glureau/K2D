@@ -1,8 +1,8 @@
 package com.glureau.mermaidksp.compiler.markdown
 
 import com.glureau.mermaidksp.compiler.GClass
-import com.glureau.mermaidksp.compiler.mermaid.renderer.MermaidClassRenderer
-import com.glureau.mermaidksp.compiler.mermaid.renderer.MermaidRendererConfiguration
+import com.glureau.mermaidksp.compiler.mermaid.MermaidClassRenderer
+import com.glureau.mermaidksp.compiler.mermaid.MermaidRendererConfiguration
 import com.glureau.mermaidksp.compiler.writeMarkdown
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 

@@ -17,17 +17,9 @@
 
 package com.glureau.mermaidksp.compiler
 
+import com.google.devtools.ksp.closestClassDeclaration
 import com.google.devtools.ksp.getVisibility
-import com.google.devtools.ksp.symbol.ClassKind
-import com.google.devtools.ksp.symbol.KSClassDeclaration
-import com.google.devtools.ksp.symbol.KSDeclaration
-import com.google.devtools.ksp.symbol.KSFile
-import com.google.devtools.ksp.symbol.KSFunctionDeclaration
-import com.google.devtools.ksp.symbol.KSPropertyDeclaration
-import com.google.devtools.ksp.symbol.KSTypeReference
-import com.google.devtools.ksp.symbol.KSVisitorVoid
-import com.google.devtools.ksp.symbol.Modifier
-import com.google.devtools.ksp.symbol.Visibility
+import com.google.devtools.ksp.symbol.*
 import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 
 @KotlinPoetKspPreview
@@ -70,6 +62,28 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             .toList()
         klass.inners =
             classDeclaration.declarations.mapNotNull { if (it is KSClassDeclaration) scan(it) else null }.toList()
+
+        classDeclaration.typeParameters.map {
+            it.bounds.firstOrNull()?.getMermaidClass()
+            val declaration: KSDeclaration? = it.bounds.firstOrNull()?.resolve()?.declaration
+            val foo = if (declaration is KSClassDeclaration) {
+                scan(declaration)
+            } else null
+            Logger.warn("Class: ${klass.symbolName} => $foo", it)
+        }
+        // TODO: Apply same compute on other "generics" computation
+        // TODO: rework "symbolName" logic and use a specific mermaid method to display "~
+        klass.generics = classDeclaration.typeParameters.map {
+            Generics(
+                it.name.asString(),
+                it.bounds.first().getMermaidClass()!!
+            )
+
+        }
+        //     fun KSTypeReference.getMermaidClass(): GClassOrBasic? {
+        /*klass.generics = classDeclaration.typeParameters.map {
+            scan(it.bounds.first().element)
+        }*/
         return klass
     }
 
@@ -84,8 +98,10 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             Basic(
                 qualifiedName = qualifiedName,
                 packageName = decl.packageName.asString(),
-                symbolName = decl.simpleName.asString()
-            )
+                symbolName = decl.simpleName.asString(),
+            ).apply {
+                //TODO: generics = ...
+            }
         } else {
             this.type.getMermaidClass()!!
         }
@@ -126,8 +142,11 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             Basic(
                 qualifiedName = qualifiedName,
                 packageName = decl.packageName.asString(),
-                symbolName = decl.simpleName.asString()
-            )
+                symbolName = decl.simpleName.asString(),
+            ).apply {
+                //TODO: generics = ...
+            }
+
             //Basic(decl.getMermaidClassName())
         } else {
             scan(decl)
@@ -159,13 +178,14 @@ class AggregatorClassVisitor : KSVisitorVoid() {
                     // Not sure if this is required here after all...
                     val returnType = typeParameters.last().getMermaidClassName()
                     val params = typeParameters.dropLast(1).joinToString { tp ->
-                        tp.getMermaidClassName() + tp.bounds.cleanString()
+                        tp.getMermaidClassName() + tp.bounds.cleanString() // TODO: clean
                     }
                     return "($params)->$returnType"
                 } else {
-                    return simpleName.asString() + "~" + typeParameters.joinToString { tp ->
+                    // TODO: clean
+                    return simpleName.asString() /*+ "~" + typeParameters.joinToString { tp ->
                         tp.getMermaidClassName() + tp.bounds.cleanString()
-                    } + "~"
+                    } + "~"*/
                 }
             }
         }
@@ -183,6 +203,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
                     else -> GClassType.Class
                 }
             }
+
             ClassKind.ENUM_CLASS -> GClassType.Enum
             ClassKind.ENUM_ENTRY -> GClassType.EnumEntry
             ClassKind.OBJECT -> GClassType.Object

@@ -36,22 +36,30 @@ data class GFunction(
     val overrides: Boolean
 )
 
+data class Generics(
+    val name: String,
+    val klassOrBasic: GClassOrBasic,
+)
+
 sealed interface GClassOrBasic {
     val qualifiedName: String // Should be unique for a given class
     val packageName: String
     val symbolName: String
+    val generics: List<Generics>
 }
 
 data class Basic(
     override val qualifiedName: String,
     override val packageName: String,
     override val symbolName: String,
+    override var generics: List<Generics> = emptyList(),
 ) : GClassOrBasic
 
 data class GClass constructor(
     override val qualifiedName: String,
     override val packageName: String,
     override val symbolName: String,
+    override var generics: List<Generics> = emptyList(),
     val originFile: KSFile?,
     val visibility: GVisibility,
     val classType: GClassType,
