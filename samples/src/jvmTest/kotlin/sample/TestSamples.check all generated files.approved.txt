@@ -261,6 +261,7 @@ classDiagram
   }
   PlayerAudioPlaybackException <|-- PlayerStreamBlankException : implements
   click PlayerStreamBlankException href "./sample.errors/-player-stream-blank-exception/index.html"
+
 ```
 
 File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/calculator/package.md
@@ -280,6 +281,7 @@ classDiagram
     +add(T) Unit
   }
   click GenericFoo~T:Number~ href "../sample.calculator/-generic-foo/index.html"
+
 ```
 
 File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/enums/package.md
@@ -306,6 +308,7 @@ classDiagram
     [[ Chromebook ]]
   }
   click DeviceKind href "../sample.enums/-device-kind/index.html"
+
 ```
 
 File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/package.md
@@ -353,6 +356,7 @@ classDiagram
   }
   Shape <|-- Circle : implements
   click Circle href "../sample/-circle/index.html"
+
 ```
 
 File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/errors/package.md
@@ -519,6 +523,7 @@ classDiagram
   }
   PlayerAudioPlaybackException <|-- PlayerStreamBlankException : implements
   click PlayerStreamBlankException href "../sample.errors/-player-stream-blank-exception/index.html"
+
 ```
 
 File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/package.md
@@ -554,5 +559,6 @@ classDiagram
     +foo Int
   }
   click TheTrap href "../sample.another/-the-trap/index.html"
+
 ```
 

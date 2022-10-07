@@ -31,7 +31,7 @@ import com.google.devtools.ksp.symbol.Visibility
 import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 
 @KotlinPoetKspPreview
-class MermaidClassVisitor : KSVisitorVoid() {
+class AggregatorClassVisitor : KSVisitorVoid() {
     val classes = mutableMapOf<String, GClass>()
     val moduleClasses = mutableSetOf<String>()
 

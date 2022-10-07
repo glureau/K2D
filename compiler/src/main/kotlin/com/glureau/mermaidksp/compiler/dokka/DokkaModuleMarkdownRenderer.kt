@@ -1,11 +1,16 @@
-package com.glureau.mermaidksp.compiler.mermaid.renderer
+package com.glureau.mermaidksp.compiler.dokka
 
 import com.glureau.mermaidksp.compiler.GClass
+import com.glureau.mermaidksp.compiler.markdown.appendMdH1
+import com.glureau.mermaidksp.compiler.markdown.appendMdMermaid
+import com.glureau.mermaidksp.compiler.mermaid.renderer.MermaidClassRenderer
+import com.glureau.mermaidksp.compiler.mermaid.renderer.MermaidRendererConfiguration
 import com.glureau.mermaidksp.compiler.writeMarkdown
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import java.io.File
 
-class ModuleMarkdownRenderer(private val environment: SymbolProcessorEnvironment) {
+class DokkaModuleMarkdownRenderer(private val environment: SymbolProcessorEnvironment) {
+
     fun render(data: MutableMap<String, GClass>, moduleClasses: MutableSet<String>) {
         val classes = data.filter { moduleClasses.contains(it.key) }
 
@@ -23,13 +28,11 @@ class ModuleMarkdownRenderer(private val environment: SymbolProcessorEnvironment
             .substringAfterLast(File.separator)
 
         val stringBuilder = StringBuilder()
-        stringBuilder.append("# Module $moduleName\n\n")
-        stringBuilder.append("```mermaid\n")
-        stringBuilder.append(
-            MermaidClassRenderer(MermaidRendererConfiguration(baseUrl = "."))
-                .renderClassDiagram(classes)
-        )
-        stringBuilder.append("```\n")
+        stringBuilder.appendMdH1("Module $moduleName")
+        val mermaidContent = MermaidClassRenderer(MermaidRendererConfiguration(baseUrl = "."))
+            .renderClassDiagram(classes)
+        stringBuilder.appendMdMermaid(mermaidContent)
+
         val content = stringBuilder.toString().toByteArray()
 
         val files = classes.values.mapNotNull { it.originFile }

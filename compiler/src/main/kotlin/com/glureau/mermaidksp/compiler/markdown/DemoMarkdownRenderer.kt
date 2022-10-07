@@ -1,42 +1,40 @@
-package com.glureau.mermaidksp.compiler.mermaid.renderer
+package com.glureau.mermaidksp.compiler.markdown
 
 import com.glureau.mermaidksp.compiler.GClass
+import com.glureau.mermaidksp.compiler.mermaid.renderer.MermaidClassRenderer
+import com.glureau.mermaidksp.compiler.mermaid.renderer.MermaidRendererConfiguration
 import com.glureau.mermaidksp.compiler.writeMarkdown
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 
-class BasicMarkdownRenderer(private val environment: SymbolProcessorEnvironment) {
+class DemoMarkdownRenderer(private val environment: SymbolProcessorEnvironment) {
     fun render(data: MutableMap<String, GClass>, fileName: String) {
         val stringBuilder = StringBuilder()
-        stringBuilder.append("# Mermaid & KSP\n")
-        stringBuilder.append("```mermaid\n")
-        stringBuilder.append(MermaidClassRenderer().renderClassDiagram(data))
-        stringBuilder.append("```\n")
+        stringBuilder.appendMdH1("Demo Mermaid & KSP")
+        stringBuilder.appendMdMermaid(MermaidClassRenderer().renderClassDiagram(data))
 
         data.keys.map { it.substringBeforeLast(".") }.distinct().forEach { packageName ->
-            stringBuilder.append("## Package $packageName\n")
-            stringBuilder.append("```mermaid\n")
-            stringBuilder.append(MermaidClassRenderer().renderClassDiagram(data.filter { it.key.substringBeforeLast(".") == packageName }))
-            stringBuilder.append("```\n")
+            stringBuilder.appendMdH1("Package $packageName")
+            stringBuilder.appendMdMermaid(
+                MermaidClassRenderer()
+                    .renderClassDiagram(data.filter { it.key.substringBeforeLast(".") == packageName })
+            )
         }
 
         data.forEach { (qualifiedName, klass) ->
             val implementedBy = data.filter { it.value.supers.any { s -> s == klass } }
             if (implementedBy.count() > 2) {
-                stringBuilder.append("## Inheritance of $qualifiedName\n")
-                stringBuilder.append("```mermaid\n")
-                stringBuilder.append(
+                stringBuilder.appendMdH1("Inheritance of $qualifiedName")
+                stringBuilder.appendMdMermaid(
                     MermaidClassRenderer(
                         MermaidRendererConfiguration(
                             showHas = false
                         )
                     ).renderClassDiagram(implementedBy + (qualifiedName to klass))
                 )
-                stringBuilder.append("```\n")
 
 
-                stringBuilder.append("## Inheritance of $qualifiedName reverse\n")
-                stringBuilder.append("```mermaid\n")
-                stringBuilder.append(
+                stringBuilder.appendMdH1("Inheritance of $qualifiedName reverse")
+                stringBuilder.appendMdMermaid(
                     MermaidClassRenderer(
                         MermaidRendererConfiguration(
                             showHas = false,
@@ -44,7 +42,6 @@ class BasicMarkdownRenderer(private val environment: SymbolProcessorEnvironment)
                         )
                     ).renderClassDiagram(implementedBy + (qualifiedName to klass))
                 )
-                stringBuilder.append("```\n")
             }
         }
 

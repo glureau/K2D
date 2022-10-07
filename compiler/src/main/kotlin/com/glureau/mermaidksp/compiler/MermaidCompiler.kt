@@ -1,7 +1,7 @@
 package com.glureau.mermaidksp.compiler
 
-import com.glureau.mermaidksp.compiler.mermaid.renderer.ModuleMarkdownRenderer
-import com.glureau.mermaidksp.compiler.mermaid.renderer.PackageMarkdownRenderer
+import com.glureau.mermaidksp.compiler.dokka.DokkaModuleMarkdownRenderer
+import com.glureau.mermaidksp.compiler.dokka.DokkaPackagesMarkdownRenderer
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
@@ -10,7 +10,6 @@ import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSNode
-import com.google.devtools.ksp.symbol.KSType
 import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 
 // Trick to share the Logger everywhere without injecting the dependency everywhere
@@ -58,13 +57,13 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
     private fun generate(
         nodeSequence: Sequence<KSNode>
     ) {
-        val mermaidClassVisitor = MermaidClassVisitor()
-        nodeSequence.forEach { it.accept(mermaidClassVisitor, Unit) }
-        val data = mermaidClassVisitor.classes
+        val aggregatorClassVisitor = AggregatorClassVisitor()
+        nodeSequence.forEach { it.accept(aggregatorClassVisitor, Unit) }
+        val data = aggregatorClassVisitor.classes
 
         if (data.isNotEmpty()) {
-            PackageMarkdownRenderer(environment).render(data, mermaidClassVisitor.moduleClasses)
-            ModuleMarkdownRenderer(environment).render(data, mermaidClassVisitor.moduleClasses)
+            DokkaPackagesMarkdownRenderer(environment).render(data, aggregatorClassVisitor.moduleClasses)
+            DokkaModuleMarkdownRenderer(environment).render(data, aggregatorClassVisitor.moduleClasses)
             //BasicMarkdownRenderer(environment).render(data, fileName)
         }
     }
