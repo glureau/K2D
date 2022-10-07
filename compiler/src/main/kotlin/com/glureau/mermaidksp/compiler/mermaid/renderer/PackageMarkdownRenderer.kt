@@ -1,11 +1,11 @@
-package com.glureau.mermaidksp.compiler.renderer
+package com.glureau.mermaidksp.compiler.mermaid.renderer
 
-import com.glureau.mermaidksp.compiler.MermaidClass
+import com.glureau.mermaidksp.compiler.GClass
 import com.glureau.mermaidksp.compiler.writeMarkdown
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 
 class PackageMarkdownRenderer(private val environment: SymbolProcessorEnvironment) {
-    fun render(data: MutableMap<String, MermaidClass>, moduleClasses: MutableSet<String>) {
+    fun render(data: MutableMap<String, GClass>, moduleClasses: MutableSet<String>) {
         data.filter { moduleClasses.contains(it.key) }
             .values
             .map { it.packageName }

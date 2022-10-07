@@ -2,8 +2,10 @@ package com.glureau.mermaidksp.compiler
 
 import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
+import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSFile
 import java.io.OutputStream
+import kotlin.reflect.KProperty1
 
 fun SymbolProcessorEnvironment.writeMarkdown(
     content: ByteArray,
@@ -29,3 +31,7 @@ fun SymbolProcessorEnvironment.writeMarkdown(
 fun OutputStream.appendText(str: String) {
     this.write(str.toByteArray())
 }
+
+@Suppress("UNCHECKED")
+fun <T> KSAnnotation.getArg(kProp: KProperty1<*, *>) =
+    arguments.firstOrNull { it.name?.asString() == kProp.name }?.value as T

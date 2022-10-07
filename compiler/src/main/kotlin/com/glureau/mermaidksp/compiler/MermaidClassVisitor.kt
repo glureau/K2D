@@ -32,7 +32,7 @@ import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 
 @KotlinPoetKspPreview
 class MermaidClassVisitor : KSVisitorVoid() {
-    val classes = mutableMapOf<String, MermaidClass>()
+    val classes = mutableMapOf<String, GClass>()
     val moduleClasses = mutableSetOf<String>()
 
     override fun visitFile(file: KSFile, data: Unit) {
@@ -45,15 +45,15 @@ class MermaidClassVisitor : KSVisitorVoid() {
         moduleClasses.add(classDeclaration.qualifiedName!!.asString()) // TODO: null to be handled later
     }
 
-    private fun scan(classDeclaration: KSClassDeclaration): MermaidClass {
+    private fun scan(classDeclaration: KSClassDeclaration): GClass {
         val qualifiedName = classDeclaration.qualifiedName!!.asString() // TODO: null to be handled later
         classes[qualifiedName]?.let { return it }
-        val klass = MermaidClass(
+        val klass = GClass(
             qualifiedName = qualifiedName,
             packageName = classDeclaration.packageName.asString(),
             originFile = classDeclaration.containingFile,
             visibility = classDeclaration.getMermaidVisibility(),
-            className = classDeclaration.getMermaidClassName(),
+            symbolName = classDeclaration.getMermaidClassName(),
             classType = classDeclaration.getMermaidClassType(),
         )
         if (classDeclaration.classKind == ClassKind.ENUM_ENTRY) {
@@ -73,7 +73,7 @@ class MermaidClassVisitor : KSVisitorVoid() {
         return klass
     }
 
-    private fun KSPropertyDeclaration.toMermaidProperty(classKind: ClassKind): MermaidProperty? {
+    private fun KSPropertyDeclaration.toMermaidProperty(classKind: ClassKind): GProperty? {
         val decl = type.resolve().declaration
         val qualifiedName = decl.qualifiedName?.asString() ?: return null
 
@@ -84,7 +84,7 @@ class MermaidClassVisitor : KSVisitorVoid() {
             Basic(
                 qualifiedName = qualifiedName,
                 packageName = decl.packageName.asString(),
-                className = decl.simpleName.asString()
+                symbolName = decl.simpleName.asString()
             )
         } else {
             this.type.getMermaidClass()!!
@@ -93,7 +93,7 @@ class MermaidClassVisitor : KSVisitorVoid() {
         val propName = this.simpleName.asString()
         val overrides =
             (classKind == ClassKind.ENUM_ENTRY) || this.modifiers.contains(Modifier.OVERRIDE) || this.findOverridee() != null
-        return MermaidProperty(
+        return GProperty(
             visibility = this.getMermaidVisibility(),
             propName = propName,
             type = mermaidClass,
@@ -103,9 +103,9 @@ class MermaidClassVisitor : KSVisitorVoid() {
 
     // TODO: User option to be parameterized?
     private val ignoredFunctionNames = listOf("copy", "<init>") + (1..30).map { "component$it" }
-    private fun KSFunctionDeclaration.toMermaidFunction(): MermaidFunction? {
+    private fun KSFunctionDeclaration.toMermaidFunction(): GFunction? {
         if (this.simpleName.asString() in ignoredFunctionNames) return null
-        return MermaidFunction(
+        return GFunction(
             visibility = this.getMermaidVisibility(),
             funcName = this.simpleName.asString(),
             // We could retrieve the name of parameters...
@@ -115,7 +115,7 @@ class MermaidClassVisitor : KSVisitorVoid() {
         )
     }
 
-    fun KSTypeReference.getMermaidClass(): MermaidClassOrBasic? {
+    fun KSTypeReference.getMermaidClass(): GClassOrBasic? {
         val decl = resolve().declaration
         val qualifiedName = decl.qualifiedName?.asString() ?: return null
         return if (
@@ -126,7 +126,7 @@ class MermaidClassVisitor : KSVisitorVoid() {
             Basic(
                 qualifiedName = qualifiedName,
                 packageName = decl.packageName.asString(),
-                className = decl.simpleName.asString()
+                symbolName = decl.simpleName.asString()
             )
             //Basic(decl.getMermaidClassName())
         } else {
@@ -134,14 +134,14 @@ class MermaidClassVisitor : KSVisitorVoid() {
         }
     }
 
-    private fun KSDeclaration.getMermaidVisibility(): MermaidVisibility =
+    private fun KSDeclaration.getMermaidVisibility(): GVisibility =
         when (getVisibility()) {
-            Visibility.PUBLIC -> MermaidVisibility.Public
-            Visibility.PRIVATE -> MermaidVisibility.Private
-            Visibility.PROTECTED -> MermaidVisibility.Protected
-            Visibility.INTERNAL -> MermaidVisibility.Internal
-            Visibility.LOCAL -> MermaidVisibility.Private
-            Visibility.JAVA_PACKAGE -> MermaidVisibility.Private
+            Visibility.PUBLIC -> GVisibility.Public
+            Visibility.PRIVATE -> GVisibility.Private
+            Visibility.PROTECTED -> GVisibility.Protected
+            Visibility.INTERNAL -> GVisibility.Internal
+            Visibility.LOCAL -> GVisibility.Private
+            Visibility.JAVA_PACKAGE -> GVisibility.Private
         }
 
     private val functionTypeNames = (0..22).map { "Function$it" }
@@ -172,20 +172,20 @@ class MermaidClassVisitor : KSVisitorVoid() {
         return simpleName.asString()
     }
 
-    private fun KSClassDeclaration.getMermaidClassType(): MermaidClassType =
+    private fun KSClassDeclaration.getMermaidClassType(): GClassType =
         when (classKind) {
-            ClassKind.INTERFACE -> MermaidClassType.Interface
+            ClassKind.INTERFACE -> GClassType.Interface
             ClassKind.CLASS -> {
                 when {
-                    modifiers.contains(Modifier.SEALED) -> MermaidClassType.SealedClass
-                    modifiers.contains(Modifier.DATA) -> MermaidClassType.DataClass
-                    modifiers.contains(Modifier.VALUE) -> MermaidClassType.ValueClass
-                    else -> MermaidClassType.Class
+                    modifiers.contains(Modifier.SEALED) -> GClassType.SealedClass
+                    modifiers.contains(Modifier.DATA) -> GClassType.DataClass
+                    modifiers.contains(Modifier.VALUE) -> GClassType.ValueClass
+                    else -> GClassType.Class
                 }
             }
-            ClassKind.ENUM_CLASS -> MermaidClassType.Enum
-            ClassKind.ENUM_ENTRY -> MermaidClassType.EnumEntry
-            ClassKind.OBJECT -> MermaidClassType.Object
-            ClassKind.ANNOTATION_CLASS -> MermaidClassType.Annotation
+            ClassKind.ENUM_CLASS -> GClassType.Enum
+            ClassKind.ENUM_ENTRY -> GClassType.EnumEntry
+            ClassKind.OBJECT -> GClassType.Object
+            ClassKind.ANNOTATION_CLASS -> GClassType.Annotation
         }
 }

@@ -1,11 +1,11 @@
-package com.glureau.mermaidksp.compiler.renderer
+package com.glureau.mermaidksp.compiler.mermaid.renderer
 
-import com.glureau.mermaidksp.compiler.MermaidClass
+import com.glureau.mermaidksp.compiler.GClass
 import com.glureau.mermaidksp.compiler.writeMarkdown
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 
 class BasicMarkdownRenderer(private val environment: SymbolProcessorEnvironment) {
-    fun render(data: MutableMap<String, MermaidClass>, fileName: String) {
+    fun render(data: MutableMap<String, GClass>, fileName: String) {
         val stringBuilder = StringBuilder()
         stringBuilder.append("# Mermaid & KSP\n")
         stringBuilder.append("```mermaid\n")
