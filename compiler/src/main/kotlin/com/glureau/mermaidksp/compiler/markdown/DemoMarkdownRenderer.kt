@@ -7,6 +7,8 @@ import com.glureau.mermaidksp.compiler.writeMarkdown
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 
 class DemoMarkdownRenderer(private val environment: SymbolProcessorEnvironment) {
+    private val tableRenderer = TableRenderer()
+
     fun render(data: MutableMap<String, GClass>, fileName: String) {
         val stringBuilder = StringBuilder()
         stringBuilder.appendMdH1("Demo Mermaid & KSP")
@@ -31,18 +33,12 @@ class DemoMarkdownRenderer(private val environment: SymbolProcessorEnvironment) 
                         )
                     ).renderClassDiagram(implementedBy + (qualifiedName to klass))
                 )
-
-
-                stringBuilder.appendMdH1("Inheritance of $qualifiedName reverse")
-                stringBuilder.appendMdMermaid(
-                    MermaidClassRenderer(
-                        MermaidRendererConfiguration(
-                            showHas = false,
-                            basicIsDown = false,
-                        )
-                    ).renderClassDiagram(implementedBy + (qualifiedName to klass))
-                )
             }
+        }
+
+        data.values.forEach { klass ->
+            stringBuilder.appendMdH2("Details of ${klass.symbolName}")
+            stringBuilder.append(tableRenderer.renderClassMembers(klass))
         }
 
         val files = data.values.mapNotNull { it.originFile }

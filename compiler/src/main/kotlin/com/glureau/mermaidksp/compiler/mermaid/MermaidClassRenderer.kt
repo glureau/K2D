@@ -1,6 +1,7 @@
 package com.glureau.mermaidksp.compiler.mermaid
 
 import com.glureau.mermaidksp.compiler.*
+import com.glureau.mermaidksp.compiler.markdown.render
 
 class MermaidClassRenderer(
     private val conf: MermaidRendererConfiguration = MermaidRendererConfiguration()
@@ -74,31 +75,7 @@ class MermaidClassRenderer(
         return symbolName + genericsStr
     }
 
-    private fun LocalType.render(asProperty: Boolean = false): String =
-        if (kotlinNativeFunctionNames.contains(type.symbolName)) {
-            val returnType = usedGenerics.last()
-            // Special char, to look like parenthesis but avoid Mermaid limitation with lambda as a property type.
-            // source: http://xahlee.info/comp/unicode_matching_brackets.html
-            // Mermaid translates a line that contains standard parenthesis as a function, this is conflicting with Kotlin short syntax
-            val parOpen = if (asProperty) "⟮" else "("
-            val parClose = if (asProperty) "⟯" else ")"
-            usedGenerics.dropLast(1)
-                .joinToString(
-                    prefix = parOpen,
-                    postfix = "$parClose-> ${returnType.removePrefix("INVARIANT").trim()}"
-                ) {
-                    it.removePrefix("INVARIANT").trim()
-                }
-        } else {
-            val genericsStr =
-                if (usedGenerics.isEmpty()) ""
-                else usedGenerics.joinToString(
-                    prefix = "~",
-                    postfix = "~",
-                    transform = { it.removePrefix("INVARIANT").trim() }
-                )
-            type.symbolName + genericsStr
-        }
+
 
 
     private fun GProperty.shouldDisplay(containerClass: GClass): Boolean {

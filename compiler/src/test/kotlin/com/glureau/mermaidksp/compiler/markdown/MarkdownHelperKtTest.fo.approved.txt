@@ -1,0 +1,6 @@
+| name        | type         | comments    |
+|-------------|--------------|-------------|
+| name        | String       |             |
+| productUuid | Int          | no comments |
+| ez          | List<String> | a           |
+

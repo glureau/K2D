@@ -1,7 +1,7 @@
 package com.glureau.mermaidksp.compiler.mermaid
 
-import com.glureau.mermaidksp.compiler.GVisibility
 import com.glureau.mermaidksp.compiler.GClassType
+import com.glureau.mermaidksp.compiler.GVisibility
 
 val GVisibility.asMermaid: String
     get() = when (this) {
@@ -12,7 +12,7 @@ val GVisibility.asMermaid: String
     }
 
 val GClassType.asMermaid: String
-    get() = when(this) {
+    get() = when (this) {
         GClassType.Interface -> "<<interface>>"
         GClassType.Enum -> "<<enum>>"
         GClassType.EnumEntry -> "<<enum entry>>"
@@ -63,3 +63,4 @@ object Relationship {
         MermaidRelationShip(MermaidRelationType.None, MermaidRelationLink.Solid, MermaidRelationType.Aggregation)
     // Do we need more? https://mermaid-js.github.io/mermaid/#/classDiagram?id=defining-relationship
 }
+

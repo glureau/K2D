@@ -1,7 +1,9 @@
 package com.glureau.mermaidksp.compiler
 
+import MermaidGraph
 import com.glureau.mermaidksp.compiler.dokka.DokkaModuleMarkdownRenderer
 import com.glureau.mermaidksp.compiler.dokka.DokkaPackagesMarkdownRenderer
+import com.glureau.mermaidksp.compiler.markdown.DemoMarkdownRenderer
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
@@ -10,6 +12,7 @@ import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSNode
+import com.google.devtools.ksp.symbol.KSType
 import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 
 // Trick to share the Logger everywhere without injecting the dependency everywhere
@@ -24,9 +27,7 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
         sharedLogger = environment.logger
     }
 
-    @OptIn(KspExperimental::class)
     override fun process(resolver: Resolver): List<KSAnnotated> {
-        /*
         resolver.getSymbolsWithAnnotation(
             annotationName = MermaidGraph::class.qualifiedName!!,
             inDepth = true
@@ -39,14 +40,13 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
                         val klasses = annotation.getArg<List<KSType>>(MermaidGraph::klasses)
                         val nodeSequence = klasses.map { it.declaration }.asSequence()
 
-                        val mermaidClassVisitor = MermaidClassVisitor()
+                        val mermaidClassVisitor = AggregatorClassVisitor()
                         nodeSequence.forEach { it.accept(mermaidClassVisitor, Unit) }
                         val data = mermaidClassVisitor.classes
 
-                        BasicMarkdownRenderer(environment).render(data, name)
+                        DemoMarkdownRenderer(environment).render(data, name)
                     }
             }
-        */
 
         val nodeSequence: Sequence<KSNode> = resolver.getNewFiles()
         generate(nodeSequence)

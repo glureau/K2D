@@ -46,6 +46,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             visibility = classDeclaration.getMermaidVisibility(),
             symbolName = classDeclaration.getMermaidClassName(),
             classType = classDeclaration.getMermaidClassType(),
+            docString = classDeclaration.docString,
         )
         if (classDeclaration.classKind == ClassKind.ENUM_ENTRY) {
             classDeclaration.declarations
@@ -120,6 +121,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             propName = propName,
             type = LocalType(type = mermaidClass, usedGenerics = type.resolve().arguments.map { it.type.toString() }),
             overrides = overrides,
+            docString = this.docString,
         )
     }
 
@@ -146,7 +148,8 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             //usedGenerics = type.resolve().arguments.map { it.type.toString() },
             parameters = params,
             returnType = returnType,
-            overrides = this.modifiers.contains(Modifier.OVERRIDE)
+            overrides = this.modifiers.contains(Modifier.OVERRIDE),
+            docString = this.docString,
         )
     }
 

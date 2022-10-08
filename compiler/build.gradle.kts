@@ -23,7 +23,10 @@ dependencies {
 
     testImplementation("com.github.tschuchortdev:kotlin-compile-testing-ksp:1.4.7")
     testImplementation("junit:junit:4.13.2")
-    testImplementation(kotlin("test"))
+    //testImplementation(kotlin("test"))
+    testImplementation("org.junit.platform:junit-platform-runner:1.9.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
+    testImplementation("com.approvaltests:approvaltests:18.4.0")
 }
 
 sourceSets.main {

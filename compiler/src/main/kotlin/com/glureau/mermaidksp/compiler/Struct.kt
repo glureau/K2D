@@ -26,7 +26,8 @@ data class GProperty(
     val propName: String,
     // val words = List<String>
     val type: LocalType,
-    val overrides: Boolean
+    val overrides: Boolean,
+    val docString: String?,
 )
 
 data class LocalType(
@@ -43,7 +44,8 @@ data class GFunction(
     val funcName: String,
     val parameters: List<GFunctionParameter>,
     val returnType: LocalType?,
-    val overrides: Boolean
+    val overrides: Boolean,
+    val docString: String?,
 )
 
 data class Generics(
@@ -73,6 +75,7 @@ data class GClass constructor(
     val originFile: KSFile?,
     val visibility: GVisibility,
     val classType: GClassType,
+    val docString: String?,
     var supers: List<GClassOrBasic> = emptyList(),
     var properties: List<GProperty> = emptyList(),
     var functions: List<GFunction> = emptyList(),
