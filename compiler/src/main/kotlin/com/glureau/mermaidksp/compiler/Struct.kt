@@ -24,15 +24,25 @@ enum class GClassType {
 data class GProperty(
     val visibility: GVisibility,
     val propName: String,
-    val type: GClassOrBasic,
+    // val words = List<String>
+    val type: LocalType,
     val overrides: Boolean
 )
+
+data class LocalType(
+    val type: GClassOrBasic,
+    // at this location, the generics may have been substituted,
+    // ex List<Any> is used locally as a List<String> (usedGenerics=["String"])
+    val usedGenerics: List<String>,
+)
+
+typealias GFunctionParameter = LocalType // No need for more... yet
 
 data class GFunction(
     val visibility: GVisibility,
     val funcName: String,
-    val parameters: List<GClassOrBasic>,
-    val returnType: GClassOrBasic?,
+    val parameters: List<GFunctionParameter>,
+    val returnType: LocalType?,
     val overrides: Boolean
 )
 

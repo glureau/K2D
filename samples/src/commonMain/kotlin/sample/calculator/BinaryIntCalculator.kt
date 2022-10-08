@@ -12,5 +12,11 @@ class BinaryIntCalculator(
 
 @Suppress("Unused")
 interface GenericFoo<T : Number> {
+    val list: List<T>
+    val latestResult: Result<Int>
+    val lambda: (String) -> Double
+
     fun add(t: T)
+    fun addAll(others: List<T>): List<T>
+    fun computeResult(): Result<Int>
 }

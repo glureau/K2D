@@ -16,23 +16,24 @@ class MermaidClassRenderer(
             //if (c.classType == MermaidClassType.EnumEntry && c.properties.all { it.overrides } && c.functions.all { it.overrides }) return@forEach
             if (c.classType == GClassType.EnumEntry) return@forEach // Ignoring for now...
 
-            val generics = c.generics.let {
-                if (it.isEmpty()) "" else it.joinToString(
-                    prefix = "~",
-                    transform = { it.name + ":" + it.klassOrBasic.symbolName },
-                    postfix = "~"
-                )
-            }
-            val fullName = c.symbolName + generics
-            stringBuilder.append("  class $fullName {\n")
+            stringBuilder.append("  class ${c.fullTypeName()} {\n")
             if (conf.showClassType) stringBuilder.append("    ${c.classType.asMermaid}\n")
             c.properties.forEach { p ->
                 if (p.shouldDisplay(c))
-                    stringBuilder.append("    ${p.visibility.asMermaid}${p.propName} ${p.type.symbolName}\n")
+                    stringBuilder.append("    ${p.visibility.asMermaid}${p.propName} ${p.type.render(true)}\n")
+
+                //stringBuilder.append(p.type.toString() + "\n") // TODO: remove this line, debug only
             }
+
             c.functions.forEach { f ->
-                if (f.shouldDisplay())
-                    stringBuilder.append("    ${f.visibility.asMermaid}${f.funcName}(${f.parameters.joinToString { it.symbolName }}) ${f.returnType?.symbolName ?: ""}\n")
+                if (f.shouldDisplay()) {
+                    // TODO: method to render lambdas can be shared (somewhere else)
+                    val paramsString = f.parameters.joinToString { it.render() }
+                    //val paramsString = f.parameters.joinToString { it.usedGenerics.joinToString("|") }
+                    var returnString = f.returnType?.render() ?: ""
+                    if (returnString == "Unit") returnString = "" // Ignore Unit
+                    stringBuilder.append("    ${f.visibility.asMermaid}${f.funcName}($paramsString) ${returnString}\n")
+                }
             }
             if (c.classType == GClassType.Enum) {
                 c.inners.forEach { i ->
@@ -43,24 +44,62 @@ class MermaidClassRenderer(
             if (conf.showImplements) {
                 c.supers.forEach { s ->
                     if (conf.basicIsDown)
-                        stringBuilder.append("  ${c.symbolName} ${Relationship.Implement} ${s.symbolName} : implements\n")
+                        stringBuilder.append("  ${c.fullTypeName()} ${Relationship.Implement} ${s.fullTypeName()} : implements\n")
                     else
-                        stringBuilder.append("  ${s.symbolName} ${Relationship.ImplementReverse} ${c.symbolName} : implements\n")
+                        stringBuilder.append("  ${s.fullTypeName()} ${Relationship.ImplementReverse} ${c.fullTypeName()} : implements\n")
                 }
             }
             if (conf.showHas) {
                 c.properties.forEach { p ->
                     val shouldDisplay = p.shouldDisplay(c)
-                    if (p.type is GClass && shouldDisplay) {
-                        stringBuilder.append("  ${c.symbolName} ${Relationship.Composition} ${p.type.symbolName} : has\n")
+                    if (p.type.type is GClass && shouldDisplay) {
+                        stringBuilder.append("  ${c.fullTypeName()} ${Relationship.Composition} ${p.type.render(true)} : has\n")
                     }
                 }
             }
             // Cannot write a tooltip for now when using generics: https://github.com/mermaid-js/mermaid/issues/2944
-            stringBuilder.append("  click $fullName href \"${conf.baseUrl}/${c.packageName}/${c.symbolName.asDokkaHtmlPageFormat()}\"\n")// \"Open ${c.className.substringBefore("~")}\"\n")
+            stringBuilder.append("  click ${c.fullTypeName()} href \"${conf.baseUrl}/${c.packageName}/${c.symbolName.asDokkaHtmlPageFormat()}\"\n")// \"Open ${c.className.substringBefore("~")}\"\n")
         }
         return stringBuilder.toString()
     }
+
+    fun GClassOrBasic.fullTypeName(): String {
+        val genericsStr =
+            if (generics.isEmpty()) ""
+            else generics.joinToString(
+                prefix = "~",
+                transform = { it.name + ":" + it.klassOrBasic.symbolName },
+                postfix = "~"
+            )
+        return symbolName + genericsStr
+    }
+
+    private fun LocalType.render(asProperty: Boolean = false): String =
+        if (kotlinNativeFunctionNames.contains(type.symbolName)) {
+            val returnType = usedGenerics.last()
+            // Special char, to look like parenthesis but avoid Mermaid limitation with lambda as a property type.
+            // source: http://xahlee.info/comp/unicode_matching_brackets.html
+            // Mermaid translates a line that contains standard parenthesis as a function, this is conflicting with Kotlin short syntax
+            val parOpen = if (asProperty) "⟮" else "("
+            val parClose = if (asProperty) "⟯" else ")"
+            usedGenerics.dropLast(1)
+                .joinToString(
+                    prefix = parOpen,
+                    postfix = "$parClose-> ${returnType.removePrefix("INVARIANT").trim()}"
+                ) {
+                    it.removePrefix("INVARIANT").trim()
+                }
+        } else {
+            val genericsStr =
+                if (usedGenerics.isEmpty()) ""
+                else usedGenerics.joinToString(
+                    prefix = "~",
+                    postfix = "~",
+                    transform = { it.removePrefix("INVARIANT").trim() }
+                )
+            type.symbolName + genericsStr
+        }
+
 
     private fun GProperty.shouldDisplay(containerClass: GClass): Boolean {
         if (!conf.showOverride && overrides) return false

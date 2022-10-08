@@ -17,7 +17,6 @@
 
 package com.glureau.mermaidksp.compiler
 
-import com.google.devtools.ksp.closestClassDeclaration
 import com.google.devtools.ksp.getVisibility
 import com.google.devtools.ksp.symbol.*
 import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
@@ -73,18 +72,21 @@ class AggregatorClassVisitor : KSVisitorVoid() {
         }
         // TODO: Apply same compute on other "generics" computation
         // TODO: rework "symbolName" logic and use a specific mermaid method to display "~
-        klass.generics = classDeclaration.typeParameters.map {
-            Generics(
-                it.name.asString(),
-                it.bounds.first().getMermaidClass()!!
-            )
-
-        }
+        klass.generics = classDeclaration.generics()
         //     fun KSTypeReference.getMermaidClass(): GClassOrBasic? {
         /*klass.generics = classDeclaration.typeParameters.map {
             scan(it.bounds.first().element)
         }*/
         return klass
+    }
+
+    fun KSDeclaration.generics(): List<Generics> {
+        return typeParameters.map {
+            Generics(
+                it.name.asString(),
+                it.bounds.first().getMermaidClass()!!
+            )
+        }
     }
 
     private fun KSPropertyDeclaration.toMermaidProperty(classKind: ClassKind): GProperty? {
@@ -100,7 +102,11 @@ class AggregatorClassVisitor : KSVisitorVoid() {
                 packageName = decl.packageName.asString(),
                 symbolName = decl.simpleName.asString(),
             ).apply {
-                //TODO: generics = ...
+                generics = decl.generics()
+
+                if (symbolName == "List") {
+                    //Logger.error("XXX - " + this.toString(), this@toMermaidProperty)
+                }
             }
         } else {
             this.type.getMermaidClass()!!
@@ -112,7 +118,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
         return GProperty(
             visibility = this.getMermaidVisibility(),
             propName = propName,
-            type = mermaidClass,
+            type = LocalType(type = mermaidClass, usedGenerics = type.resolve().arguments.map { it.type.toString() }),
             overrides = overrides,
         )
     }
@@ -121,12 +127,25 @@ class AggregatorClassVisitor : KSVisitorVoid() {
     private val ignoredFunctionNames = listOf("copy", "<init>") + (1..30).map { "component$it" }
     private fun KSFunctionDeclaration.toMermaidFunction(): GFunction? {
         if (this.simpleName.asString() in ignoredFunctionNames) return null
+        val params = this.parameters.mapNotNull {
+            GFunctionParameter(
+                type = it.type.getMermaidClass() ?: return@mapNotNull null,
+                usedGenerics = it.type.element?.typeArguments?.map { it.toString() }.orEmpty(),
+            )
+        }
+        val returnType = this.returnType?.getMermaidClass()?.let { type ->
+            LocalType(
+                type = type,
+                usedGenerics = this.returnType!!.element?.typeArguments?.map { it.toString() }.orEmpty()
+            )
+        }
         return GFunction(
             visibility = this.getMermaidVisibility(),
             funcName = this.simpleName.asString(),
             // We could retrieve the name of parameters...
-            parameters = this.parameters.mapNotNull { it.type.getMermaidClass() },
-            returnType = this.returnType?.getMermaidClass(),
+            //usedGenerics = type.resolve().arguments.map { it.type.toString() },
+            parameters = params,
+            returnType = returnType,
             overrides = this.modifiers.contains(Modifier.OVERRIDE)
         )
     }
@@ -144,10 +163,8 @@ class AggregatorClassVisitor : KSVisitorVoid() {
                 packageName = decl.packageName.asString(),
                 symbolName = decl.simpleName.asString(),
             ).apply {
-                //TODO: generics = ...
+                generics = decl.generics()
             }
-
-            //Basic(decl.getMermaidClassName())
         } else {
             scan(decl)
         }
@@ -163,7 +180,6 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             Visibility.JAVA_PACKAGE -> GVisibility.Private
         }
 
-    private val functionTypeNames = (0..22).map { "Function$it" }
     private fun KSDeclaration.getMermaidClassName(): String {
         if (this is KSClassDeclaration) {
             if (this.typeParameters.isNotEmpty()) {
@@ -174,7 +190,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
                         prefix = ":"
                     ) { b -> b.element.toString() }
                 }
-                if (functionTypeNames.contains(simpleName.asString())) {
+                if (kotlinNativeFunctionNames.contains(simpleName.asString())) {
                     // Not sure if this is required here after all...
                     val returnType = typeParameters.last().getMermaidClassName()
                     val params = typeParameters.dropLast(1).joinToString { tp ->
