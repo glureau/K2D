@@ -1,5 +1,10 @@
 package com.glureau.markdown_replace
 
+import K2DConfiguration
+import K2DDokkaConfig
+import com.google.devtools.ksp.gradle.KspExtension
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -21,11 +26,16 @@ class MarkdownReplacePlugin : Plugin<Project> {
 }
 
 open class MarkdownReplaceTask : DefaultTask() {
+    init {
+        configureKspCompiler(project)
+    }
     @TaskAction
     fun execute() {
         println("Execute !")
         val ext = project.extensions.getByType(MarkdownReplaceExtension::class.java)
         println("ext= ${ext.runnable}")
+
+        configureKspCompiler(project)
 
         val directives = listOf<Directive>(
             Directive("INSERT") { params -> File(project.projectDir.absolutePath + "/" + params[0]).readText() }
@@ -36,6 +46,7 @@ open class MarkdownReplaceTask : DefaultTask() {
          * <!--$ COMMAND some params -->
          * <!--$ END -->
          */
+        val tokenEnd = "<!-- END \$-->"
 
         ext.files.files.forEach { file ->
             val fileContent = file.readText()
@@ -47,11 +58,11 @@ open class MarkdownReplaceTask : DefaultTask() {
             splittedFile.drop(1).map { split ->
 
                 val endDirectiveIndex: Int = min(split.indexOf("\n"), split.indexOf("-->"))
-                val endIndex = split.indexOf("<!--\$ END -->")
-                if (endIndex == -1) error("Missing '<!--\$ END -->' in the file $file, cannot determine the end of the directive")
+                val endIndex = split.indexOf(tokenEnd)
+                if (endIndex == -1) error("Missing '$tokenEnd' in the file $file, cannot determine the end of the directive")
 
                 val directiveWithParams = split.substringBefore("-->").trim()
-                updatedContent += "<!--\$ $directiveWithParams\n"
+                updatedContent += "<!--\$ $directiveWithParams -->\n"
 
                 val directiveWithParamsSplit = directiveWithParams.split(" ")
                 directives.firstOrNull { it.key == directiveWithParamsSplit[0] }.let { d ->
@@ -63,8 +74,8 @@ open class MarkdownReplaceTask : DefaultTask() {
                 }
 
                 println("Execute directive $directiveWithParams")
-                updatedContent += "\n--->\n"
-                updatedContent += split.substring(endIndex + 4)
+                updatedContent += "\n$tokenEnd\n"
+                updatedContent += split.substring(endIndex + tokenEnd.length)
             }
 
             val toFile = if (ext.replaceInPlace) file else File(project.buildDir.path + "/" + file.name)
@@ -72,6 +83,18 @@ open class MarkdownReplaceTask : DefaultTask() {
 
             println("Final file:")
         }
+    }
+
+    private fun configureKspCompiler(project: Project) {
+        val kspPlugin = project.plugins.getPlugin("com.google.devtools.ksp") ?: return
+        val kspExt = project.extensions.getByType(KspExtension::class.java)
+        println("Ksp Extension!")
+        println("setup arg = " + Json.encodeToString(K2DConfiguration(
+            dokkaConfig = K2DDokkaConfig(generateMermaidOnModules = true, generateMermaidOnPackages = false)
+        )))
+        kspExt.arg("k2d.config", Json.encodeToString(K2DConfiguration(
+            dokkaConfig = K2DDokkaConfig(generateMermaidOnModules = true, generateMermaidOnPackages = false)
+        )))
     }
 }
 

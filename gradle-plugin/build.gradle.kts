@@ -4,6 +4,15 @@ plugins {
     `java-gradle-plugin`
 }
 
+dependencies {
+    val kspVersion: String by project
+    //implementation("com.google.devtools.ksp:symbol-processing:$kspVersion")
+    //implementation("com.google.devtools.ksp:symbol-processing-api:$kspVersion")
+    implementation("com.google.devtools.ksp:symbol-processing-gradle-plugin:$kspVersion")
+    implementation(project(":lib"))
+}
+
+// TODO : Unify naming
 group = "com.glureau.markdownreplace"
 gradlePlugin {
     plugins {

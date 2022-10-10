@@ -43,26 +43,20 @@
 
 ### Chapter 2
 
+blablabla
+
 ### Chapter 3
 
-<!--$ INSERT build/generated/ksp/metadata/commonMain/resources/sample/package.md -->
-# Package sample
-
+<!--$ INSERT build/generated/ksp/metadata/commonMain/resources/Shapes23.md -->
 ```mermaid
 classDiagram
-  class Position {
-    <<data class>>
-    +x Float
-    +y Float
-  }
-  click Position href "../sample/-position/index.html"
   class Shape {
     <<interface>>
     +originPosition Position
     +computeSurface() Float
   }
   Shape ..* Position : has
-  click Shape href "../sample/-shape/index.html"
+  click Shape href "./sample/-shape/index.html"
   class Rectangle {
     <<interface>>
     +width Float
@@ -70,30 +64,33 @@ classDiagram
     +rotate(Float) 
   }
   Shape <|-- Rectangle : implements
-  click Rectangle href "../sample/-rectangle/index.html"
+  click Rectangle href "./sample/-rectangle/index.html"
   class Polygon {
     <<interface>>
     +howMuchSides() Int
   }
   Shape <|-- Polygon : implements
-  click Polygon href "../sample/-polygon/index.html"
+  click Polygon href "./sample/-polygon/index.html"
   class Square {
     <<class>>
     +sideSize Float
     +publicFun() 
   }
   Polygon <|-- Square : implements
-  click Square href "../sample/-square/index.html"
+  click Square href "./sample/-square/index.html"
   class Circle {
     <<data class>>
     +radius Float
   }
   Shape <|-- Circle : implements
-  click Circle href "../sample/-circle/index.html"
+  click Circle href "./sample/-circle/index.html"
 
 ```
 
-<!--$ END -->
+<!-- END $-->
+
+
+
 
 
 

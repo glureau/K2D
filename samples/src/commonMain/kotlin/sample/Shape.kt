@@ -6,8 +6,8 @@ import sample.another.Oval
 data class Position(val x: Float, val y: Float)
 
 
-@MermaidGraph("Shapes", [Shape::class, Polygon::class, Circle::class, Rectangle::class, Oval::class])
-@MermaidGraph("SquareToShape", [Shape::class, Polygon::class, Square::class])
+//@MermaidGraph("Shapes", [Shape::class, Polygon::class, Circle::class, Rectangle::class, Oval::class])
+//@MermaidGraph("SquareToShape", [Shape::class, Polygon::class, Square::class])
 interface Shape {
     val originPosition: Position
     fun computeSurface(): Float {
@@ -35,4 +35,5 @@ class Square(override val originPosition: Position) : Polygon {
     override fun computeSurface(): Float = TODO() // Ignored (override)
 }
 
-data class Circle(override val originPosition: Position, val radius: Float) : Shape
+data class Circle(override val originPosition: Position, val radius: Float) : Shape {
+}
