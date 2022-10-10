@@ -4,7 +4,18 @@ plugins {
     id("org.jetbrains.dokka") version "1.6.21"
     id("org.ajoberstar.git-publish")
     id("org.ajoberstar.grgit")
+    id("org.jetbrains.kotlinx.knit") version "0.4.0"
+    id("com.glureau.markdownreplace") version "0.1.1"
 }
+
+markdownReplace {
+    files = fileTree(projectDir).apply {
+        include("**/**.md")
+    }
+    replaceInPlace = true
+    runnable = Runnable {}
+}
+
 repositories {
     mavenCentral()
 }
