@@ -1,51 +1,21 @@
 <!--- TOC -->
 
-* [Part 1](#part-1)
-  * [Chapter 1](#chapter-1)
-  * [Chapter 2](#chapter-2)
-  * [Chapter 3](#chapter-3)
-* [Details of Shape](#details-of-shape)
-    * [Properties](#properties)
-    * [Functions](#functions)
-* [Details of Position](#details-of-position)
-    * [Properties](#properties)
-* [Details of Polygon](#details-of-polygon)
-    * [Properties](#properties)
-    * [Functions](#functions)
-* [Details of Circle](#details-of-circle)
-    * [Properties](#properties)
-    * [Functions](#functions)
-* [Details of Rectangle](#details-of-rectangle)
-    * [Properties](#properties)
-    * [Functions](#functions)
-* [Details of Oval](#details-of-oval)
-    * [Properties](#properties)
-    * [Functions](#functions)
-* [Details of InnerOval](#details-of-inneroval)
-    * [Properties](#properties)
-* [Details of Square](#details-of-square)
-    * [Properties](#properties)
-    * [Functions](#functions)
-* [Details of Builder](#details-of-builder)
-    * [Functions](#functions)
+  * [Let's see the schema!](#let's-see-the-schema)
 * [Part 2](#part-2)
-  * [Chapter 1](#chapter-1)
-  * [Chapter 2](#chapter-2)
-  * [Chapter 3](#chapter-3)
+  * [Shape](#shape)
+    * [Properties](#properties)
+    * [Functions](#functions)
+  * [Square](#square)
+    * [Properties](#properties)
+    * [Functions](#functions)
   * [Chapter 4](#chapter-4)
 
 <!--- END -->
 # Hello !
 
-## Part 1
+Introduction to the library
 
-### Chapter 1
-
-### Chapter 2
-
-blablabla
-
-### Chapter 3
+### Let's see the schema!
 
 <!--$ INSERT build/generated/ksp/metadata/commonMain/resources/Shapes23.md -->
 ```mermaid
@@ -97,19 +67,61 @@ classDiagram
 
 ## Part 2
 
-nlanl
+### Shape
 
-### Chapter 1
+My custom documentation about shape is here, and here is the dynamic part:
 
-aelknra
+<!--$ INSERT build/generated/ksp/metadata/commonMain/resources/table_Shape.md -->
+#### Properties
 
-### Chapter 2
 
-ateaa
+| Name           | Type     | Comments |
+|----------------|----------|----------|
+| originPosition | Position |          |
 
-### Chapter 3
+#### Functions
 
-aer
+
+| Name           | Return Type | Comments |
+|----------------|-------------|----------|
+| computeSurface | Float       |          |
+
+
+<!-- END $-->
+
+And I can complete with hardcoded part at any time
+
+
+### Square
+
+How is defined a Square??
+
+<!--$ INSERT build/generated/ksp/metadata/commonMain/resources/table_Square.md -->
+#### Properties
+
+
+| Name           | Type     | Comments |
+|----------------|----------|----------|
+| originPosition | Position |          |
+| sideSize       | Float    |          |
+
+#### Functions
+
+
+| Name           | Return Type | Comments |
+|----------------|-------------|----------|
+| computeSurface | Float       |          |
+| howMuchSides   | Int         |          |
+| internalFun    | Unit        |          |
+| privateFun     | Unit        |          |
+| protectedFun   | Unit        |          |
+| publicFun      | Unit        |          |
+
+
+<!-- END $-->
+
+
+
 
 ### Chapter 4
 

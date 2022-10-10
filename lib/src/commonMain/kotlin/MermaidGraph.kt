@@ -8,6 +8,11 @@ annotation class MermaidGraph(
     val symbolSelector: K2DSymbolSelectorAnnotation = K2DSymbolSelectorAnnotation(),
 )
 
+@Repeatable
+annotation class ClassMembersTable(
+    val symbolSelector: K2DSymbolSelectorAnnotation = K2DSymbolSelectorAnnotation(),
+)
+
 @Serializable
 data class K2DConfiguration(
     val dokkaConfig: K2DDokkaConfig? = null,

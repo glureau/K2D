@@ -35,3 +35,6 @@ fun OutputStream.appendText(str: String) {
 @Suppress("UNCHECKED")
 fun <T> KSAnnotation.getArg(kProp: KProperty1<*, *>) =
     arguments.firstOrNull { it.name?.asString() == kProp.name }?.value as T
+
+fun KSAnnotation.argFrom(kProp: KProperty1<*, String>) =
+    arguments.first { it.name?.asString() == kProp.name }

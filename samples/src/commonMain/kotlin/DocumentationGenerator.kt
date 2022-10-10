@@ -1,5 +1,6 @@
 package foo
 
+import ClassMembersTable
 import K2DSymbolSelectorAnnotation
 import MermaidGraph
 
@@ -8,6 +9,11 @@ import MermaidGraph
     symbolSelector = K2DSymbolSelectorAnnotation(
         includesFqnRegex = "sample\\.[A-Z].*", // only in sample package
         excludesFqnRegex = "sample.Position"
+    )
+)
+@ClassMembersTable(
+    K2DSymbolSelectorAnnotation(
+        includesFqnRegex = "sample\\.[A-Z].*", // only in sample package
     )
 )
 object DocumentationGenerator

@@ -1,11 +1,14 @@
 package com.glureau.mermaidksp.compiler
 
+import ClassMembersTable
 import K2DConfiguration
 import K2DDokkaConfig
+import K2DSymbolSelector
 import K2DSymbolSelectorAnnotation
 import MermaidGraph
 import com.glureau.mermaidksp.compiler.dokka.DokkaModuleMarkdownRenderer
 import com.glureau.mermaidksp.compiler.dokka.DokkaPackagesMarkdownRenderer
+import com.glureau.mermaidksp.compiler.markdown.TableRenderer
 import com.glureau.mermaidksp.compiler.markdown.appendMdMermaid
 import com.glureau.mermaidksp.compiler.mermaid.MermaidClassRenderer
 import com.google.devtools.ksp.processing.*
@@ -15,7 +18,7 @@ import com.google.devtools.ksp.symbol.KSNode
 import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import kotlin.reflect.KProperty1
+import kotlin.reflect.KClass
 
 // Trick to share the Logger everywhere without injecting the dependency everywhere
 internal lateinit var sharedLogger: KSPLogger
@@ -43,59 +46,70 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
         Logger.warn("aggro=${aggregatorClassVisitor.classes.keys}")
 
 
-        resolver.getSymbolsWithAnnotation(
-            annotationName = MermaidGraph::class.qualifiedName!!,
-            inDepth = true
-        )
-            .forEach { annotated ->
-                annotated.annotations
-                    .filter { it.annotationType.resolve().declaration.qualifiedName?.asString() == MermaidGraph::class.qualifiedName }
-                    .forEach { annotation ->
-                        val name = annotation.getArg<String>(MermaidGraph::name)
-                        Logger.warn("ANNOTATION = $name")
-                        // TODO: remove?
-                        //  val klasses = annotation.getArg<List<KSType>>(MermaidGraph::klasses)
-                        //  val nodeSequence = klasses.map { it.declaration }.asSequence()
+        resolver.onAnnotation(MermaidGraph::class) { annotation ->
+            val name = annotation.getArg<String>(MermaidGraph::name)
+            val annotationSymbolSelector = annotation.getArg<KSAnnotation>(MermaidGraph::symbolSelector)
+            val selector = annotationSymbolSelector.symbolSelector()
 
-                        fun KSAnnotation.argFrom(kProp: KProperty1<*, String>) =
-                            arguments.first { it.name?.asString() == kProp.name }
-
-                        val annotationSymbolSelector = annotation.getArg<KSAnnotation>(MermaidGraph::symbolSelector)
-                        val includesFqnRegex =
-                            annotationSymbolSelector.argFrom(K2DSymbolSelectorAnnotation::includesFqnRegex).value as String
-                        val excludesFqnRegex =
-                            annotationSymbolSelector.argFrom(K2DSymbolSelectorAnnotation::excludesFqnRegex).value as String
-
-                        Logger.warn("ANNOTATION.symbolSelector = ${annotationSymbolSelector.arguments}")
-
-                        /*
-                        val mermaidClassVisitor = AggregatorClassVisitor()
-                        nodeSequence.forEach { it.accept(mermaidClassVisitor, Unit) }
-                        val data = mermaidClassVisitor.classes*/
-                        // TODO: No need of the global config here, it's by
-                        val includeRegex = Regex(includesFqnRegex)
-                        val excludeRegex = Regex(excludesFqnRegex)
-                        val filtered = aggregatorClassVisitor.classes.filter { (fqn, klass) ->
-                            includeRegex.matches(fqn) && !excludeRegex.matches(fqn)
-                        }
-
-                        val content = buildString {
-                            appendMdMermaid(MermaidClassRenderer().renderClassDiagram(filtered))
-                        }.toByteArray()
-
-                        Logger.warn("content=${content}")
-                        val files = filtered.values.mapNotNull { it.originFile }
-
-                        environment.logger.warn("Rendering markdown $name.md")
-                        environment.writeMarkdown(content, "", name, files)
-                    }
+            // TODO: No need of the global config here, it's computed by
+            val includeRegex = Regex(selector.includesFqnRegex)
+            val excludeRegex = Regex(selector.excludesFqnRegex)
+            val filtered = aggregatorClassVisitor.classes.filter { (fqn, _) ->
+                includeRegex.matches(fqn) && !excludeRegex.matches(fqn)
             }
+
+            // TODO: get MermaidRendererConfiguration from annotation
+            val content = buildString { appendMdMermaid(MermaidClassRenderer().renderClassDiagram(filtered)) }
+                .toByteArray()
+
+
+            val files = filtered.values.mapNotNull { it.originFile }
+            environment.logger.warn("Rendering markdown $name.md")
+            environment.writeMarkdown(content, "", name, files)
+        }
+
+        resolver.onAnnotation(ClassMembersTable::class) { annotation ->
+            val annotationSymbolSelector = annotation.getArg<KSAnnotation>(ClassMembersTable::symbolSelector)
+            val selector = annotationSymbolSelector.symbolSelector()
+
+            // TODO: No need of the global config here, it's computed by
+            val includeRegex = Regex(selector.includesFqnRegex)
+            val excludeRegex = Regex(selector.excludesFqnRegex)
+            val filtered = aggregatorClassVisitor.classes.filter { (fqn, _) ->
+                includeRegex.matches(fqn) && !excludeRegex.matches(fqn)
+            }
+            filtered.forEach { (fqn, gClass) ->
+                val content = TableRenderer().renderClassMembers(gClass).toByteArray()
+
+                environment.logger.warn("Rendering table ${gClass.symbolName}.md")
+                environment.writeMarkdown(
+                    content = content,
+                    packageName = "",
+                    fileName = "table_" + gClass.symbolName,
+                    dependencies = gClass.originFile?.let { listOf(it) } ?: emptyList())
+
+            }
+        }
 
         configuration.dokkaConfig?.let {
             generateDokka(aggregatorClassVisitor, it)
         }
 
         return emptyList()
+    }
+
+    private fun Resolver.onAnnotation(klass: KClass<*>, act: (KSAnnotation) -> Unit) {
+        getSymbolsWithAnnotation(
+            annotationName = klass.qualifiedName!!,
+            inDepth = true
+        )
+            .forEach { annotated ->
+                annotated.annotations
+                    .filter { it.annotationType.resolve().declaration.qualifiedName?.asString() == klass.qualifiedName }
+                    .forEach { annotation ->
+                        act(annotation)
+                    }
+            }
     }
 
     private fun generateDokka(
@@ -111,6 +125,12 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
                 DokkaModuleMarkdownRenderer(environment).render(data, aggregatorClassVisitor.moduleClasses)
         }
     }
+}
+
+private fun KSAnnotation.symbolSelector(): K2DSymbolSelector {
+    val includesFqnRegex = (argFrom(K2DSymbolSelectorAnnotation::includesFqnRegex).value as? String).orEmpty()
+    val excludesFqnRegex = (argFrom(K2DSymbolSelectorAnnotation::excludesFqnRegex).value as? String).orEmpty()
+    return K2DSymbolSelector(includesFqnRegex = includesFqnRegex, excludesFqnRegex = excludesFqnRegex)
 }
 
 @KotlinPoetKspPreview
