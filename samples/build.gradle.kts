@@ -10,7 +10,7 @@ plugins {
 
 markdownReplace {
     files = fileTree(projectDir).apply {
-        include("**/**.md")
+        include("src/**/**.md")
     }
     replaceInPlace = true
     runnable = Runnable {}

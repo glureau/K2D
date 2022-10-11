@@ -1,113 +1,4 @@
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/SquareToShape.md
-# Demo Mermaid & KSP
-
-```mermaid
-classDiagram
-  class Shape {
-    <<interface>>
-    +originPosition Position
-    +computeSurface() Float
-  }
-  Shape ..* Position : has
-  click Shape href "./sample/-shape/index.html"
-  class Position {
-    <<data class>>
-    +x Float
-    +y Float
-  }
-  click Position href "./sample/-position/index.html"
-  class Polygon {
-    <<interface>>
-    +howMuchSides() Int
-  }
-  Shape <|-- Polygon : implements
-  click Polygon href "./sample/-polygon/index.html"
-  class Square {
-    <<class>>
-    +sideSize Float
-    +publicFun() 
-  }
-  Polygon <|-- Square : implements
-  click Square href "./sample/-square/index.html"
-
-```
-# Package sample
-
-```mermaid
-classDiagram
-  class Shape {
-    <<interface>>
-    +originPosition Position
-    +computeSurface() Float
-  }
-  Shape ..* Position : has
-  click Shape href "./sample/-shape/index.html"
-  class Position {
-    <<data class>>
-    +x Float
-    +y Float
-  }
-  click Position href "./sample/-position/index.html"
-  class Polygon {
-    <<interface>>
-    +howMuchSides() Int
-  }
-  Shape <|-- Polygon : implements
-  click Polygon href "./sample/-polygon/index.html"
-  class Square {
-    <<class>>
-    +sideSize Float
-    +publicFun() 
-  }
-  Polygon <|-- Square : implements
-  click Square href "./sample/-square/index.html"
-
-```
-## Details of Shape
-
-#### Properties
-
-
-| Name           | Type     | Comments |
-|----------------|----------|----------|
-| originPosition | Position |          |
-
-#### Functions
-
-
-| Name           | Return Type | Comments |
-|----------------|-------------|----------|
-| computeSurface | Float       |          |
-
-## Details of Position
-
-#### Properties
-
-
-| Name | Type  | Comments |
-|------|-------|----------|
-| x    | Float |          |
-| y    | Float |          |
-
-## Details of Polygon
-
-#### Properties
-
-
-| Name           | Type     | Comments |
-|----------------|----------|----------|
-| originPosition | Position |          |
-
-#### Functions
-
-
-| Name           | Return Type | Comments |
-|----------------|-------------|----------|
-| computeSurface | Float       |          |
-| howMuchSides   | Int         |          |
-
-## Details of Square
-
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/table_Square.md
 #### Properties
 
 
@@ -129,11 +20,82 @@ classDiagram
 | publicFun      | Unit        |          |
 
 
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/Shapes23.md
+```mermaid
+classDiagram
+  class Shape {
+    <<interface>>
+    +originPosition Position
+    +computeSurface() Float
+  }
+  Shape ..* Position : has
+  click Shape href "./sample/-shape/index.html"
+  class Rectangle {
+    <<interface>>
+    +width Float
+    +height Float
+    +rotate(Float) 
+  }
+  Shape <|-- Rectangle : implements
+  click Rectangle href "./sample/-rectangle/index.html"
+  class Polygon {
+    <<interface>>
+    +howMuchSides() Int
+  }
+  Shape <|-- Polygon : implements
+  click Polygon href "./sample/-polygon/index.html"
+  class Square {
+    <<class>>
+    +sideSize Float
+    +publicFun() 
+  }
+  Polygon <|-- Square : implements
+  click Square href "./sample/-square/index.html"
+  class Circle {
+    <<data class>>
+    +radius Float
+  }
+  Shape <|-- Circle : implements
+  click Circle href "./sample/-circle/index.html"
+
+```
+
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/table_Polygon.md
+#### Properties
+
+
+| Name           | Type     | Comments |
+|----------------|----------|----------|
+| originPosition | Position |          |
+
+#### Functions
+
+
+| Name           | Return Type | Comments |
+|----------------|-------------|----------|
+| computeSurface | Float       |          |
+| howMuchSides   | Int         |          |
+
+
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/table_Position.md
+#### Properties
+
+
+| Name | Type  | Comments |
+|------|-------|----------|
+| x    | Float |          |
+| y    | Float |          |
+
+
 File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/module.md
 # Module samples
 
 ```mermaid
 classDiagram
+  class DocumentationGenerator {
+    <<object>>
+  }
+  click DocumentationGenerator href "./foo/-documentation-generator/index.html"
   class Position {
     <<data class>>
     +x Float
@@ -241,244 +203,7 @@ classDiagram
 
 ```
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/Shapes.md
-# Demo Mermaid & KSP
-
-```mermaid
-classDiagram
-  class Shape {
-    <<interface>>
-    +originPosition Position
-    +computeSurface() Float
-  }
-  Shape ..* Position : has
-  click Shape href "./sample/-shape/index.html"
-  class Position {
-    <<data class>>
-    +x Float
-    +y Float
-  }
-  click Position href "./sample/-position/index.html"
-  class Polygon {
-    <<interface>>
-    +howMuchSides() Int
-  }
-  Shape <|-- Polygon : implements
-  click Polygon href "./sample/-polygon/index.html"
-  class Circle {
-    <<data class>>
-    +radius Float
-  }
-  Shape <|-- Circle : implements
-  click Circle href "./sample/-circle/index.html"
-  class Rectangle {
-    <<interface>>
-    +width Float
-    +height Float
-    +rotate(Float) 
-  }
-  Shape <|-- Rectangle : implements
-  click Rectangle href "./sample/-rectangle/index.html"
-  class Oval {
-    <<data class>>
-    +centerOne Position
-    +centerTwo Position
-    +distanceBetweenPoints Float
-    +angle Float
-    +radius Float
-  }
-  Shape <|-- Oval : implements
-  Oval ..* Position : has
-  Oval ..* Position : has
-  click Oval href "./sample.another/-oval/index.html"
-  class InnerOval {
-    <<class>>
-    +square Square
-  }
-  InnerOval ..* Square : has
-  click InnerOval href "./sample.another/-inner-oval/index.html"
-  class Square {
-    <<class>>
-    +sideSize Float
-    +publicFun() 
-  }
-  Polygon <|-- Square : implements
-  click Square href "./sample/-square/index.html"
-  class Builder {
-    <<object>>
-    +build() Oval
-  }
-  click Builder href "./sample.another/-builder/index.html"
-
-```
-# Package sample
-
-```mermaid
-classDiagram
-  class Shape {
-    <<interface>>
-    +originPosition Position
-    +computeSurface() Float
-  }
-  Shape ..* Position : has
-  click Shape href "./sample/-shape/index.html"
-  class Position {
-    <<data class>>
-    +x Float
-    +y Float
-  }
-  click Position href "./sample/-position/index.html"
-  class Polygon {
-    <<interface>>
-    +howMuchSides() Int
-  }
-  Shape <|-- Polygon : implements
-  click Polygon href "./sample/-polygon/index.html"
-  class Circle {
-    <<data class>>
-    +radius Float
-  }
-  Shape <|-- Circle : implements
-  click Circle href "./sample/-circle/index.html"
-  class Rectangle {
-    <<interface>>
-    +width Float
-    +height Float
-    +rotate(Float) 
-  }
-  Shape <|-- Rectangle : implements
-  click Rectangle href "./sample/-rectangle/index.html"
-  class Square {
-    <<class>>
-    +sideSize Float
-    +publicFun() 
-  }
-  Polygon <|-- Square : implements
-  click Square href "./sample/-square/index.html"
-
-```
-# Package sample.another
-
-```mermaid
-classDiagram
-  class Oval {
-    <<data class>>
-    +centerOne Position
-    +centerTwo Position
-    +distanceBetweenPoints Float
-    +angle Float
-    +radius Float
-  }
-  Shape <|-- Oval : implements
-  Oval ..* Position : has
-  Oval ..* Position : has
-  click Oval href "./sample.another/-oval/index.html"
-
-```
-# Package sample.another.Oval
-
-```mermaid
-classDiagram
-  class InnerOval {
-    <<class>>
-    +square Square
-  }
-  InnerOval ..* Square : has
-  click InnerOval href "./sample.another/-inner-oval/index.html"
-  class Builder {
-    <<object>>
-    +build() Oval
-  }
-  click Builder href "./sample.another/-builder/index.html"
-
-```
-# Inheritance of sample.Shape
-
-```mermaid
-classDiagram
-  class Polygon {
-    <<interface>>
-    +howMuchSides() Int
-  }
-  Shape <|-- Polygon : implements
-  click Polygon href "./sample/-polygon/index.html"
-  class Circle {
-    <<data class>>
-    +radius Float
-  }
-  Shape <|-- Circle : implements
-  click Circle href "./sample/-circle/index.html"
-  class Rectangle {
-    <<interface>>
-    +width Float
-    +height Float
-    +rotate(Float) 
-  }
-  Shape <|-- Rectangle : implements
-  click Rectangle href "./sample/-rectangle/index.html"
-  class Oval {
-    <<data class>>
-    +centerOne Position
-    +centerTwo Position
-    +distanceBetweenPoints Float
-    +angle Float
-    +radius Float
-  }
-  Shape <|-- Oval : implements
-  click Oval href "./sample.another/-oval/index.html"
-  class Shape {
-    <<interface>>
-    +originPosition Position
-    +computeSurface() Float
-  }
-  click Shape href "./sample/-shape/index.html"
-
-```
-## Details of Shape
-
-#### Properties
-
-
-| Name           | Type     | Comments |
-|----------------|----------|----------|
-| originPosition | Position |          |
-
-#### Functions
-
-
-| Name           | Return Type | Comments |
-|----------------|-------------|----------|
-| computeSurface | Float       |          |
-
-## Details of Position
-
-#### Properties
-
-
-| Name | Type  | Comments |
-|------|-------|----------|
-| x    | Float |          |
-| y    | Float |          |
-
-## Details of Polygon
-
-#### Properties
-
-
-| Name           | Type     | Comments |
-|----------------|----------|----------|
-| originPosition | Position |          |
-
-#### Functions
-
-
-| Name           | Return Type | Comments |
-|----------------|-------------|----------|
-| computeSurface | Float       |          |
-| howMuchSides   | Int         |          |
-
-## Details of Circle
-
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/table_Circle.md
 #### Properties
 
 
@@ -494,8 +219,8 @@ classDiagram
 |----------------|-------------|----------|
 | computeSurface | Float       |          |
 
-## Details of Rectangle
 
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/table_Rectangle.md
 #### Properties
 
 
@@ -513,49 +238,14 @@ classDiagram
 | computeSurface | Float       |          |
 | rotate         | Unit        |          |
 
-## Details of Oval
 
-
- Please check [this link](https://en.wikipedia.org/wiki/Oval) for reference
-
-
-#### Properties
-
-
-| Name                  | Type     | Comments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-|-----------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| angle                 | Float    | In Euclidean geometry, an angle is the figure formed by two rays, called the sides of the angle, sharing a common endpoint, called the vertex of the angle.[1] Angles formed by two rays lie in the plane that contains the rays. Angles are also formed by the intersection of two planes. These are called dihedral angles. Two intersecting curves may also define an angle, which is the angle of the rays lying tangent to the respective curves at their point of intersection.<div></div><div></div> Angle is also used to designate the measure of an angle or of a rotation. This measure is the ratio of the length of a circular arc to its radius. In the case of a geometric angle, the arc is centered at the vertex and delimited by the sides. In the case of a rotation, the arc is centered at the center of the rotation and delimited by any other point and its image by the rotation. |
-| centerOne             | Position |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| centerTwo             | Position |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| distanceBetweenPoints | Float    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| originPosition        | Position | This is the original position use to originate the...                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| radius                | Float    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-
-#### Functions
-
-
-| Name           | Return Type | Comments |
-|----------------|-------------|----------|
-| computeSurface | Float       |          |
-
-## Details of InnerOval
-
-#### Properties
-
-
-| Name   | Type   | Comments |
-|--------|--------|----------|
-| square | Square |          |
-
-## Details of Square
-
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/table_Shape.md
 #### Properties
 
 
 | Name           | Type     | Comments |
 |----------------|----------|----------|
 | originPosition | Position |          |
-| sideSize       | Float    |          |
 
 #### Functions
 
@@ -563,155 +253,5 @@ classDiagram
 | Name           | Return Type | Comments |
 |----------------|-------------|----------|
 | computeSurface | Float       |          |
-| howMuchSides   | Int         |          |
-| internalFun    | Unit        |          |
-| privateFun     | Unit        |          |
-| protectedFun   | Unit        |          |
-| publicFun      | Unit        |          |
 
-## Details of Builder
-
-#### Functions
-
-
-| Name  | Return Type | Comments |
-|-------|-------------|----------|
-| build | Oval        |          |
-
-
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/calculator/package.md
-# Package sample.calculator
-
-```mermaid
-classDiagram
-  class BinaryIntCalculator {
-    <<class>>
-    +reg1 Int
-    +reg2 Int
-    +calculate((Int, () -> Int)-> Int) Int
-  }
-  click BinaryIntCalculator href "../sample.calculator/-binary-int-calculator/index.html"
-  class GenericFoo~T:Number~ {
-    <<interface>>
-    +list List~T~
-    +latestResult Result~Int~
-    +lambda ⟮String⟯-> Double
-    +add(T) 
-    +addAll(List~T~) List~T~
-    +computeResult() Result~Int~
-  }
-  click GenericFoo~T:Number~ href "../sample.calculator/-generic-foo/index.html"
-
-```
-
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/enums/package.md
-# Package sample.enums
-
-```mermaid
-classDiagram
-  class Direction {
-    <<enum>>
-    [[ UP ]]
-    [[ DOWN ]]
-    [[ LEFT ]]
-    [[ RIGHT ]]
-  }
-  click Direction href "../sample.enums/-direction/index.html"
-  class DeviceKind {
-    <<enum>>
-    +userAgent String
-    +index Int
-    [[ Smartphone ]]
-    [[ Computer ]]
-    [[ Tablet ]]
-    [[ Smartwatches ]]
-    [[ Chromebook ]]
-  }
-  click DeviceKind href "../sample.enums/-device-kind/index.html"
-
-```
-
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/package.md
-# Package sample
-
-```mermaid
-classDiagram
-  class Position {
-    <<data class>>
-    +x Float
-    +y Float
-  }
-  click Position href "../sample/-position/index.html"
-  class Shape {
-    <<interface>>
-    +originPosition Position
-    +computeSurface() Float
-  }
-  Shape ..* Position : has
-  click Shape href "../sample/-shape/index.html"
-  class Rectangle {
-    <<interface>>
-    +width Float
-    +height Float
-    +rotate(Float) 
-  }
-  Shape <|-- Rectangle : implements
-  click Rectangle href "../sample/-rectangle/index.html"
-  class Polygon {
-    <<interface>>
-    +howMuchSides() Int
-  }
-  Shape <|-- Polygon : implements
-  click Polygon href "../sample/-polygon/index.html"
-  class Square {
-    <<class>>
-    +sideSize Float
-    +publicFun() 
-  }
-  Polygon <|-- Square : implements
-  click Square href "../sample/-square/index.html"
-  class Circle {
-    <<data class>>
-    +radius Float
-  }
-  Shape <|-- Circle : implements
-  click Circle href "../sample/-circle/index.html"
-
-```
-
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/package.md
-# Package sample.another
-
-```mermaid
-classDiagram
-  class Oval {
-    <<data class>>
-    +centerOne Position
-    +centerTwo Position
-    +distanceBetweenPoints Float
-    +angle Float
-    +radius Float
-  }
-  Shape <|-- Oval : implements
-  Oval ..* Position : has
-  Oval ..* Position : has
-  click Oval href "../sample.another/-oval/index.html"
-  class InnerOval {
-    <<class>>
-    +square Square
-  }
-  InnerOval ..* Square : has
-  click InnerOval href "../sample.another/-inner-oval/index.html"
-  class Builder {
-    <<object>>
-    +build() Oval
-  }
-  click Builder href "../sample.another/-builder/index.html"
-  class TheTrap {
-    <<class>>
-    +foo Int
-  }
-  click TheTrap href "../sample.another/-the-trap/index.html"
-
-```
 

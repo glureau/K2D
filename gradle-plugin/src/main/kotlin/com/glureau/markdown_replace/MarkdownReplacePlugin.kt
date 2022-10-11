@@ -11,7 +11,6 @@ import org.gradle.api.Project
 import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.TaskAction
 import java.io.File
-import java.lang.Integer.min
 
 // TODO: Name this project ? Like K2D for "Kotlin to Documentation"? (not related to current file, general todo)
 // TODO: Rename that for InPlaceReplace? It's not actually limited to Markdown...
@@ -29,6 +28,7 @@ open class MarkdownReplaceTask : DefaultTask() {
     init {
         configureKspCompiler(project)
     }
+
     @TaskAction
     fun execute() {
         println("Execute !")
@@ -37,45 +37,50 @@ open class MarkdownReplaceTask : DefaultTask() {
 
         configureKspCompiler(project)
 
+
+
         val directives = listOf<Directive>(
-            Directive("INSERT") { params -> File(project.projectDir.absolutePath + "/" + params[0]).readText() }
+            Directive("INSERT") { params -> "\n" + File(project.projectDir.absolutePath + "/" + params[0]).readText() },
+            Directive("GRADLE_PROPERTIES") { params -> project.properties[params[0]].toString() },
+            Directive("SYSTEM_ENV") { params -> System.getenv(params[0]) },
         )
 
+        println("PROP :: " + System.getenv())
         /**
-         * Syntax of a directive is defined by :
+         * Usually syntax of a directive is defined by :
          * <!--$ COMMAND some params -->
          * <!--$ END -->
          */
-        val tokenEnd = "<!-- END \$-->"
 
         ext.files.files.forEach { file ->
+            val (tokenStart, tokenEnd) = getTokensFromFile(file)
             val fileContent = file.readText()
-            val splittedFile = fileContent.split("<!--\$")
-            println("Checking $file")
-            if (splittedFile.count() <= 1) return@forEach
+            val allMatches = tokenStart.findAll(fileContent).toList()
 
-            var updatedContent = splittedFile.first()
-            splittedFile.drop(1).map { split ->
+            if (allMatches.count() <= 1) return@forEach
 
-                val endDirectiveIndex: Int = min(split.indexOf("\n"), split.indexOf("-->"))
-                val endIndex = split.indexOf(tokenEnd)
-                if (endIndex == -1) error("Missing '$tokenEnd' in the file $file, cannot determine the end of the directive")
-
-                val directiveWithParams = split.substringBefore("-->").trim()
-                updatedContent += "<!--\$ $directiveWithParams -->\n"
-
+            var updatedContent = fileContent.substring(0, allMatches.first().range.first)
+            allMatches.forEachIndexed { index, startMatch ->
+                val directiveWithParams = startMatch.groupValues[1]
+                val endMatch = tokenEnd.find(fileContent, startIndex = startMatch.range.last) ?: error("boom")
+                val endIndex = endMatch.range.first
+                val oldContent = fileContent.substring(startMatch.range.last + 1, endIndex)
+                updatedContent += startMatch.groupValues[0]
                 val directiveWithParamsSplit = directiveWithParams.split(" ")
                 directives.firstOrNull { it.key == directiveWithParamsSplit[0] }.let { d ->
                     if (d == null) {
-                        updatedContent += split.substring(endDirectiveIndex, endIndex)
+                        println("Unknown directive $directiveWithParams")
+                        updatedContent += oldContent
                     } else {
+                        println("Execute directive $directiveWithParams")
                         updatedContent += d.action(directiveWithParamsSplit.drop(1))
                     }
                 }
 
-                println("Execute directive $directiveWithParams")
-                updatedContent += "\n$tokenEnd\n"
-                updatedContent += split.substring(endIndex + tokenEnd.length)
+                updatedContent += fileContent.substring(
+                    endMatch.range.start,
+                    allMatches.getOrNull(index + 1)?.range?.start ?: fileContent.length
+                )
             }
 
             val toFile = if (ext.replaceInPlace) file else File(project.buildDir.path + "/" + file.name)
@@ -85,16 +90,33 @@ open class MarkdownReplaceTask : DefaultTask() {
         }
     }
 
+    private fun getTokensFromFile(file: File): Pair<Regex, Regex> {
+        // Structure to handle tokens based on file extension
+        val mermaidTokens = Regex("<!--\\$ (.*?)-->", RegexOption.DOT_MATCHES_ALL) to Regex("<!-- END \\$-->")
+        return when {
+            file.endsWith(".md") -> mermaidTokens
+            else -> mermaidTokens
+        }
+    }
+
     private fun configureKspCompiler(project: Project) {
         val kspPlugin = project.plugins.getPlugin("com.google.devtools.ksp") ?: return
         val kspExt = project.extensions.getByType(KspExtension::class.java)
         println("Ksp Extension!")
-        println("setup arg = " + Json.encodeToString(K2DConfiguration(
-            dokkaConfig = K2DDokkaConfig(generateMermaidOnModules = true, generateMermaidOnPackages = false)
-        )))
-        kspExt.arg("k2d.config", Json.encodeToString(K2DConfiguration(
-            dokkaConfig = K2DDokkaConfig(generateMermaidOnModules = true, generateMermaidOnPackages = false)
-        )))
+        println(
+            "setup arg = " + Json.encodeToString(
+                K2DConfiguration(
+                    dokkaConfig = K2DDokkaConfig(generateMermaidOnModules = true, generateMermaidOnPackages = false)
+                )
+            )
+        )
+        kspExt.arg(
+            "k2d.config", Json.encodeToString(
+                K2DConfiguration(
+                    dokkaConfig = K2DDokkaConfig(generateMermaidOnModules = true, generateMermaidOnPackages = false)
+                )
+            )
+        )
     }
 }
 

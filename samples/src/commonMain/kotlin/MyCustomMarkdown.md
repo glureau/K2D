@@ -1,21 +1,29 @@
+# Hello !
+
 <!--- TOC -->
 
-  * [Let's see the schema!](#let's-see-the-schema)
-* [Part 2](#part-2)
+  * [Mermaid example](#mermaid-example)
+* [Function & Properties](#function-&-properties)
   * [Shape](#shape)
     * [Properties](#properties)
     * [Functions](#functions)
   * [Square](#square)
     * [Properties](#properties)
     * [Functions](#functions)
-  * [Chapter 4](#chapter-4)
 
 <!--- END -->
-# Hello !
 
-Introduction to the library
+Those values below are updated automatically...
 
-### Let's see the schema!
+Introduction to the library **_v.<!--$ GRADLE_PROPERTIES version -->0.1.1<!-- END $-->_** (from gradle properties)
+
+Build on Kotlin **_<!--$ GRADLE_PROPERTIES kotlinVersion -->1.7.10<!-- END $-->_** (also from gradle properties)
+
+Documentation update from computer with system env **_LOGNAME=<!--$ SYSTEM_ENV LOGNAME -->glureau<!-- END $-->_**
+
+
+
+### Mermaid example
 
 <!--$ INSERT build/generated/ksp/metadata/commonMain/resources/Shapes23.md -->
 ```mermaid
@@ -56,16 +64,11 @@ classDiagram
   click Circle href "./sample/-circle/index.html"
 
 ```
-
 <!-- END $-->
 
+## Function & Properties
 
-
-
-
-
-
-## Part 2
+Fully generated documentation above + additional high-level documentation
 
 ### Shape
 
@@ -86,8 +89,8 @@ My custom documentation about shape is here, and here is the dynamic part:
 |----------------|-------------|----------|
 | computeSurface | Float       |          |
 
-
 <!-- END $-->
+
 
 And I can complete with hardcoded part at any time
 
@@ -117,12 +120,4 @@ How is defined a Square??
 | protectedFun   | Unit        |          |
 | publicFun      | Unit        |          |
 
-
 <!-- END $-->
-
-
-
-
-### Chapter 4
-
-aer
