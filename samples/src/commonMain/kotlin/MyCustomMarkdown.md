@@ -21,6 +21,7 @@ Build on Kotlin **_<!--$ GRADLE_PROPERTIES kotlinVersion -->1.7.10<!-- END $-->_
 
 Documentation update from computer with system env **_LOGNAME=<!--$ SYSTEM_ENV LOGNAME -->glureau<!-- END $-->_**
 
+Last documentation update: **_<!--$ DATETIME yyyy.MM.dd G 'at' HH:mm:ss z -->2022.10.12 AD at 00:44:15 CEST<!-- END $-->_**
 
 
 ### Mermaid example

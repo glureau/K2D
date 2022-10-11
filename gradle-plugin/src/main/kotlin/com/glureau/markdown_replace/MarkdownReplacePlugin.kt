@@ -11,6 +11,8 @@ import org.gradle.api.Project
 import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.TaskAction
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 // TODO: Name this project ? Like K2D for "Kotlin to Documentation"? (not related to current file, general todo)
 // TODO: Rename that for InPlaceReplace? It's not actually limited to Markdown...
@@ -31,21 +33,17 @@ open class MarkdownReplaceTask : DefaultTask() {
 
     @TaskAction
     fun execute() {
-        println("Execute !")
         val ext = project.extensions.getByType(MarkdownReplaceExtension::class.java)
-        println("ext= ${ext.runnable}")
 
         configureKspCompiler(project)
-
-
 
         val directives = listOf<Directive>(
             Directive("INSERT") { params -> "\n" + File(project.projectDir.absolutePath + "/" + params[0]).readText() },
             Directive("GRADLE_PROPERTIES") { params -> project.properties[params[0]].toString() },
             Directive("SYSTEM_ENV") { params -> System.getenv(params[0]) },
+            Directive("DATETIME") { params -> SimpleDateFormat(params[0]).format(Calendar.getInstance().time) },
         )
 
-        println("PROP :: " + System.getenv())
         /**
          * Usually syntax of a directive is defined by :
          * <!--$ COMMAND some params -->
@@ -66,14 +64,16 @@ open class MarkdownReplaceTask : DefaultTask() {
                 val endIndex = endMatch.range.first
                 val oldContent = fileContent.substring(startMatch.range.last + 1, endIndex)
                 updatedContent += startMatch.groupValues[0]
-                val directiveWithParamsSplit = directiveWithParams.split(" ")
-                directives.firstOrNull { it.key == directiveWithParamsSplit[0] }.let { d ->
+                val directiveKey = directiveWithParams.substringBefore(" ")
+                val params = directiveWithParams.substringAfter(" ").trim()
+                directives.firstOrNull { it.key == directiveKey }.let { d ->
                     if (d == null) {
-                        println("Unknown directive $directiveWithParams")
+                        println("Unknown directive $directiveKey ($directiveWithParams)")
                         updatedContent += oldContent
                     } else {
                         println("Execute directive $directiveWithParams")
-                        updatedContent += d.action(directiveWithParamsSplit.drop(1))
+                        // Split by " " is a bit tricky, may be specific to the current Directive instead
+                        updatedContent += d.action(listOf(params))
                     }
                 }
 
@@ -125,5 +125,4 @@ data class Directive(val key: String, val action: (params: List<String>) -> Stri
 open class MarkdownReplaceExtension {
     var replaceInPlace: Boolean = false
     lateinit var files: FileCollection
-    lateinit var runnable: Runnable
 }

@@ -13,7 +13,6 @@ markdownReplace {
         include("src/**/**.md")
     }
     replaceInPlace = true
-    runnable = Runnable {}
 }
 
 repositories {
