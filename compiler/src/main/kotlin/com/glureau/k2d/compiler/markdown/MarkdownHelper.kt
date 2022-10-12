@@ -1,7 +1,7 @@
-package com.glureau.mermaidksp.compiler.markdown
+package com.glureau.k2d.compiler.markdown
 
-import com.glureau.mermaidksp.compiler.LocalType
-import com.glureau.mermaidksp.compiler.kotlinNativeFunctionNames
+import com.glureau.k2d.compiler.LocalType
+import com.glureau.k2d.compiler.kotlinNativeFunctionNames
 import kotlin.math.max
 
 fun StringBuilder.appendMdHeader(level: Int, header: String) = append("#".repeat(level) + " $header\n\n")

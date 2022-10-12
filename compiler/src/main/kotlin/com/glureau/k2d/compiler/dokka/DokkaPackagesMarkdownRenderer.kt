@@ -1,7 +1,7 @@
-package com.glureau.mermaidksp.compiler.dokka
+package com.glureau.k2d.compiler.dokka
 
-import com.glureau.mermaidksp.compiler.GClass
-import com.glureau.mermaidksp.compiler.writeMarkdown
+import com.glureau.k2d.compiler.GClass
+import com.glureau.k2d.compiler.writeMarkdown
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 
 class DokkaPackagesMarkdownRenderer(private val environment: SymbolProcessorEnvironment) {

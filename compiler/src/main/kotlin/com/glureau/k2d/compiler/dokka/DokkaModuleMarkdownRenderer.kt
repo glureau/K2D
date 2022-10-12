@@ -1,11 +1,11 @@
-package com.glureau.mermaidksp.compiler.dokka
+package com.glureau.k2d.compiler.dokka
 
-import com.glureau.mermaidksp.compiler.GClass
-import com.glureau.mermaidksp.compiler.markdown.appendMdH1
-import com.glureau.mermaidksp.compiler.markdown.appendMdMermaid
-import com.glureau.mermaidksp.compiler.mermaid.MermaidClassRenderer
-import com.glureau.mermaidksp.compiler.mermaid.MermaidRendererConfiguration
-import com.glureau.mermaidksp.compiler.writeMarkdown
+import com.glureau.k2d.compiler.GClass
+import com.glureau.k2d.compiler.markdown.appendMdH1
+import com.glureau.k2d.compiler.markdown.appendMdMermaid
+import com.glureau.k2d.compiler.mermaid.MermaidClassRenderer
+import com.glureau.k2d.compiler.mermaid.MermaidRendererConfiguration
+import com.glureau.k2d.compiler.writeMarkdown
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import java.io.File
 

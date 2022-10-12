@@ -1,16 +1,11 @@
-package com.glureau.mermaidksp.compiler
+package com.glureau.k2d.compiler
 
-import ClassMembersTable
-import K2DConfiguration
-import K2DDokkaConfig
-import K2DSymbolSelector
-import K2DSymbolSelectorAnnotation
-import MermaidGraph
-import com.glureau.mermaidksp.compiler.dokka.DokkaModuleMarkdownRenderer
-import com.glureau.mermaidksp.compiler.dokka.DokkaPackagesMarkdownRenderer
-import com.glureau.mermaidksp.compiler.markdown.table.MarkdownTableRenderer
-import com.glureau.mermaidksp.compiler.markdown.appendMdMermaid
-import com.glureau.mermaidksp.compiler.mermaid.MermaidClassRenderer
+import com.glureau.k2d.*
+import com.glureau.k2d.compiler.dokka.DokkaModuleMarkdownRenderer
+import com.glureau.k2d.compiler.dokka.DokkaPackagesMarkdownRenderer
+import com.glureau.k2d.compiler.markdown.appendMdMermaid
+import com.glureau.k2d.compiler.markdown.table.MarkdownTableRenderer
+import com.glureau.k2d.compiler.mermaid.MermaidClassRenderer
 import com.google.devtools.ksp.processing.*
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSAnnotation
@@ -46,9 +41,9 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
         Logger.warn("aggro=${aggregatorClassVisitor.classes.keys}")
 
 
-        resolver.onAnnotation(MermaidGraph::class) { annotation ->
-            val name = annotation.getArg<String>(MermaidGraph::name)
-            val annotationSymbolSelector = annotation.getArg<KSAnnotation>(MermaidGraph::symbolSelector)
+        resolver.onAnnotation(K2DMermaidGraph::class) { annotation ->
+            val name = annotation.getArg<String>(K2DMermaidGraph::name)
+            val annotationSymbolSelector = annotation.getArg<KSAnnotation>(K2DMermaidGraph::symbolSelector)
             val selector = annotationSymbolSelector.symbolSelector()
 
             // TODO: No need of the global config here, it's computed by
@@ -68,8 +63,8 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
             environment.writeMarkdown(content, "", name, files)
         }
 
-        resolver.onAnnotation(ClassMembersTable::class) { annotation ->
-            val annotationSymbolSelector = annotation.getArg<KSAnnotation>(ClassMembersTable::symbolSelector)
+        resolver.onAnnotation(K2DClassMembersTable::class) { annotation ->
+            val annotationSymbolSelector = annotation.getArg<KSAnnotation>(K2DClassMembersTable::symbolSelector)
             val selector = annotationSymbolSelector.symbolSelector()
 
             // TODO: No need of the global config here, it's computed by

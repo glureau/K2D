@@ -1,12 +1,10 @@
 package sample
 
-import K2DHide
+import com.glureau.k2d.K2DHide
 
 data class Position(val x: Float, val y: Float)
 
 
-//@MermaidGraph("Shapes", [Shape::class, Polygon::class, Circle::class, Rectangle::class, Oval::class])
-//@MermaidGraph("SquareToShape", [Shape::class, Polygon::class, Square::class])
 interface Shape {
     val originPosition: Position
     fun computeSurface(): Float {
@@ -26,8 +24,10 @@ interface Polygon : Shape {
 
 class Square(override val originPosition: Position) : Polygon {
     val sideSize: Float = 1f
+
     @K2DHide
     val hiddenValue: Float get() = sideSize
+
     override fun howMuchSides(): Int = TODO() // Ignored (override)
     public fun publicFun() = Unit // Reported
     private fun privateFun() = Unit // Ignored (visibility)

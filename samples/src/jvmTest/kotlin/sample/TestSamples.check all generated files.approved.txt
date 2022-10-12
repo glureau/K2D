@@ -43,10 +43,6 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 
 ```mermaid
 classDiagram
-  class DocumentationGenerator {
-    <<object>>
-  }
-  click DocumentationGenerator href "./foo/-documentation-generator/index.html"
   class Position {
     <<data class>>
     +x Float

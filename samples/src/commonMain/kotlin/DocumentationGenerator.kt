@@ -1,24 +1,20 @@
-package foo
-
-import ClassMembersTable
-import K2DSymbolSelectorAnnotation
-import MermaidGraph
-import sample.Circle
-import sample.Shape
-import sample.Square
-
-@MermaidGraph(
+@file:K2DMermaidGraph(
     "Shapes23",
     symbolSelector = K2DSymbolSelectorAnnotation(
         includesFqnRegex = "sample\\.[A-Z].*", // only in sample package
         excludesFqnRegex = "sample.Position",
     )
 )
-@ClassMembersTable(
+
+
+@file:K2DClassMembersTable(
     K2DSymbolSelectorAnnotation(
         includesFqnRegex = "sample\\.[A-Z].*", // only in sample package
-        //includeChild = Order::class
-        //klasses = [Circle::class, Square::class]
     )
 )
-object DocumentationGenerator
+
+package foo
+
+import com.glureau.k2d.K2DClassMembersTable
+import com.glureau.k2d.K2DMermaidGraph
+import com.glureau.k2d.K2DSymbolSelectorAnnotation

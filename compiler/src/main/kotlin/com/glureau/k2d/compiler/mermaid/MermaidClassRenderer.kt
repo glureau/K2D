@@ -1,7 +1,7 @@
-package com.glureau.mermaidksp.compiler.mermaid
+package com.glureau.k2d.compiler.mermaid
 
-import com.glureau.mermaidksp.compiler.*
-import com.glureau.mermaidksp.compiler.markdown.render
+import com.glureau.k2d.compiler.*
+import com.glureau.k2d.compiler.markdown.render
 
 class MermaidClassRenderer(
     private val conf: MermaidRendererConfiguration = MermaidRendererConfiguration()

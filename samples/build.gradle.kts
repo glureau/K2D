@@ -85,7 +85,7 @@ afterEvaluate {
 
 // Publish the sample documentation on branch "demo"
 gitPublish {
-    repoUri.set("git@github.com:glureau/MermaidKsp.git")
+    repoUri.set("git@github.com:glureau/K2D.git")
     branch.set("demo")
     contents.from("$buildDir/dokka/")
     preserve { include("**") }

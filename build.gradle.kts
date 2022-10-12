@@ -23,8 +23,8 @@ plugins {
 }
 
 allprojects {
-    group = "com.glureau.mermaidksp"
-    version = "0.1.1"
+    group = "com.glureau.k2d"
+    version = "0.2.0"
 
     repositories {
         mavenLocal()
@@ -77,7 +77,7 @@ tasks.create<Sync>("copyMavenLocalArtifacts") {
 }
 
 gitPublish {
-    repoUri.set("git@github.com:glureau/MermaidKsp.git")
+    repoUri.set("git@github.com:glureau/K2D.git")
     branch.set("mvn-repo")
     contents.from("$buildDir/mvn-repo")
     preserve { include("**") }

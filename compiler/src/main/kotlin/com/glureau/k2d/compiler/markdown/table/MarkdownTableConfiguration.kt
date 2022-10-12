@@ -1,4 +1,4 @@
-package com.glureau.mermaidksp.compiler.markdown.table
+package com.glureau.k2d.compiler.markdown.table
 
 // TODO: make it accessible from annotations
 data class MarkdownTableConfiguration(
@@ -6,5 +6,6 @@ data class MarkdownTableConfiguration(
     val showClassName: Boolean = true,
     val showClassDocumentation: Boolean = true,
     val showClassProperties: Boolean = true,
+    val showClassPropertiesWithNoBackingField: Boolean = false,
     val showClassFunctions: Boolean = true,
 )

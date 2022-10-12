@@ -1,4 +1,4 @@
-package com.glureau.mermaidksp.compiler.mermaid
+package com.glureau.k2d.compiler.mermaid
 
 data class MermaidRendererConfiguration(
     val showClassType: Boolean = true,

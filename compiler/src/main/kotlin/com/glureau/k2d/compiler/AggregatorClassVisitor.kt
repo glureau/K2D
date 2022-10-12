@@ -15,9 +15,9 @@
  * under the License.
  */
 
-package com.glureau.mermaidksp.compiler
+package com.glureau.k2d.compiler
 
-import K2DHide
+import com.glureau.k2d.K2DHide
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.getAnnotationsByType
 import com.google.devtools.ksp.getVisibility

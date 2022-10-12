@@ -1,10 +1,10 @@
-# MermaidKsp
+# K2D (Kotlin to Documentation)
 
-Generate diagram sequences (mermaid format) based on the classes of each package. A graph is generated for each module and for each package.
+Generate diagram sequences (mermaid format), markdown tables and more based on your code directly.
 
 This is a work in progress, don't hesitate to add your ideas in a new issue! Thanks for your help ;)
 
-## [DEMO](https://www.glureau.com/MermaidKsp/html/)
+## [DEMO for Dokka](https://www.glureau.com/K2D/html/)
 
 ![image](https://user-images.githubusercontent.com/7968075/174116714-ffa7918e-85c9-44d2-8142-85a66bd29cb0.png)
 

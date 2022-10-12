@@ -1,4 +1,4 @@
-package com.glureau.mermaidksp.compiler
+package com.glureau.k2d.compiler
 
 import com.google.devtools.ksp.symbol.KSFile
 

@@ -1,4 +1,4 @@
-package com.glureau.mermaidksp.compiler.markdown
+package com.glureau.k2d.compiler.markdown
 
 import org.approvaltests.Approvals
 import org.junit.Test

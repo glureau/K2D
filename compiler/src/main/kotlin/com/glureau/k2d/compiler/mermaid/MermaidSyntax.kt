@@ -1,7 +1,7 @@
-package com.glureau.mermaidksp.compiler.mermaid
+package com.glureau.k2d.compiler.mermaid
 
-import com.glureau.mermaidksp.compiler.GClassType
-import com.glureau.mermaidksp.compiler.GVisibility
+import com.glureau.k2d.compiler.GClassType
+import com.glureau.k2d.compiler.GVisibility
 
 val GVisibility.asMermaid: String
     get() = when (this) {

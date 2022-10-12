@@ -1,10 +1,10 @@
-package com.glureau.mermaidksp.compiler.dokka
+package com.glureau.k2d.compiler.dokka
 
-import com.glureau.mermaidksp.compiler.GClass
-import com.glureau.mermaidksp.compiler.markdown.appendMdH1
-import com.glureau.mermaidksp.compiler.markdown.appendMdMermaid
-import com.glureau.mermaidksp.compiler.mermaid.MermaidClassRenderer
-import com.glureau.mermaidksp.compiler.mermaid.MermaidRendererConfiguration
+import com.glureau.k2d.compiler.GClass
+import com.glureau.k2d.compiler.markdown.appendMdH1
+import com.glureau.k2d.compiler.markdown.appendMdMermaid
+import com.glureau.k2d.compiler.mermaid.MermaidClassRenderer
+import com.glureau.k2d.compiler.mermaid.MermaidRendererConfiguration
 
 class DokkaPackageMarkdownRenderer {
     fun render(data: MutableMap<String, GClass>, packageName: String): String {
