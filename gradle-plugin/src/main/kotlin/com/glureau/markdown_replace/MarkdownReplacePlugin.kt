@@ -38,7 +38,18 @@ open class MarkdownReplaceTask : DefaultTask() {
         configureKspCompiler(project)
 
         val directives = listOf<Directive>(
-            Directive("INSERT") { params -> "\n" + File(project.projectDir.absolutePath + "/" + params[0]).readText() },
+            Directive("INSERT") { params ->
+                var filesContent = ""
+                val fileTree = project.fileTree(project.projectDir)
+                fileTree.include(params[0])
+
+                fileTree.files.forEach {
+                    println(" - file = $it")
+                    filesContent += "\n" + it.readText()
+                }
+
+                filesContent
+            },
             Directive("GRADLE_PROPERTIES") { params -> project.properties[params[0]].toString() },
             Directive("SYSTEM_ENV") { params -> System.getenv(params[0]) },
             Directive("DATETIME") { params -> SimpleDateFormat(params[0]).format(Calendar.getInstance().time) },
@@ -49,8 +60,12 @@ open class MarkdownReplaceTask : DefaultTask() {
          * <!--$ COMMAND some params -->
          * <!--$ END -->
          */
+        val filesToParse = ext.files ?: project.fileTree(project.projectDir).apply {
+            // By default, we pick only markdowns on the src directory, but there is really no limitation
+            include("**/**.md")
+        }
 
-        ext.files.files.forEach { file ->
+        filesToParse.files.forEach { file ->
             val (tokenStart, tokenEnd) = getTokensFromFile(file)
             val fileContent = file.readText()
             val allMatches = tokenStart.findAll(fileContent).toList()
@@ -123,6 +138,6 @@ open class MarkdownReplaceTask : DefaultTask() {
 data class Directive(val key: String, val action: (params: List<String>) -> String)
 
 open class MarkdownReplaceExtension {
-    var replaceInPlace: Boolean = false
-    lateinit var files: FileCollection
+    var replaceInPlace: Boolean = true
+    var files: FileCollection? = null
 }

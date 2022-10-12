@@ -8,7 +8,7 @@ import K2DSymbolSelectorAnnotation
 import MermaidGraph
 import com.glureau.mermaidksp.compiler.dokka.DokkaModuleMarkdownRenderer
 import com.glureau.mermaidksp.compiler.dokka.DokkaPackagesMarkdownRenderer
-import com.glureau.mermaidksp.compiler.markdown.TableRenderer
+import com.glureau.mermaidksp.compiler.markdown.table.MarkdownTableRenderer
 import com.glureau.mermaidksp.compiler.markdown.appendMdMermaid
 import com.glureau.mermaidksp.compiler.mermaid.MermaidClassRenderer
 import com.google.devtools.ksp.processing.*
@@ -78,13 +78,17 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
             val filtered = aggregatorClassVisitor.classes.filter { (fqn, _) ->
                 includeRegex.matches(fqn) && !excludeRegex.matches(fqn)
             }
-            filtered.forEach { (fqn, gClass) ->
-                val content = TableRenderer().renderClassMembers(gClass).toByteArray()
+            filtered.forEach { (_, gClass) ->
+                if (gClass.hide) {
+                    Logger.info("Ignoring ${gClass.symbolName}")
+                    return@forEach
+                }
+                val content = MarkdownTableRenderer().renderClassMembers(gClass).toByteArray()
 
-                environment.logger.warn("Rendering table ${gClass.symbolName}.md")
+                Logger.warn("Rendering table ${gClass.symbolName}.md")
                 environment.writeMarkdown(
                     content = content,
-                    packageName = "",
+                    packageName = gClass.packageName,
                     fileName = "table_" + gClass.symbolName,
                     dependencies = gClass.originFile?.let { listOf(it) } ?: emptyList())
 

@@ -1,13 +1,14 @@
 package com.glureau.mermaidksp.compiler.markdown
 
 import com.glureau.mermaidksp.compiler.GClass
+import com.glureau.mermaidksp.compiler.markdown.table.MarkdownTableRenderer
 import com.glureau.mermaidksp.compiler.mermaid.MermaidClassRenderer
 import com.glureau.mermaidksp.compiler.mermaid.MermaidRendererConfiguration
 import com.glureau.mermaidksp.compiler.writeMarkdown
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 
 class DemoMarkdownRenderer(private val environment: SymbolProcessorEnvironment) {
-    private val tableRenderer = TableRenderer()
+    private val markdownTableRenderer = MarkdownTableRenderer()
 
     fun render(data: MutableMap<String, GClass>, fileName: String) {
         val stringBuilder = StringBuilder()
@@ -37,8 +38,9 @@ class DemoMarkdownRenderer(private val environment: SymbolProcessorEnvironment) 
         }
 
         data.values.forEach { klass ->
+            if (klass.hide) return@forEach
             stringBuilder.appendMdH2("Details of ${klass.symbolName}")
-            stringBuilder.append(tableRenderer.renderClassMembers(klass))
+            stringBuilder.append(markdownTableRenderer.renderClassMembers(klass))
         }
 
         val files = data.values.mapNotNull { it.originFile }

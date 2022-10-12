@@ -8,12 +8,14 @@ plugins {
     id("com.glureau.markdownreplace") version "0.1.1"
 }
 
+/*
 markdownReplace {
     files = fileTree(projectDir).apply {
         include("src/**/**.md")
     }
     replaceInPlace = true
 }
+*/
 
 repositories {
     mavenCentral()

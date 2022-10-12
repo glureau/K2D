@@ -17,13 +17,18 @@
 
 package com.glureau.mermaidksp.compiler
 
+import K2DHide
+import com.google.devtools.ksp.KspExperimental
+import com.google.devtools.ksp.getAnnotationsByType
 import com.google.devtools.ksp.getVisibility
 import com.google.devtools.ksp.symbol.*
 import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 
+@OptIn(KspExperimental::class)
 @KotlinPoetKspPreview
 class AggregatorClassVisitor : KSVisitorVoid() {
     val classes = mutableMapOf<String, GClass>()
+    val basics = mutableMapOf<String, Basic>()
     val moduleClasses = mutableSetOf<String>()
 
     override fun visitFile(file: KSFile, data: Unit) {
@@ -39,24 +44,27 @@ class AggregatorClassVisitor : KSVisitorVoid() {
     private fun scan(classDeclaration: KSClassDeclaration): GClass {
         val qualifiedName = classDeclaration.qualifiedName!!.asString() // TODO: null to be handled later
         classes[qualifiedName]?.let { return it }
+        val hide = classDeclaration.getAnnotationsByType(K2DHide::class).toList().isNotEmpty()
         val klass = GClass(
             qualifiedName = qualifiedName,
             packageName = classDeclaration.packageName.asString(),
             originFile = classDeclaration.containingFile,
-            visibility = classDeclaration.getMermaidVisibility(),
+            visibility = classDeclaration.getGVisibility(),
             symbolName = classDeclaration.getMermaidClassName(),
-            classType = classDeclaration.getMermaidClassType(),
+            classType = classDeclaration.getGClassType(),
             docString = classDeclaration.docString,
+            hide = hide,
         )
         if (classDeclaration.classKind == ClassKind.ENUM_ENTRY) {
             classDeclaration.declarations
         }
         // Store BEFORE visiting other prop/func so that it can be retrieved from the map (and avoid infinite loop)
         classes[qualifiedName] = klass
+        Logger.warn("KLASS: ${klass.symbolName}")
         klass.properties =
-            classDeclaration.getAllProperties().mapNotNull { it.toMermaidProperty(classDeclaration.classKind) }.toList()
-        klass.functions = classDeclaration.getAllFunctions().mapNotNull { it.toMermaidFunction() }.toList()
-        klass.supers = classDeclaration.superTypes.mapNotNull { it.getMermaidClass() }
+            classDeclaration.getAllProperties().mapNotNull { it.toGProperty(classDeclaration.classKind) }.toList()
+        klass.functions = classDeclaration.getAllFunctions().mapNotNull { it.toGFunction() }.toList()
+        klass.supers = classDeclaration.superTypes.mapNotNull { it.getGClass() }
             // Because KSP consider now that every class extends Any, but we don't care about that in graphs.
             .filter { it.qualifiedName != "kotlin.Any" }
             .toList()
@@ -64,7 +72,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             classDeclaration.declarations.mapNotNull { if (it is KSClassDeclaration) scan(it) else null }.toList()
 
         classDeclaration.typeParameters.map {
-            it.bounds.firstOrNull()?.getMermaidClass()
+            it.bounds.firstOrNull()?.getGClass()
             val declaration: KSDeclaration? = it.bounds.firstOrNull()?.resolve()?.declaration
             val foo = if (declaration is KSClassDeclaration) {
                 scan(declaration)
@@ -85,12 +93,13 @@ class AggregatorClassVisitor : KSVisitorVoid() {
         return typeParameters.map {
             Generics(
                 it.name.asString(),
-                it.bounds.first().getMermaidClass()!!
+                it.bounds.first().getGClass()!!
             )
         }
     }
 
-    private fun KSPropertyDeclaration.toMermaidProperty(classKind: ClassKind): GProperty? {
+    @OptIn(KspExperimental::class)
+    private fun KSPropertyDeclaration.toGProperty(classKind: ClassKind): GProperty? {
         val decl = type.resolve().declaration
         val qualifiedName = decl.qualifiedName?.asString() ?: return null
 
@@ -110,39 +119,45 @@ class AggregatorClassVisitor : KSVisitorVoid() {
                 }
             }
         } else {
-            this.type.getMermaidClass()!!
+            this.type.getGClass()!!
         }
 
         val propName = this.simpleName.asString()
         val overrides =
             (classKind == ClassKind.ENUM_ENTRY) || this.modifiers.contains(Modifier.OVERRIDE) || this.findOverridee() != null
+
+
+        val hide = getAnnotationsByType(K2DHide::class).toList().isNotEmpty()
         return GProperty(
-            visibility = this.getMermaidVisibility(),
+            visibility = this.getGVisibility(),
             propName = propName,
             type = LocalType(type = mermaidClass, usedGenerics = type.resolve().arguments.map { it.type.toString() }),
             overrides = overrides,
             docString = this.docString,
+            hasBackingField = this.hasBackingField,
+            hide = hide,
         )
     }
 
     // TODO: User option to be parameterized?
     private val ignoredFunctionNames = listOf("copy", "<init>") + (1..30).map { "component$it" }
-    private fun KSFunctionDeclaration.toMermaidFunction(): GFunction? {
+    private fun KSFunctionDeclaration.toGFunction(): GFunction? {
         if (this.simpleName.asString() in ignoredFunctionNames) return null
         val params = this.parameters.mapNotNull {
             GFunctionParameter(
-                type = it.type.getMermaidClass() ?: return@mapNotNull null,
+                type = it.type.getGClass() ?: return@mapNotNull null,
                 usedGenerics = it.type.element?.typeArguments?.map { it.toString() }.orEmpty(),
             )
         }
-        val returnType = this.returnType?.getMermaidClass()?.let { type ->
+        val returnType = this.returnType?.getGClass()?.let { type ->
             LocalType(
                 type = type,
                 usedGenerics = this.returnType!!.element?.typeArguments?.map { it.toString() }.orEmpty()
             )
         }
+        val hide = getAnnotationsByType(K2DHide::class).toList().isNotEmpty()
         return GFunction(
-            visibility = this.getMermaidVisibility(),
+            visibility = this.getGVisibility(),
             funcName = this.simpleName.asString(),
             // We could retrieve the name of parameters...
             //usedGenerics = type.resolve().arguments.map { it.type.toString() },
@@ -150,10 +165,11 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             returnType = returnType,
             overrides = this.modifiers.contains(Modifier.OVERRIDE),
             docString = this.docString,
+            hide = hide,
         )
     }
 
-    fun KSTypeReference.getMermaidClass(): GClassOrBasic? {
+    fun KSTypeReference.getGClass(): GClassOrBasic? {
         val decl = resolve().declaration
         val qualifiedName = decl.qualifiedName?.asString() ?: return null
         return if (
@@ -161,11 +177,13 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             qualifiedName.startsWith("java.") ||
             decl !is KSClassDeclaration
         ) {
+            basics[qualifiedName]?.let { return it }
             Basic(
                 qualifiedName = qualifiedName,
                 packageName = decl.packageName.asString(),
                 symbolName = decl.simpleName.asString(),
             ).apply {
+                basics[qualifiedName] = this
                 generics = decl.generics()
             }
         } else {
@@ -173,7 +191,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
         }
     }
 
-    private fun KSDeclaration.getMermaidVisibility(): GVisibility =
+    private fun KSDeclaration.getGVisibility(): GVisibility =
         when (getVisibility()) {
             Visibility.PUBLIC -> GVisibility.Public
             Visibility.PRIVATE -> GVisibility.Private
@@ -211,7 +229,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
         return simpleName.asString()
     }
 
-    private fun KSClassDeclaration.getMermaidClassType(): GClassType =
+    private fun KSClassDeclaration.getGClassType(): GClassType =
         when (classKind) {
             ClassKind.INTERFACE -> GClassType.Interface
             ClassKind.CLASS -> {

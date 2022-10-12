@@ -28,6 +28,8 @@ data class GProperty(
     val type: LocalType,
     val overrides: Boolean,
     val docString: String?,
+    val hasBackingField: Boolean,
+    val hide: Boolean,
 )
 
 data class LocalType(
@@ -46,6 +48,7 @@ data class GFunction(
     val returnType: LocalType?,
     val overrides: Boolean,
     val docString: String?,
+    val hide: Boolean,
 )
 
 data class Generics(
@@ -76,6 +79,7 @@ data class GClass constructor(
     val visibility: GVisibility,
     val classType: GClassType,
     val docString: String?,
+    val hide: Boolean,
     var supers: List<GClassOrBasic> = emptyList(),
     var properties: List<GProperty> = emptyList(),
     var functions: List<GFunction> = emptyList(),

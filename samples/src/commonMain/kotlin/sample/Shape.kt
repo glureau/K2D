@@ -1,7 +1,6 @@
 package sample
 
-import MermaidGraph
-import sample.another.Oval
+import K2DHide
 
 data class Position(val x: Float, val y: Float)
 
@@ -27,6 +26,8 @@ interface Polygon : Shape {
 
 class Square(override val originPosition: Position) : Polygon {
     val sideSize: Float = 1f
+    @K2DHide
+    val hiddenValue: Float get() = sideSize
     override fun howMuchSides(): Int = TODO() // Ignored (override)
     public fun publicFun() = Unit // Reported
     private fun privateFun() = Unit // Ignored (visibility)
@@ -35,5 +36,7 @@ class Square(override val originPosition: Position) : Polygon {
     override fun computeSurface(): Float = TODO() // Ignored (override)
 }
 
-data class Circle(override val originPosition: Position, val radius: Float) : Shape {
-}
+data class Circle(override val originPosition: Position, val radius: Float) : Shape
+
+@K2DHide
+data class InternalWeirdShape(override val originPosition: Position, val radius: Float) : Shape

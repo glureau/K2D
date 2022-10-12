@@ -21,7 +21,7 @@ Build on Kotlin **_<!--$ GRADLE_PROPERTIES kotlinVersion -->1.7.10<!-- END $-->_
 
 Documentation update from computer with system env **_LOGNAME=<!--$ SYSTEM_ENV LOGNAME -->glureau<!-- END $-->_**
 
-Last documentation update: **_<!--$ DATETIME yyyy.MM.dd G 'at' HH:mm:ss z -->2022.10.12 AD at 00:44:15 CEST<!-- END $-->_**
+Last documentation update: **_<!--$ DATETIME yyyy.MM.dd G 'at' HH:mm:ss z -->2022.10.12 AD at 14:55:51 CEST<!-- END $-->_**
 
 
 ### Mermaid example
@@ -75,22 +75,7 @@ Fully generated documentation above + additional high-level documentation
 
 My custom documentation about shape is here, and here is the dynamic part:
 
-<!--$ INSERT build/generated/ksp/metadata/commonMain/resources/table_Shape.md -->
-#### Properties
-
-
-| Name           | Type     | Comments |
-|----------------|----------|----------|
-| originPosition | Position |          |
-
-#### Functions
-
-
-| Name           | Return Type | Comments |
-|----------------|-------------|----------|
-| computeSurface | Float       |          |
-
-<!-- END $-->
+<!--$ INSERT build/generated/ksp/metadata/commonMain/resources/table_Shape.md --><!-- END $-->
 
 
 And I can complete with hardcoded part at any time
@@ -100,25 +85,4 @@ And I can complete with hardcoded part at any time
 
 How is defined a Square??
 
-<!--$ INSERT build/generated/ksp/metadata/commonMain/resources/table_Square.md -->
-#### Properties
-
-
-| Name           | Type     | Comments |
-|----------------|----------|----------|
-| originPosition | Position |          |
-| sideSize       | Float    |          |
-
-#### Functions
-
-
-| Name           | Return Type | Comments |
-|----------------|-------------|----------|
-| computeSurface | Float       |          |
-| howMuchSides   | Int         |          |
-| internalFun    | Unit        |          |
-| privateFun     | Unit        |          |
-| protectedFun   | Unit        |          |
-| publicFun      | Unit        |          |
-
-<!-- END $-->
+<!--$ INSERT build/generated/ksp/metadata/commonMain/resources/table_Square.md --><!-- END $-->

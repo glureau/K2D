@@ -11,6 +11,7 @@ class MermaidClassRenderer(
         val stringBuilder = StringBuilder()
         stringBuilder.append("classDiagram\n")
         classes.values.forEach { c ->
+            if (c.hide) return@forEach
 
             if (!conf.showInternal && c.visibility == GVisibility.Internal) return@forEach
 
@@ -76,9 +77,8 @@ class MermaidClassRenderer(
     }
 
 
-
-
     private fun GProperty.shouldDisplay(containerClass: GClass): Boolean {
+        if (hide) return false
         if (!conf.showOverride && overrides) return false
         if (containerClass.classType == GClassType.Enum && propName in listOf("name", "ordinal")) return false
         return when (visibility) {
@@ -89,14 +89,15 @@ class MermaidClassRenderer(
         }
     }
 
-    private fun GFunction.shouldDisplay(): Boolean =
-        when (visibility) {
+    private fun GFunction.shouldDisplay(): Boolean {
+        if (hide) return false
+        return when (visibility) {
             GVisibility.Public -> conf.showPublic
             GVisibility.Private -> conf.showPrivate
             GVisibility.Protected -> conf.showProtected
             GVisibility.Internal -> conf.showInternal
-        } &&
-                (conf.showOverride || !overrides)
+        } && (conf.showOverride || !overrides)
+    }
 }
 
 // TODO: To be injected via a LinkGenerator interface

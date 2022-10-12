@@ -4,10 +4,13 @@ import com.glureau.mermaidksp.compiler.LocalType
 import com.glureau.mermaidksp.compiler.kotlinNativeFunctionNames
 import kotlin.math.max
 
-fun StringBuilder.appendMdH1(header: String) = append("# $header\n\n")
-fun StringBuilder.appendMdH2(header: String) = append("## $header\n\n")
-fun StringBuilder.appendMdH3(header: String) = append("### $header\n\n")
-fun StringBuilder.appendMdH4(header: String) = append("#### $header\n\n")
+fun StringBuilder.appendMdHeader(level: Int, header: String) = append("#".repeat(level) + " $header\n\n")
+fun StringBuilder.appendMdH1(header: String) = appendMdHeader(1, header)
+fun StringBuilder.appendMdH2(header: String) = appendMdHeader(2, header)
+fun StringBuilder.appendMdH3(header: String) = appendMdHeader(3, header)
+fun StringBuilder.appendMdH4(header: String) = appendMdHeader(4, header)
+fun StringBuilder.appendMdH5(header: String) = appendMdHeader(5, header)
+fun StringBuilder.appendMdH6(header: String) = appendMdHeader(6, header)
 fun StringBuilder.appendMdMermaid(mermaidContent: String) = append(mdBlock(mermaidContent, "mermaid"))
 fun StringBuilder.appendMdTable(headers: List<String>, vararg rows: List<String>) = append(mdTable(headers, *rows))
 

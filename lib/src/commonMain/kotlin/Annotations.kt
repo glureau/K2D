@@ -4,7 +4,6 @@ import kotlin.reflect.KClass
 @Repeatable
 annotation class MermaidGraph(
     val name: String,
-    val klasses: Array<KClass<*>> = emptyArray(), //TODO : use K2DSymbolSelector instead
     val symbolSelector: K2DSymbolSelectorAnnotation = K2DSymbolSelectorAnnotation(),
 )
 
@@ -12,6 +11,13 @@ annotation class MermaidGraph(
 annotation class ClassMembersTable(
     val symbolSelector: K2DSymbolSelectorAnnotation = K2DSymbolSelectorAnnotation(),
 )
+
+@Target(
+    AnnotationTarget.PROPERTY,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.CLASS,
+)
+annotation class K2DHide
 
 @Serializable
 data class K2DConfiguration(
@@ -27,7 +33,12 @@ data class K2DDokkaConfig(
 
 annotation class K2DSymbolSelectorAnnotation(
     val includesFqnRegex: String = ".*", // field is used as a Regex
+    val includesClasses: Array<KClass<*>> = emptyArray(),
+    val includesClassesInheritingFrom: Array<KClass<*>> = emptyArray(),
+
     val excludesFqnRegex: String = ".*", // field is used as a Regex
+    val excludesClasses: Array<KClass<*>> = emptyArray(),
+    val excludesClassesInheritingFrom: Array<KClass<*>> = emptyArray(),
 )
 
 fun K2DSymbolSelectorAnnotation.toSelector() = K2DSymbolSelector(
