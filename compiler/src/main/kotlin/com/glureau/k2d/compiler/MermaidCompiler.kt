@@ -1,8 +1,8 @@
 package com.glureau.k2d.compiler
 
 import com.glureau.k2d.*
-import com.glureau.k2d.compiler.dokka.DokkaModuleMarkdownRenderer
-import com.glureau.k2d.compiler.dokka.DokkaPackagesMarkdownRenderer
+import com.glureau.k2d.compiler.dokka.DokkaModuleMermaidRenderer
+import com.glureau.k2d.compiler.dokka.DokkaPackagesMermaidRenderer
 import com.glureau.k2d.compiler.markdown.appendMdMermaid
 import com.glureau.k2d.compiler.markdown.table.MarkdownTableRenderer
 import com.glureau.k2d.compiler.mermaid.MermaidClassRenderer
@@ -28,17 +28,19 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
     }
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
-        val configuration =
-            environment.options["k2d.config"]?.let { Json.decodeFromString<K2DConfiguration>(it) }
-                ?: K2DConfiguration()
+        val configParamStr = environment.options["k2d.config"]
+        Logger.warn("PARAM=" + configParamStr)
+        val configuration = if (!configParamStr.isNullOrBlank() && configParamStr != "null") {
+            Json.decodeFromString(configParamStr)
+        } else {
+            K2DConfiguration()
+        }
 
         Logger.warn("config = $configuration")
 
         val nodeSequence: Sequence<KSNode> = resolver.getNewFiles()
-        Logger.warn("nodeSequence: $nodeSequence")
         val aggregatorClassVisitor = AggregatorClassVisitor()
         nodeSequence.forEach { it.accept(aggregatorClassVisitor, Unit) }
-        Logger.warn("aggro=${aggregatorClassVisitor.classes.keys}")
 
 
         resolver.onAnnotation(K2DMermaidGraph::class) { annotation ->
@@ -54,7 +56,13 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
             }
 
             // TODO: get MermaidRendererConfiguration from annotation
-            val content = buildString { appendMdMermaid(MermaidClassRenderer().renderClassDiagram(filtered)) }
+            val content = buildString {
+                appendMdMermaid(
+                    MermaidClassRenderer(configuration.defaultMermaidConfiguration).renderClassDiagram(
+                        filtered
+                    )
+                )
+            }
                 .toByteArray()
 
 
@@ -78,20 +86,24 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
                     Logger.info("Ignoring ${gClass.symbolName}")
                     return@forEach
                 }
-                val content = MarkdownTableRenderer().renderClassMembers(gClass).toByteArray()
+                val content =
+                    MarkdownTableRenderer(configuration.defaultMarkdownTableConfiguration).renderClassMembers(gClass)
+                        .toByteArray()
 
-                Logger.warn("Rendering table ${gClass.symbolName}.md")
-                environment.writeMarkdown(
-                    content = content,
-                    packageName = gClass.packageName,
-                    fileName = "table_" + gClass.symbolName,
-                    dependencies = gClass.originFile?.let { listOf(it) } ?: emptyList())
+                if (content.isNotEmpty()) {
+                    Logger.warn("Rendering table ${gClass.symbolName}.md")
+                    environment.writeMarkdown(
+                        content = content,
+                        packageName = gClass.packageName,
+                        fileName = "table_" + gClass.symbolName,
+                        dependencies = gClass.originFile?.let { listOf(it) } ?: emptyList())
+                }
 
             }
         }
 
         configuration.dokkaConfig?.let {
-            generateDokka(aggregatorClassVisitor, it)
+            generateDokka(aggregatorClassVisitor, it, configuration)
         }
 
         return emptyList()
@@ -113,15 +125,22 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
 
     private fun generateDokka(
         aggregatorClassVisitor: AggregatorClassVisitor,
-        dokkaConfig: K2DDokkaConfig
+        dokkaConfig: K2DDokkaConfig,
+        configuration: K2DConfiguration
     ) {
         val data = aggregatorClassVisitor.classes
 
         if (data.isNotEmpty()) {
             if (dokkaConfig.generateMermaidOnPackages)
-                DokkaPackagesMarkdownRenderer(environment).render(data, aggregatorClassVisitor.moduleClasses)
+                DokkaPackagesMermaidRenderer(environment, configuration.defaultMermaidConfiguration).render(
+                    data,
+                    aggregatorClassVisitor.moduleClasses
+                )
             if (dokkaConfig.generateMermaidOnModules)
-                DokkaModuleMarkdownRenderer(environment).render(data, aggregatorClassVisitor.moduleClasses)
+                DokkaModuleMermaidRenderer(environment, configuration.defaultMermaidConfiguration).render(
+                    data,
+                    aggregatorClassVisitor.moduleClasses
+                )
         }
     }
 }

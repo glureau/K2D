@@ -60,7 +60,6 @@ class AggregatorClassVisitor : KSVisitorVoid() {
         }
         // Store BEFORE visiting other prop/func so that it can be retrieved from the map (and avoid infinite loop)
         classes[qualifiedName] = klass
-        Logger.warn("KLASS: ${klass.symbolName}")
         klass.properties =
             classDeclaration.getAllProperties().mapNotNull { it.toGProperty(classDeclaration.classKind) }.toList()
         klass.functions = classDeclaration.getAllFunctions().mapNotNull { it.toGFunction() }.toList()

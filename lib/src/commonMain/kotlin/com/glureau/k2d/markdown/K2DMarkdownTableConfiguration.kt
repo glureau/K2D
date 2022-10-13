@@ -1,7 +1,10 @@
-package com.glureau.k2d.compiler.markdown.table
+package com.glureau.k2d.markdown
+
+import kotlinx.serialization.Serializable
 
 // TODO: make it accessible from annotations
-data class MarkdownTableConfiguration(
+@Serializable
+data class K2DMarkdownTableConfiguration(
     val markdownClassNameLevel: Int = 4,
     val showClassName: Boolean = true,
     val showClassDocumentation: Boolean = true,

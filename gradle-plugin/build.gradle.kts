@@ -14,15 +14,15 @@ dependencies {
 }
 
 // TODO : Unify naming
-group = "com.glureau.markdownreplace"
+group = "com.glureau.k2d"
 gradlePlugin {
     plugins {
         create("k2d") {
             // This is a fully-qualified plugin id, short id of 'kotlinx-knit' is added manually in resources
-            id = "com.glureau.markdownreplace"
-            implementationClass = "com.glureau.markdown_replace.MarkdownReplacePlugin"
-            displayName = "Markdown replace tool"
-            description = "Make dynamic changes in your markdown files"
+            id = "com.glureau.k2d"
+            implementationClass = "com.glureau.k2d.K2DPlugin"
+            displayName = "Kotlin to Documentation"
+            description = "Generate markdown content from Kotlin code"
         }
     }
 }

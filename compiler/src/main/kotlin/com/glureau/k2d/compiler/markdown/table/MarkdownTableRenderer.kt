@@ -5,11 +5,13 @@ import com.glureau.k2d.compiler.GClassType
 import com.glureau.k2d.compiler.markdown.appendMdHeader
 import com.glureau.k2d.compiler.markdown.appendMdTable
 import com.glureau.k2d.compiler.markdown.render
+import com.glureau.k2d.markdown.K2DMarkdownTableConfiguration
 
 class MarkdownTableRenderer(
-    private val config: MarkdownTableConfiguration = MarkdownTableConfiguration()
+    private val config: K2DMarkdownTableConfiguration = K2DMarkdownTableConfiguration()
 ) {
     fun renderClassMembers(klass: GClass): String = buildString {
+        if (klass.classType in listOf(GClassType.EnumEntry)) return@buildString
 
         if (config.showClassName) {
             appendMdHeader(config.markdownClassNameLevel, klass.symbolName)
@@ -18,6 +20,7 @@ class MarkdownTableRenderer(
         if (config.showClassDocumentation) {
             klass.docString?.let { append(it + "\n\n") }
         }
+
 
         val printableProperties = klass.properties
             .filter { config.showClassProperties }
@@ -44,6 +47,8 @@ class MarkdownTableRenderer(
             .filter { !it.hide }
             // methods from `kotlin.Any` are, 99.9% of the time not relevant
             .filter { it.funcName !in listOf("equals", "hashCode", "toString") }
+            // Kotlin enums provide clone and compareTo methods by default, not really relevant for documentation
+            .filter { klass.classType != GClassType.Enum || it.funcName !in listOf("clone", "compareTo") }
         if (printableFunctions.isNotEmpty()) {
             appendMdHeader(config.markdownClassNameLevel + 1, "Functions\n")
             appendMdTable(
@@ -51,6 +56,13 @@ class MarkdownTableRenderer(
                 *(printableFunctions.sortedBy { it.funcName }
                     .map { listOf(it.funcName, it.returnType?.render() ?: "", it.docString ?: "") }
                     .toTypedArray())
+            )
+        }
+
+        if (klass.classType == GClassType.Enum) {
+            appendMdTable(
+                headers = listOf("Entry", "Comments"),
+                *klass.inners.map { listOf(it.symbolName, it.docString ?: "") }.toTypedArray()
             )
         }
     }

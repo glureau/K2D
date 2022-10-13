@@ -2,9 +2,10 @@ package com.glureau.k2d.compiler.mermaid
 
 import com.glureau.k2d.compiler.*
 import com.glureau.k2d.compiler.markdown.render
+import com.glureau.k2d.mermaid.K2DMermaidRendererConfiguration
 
 class MermaidClassRenderer(
-    private val conf: MermaidRendererConfiguration = MermaidRendererConfiguration()
+    private val conf: K2DMermaidRendererConfiguration
 ) {
 
     fun renderClassDiagram(classes: Map<String, GClass>): String {

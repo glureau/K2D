@@ -4,12 +4,15 @@ import com.glureau.k2d.compiler.GClass
 import com.glureau.k2d.compiler.markdown.appendMdH1
 import com.glureau.k2d.compiler.markdown.appendMdMermaid
 import com.glureau.k2d.compiler.mermaid.MermaidClassRenderer
-import com.glureau.k2d.compiler.mermaid.MermaidRendererConfiguration
 import com.glureau.k2d.compiler.writeMarkdown
+import com.glureau.k2d.mermaid.K2DMermaidRendererConfiguration
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import java.io.File
 
-class DokkaModuleMarkdownRenderer(private val environment: SymbolProcessorEnvironment) {
+class DokkaModuleMermaidRenderer(
+    private val environment: SymbolProcessorEnvironment,
+    private val configuration: K2DMermaidRendererConfiguration,
+) {
 
     fun render(data: MutableMap<String, GClass>, moduleClasses: MutableSet<String>) {
         val classes = data.filter { moduleClasses.contains(it.key) }
@@ -29,7 +32,7 @@ class DokkaModuleMarkdownRenderer(private val environment: SymbolProcessorEnviro
 
         val stringBuilder = StringBuilder()
         stringBuilder.appendMdH1("Module $moduleName")
-        val mermaidContent = MermaidClassRenderer(MermaidRendererConfiguration(baseUrl = "."))
+        val mermaidContent = MermaidClassRenderer(configuration)
             .renderClassDiagram(classes)
         stringBuilder.appendMdMermaid(mermaidContent)
 

@@ -9,7 +9,7 @@
 
 @file:K2DClassMembersTable(
     K2DSymbolSelectorAnnotation(
-        includesFqnRegex = "sample\\.[A-Z].*", // only in sample package
+        includesFqnRegex = "sample\\..*", // only in sample package
     )
 )
 

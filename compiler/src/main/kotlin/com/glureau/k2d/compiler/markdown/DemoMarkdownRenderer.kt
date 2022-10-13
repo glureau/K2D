@@ -3,8 +3,8 @@ package com.glureau.k2d.compiler.markdown
 import com.glureau.k2d.compiler.GClass
 import com.glureau.k2d.compiler.markdown.table.MarkdownTableRenderer
 import com.glureau.k2d.compiler.mermaid.MermaidClassRenderer
-import com.glureau.k2d.compiler.mermaid.MermaidRendererConfiguration
 import com.glureau.k2d.compiler.writeMarkdown
+import com.glureau.k2d.mermaid.K2DMermaidRendererConfiguration
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 
 class DemoMarkdownRenderer(private val environment: SymbolProcessorEnvironment) {
@@ -13,12 +13,13 @@ class DemoMarkdownRenderer(private val environment: SymbolProcessorEnvironment) 
     fun render(data: MutableMap<String, GClass>, fileName: String) {
         val stringBuilder = StringBuilder()
         stringBuilder.appendMdH1("Demo Mermaid & KSP")
-        stringBuilder.appendMdMermaid(MermaidClassRenderer().renderClassDiagram(data))
+        val confMermaid = K2DMermaidRendererConfiguration()
+        stringBuilder.appendMdMermaid(MermaidClassRenderer(confMermaid).renderClassDiagram(data))
 
         data.keys.map { it.substringBeforeLast(".") }.distinct().forEach { packageName ->
             stringBuilder.appendMdH1("Package $packageName")
             stringBuilder.appendMdMermaid(
-                MermaidClassRenderer()
+                MermaidClassRenderer(confMermaid)
                     .renderClassDiagram(data.filter { it.key.substringBeforeLast(".") == packageName })
             )
         }
@@ -29,7 +30,7 @@ class DemoMarkdownRenderer(private val environment: SymbolProcessorEnvironment) 
                 stringBuilder.appendMdH1("Inheritance of $qualifiedName")
                 stringBuilder.appendMdMermaid(
                     MermaidClassRenderer(
-                        MermaidRendererConfiguration(
+                        K2DMermaidRendererConfiguration(
                             showHas = false
                         )
                     ).renderClassDiagram(implementedBy + (qualifiedName to klass))

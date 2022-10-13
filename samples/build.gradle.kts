@@ -1,21 +1,25 @@
+import com.glureau.k2d.K2DConfiguration
+import com.glureau.k2d.K2DDokkaConfig
+
 plugins {
     kotlin("multiplatform")
-    id("com.google.devtools.ksp")
     id("org.jetbrains.dokka") version "1.6.21"
     id("org.ajoberstar.git-publish")
     id("org.ajoberstar.grgit")
-    id("org.jetbrains.kotlinx.knit") version "0.4.0"
-    id("com.glureau.markdownreplace") version "0.1.1"
+    id("com.google.devtools.ksp")
+    id("org.jetbrains.kotlinx.knit") version "0.4.0" // TESTING...
+    id("com.glureau.k2d") version "0.2.0"
 }
 
-/*
-markdownReplace {
-    files = fileTree(projectDir).apply {
-        include("src/**/**.md")
-    }
-    replaceInPlace = true
+k2d {
+    config = K2DConfiguration(
+        dokkaConfig = K2DDokkaConfig(
+            generateMermaidOnModules = true,
+            generateMermaidOnPackages = true,
+        ),
+        //defaultMarkdownTableConfiguration = K2DMarkdownTableConfiguration(),
+    )
 }
-*/
 
 repositories {
     mavenCentral()

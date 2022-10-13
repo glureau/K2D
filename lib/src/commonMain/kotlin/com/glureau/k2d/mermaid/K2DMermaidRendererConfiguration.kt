@@ -1,6 +1,9 @@
-package com.glureau.k2d.compiler.mermaid
+package com.glureau.k2d.mermaid
 
-data class MermaidRendererConfiguration(
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class K2DMermaidRendererConfiguration(
     val showClassType: Boolean = true,
 
     val showPublic: Boolean = true,
