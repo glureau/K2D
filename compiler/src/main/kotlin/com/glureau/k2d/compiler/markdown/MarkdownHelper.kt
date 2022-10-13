@@ -71,8 +71,8 @@ fun LocalType.renderForMarkdown(): String =
         val genericsStr =
             if (usedGenerics.isEmpty()) ""
             else usedGenerics.joinToString(
-                prefix = "<",
-                postfix = ">",
+                prefix = "&lt;",
+                postfix = "&gt;",
                 transform = { it.removePrefix("INVARIANT").trim() }
             )
         type.symbolName + genericsStr

@@ -202,17 +202,17 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | Name         | Type               | Comments |
 |--------------|--------------------|----------|
 | lambda       | (String) -> Double |          |
-| latestResult | Result<Int>        |          |
-| list         | List<T>            |          |
+| latestResult | Result&lt;Int&gt;  |          |
+| list         | List&lt;T&gt;      |          |
 
 ##### Functions
 
 
-| Name          | Return Type | Comments |
-|---------------|-------------|----------|
-| add           | Unit        |          |
-| addAll        | List<T>     |          |
-| computeResult | Result<Int> |          |
+| Name          | Return Type       | Comments |
+|---------------|-------------------|----------|
+| add           | Unit              |          |
+| addAll        | List&lt;T&gt;     |          |
+| computeResult | Result&lt;Int&gt; |          |
 
 
 File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/calculator/package.md
