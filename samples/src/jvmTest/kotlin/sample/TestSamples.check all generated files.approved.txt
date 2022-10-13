@@ -199,11 +199,11 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 ##### Properties
 
 
-| Name         | Type              | Comments |
-|--------------|-------------------|----------|
-| lambda       | ⟮String⟯-> Double |          |
-| latestResult | Result~Int~       |          |
-| list         | List~T~           |          |
+| Name         | Type               | Comments |
+|--------------|--------------------|----------|
+| lambda       | (String) -> Double |          |
+| latestResult | Result<Int>        |          |
+| list         | List<T>            |          |
 
 ##### Functions
 
@@ -211,8 +211,8 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | Name          | Return Type | Comments |
 |---------------|-------------|----------|
 | add           | Unit        |          |
-| addAll        | List~T~     |          |
-| computeResult | Result~Int~ |          |
+| addAll        | List<T>     |          |
+| computeResult | Result<Int> |          |
 
 
 File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/calculator/package.md

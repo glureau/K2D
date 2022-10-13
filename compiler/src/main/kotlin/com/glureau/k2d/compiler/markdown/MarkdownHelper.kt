@@ -57,18 +57,13 @@ fun mdTable(headers: List<String>, vararg rows: List<String>): String {
 
 fun String.cleanStr() = trim().removeSurrounding("\n").trim().replace("\n", "<div></div>")
 
-fun LocalType.render(asProperty: Boolean = false): String =
+fun LocalType.renderForMarkdown(): String =
     if (kotlinNativeFunctionNames.contains(type.symbolName)) {
         val returnType = usedGenerics.last()
-        // Special char, to look like parenthesis but avoid Mermaid limitation with lambda as a property type.
-        // source: http://xahlee.info/comp/unicode_matching_brackets.html
-        // Mermaid translates a line that contains standard parenthesis as a function, this is conflicting with Kotlin short syntax
-        val parOpen = if (asProperty) "⟮" else "("
-        val parClose = if (asProperty) "⟯" else ")"
         usedGenerics.dropLast(1)
             .joinToString(
-                prefix = parOpen,
-                postfix = "$parClose-> ${returnType.removePrefix("INVARIANT").trim()}"
+                prefix = "(",
+                postfix = ") -> ${returnType.removePrefix("INVARIANT").trim()}"
             ) {
                 it.removePrefix("INVARIANT").trim()
             }
@@ -76,8 +71,8 @@ fun LocalType.render(asProperty: Boolean = false): String =
         val genericsStr =
             if (usedGenerics.isEmpty()) ""
             else usedGenerics.joinToString(
-                prefix = "~",
-                postfix = "~",
+                prefix = "<",
+                postfix = ">",
                 transform = { it.removePrefix("INVARIANT").trim() }
             )
         type.symbolName + genericsStr

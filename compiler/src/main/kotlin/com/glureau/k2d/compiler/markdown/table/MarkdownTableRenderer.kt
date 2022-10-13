@@ -4,7 +4,7 @@ import com.glureau.k2d.compiler.GClass
 import com.glureau.k2d.compiler.GClassType
 import com.glureau.k2d.compiler.markdown.appendMdHeader
 import com.glureau.k2d.compiler.markdown.appendMdTable
-import com.glureau.k2d.compiler.markdown.render
+import com.glureau.k2d.compiler.markdown.renderForMarkdown
 import com.glureau.k2d.markdown.K2DMarkdownTableConfiguration
 
 class MarkdownTableRenderer(
@@ -37,7 +37,7 @@ class MarkdownTableRenderer(
                 headers = listOf("Name", "Type", "Comments"),
                 *(printableProperties
                     .sortedBy { it.propName }
-                    .map { listOf(it.propName, it.type.render(true), it.docString ?: "") }
+                    .map { listOf(it.propName, it.type.renderForMarkdown(), it.docString ?: "") }
                     .toTypedArray())
             )
         }
@@ -54,7 +54,7 @@ class MarkdownTableRenderer(
             appendMdTable(
                 headers = listOf("Name", "Return Type", "Comments"),
                 *(printableFunctions.sortedBy { it.funcName }
-                    .map { listOf(it.funcName, it.returnType?.render() ?: "", it.docString ?: "") }
+                    .map { listOf(it.funcName, it.returnType?.renderForMarkdown() ?: "", it.docString ?: "") }
                     .toTypedArray())
             )
         }

@@ -1,7 +1,6 @@
 package com.glureau.k2d.compiler.mermaid
 
 import com.glureau.k2d.compiler.*
-import com.glureau.k2d.compiler.markdown.render
 import com.glureau.k2d.mermaid.K2DMermaidRendererConfiguration
 
 class MermaidClassRenderer(
@@ -23,7 +22,7 @@ class MermaidClassRenderer(
             if (conf.showClassType) stringBuilder.append("    ${c.classType.asMermaid}\n")
             c.properties.forEach { p ->
                 if (p.shouldDisplay(c))
-                    stringBuilder.append("    ${p.visibility.asMermaid}${p.propName} ${p.type.render(true)}\n")
+                    stringBuilder.append("    ${p.visibility.asMermaid}${p.propName} ${p.type.renderForMermaid(true)}\n")
 
                 //stringBuilder.append(p.type.toString() + "\n") // TODO: remove this line, debug only
             }
@@ -31,9 +30,9 @@ class MermaidClassRenderer(
             c.functions.forEach { f ->
                 if (f.shouldDisplay()) {
                     // TODO: method to render lambdas can be shared (somewhere else)
-                    val paramsString = f.parameters.joinToString { it.render() }
+                    val paramsString = f.parameters.joinToString { it.renderForMermaid() }
                     //val paramsString = f.parameters.joinToString { it.usedGenerics.joinToString("|") }
-                    var returnString = f.returnType?.render() ?: ""
+                    var returnString = f.returnType?.renderForMermaid() ?: ""
                     if (returnString == "Unit") returnString = "" // Ignore Unit
                     stringBuilder.append("    ${f.visibility.asMermaid}${f.funcName}($paramsString) ${returnString}\n")
                 }
@@ -56,7 +55,7 @@ class MermaidClassRenderer(
                 c.properties.forEach { p ->
                     val shouldDisplay = p.shouldDisplay(c)
                     if (p.type.type is GClass && shouldDisplay) {
-                        stringBuilder.append("  ${c.fullTypeName()} ${Relationship.Composition} ${p.type.render(true)} : has\n")
+                        stringBuilder.append("  ${c.fullTypeName()} ${Relationship.Composition} ${p.type.renderForMermaid(true)} : has\n")
                     }
                 }
             }

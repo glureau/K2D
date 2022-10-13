@@ -218,10 +218,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
                     }
                     return "($params)->$returnType"
                 } else {
-                    // TODO: clean
-                    return simpleName.asString() /*+ "~" + typeParameters.joinToString { tp ->
-                        tp.getMermaidClassName() + tp.bounds.cleanString()
-                    } + "~"*/
+                    return simpleName.asString()
                 }
             }
         }
