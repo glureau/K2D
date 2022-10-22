@@ -36,11 +36,11 @@ classDiagram
   }
   Shape <|-- Circle : implements
   click Circle href "./sample/-circle/index.html"
-  class Companion {
+  class Circle_Companion {
     <<object>>
     +TAU Double
   }
-  click Companion href "./sample/-companion/index.html"
+  click Circle_Companion href "./sample/-circle.-companion/index.html"
 
 ```
 
@@ -141,16 +141,16 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | foo  | Int  |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/table_InnerOval.md
-#### InnerOval
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/table_Oval.InnerOval.md
+#### Oval.InnerOval
 
 | Name   | Type   | Comments |
 |--------|--------|----------|
 | square | Square |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/table_Builder.md
-#### Builder
+File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/table_Oval.Builder.md
+#### Oval.Builder
 
 | Name    | Return Type | Comments |
 |---------|-------------|----------|

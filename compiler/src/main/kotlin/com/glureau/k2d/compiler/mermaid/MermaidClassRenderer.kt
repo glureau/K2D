@@ -80,7 +80,7 @@ class MermaidClassRenderer(
                 transform = { it.name + ":" + it.klassOrBasic.symbolName },
                 postfix = "~"
             )
-        return symbolName + genericsStr
+        return symbolName.replace(".", "_") + genericsStr
     }
 
 

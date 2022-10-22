@@ -13,7 +13,7 @@ class MarkdownTableRenderer(
 ) {
     fun renderClassMembers(klass: GClass): String = buildString {
         if (klass.classType in listOf(GClassType.EnumEntry)) return@buildString
-        if (!config.showCompanion && klass.symbolName == "Companion" && klass.classType == GClassType.Object) return@buildString
+        if (!config.showCompanion && klass.simpleName == "Companion" && klass.classType == GClassType.Object) return@buildString
         if (!config.showInterface && klass.classType == GClassType.Interface) return@buildString
 
         if (config.showClassName) {
@@ -23,7 +23,6 @@ class MarkdownTableRenderer(
         if (config.showClassDocumentation) {
             klass.docString?.let { append(it + "\n\n") }
         }
-
 
         val printableProperties = klass.properties
             .filter { config.showClassProperties }
@@ -69,7 +68,7 @@ class MarkdownTableRenderer(
         if (klass.classType == GClassType.Enum) {
             appendMdTable(
                 headers = listOf("Entry", "Comments"),
-                *klass.inners.map { listOf(it.symbolName, it.docString ?: "") }.toTypedArray()
+                *klass.inners.map { listOf(it.simpleName, it.docString ?: "") }.toTypedArray()
             )
         }
     }

@@ -60,6 +60,7 @@ sealed interface GClassOrBasic {
     val qualifiedName: String // Should be unique for a given class
     val packageName: String
     val symbolName: String
+    val simpleName: String
     val generics: List<Generics>
 }
 
@@ -67,6 +68,7 @@ data class Basic(
     override val qualifiedName: String,
     override val packageName: String,
     override val symbolName: String,
+    override val simpleName: String,
     override var generics: List<Generics> = emptyList(),
 ) : GClassOrBasic
 
@@ -74,6 +76,7 @@ data class GClass constructor(
     override val qualifiedName: String,
     override val packageName: String,
     override val symbolName: String,
+    override val simpleName: String,
     override var generics: List<Generics> = emptyList(),
     val originFile: KSFile?,
     val visibility: GVisibility,

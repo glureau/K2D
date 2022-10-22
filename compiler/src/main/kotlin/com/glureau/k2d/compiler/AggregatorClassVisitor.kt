@@ -51,6 +51,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             originFile = classDeclaration.containingFile,
             visibility = classDeclaration.getGVisibility(),
             symbolName = classDeclaration.getMermaidClassName(),
+            simpleName = classDeclaration.simpleName.asString(),
             classType = classDeclaration.getGClassType(),
             docString = classDeclaration.docString,
             hide = hide,
@@ -110,6 +111,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
                 qualifiedName = qualifiedName,
                 packageName = decl.packageName.asString(),
                 symbolName = decl.simpleName.asString(),
+                simpleName = decl.simpleName.asString(),
             ).apply {
                 generics = decl.generics()
 
@@ -181,6 +183,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
                 qualifiedName = qualifiedName,
                 packageName = decl.packageName.asString(),
                 symbolName = decl.simpleName.asString(),
+                simpleName = decl.simpleName.asString(),
             ).apply {
                 basics[qualifiedName] = this
                 generics = decl.generics()
@@ -218,11 +221,12 @@ class AggregatorClassVisitor : KSVisitorVoid() {
                     }
                     return "($params)->$returnType"
                 } else {
-                    return simpleName.asString()
+                    return qualifiedName?.asString()?.removePrefix(packageName.asString() + ".")
+                        ?: simpleName.asString()
                 }
             }
         }
-        return simpleName.asString()
+        return qualifiedName?.asString()?.removePrefix(packageName.asString() + ".") ?: simpleName.asString()
     }
 
     private fun KSClassDeclaration.getGClassType(): GClassType =
