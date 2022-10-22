@@ -4,6 +4,8 @@ Generate diagram sequences (mermaid format), markdown tables and more based on y
 
 This is a work in progress, don't hesitate to add your ideas in a new issue! Thanks for your help ;)
 
+Current version: <!--$ GRADLE_PROPERTIES version -->0.2.0<!-- END $-->
+
 ## [DEMO for Dokka](https://www.glureau.com/K2D/html/)
 
 ![image](https://user-images.githubusercontent.com/7968075/174116714-ffa7918e-85c9-44d2-8142-85a66bd29cb0.png)

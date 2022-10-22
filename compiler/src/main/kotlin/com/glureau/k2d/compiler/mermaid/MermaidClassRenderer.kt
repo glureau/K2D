@@ -12,6 +12,7 @@ class MermaidClassRenderer(
         stringBuilder.append("classDiagram\n")
         classes.values.forEach { c ->
             if (c.hide) return@forEach
+            if (!conf.showCompanion && c.symbolName == "Companion" && c.classType == GClassType.Object) return@forEach
 
             if (!conf.showInternal && c.visibility == GVisibility.Internal) return@forEach
 
@@ -55,7 +56,13 @@ class MermaidClassRenderer(
                 c.properties.forEach { p ->
                     val shouldDisplay = p.shouldDisplay(c)
                     if (p.type.type is GClass && shouldDisplay) {
-                        stringBuilder.append("  ${c.fullTypeName()} ${Relationship.Composition} ${p.type.renderForMermaid(true)} : has\n")
+                        stringBuilder.append(
+                            "  ${c.fullTypeName()} ${Relationship.Composition} ${
+                                p.type.renderForMermaid(
+                                    true
+                                )
+                            } : has\n"
+                        )
                     }
                 }
             }
@@ -80,6 +87,7 @@ class MermaidClassRenderer(
     private fun GProperty.shouldDisplay(containerClass: GClass): Boolean {
         if (hide) return false
         if (!conf.showOverride && overrides) return false
+        if (!conf.showClassPropertiesWithNoBackingField && !hasBackingField) return false
         if (containerClass.classType == GClassType.Enum && propName in listOf("name", "ordinal")) return false
         return when (visibility) {
             GVisibility.Public -> conf.showPublic

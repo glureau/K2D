@@ -1,7 +1,6 @@
 package sample
 
 import org.approvaltests.Approvals
-import org.approvaltests.combinations.CombinationApprovals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

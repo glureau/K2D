@@ -20,6 +20,7 @@ plugins {
     id("org.ajoberstar.git-publish") version "3.0.1"
     id("org.ajoberstar.grgit") version "4.1.1"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
+    id("com.glureau.grip") version "0.3.0"
 }
 
 allprojects {
@@ -86,3 +87,9 @@ gitPublish {
 }
 tasks["copyMavenLocalArtifacts"].dependsOn("cleanMavenLocalArtifacts")
 tasks["gitPublishCopy"].dependsOn("copyMavenLocalArtifacts")
+
+grip {
+    files = fileTree(projectDir).apply {
+        include("README.md")
+    }
+}

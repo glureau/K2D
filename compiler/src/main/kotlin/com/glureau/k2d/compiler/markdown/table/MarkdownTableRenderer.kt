@@ -2,6 +2,7 @@ package com.glureau.k2d.compiler.markdown.table
 
 import com.glureau.k2d.compiler.GClass
 import com.glureau.k2d.compiler.GClassType
+import com.glureau.k2d.compiler.GFunction
 import com.glureau.k2d.compiler.markdown.appendMdHeader
 import com.glureau.k2d.compiler.markdown.appendMdTable
 import com.glureau.k2d.compiler.markdown.renderForMarkdown
@@ -12,6 +13,8 @@ class MarkdownTableRenderer(
 ) {
     fun renderClassMembers(klass: GClass): String = buildString {
         if (klass.classType in listOf(GClassType.EnumEntry)) return@buildString
+        if (!config.showCompanion && klass.symbolName == "Companion" && klass.classType == GClassType.Object) return@buildString
+        if (!config.showInterface && klass.classType == GClassType.Interface) return@buildString
 
         if (config.showClassName) {
             appendMdHeader(config.markdownClassNameLevel, klass.symbolName)
@@ -32,11 +35,12 @@ class MarkdownTableRenderer(
                         config.showClassPropertiesWithNoBackingField
             }
         if (printableProperties.isNotEmpty()) {
-            appendMdHeader(config.markdownClassNameLevel + 1, "Properties\n")
+            if (config.showSectionName) {
+                appendMdHeader(config.markdownClassNameLevel + 1, "Properties\n")
+            }
             appendMdTable(
                 headers = listOf("Name", "Type", "Comments"),
                 *(printableProperties
-                    .sortedBy { it.propName }
                     .map { listOf(it.propName, it.type.renderForMarkdown(), it.docString ?: "") }
                     .toTypedArray())
             )
@@ -50,11 +54,14 @@ class MarkdownTableRenderer(
             // Kotlin enums provide clone and compareTo methods by default, not really relevant for documentation
             .filter { klass.classType != GClassType.Enum || it.funcName !in listOf("clone", "compareTo") }
         if (printableFunctions.isNotEmpty()) {
-            appendMdHeader(config.markdownClassNameLevel + 1, "Functions\n")
+            if (config.showSectionName) {
+                appendMdHeader(config.markdownClassNameLevel + 1, "Functions\n")
+            }
+            fun GFunction.displayName(): String = this.funcName + if (this.parameters.isEmpty()) "()" else "(..)"
             appendMdTable(
                 headers = listOf("Name", "Return Type", "Comments"),
                 *(printableFunctions.sortedBy { it.funcName }
-                    .map { listOf(it.funcName, it.returnType?.renderForMarkdown() ?: "", it.docString ?: "") }
+                    .map { listOf(it.displayName(), it.returnType?.renderForMarkdown() ?: "", it.docString ?: "") }
                     .toTypedArray())
             )
         }

@@ -10,8 +10,10 @@ data class K2DMermaidRendererConfiguration(
     val showPrivate: Boolean = false,
     val showProtected: Boolean = false,
     val showInternal: Boolean = false,
+    val showCompanion: Boolean = true,
 
     val showOverride: Boolean = false,
+    val showClassPropertiesWithNoBackingField: Boolean = true,
 
     val showImplements: Boolean = true,
     val showHas: Boolean = true,

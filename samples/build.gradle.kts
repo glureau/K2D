@@ -10,7 +10,7 @@ plugins {
     id("org.jetbrains.kotlinx.knit") version "0.4.0" // TESTING...
     id("com.glureau.k2d") version "0.2.0"
 }
-
+/*
 k2d {
     config = K2DConfiguration(
         dokkaConfig = K2DDokkaConfig(
@@ -20,6 +20,8 @@ k2d {
         //defaultMarkdownTableConfiguration = K2DMarkdownTableConfiguration(),
     )
 }
+
+ */
 
 repositories {
     mavenCentral()

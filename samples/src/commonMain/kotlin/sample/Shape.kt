@@ -26,7 +26,10 @@ class Square(override val originPosition: Position) : Polygon {
     val sideSize: Float = 1f
 
     @K2DHide
-    val hiddenValue: Float get() = sideSize
+    val hiddenValue: Float = 2f
+
+    // A computed value has no backing fields
+    val computedValue: Float get() = sideSize
 
     override fun howMuchSides(): Int = TODO() // Ignored (override)
     public fun publicFun() = Unit // Reported
@@ -36,7 +39,11 @@ class Square(override val originPosition: Position) : Polygon {
     override fun computeSurface(): Float = TODO() // Ignored (override)
 }
 
-data class Circle(override val originPosition: Position, val radius: Float) : Shape
+data class Circle(override val originPosition: Position, val radius: Float) : Shape {
+    companion object {
+        const val TAU: Double = kotlin.math.PI * 2
+    }
+}
 
 @K2DHide
 data class InternalWeirdShape(override val originPosition: Position, val radius: Float) : Shape
