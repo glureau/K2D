@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm")
     id("maven-publish")
+    kotlin("plugin.serialization")
 }
 
 repositories {
@@ -20,6 +21,7 @@ dependencies {
     implementation("com.squareup:kotlinpoet-ksp:1.10.2")
     implementation("com.google.devtools.ksp:symbol-processing:$kspVersion")
     implementation("com.google.devtools.ksp:symbol-processing-api:$kspVersion")
+    api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
 
     testImplementation("com.github.tschuchortdev:kotlin-compile-testing-ksp:1.4.7")
     testImplementation("junit:junit:4.13.2")

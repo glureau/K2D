@@ -2,7 +2,7 @@ package com.glureau.k2d.compiler.dokka
 
 import com.glureau.k2d.compiler.GClass
 import com.glureau.k2d.compiler.writeMarkdown
-import com.glureau.k2d.mermaid.K2DMermaidRendererConfiguration
+import com.glureau.k2d.compiler.mermaid.K2DMermaidRendererConfiguration
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 
 class DokkaPackagesMermaidRenderer(

@@ -6,7 +6,6 @@ import com.glureau.k2d.compiler.GFunction
 import com.glureau.k2d.compiler.markdown.appendMdHeader
 import com.glureau.k2d.compiler.markdown.appendMdTable
 import com.glureau.k2d.compiler.markdown.renderForMarkdown
-import com.glureau.k2d.markdown.K2DMarkdownTableConfiguration
 
 class MarkdownTableRenderer(
     private val config: K2DMarkdownTableConfiguration = K2DMarkdownTableConfiguration()

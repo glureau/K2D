@@ -4,7 +4,7 @@ import com.glureau.k2d.compiler.GClass
 import com.glureau.k2d.compiler.markdown.table.MarkdownTableRenderer
 import com.glureau.k2d.compiler.mermaid.MermaidClassRenderer
 import com.glureau.k2d.compiler.writeMarkdown
-import com.glureau.k2d.mermaid.K2DMermaidRendererConfiguration
+import com.glureau.k2d.compiler.mermaid.K2DMermaidRendererConfiguration
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 
 class DemoMarkdownRenderer(private val environment: SymbolProcessorEnvironment) {

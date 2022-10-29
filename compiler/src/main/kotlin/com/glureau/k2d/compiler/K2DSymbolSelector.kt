@@ -1,4 +1,4 @@
-package com.glureau.k2d
+package com.glureau.k2d.compiler
 
 import kotlinx.serialization.Serializable
 

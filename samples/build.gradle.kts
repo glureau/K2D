@@ -1,6 +1,3 @@
-import com.glureau.k2d.K2DConfiguration
-import com.glureau.k2d.K2DDokkaConfig
-
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.dokka") version "1.6.21"
@@ -10,24 +7,25 @@ plugins {
     id("org.jetbrains.kotlinx.knit") version "0.4.0" // TESTING...
     id("com.glureau.k2d") version "0.2.0"
 }
-/*
-k2d {
-    config = K2DConfiguration(
-        dokkaConfig = K2DDokkaConfig(
-            generateMermaidOnModules = true,
-            generateMermaidOnPackages = true,
-        ),
-        //defaultMarkdownTableConfiguration = K2DMarkdownTableConfiguration(),
-    )
-}
-
- */
 
 repositories {
     mavenCentral()
 }
 dependencies {
     dokkaPlugin("com.glureau:html-mermaid-dokka-plugin:0.3.2")
+}
+
+k2d {
+    dokka {
+        generateMermaidOnModules = false
+        //generateMermaidOnPackages = false
+    }
+    defaultMermaidConfiguration {
+        //showPublic = false
+    }
+    defaultMarkdownTableConfiguration {
+
+    }
 }
 
 kotlin {

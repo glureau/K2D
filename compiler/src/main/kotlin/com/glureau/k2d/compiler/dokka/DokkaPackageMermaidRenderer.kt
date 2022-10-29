@@ -4,7 +4,7 @@ import com.glureau.k2d.compiler.GClass
 import com.glureau.k2d.compiler.markdown.appendMdH1
 import com.glureau.k2d.compiler.markdown.appendMdMermaid
 import com.glureau.k2d.compiler.mermaid.MermaidClassRenderer
-import com.glureau.k2d.mermaid.K2DMermaidRendererConfiguration
+import com.glureau.k2d.compiler.mermaid.K2DMermaidRendererConfiguration
 
 class DokkaPackageMermaidRenderer(
     private val configuration: K2DMermaidRendererConfiguration,

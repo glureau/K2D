@@ -1,7 +1,6 @@
 plugins {
     kotlin("multiplatform")
     id("maven-publish")
-    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -18,11 +17,6 @@ kotlin {
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
             languageSettings.optIn("kotlin.js.ExperimentalJsExport")
-        }
-        commonMain {
-            dependencies {
-                api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
-            }
         }
     }
 

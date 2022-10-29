@@ -1,7 +1,8 @@
-package com.glureau.k2d
+package com.glureau.k2d.compiler
 
-import com.glureau.k2d.markdown.K2DMarkdownTableConfiguration
-import com.glureau.k2d.mermaid.K2DMermaidRendererConfiguration
+import com.glureau.k2d.compiler.dokka.K2DDokkaConfig
+import com.glureau.k2d.compiler.markdown.table.K2DMarkdownTableConfiguration
+import com.glureau.k2d.compiler.mermaid.K2DMermaidRendererConfiguration
 import kotlinx.serialization.Serializable
 
 @Serializable

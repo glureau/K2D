@@ -1,8 +1,11 @@
 package com.glureau.k2d.compiler
 
-import com.glureau.k2d.*
+import com.glureau.k2d.K2DClassMembersTable
+import com.glureau.k2d.K2DMermaidGraph
+import com.glureau.k2d.K2DSymbolSelectorAnnotation
 import com.glureau.k2d.compiler.dokka.DokkaModuleMermaidRenderer
 import com.glureau.k2d.compiler.dokka.DokkaPackagesMermaidRenderer
+import com.glureau.k2d.compiler.dokka.K2DDokkaConfig
 import com.glureau.k2d.compiler.markdown.appendMdMermaid
 import com.glureau.k2d.compiler.markdown.table.MarkdownTableRenderer
 import com.glureau.k2d.compiler.mermaid.MermaidClassRenderer

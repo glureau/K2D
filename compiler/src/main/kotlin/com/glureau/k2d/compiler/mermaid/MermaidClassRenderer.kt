@@ -1,7 +1,6 @@
 package com.glureau.k2d.compiler.mermaid
 
 import com.glureau.k2d.compiler.*
-import com.glureau.k2d.mermaid.K2DMermaidRendererConfiguration
 
 class MermaidClassRenderer(
     private val conf: K2DMermaidRendererConfiguration
