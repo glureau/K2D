@@ -142,7 +142,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 
 
 File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/table_Oval.InnerOval.md
-#### Oval.InnerOval
+##### Oval.InnerOval
 
 | Name   | Type   | Comments |
 |--------|--------|----------|
@@ -150,7 +150,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 
 
 File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/table_Oval.Builder.md
-#### Oval.Builder
+##### Oval.Builder
 
 | Name    | Return Type | Comments |
 |---------|-------------|----------|

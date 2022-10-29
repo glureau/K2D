@@ -6,7 +6,7 @@ import org.junit.Test
 internal class MarkdownHelperKtTest {
 
     @Test
-    fun fo() {
+    fun `check that mdTable() work`() {
         Approvals.verify(mdTable(
             headers = listOf("name", "type", "comments"),
             listOf("name", "String", ""),

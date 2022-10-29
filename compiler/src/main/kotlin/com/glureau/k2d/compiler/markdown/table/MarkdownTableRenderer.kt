@@ -16,8 +16,10 @@ class MarkdownTableRenderer(
         if (!config.showCompanion && klass.simpleName == "Companion" && klass.classType == GClassType.Object) return@buildString
         if (!config.showInterface && klass.classType == GClassType.Interface) return@buildString
 
+        val innerLevelCount = klass.symbolName.count { it == '.' }
+
         if (config.showClassName) {
-            appendMdHeader(config.markdownClassNameLevel, klass.symbolName)
+            appendMdHeader(config.markdownClassNameLevel + innerLevelCount, klass.symbolName)
         }
 
         if (config.showClassDocumentation) {
@@ -35,7 +37,7 @@ class MarkdownTableRenderer(
             }
         if (printableProperties.isNotEmpty()) {
             if (config.showSectionName) {
-                appendMdHeader(config.markdownClassNameLevel + 1, "Properties\n")
+                appendMdHeader(config.markdownClassNameLevel + 1 + innerLevelCount, "Properties\n")
             }
             appendMdTable(
                 headers = listOf("Name", "Type", "Comments"),
@@ -54,7 +56,7 @@ class MarkdownTableRenderer(
             .filter { klass.classType != GClassType.Enum || it.funcName !in listOf("clone", "compareTo") }
         if (printableFunctions.isNotEmpty()) {
             if (config.showSectionName) {
-                appendMdHeader(config.markdownClassNameLevel + 1, "Functions\n")
+                appendMdHeader(config.markdownClassNameLevel + 1 + innerLevelCount, "Functions\n")
             }
             fun GFunction.displayName(): String = this.funcName + if (this.parameters.isEmpty()) "()" else "(..)"
             appendMdTable(
