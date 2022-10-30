@@ -16,6 +16,7 @@ import com.google.devtools.ksp.symbol.KSNode
 import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import java.util.*
 import kotlin.reflect.KClass
 
 // Trick to share the Logger everywhere without injecting the dependency everywhere
@@ -31,10 +32,12 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
     }
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
-        val configParamStr = environment.options["k2d.config"]
-        Logger.warn("PARAM=" + configParamStr)
-        val configuration = if (!configParamStr.isNullOrBlank() && configParamStr != "null") {
-            Json.decodeFromString(configParamStr)
+        val configParamB64 = environment.options["k2d.config"]
+
+        val configuration = if (!configParamB64.isNullOrBlank() && configParamB64 != "null") {
+            val configJson = Base64.getDecoder().decode(configParamB64 )
+            Logger.warn("PARAM=" + configJson.decodeToString())
+            Json.decodeFromString(configJson.decodeToString())
         } else {
             K2DConfiguration()
         }

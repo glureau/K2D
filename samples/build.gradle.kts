@@ -15,19 +15,6 @@ dependencies {
     dokkaPlugin("com.glureau:html-mermaid-dokka-plugin:0.3.2")
 }
 
-k2d {
-    dokka {
-        generateMermaidOnModules = false
-        //generateMermaidOnPackages = false
-    }
-    defaultMermaidConfiguration {
-        //showPublic = false
-    }
-    defaultMarkdownTableConfiguration {
-
-    }
-}
-
 kotlin {
     jvm()
 
@@ -100,3 +87,16 @@ gitPublish {
 tasks["dokkaHtml"].dependsOn("generateMetadataFileForKotlinMultiplatformPublication")
 tasks["gitPublishCopy"].dependsOn("dokkaHtml")
 tasks["jvmTest"].dependsOn("compileCommonMainKotlinMetadata")
+
+
+
+k2d {
+    dokka {
+        generateMermaidOnModules = false
+        generateMermaidOnPackages = false
+    }
+    defaultMermaidConfiguration {
+    }
+    defaultMarkdownTableConfiguration {
+    }
+}
