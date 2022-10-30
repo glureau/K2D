@@ -1,4 +1,4 @@
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/Shapes23.md
+File: Shapes23.md
 ```mermaid
 classDiagram
   class Shape {
@@ -44,7 +44,7 @@ classDiagram
 
 ```
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/table_Square.md
+File: sample/table_Square.md
 #### Square
 
 ##### Properties
@@ -69,7 +69,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | publicFun()      | Unit        |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/table_Circle.Companion.md
+File: sample/table_Circle.Companion.md
 ##### Circle.Companion
 
 ###### Properties
@@ -80,7 +80,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | TAU  | Double |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/calculator/table_BinaryIntCalculator.md
+File: sample/calculator/table_BinaryIntCalculator.md
 #### BinaryIntCalculator
 
 ##### Properties
@@ -99,7 +99,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | calculate(..) | Int         |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/calculator/table_GenericFoo.md
+File: sample/calculator/table_GenericFoo.md
 #### GenericFoo
 
 ##### Properties
@@ -121,7 +121,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | computeResult() | Result&lt;Int&gt; |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/table_Polygon.md
+File: sample/table_Polygon.md
 #### Polygon
 
 ##### Properties
@@ -140,7 +140,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | howMuchSides()   | Int         |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/table_Position.md
+File: sample/table_Position.md
 #### Position
 
 ##### Properties
@@ -152,7 +152,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | y    | Float |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/enums/table_Direction.md
+File: sample/enums/table_Direction.md
 #### Direction
 
 ##### Properties
@@ -171,7 +171,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | RIGHT |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/enums/table_DeviceKind.md
+File: sample/enums/table_DeviceKind.md
 #### DeviceKind
 
 ##### Properties
@@ -193,7 +193,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | Chromebook   |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/table_Circle.md
+File: sample/table_Circle.md
 #### Circle
 
 ##### Properties
@@ -212,7 +212,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | computeSurface() | Float       |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/table_Rectangle.md
+File: sample/table_Rectangle.md
 #### Rectangle
 
 ##### Properties
@@ -233,7 +233,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | rotate(..)       | Unit        |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/table_Shape.md
+File: sample/table_Shape.md
 #### Shape
 
 ##### Properties
@@ -251,7 +251,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | computeSurface() | Float       |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/table_TheTrap.md
+File: sample/another/table_TheTrap.md
 #### TheTrap
 
 ##### Properties
@@ -262,7 +262,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | foo  | Int  |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/table_Oval.InnerOval.md
+File: sample/another/table_Oval.InnerOval.md
 ##### Oval.InnerOval
 
 ###### Properties
@@ -273,7 +273,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | square | Square |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/table_Oval.Builder.md
+File: sample/another/table_Oval.Builder.md
 ##### Oval.Builder
 
 ###### Functions
@@ -284,7 +284,7 @@ File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/co
 | build() | Oval        |          |
 
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/table_Oval.md
+File: sample/another/table_Oval.md
 #### Oval
 
 

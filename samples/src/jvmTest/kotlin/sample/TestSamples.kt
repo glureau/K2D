@@ -11,12 +11,13 @@ class TestSamples {
 
     @Test
     fun `check all generated files`() {
-        val generatedDir = File("build/generated/ksp/metadata/commonMain/resources")
+        val resourcePath = "build/generated/ksp/metadata/commonMain/resources"
+        val generatedDir = File(resourcePath)
         println(generatedDir.absolutePath)
         var allMarkdownGenerated = ""
         generatedDir.onEachFile { file ->
             println("Testing ${file.absolutePath}")
-            allMarkdownGenerated += "File: " + file.absolutePath + "\n" + file.readText() + "\n"
+            allMarkdownGenerated += "File: " + file.absolutePath.substringAfter("$resourcePath/") + "\n" + file.readText() + "\n"
         }
 
         Approvals.verify(allMarkdownGenerated)
