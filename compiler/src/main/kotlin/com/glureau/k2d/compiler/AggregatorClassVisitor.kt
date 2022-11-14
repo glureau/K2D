@@ -71,6 +71,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
         klass.inners =
             classDeclaration.declarations.mapNotNull { if (it is KSClassDeclaration) scan(it) else null }.toList()
 
+        /*
         classDeclaration.typeParameters.map {
             it.bounds.firstOrNull()?.getGClass()
             val declaration: KSDeclaration? = it.bounds.firstOrNull()?.resolve()?.declaration
@@ -79,6 +80,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             } else null
             Logger.warn("Class: ${klass.symbolName} => $foo", it)
         }
+         */
         // TODO: Apply same compute on other "generics" computation
         // TODO: rework "symbolName" logic and use a specific mermaid method to display "~
         klass.generics = classDeclaration.generics()

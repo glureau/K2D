@@ -4,6 +4,8 @@ import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSFile
+import com.google.devtools.ksp.symbol.KSType
+import com.google.devtools.ksp.symbol.KSValueArgument
 import java.io.OutputStream
 import kotlin.reflect.KProperty1
 
@@ -32,9 +34,15 @@ fun OutputStream.appendText(str: String) {
     this.write(str.toByteArray())
 }
 
-@Suppress("UNCHECKED")
+@Suppress("UNCHECKED_CAST")
 fun <T> KSAnnotation.getArg(kProp: KProperty1<*, *>) =
     arguments.firstOrNull { it.name?.asString() == kProp.name }?.value as T
 
-fun KSAnnotation.argFrom(kProp: KProperty1<*, String>) =
-    arguments.first { it.name?.asString() == kProp.name }
+fun KSAnnotation.argFrom(kProp: KProperty1<*, *>): KSValueArgument =
+    arguments.first {
+        it.name?.asString() == kProp.name
+    }
+
+@Suppress("UNCHECKED_CAST")
+fun KSAnnotation.classesFrom(kProp: KProperty1<*, *>): List<KSType> =
+    (argFrom(kProp).value as? List<KSType>).orEmpty()

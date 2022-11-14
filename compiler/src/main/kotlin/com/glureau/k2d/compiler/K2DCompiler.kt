@@ -2,16 +2,19 @@ package com.glureau.k2d.compiler
 
 import com.glureau.k2d.K2DClassMembersTable
 import com.glureau.k2d.K2DMermaidGraph
-import com.glureau.k2d.K2DSymbolSelectorAnnotation
+import com.glureau.k2d.compiler.K2DSymbolSelector.Companion.symbolSelector
 import com.glureau.k2d.compiler.dokka.DokkaModuleMermaidRenderer
 import com.glureau.k2d.compiler.dokka.DokkaPackagesMermaidRenderer
 import com.glureau.k2d.compiler.dokka.K2DDokkaConfig
 import com.glureau.k2d.compiler.markdown.appendMdMermaid
 import com.glureau.k2d.compiler.markdown.table.MarkdownTableRenderer
 import com.glureau.k2d.compiler.mermaid.MermaidClassRenderer
+import com.google.devtools.ksp.KspExperimental
+import com.google.devtools.ksp.getAnnotationsByType
 import com.google.devtools.ksp.processing.*
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSAnnotation
+import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSNode
 import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 import kotlinx.serialization.decodeFromString
@@ -24,6 +27,7 @@ internal lateinit var sharedLogger: KSPLogger
 
 internal object Logger : KSPLogger by sharedLogger
 
+@OptIn(KspExperimental::class)
 @KotlinPoetKspPreview
 class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : SymbolProcessor {
 
@@ -35,7 +39,7 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
         val configParamB64 = environment.options["k2d.config"]
 
         val configuration = if (!configParamB64.isNullOrBlank() && configParamB64 != "null") {
-            val configJson = Base64.getDecoder().decode(configParamB64 )
+            val configJson = Base64.getDecoder().decode(configParamB64)
             Logger.warn("PARAM=" + configJson.decodeToString())
             Json.decodeFromString(configJson.decodeToString())
         } else {
@@ -49,17 +53,16 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
         nodeSequence.forEach { it.accept(aggregatorClassVisitor, Unit) }
 
 
-        resolver.onAnnotation(K2DMermaidGraph::class) { annotation ->
-            val name = annotation.getArg<String>(K2DMermaidGraph::name)
-            val annotationSymbolSelector = annotation.getArg<KSAnnotation>(K2DMermaidGraph::symbolSelector)
-            val selector = annotationSymbolSelector.symbolSelector()
+        resolver.onFileAnnotation(K2DMermaidGraph::class) { annotation, rawAnnotation, packageName ->
+            val name = annotation.name
+            val selectorAnnotation: KSAnnotation = rawAnnotation.getArg(K2DClassMembersTable::symbolSelector)
+            // TODO : This crash when using the SymbolSelector by default, see
+            //  https://kotlinlang.slack.com/archives/C013BA8EQSE/p1668459386930549?thread_ts=1643275195.027000&cid=C013BA8EQSE
+            val selector: K2DSymbolSelector = annotation.symbolSelector.symbolSelector(selectorAnnotation, packageName)
 
             // TODO: No need of the global config here, it's computed by
-            val includeRegex = Regex(selector.includesFqnRegex)
-            val excludeRegex = Regex(selector.excludesFqnRegex)
-            val filtered = aggregatorClassVisitor.classes.filter { (fqn, _) ->
-                includeRegex.matches(fqn) && !excludeRegex.matches(fqn)
-            }
+            val filtered = aggregatorClassVisitor.classes
+                .filter { (_, gClass) -> selector.matches(gClass) }
 
             // TODO: get MermaidRendererConfiguration from annotation
             val content = buildString {
@@ -68,25 +71,23 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
                         filtered
                     )
                 )
-            }
-                .toByteArray()
+            }.toByteArray()
 
 
             val files = filtered.values.mapNotNull { it.originFile }
             environment.logger.warn("Rendering markdown $name.md")
             environment.writeMarkdown(content, "", name, files)
+
         }
 
-        resolver.onAnnotation(K2DClassMembersTable::class) { annotation ->
-            val annotationSymbolSelector = annotation.getArg<KSAnnotation>(K2DClassMembersTable::symbolSelector)
-            val selector = annotationSymbolSelector.symbolSelector()
+        resolver.onFileAnnotation(K2DClassMembersTable::class) { annotation, rawAnnotation, packageName ->
+            val selectorAnnotation: KSAnnotation = rawAnnotation.getArg(K2DClassMembersTable::symbolSelector)
+            val selector = annotation.symbolSelector.symbolSelector(selectorAnnotation, packageName)
 
             // TODO: No need of the global config here, it's computed by
-            val includeRegex = Regex(selector.includesFqnRegex)
-            val excludeRegex = Regex(selector.excludesFqnRegex)
-            val filtered = aggregatorClassVisitor.classes.filter { (fqn, _) ->
-                includeRegex.matches(fqn) && !excludeRegex.matches(fqn)
-            }
+            val filtered = aggregatorClassVisitor.classes
+                .filter { (_, gClass) -> selector.matches(gClass) }
+
             filtered.forEach { (_, gClass) ->
                 if (gClass.hide) {
                     Logger.info("Ignoring ${gClass.symbolName}")
@@ -104,7 +105,6 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
                         fileName = "table_" + gClass.symbolName,
                         dependencies = gClass.originFile?.let { listOf(it) } ?: emptyList())
                 }
-
             }
         }
 
@@ -115,17 +115,38 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
         return emptyList()
     }
 
-    private fun Resolver.onAnnotation(klass: KClass<*>, act: (KSAnnotation) -> Unit) {
+    private fun <T : Annotation> Resolver.onFileAnnotation(
+        klass: KClass<T>,
+        block: (T, rawAnnotation: KSAnnotation, packageName: String?) -> Unit
+    ) {
         getSymbolsWithAnnotation(
             annotationName = klass.qualifiedName!!,
             inDepth = true
         )
             .forEach { annotated ->
-                annotated.annotations
-                    .filter { it.annotationType.resolve().declaration.qualifiedName?.asString() == klass.qualifiedName }
-                    .forEach { annotation ->
-                        act(annotation)
+                annotated.getAnnotationsByType(klass)
+                    .forEachIndexed { index, annotation ->
+                        // Because getAnnotationsByType doesn't allow retrieval of KClass, we have to also uses the raw KSAnnotation.
+                        // https://kotlinlang.slack.com/archives/C013BA8EQSE/p1643275195027000
+                        val rawAnnotation = annotated.annotations
+                            .filter { it.annotationType.resolve().declaration.qualifiedName?.asString() == klass.qualifiedName }
+                            .toList()[index]
+                        block(annotation, rawAnnotation, (annotated as? KSFile)?.packageName?.asString())
                     }
+            }
+    }
+
+    private fun <T : Annotation> Resolver.onAnnotation(
+        klass: KClass<T>,
+        block: (T) -> Unit
+    ) {
+        getSymbolsWithAnnotation(
+            annotationName = klass.qualifiedName!!,
+            inDepth = true
+        )
+            .forEach { annotated ->
+                annotated.getAnnotationsByType(klass)
+                    .forEach { block(it) }
             }
     }
 
@@ -151,14 +172,8 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
     }
 }
 
-private fun KSAnnotation.symbolSelector(): K2DSymbolSelector {
-    val includesFqnRegex = (argFrom(K2DSymbolSelectorAnnotation::includesFqnRegex).value as? String).orEmpty()
-    val excludesFqnRegex = (argFrom(K2DSymbolSelectorAnnotation::excludesFqnRegex).value as? String).orEmpty()
-    return K2DSymbolSelector(includesFqnRegex = includesFqnRegex, excludesFqnRegex = excludesFqnRegex)
-}
-
 @KotlinPoetKspPreview
-class MermaidCompilerProvider : SymbolProcessorProvider {
+class K2DCompilerProvider : SymbolProcessorProvider {
     override fun create(environment: SymbolProcessorEnvironment) =
         MermaidCompiler(environment)
 }

@@ -4,5 +4,5 @@ package com.glureau.k2d
 @Target(AnnotationTarget.FILE)
 @Retention(AnnotationRetention.SOURCE)
 annotation class K2DClassMembersTable(
-    val symbolSelector: K2DSymbolSelectorAnnotation = K2DSymbolSelectorAnnotation(),
+    val symbolSelector: K2DSymbolSelectorAnnotation,
 )

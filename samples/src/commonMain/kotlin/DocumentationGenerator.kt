@@ -1,19 +1,19 @@
 @file:K2DMermaidGraph(
-    "Shapes23",
+    name = "Shapes23",
     symbolSelector = K2DSymbolSelectorAnnotation(
-        includesFqnRegex = "sample\\.[A-Z].*", // only in sample package
-        excludesFqnRegex = "sample.Position",
+        includesCurrentPackage = true,
+        excludesClasses = [Position::class],
+        excludesFqnRegex = "sample\\.[a-z]+.*", // only in sample package, given the convention package name
     )
 )
-
 
 @file:K2DClassMembersTable(
-    K2DSymbolSelectorAnnotation(
-        includesFqnRegex = "sample\\..*", // only in sample package
+    symbolSelector = K2DSymbolSelectorAnnotation(
+        includesCurrentPackage = true
     )
 )
 
-package foo
+package sample
 
 import com.glureau.k2d.K2DClassMembersTable
 import com.glureau.k2d.K2DMermaidGraph

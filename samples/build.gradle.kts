@@ -89,7 +89,6 @@ tasks["gitPublishCopy"].dependsOn("dokkaHtml")
 tasks["jvmTest"].dependsOn("compileCommonMainKotlinMetadata")
 
 
-
 k2d {
     dokka {
         generateMermaidOnModules = false
