@@ -29,7 +29,7 @@ internal object Logger : KSPLogger by sharedLogger
 
 @OptIn(KspExperimental::class)
 @KotlinPoetKspPreview
-class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : SymbolProcessor {
+class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolProcessor {
 
     init {
         sharedLogger = environment.logger
@@ -175,5 +175,5 @@ class MermaidCompiler(private val environment: SymbolProcessorEnvironment) : Sym
 @KotlinPoetKspPreview
 class K2DCompilerProvider : SymbolProcessorProvider {
     override fun create(environment: SymbolProcessorEnvironment) =
-        MermaidCompiler(environment)
+        K2DCompiler(environment)
 }
