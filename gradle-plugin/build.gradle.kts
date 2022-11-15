@@ -10,7 +10,7 @@ dependencies {
     //implementation("com.google.devtools.ksp:symbol-processing-api:$kspVersion")
     implementation("com.google.devtools.ksp:symbol-processing-gradle-plugin:$kspVersion")
     implementation(project(":lib"))
-    implementation(project(":compiler"))
+    api(project(":compiler"))
     compileOnly(gradleApi())
 }
 

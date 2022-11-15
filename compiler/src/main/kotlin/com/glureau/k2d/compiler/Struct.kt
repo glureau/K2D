@@ -81,6 +81,7 @@ data class GClass constructor(
     val originFile: KSFile?,
     val visibility: GVisibility,
     val classType: GClassType,
+    val isAbstract: Boolean,
     val docString: String?,
     val hide: Boolean,
     var supers: List<GClassOrBasic> = emptyList(),

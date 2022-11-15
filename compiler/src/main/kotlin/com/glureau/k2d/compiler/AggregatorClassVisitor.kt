@@ -21,6 +21,7 @@ import com.glureau.k2d.K2DHide
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.getAnnotationsByType
 import com.google.devtools.ksp.getVisibility
+import com.google.devtools.ksp.isAbstract
 import com.google.devtools.ksp.symbol.*
 import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 
@@ -49,6 +50,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             qualifiedName = qualifiedName,
             packageName = classDeclaration.packageName.asString(),
             originFile = classDeclaration.containingFile,
+            isAbstract = classDeclaration.isAbstract(),
             visibility = classDeclaration.getGVisibility(),
             symbolName = classDeclaration.getMermaidClassName(),
             simpleName = classDeclaration.simpleName.asString(),

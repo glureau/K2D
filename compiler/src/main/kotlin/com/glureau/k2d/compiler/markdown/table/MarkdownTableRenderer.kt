@@ -14,6 +14,7 @@ class MarkdownTableRenderer(
         if (klass.classType in listOf(GClassType.EnumEntry)) return@buildString
         if (!config.showCompanion && klass.simpleName == "Companion" && klass.classType == GClassType.Object) return@buildString
         if (!config.showInterface && klass.classType == GClassType.Interface) return@buildString
+        if (!config.showAbstract && klass.isAbstract) return@buildString
 
         val innerLevelCount = klass.symbolName.count { it == '.' }
 

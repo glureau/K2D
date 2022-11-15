@@ -102,7 +102,7 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
                     environment.writeMarkdown(
                         content = content,
                         packageName = gClass.packageName,
-                        fileName = "table_" + gClass.symbolName,
+                        fileName = gClass.symbolName + "_table",
                         dependencies = gClass.originFile?.let { listOf(it) } ?: emptyList())
                 }
             }

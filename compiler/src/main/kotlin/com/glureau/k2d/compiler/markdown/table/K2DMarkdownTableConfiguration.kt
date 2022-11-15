@@ -14,4 +14,5 @@ data class K2DMarkdownTableConfiguration(
     var showClassFunctions: Boolean = true,
     var showCompanion: Boolean = true,
     var showInterface: Boolean = true,
+    var showAbstract: Boolean = true,
 )
