@@ -26,6 +26,7 @@ data class GProperty(
     val propName: String,
     // val words = List<String>
     val type: LocalType,
+    val isNullable: Boolean,
     val overrides: Boolean,
     val docString: String?,
     val hasBackingField: Boolean,
@@ -39,6 +40,7 @@ data class LocalType(
     val usedGenerics: List<String>,
 )
 
+// TODO: Handle nullable parameters
 typealias GFunctionParameter = LocalType // No need for more... yet
 
 data class GFunction(

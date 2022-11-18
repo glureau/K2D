@@ -43,7 +43,13 @@ class MarkdownTableRenderer(
             appendMdTable(
                 headers = listOf("Name", "Type", "Comments"),
                 *(printableProperties
-                    .map { listOf(it.propName, it.type.renderForMarkdown(), it.docString ?: "") }
+                    .map {
+                        listOf(
+                            it.propName,
+                            "[" + it.type.renderForMarkdown() + (if (it.isNullable) "?" else "") + "]",
+                            it.docString ?: ""
+                        )
+                    }
                     .toTypedArray())
             )
         }

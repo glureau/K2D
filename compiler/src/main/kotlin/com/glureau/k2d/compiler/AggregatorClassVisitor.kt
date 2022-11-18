@@ -137,6 +137,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             visibility = this.getGVisibility(),
             propName = propName,
             type = LocalType(type = mermaidClass, usedGenerics = type.resolve().arguments.map { it.type.toString() }),
+            isNullable = type.resolve().isMarkedNullable,
             overrides = overrides,
             docString = this.docString,
             hasBackingField = this.hasBackingField,
