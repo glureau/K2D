@@ -35,10 +35,10 @@
           "name": "lib-metadata-0.3.0.jar",
           "url": "lib-0.3.0.jar",
           "size": 4207,
-          "sha512": "4ebd4c429b1851f1bc1670a218fecddcc254482847a4a01e7fe7c052336cbad5992736f08dff7c112d40736338d41d5178e89c1bde12968f848241953a183c71",
-          "sha256": "c9ec46394f6df57be7a0e7bd9e5e84fbe338808aeb7d4ba662f3a923321f690a",
-          "sha1": "7a72c9adb072242a80340acd3c22e73c278a2f89",
-          "md5": "b1ce00fc22a5b402cbac40546933edd1"
+          "sha512": "6235f6ba9d4c73d3f667aa2258e8008b2df0cc23478fdf777098d7ead4408cf34ccbbaff41266764d2bcb795b05bc05613411790b0df15569aae18ae14d39a64",
+          "sha256": "a904822b7b30fd58df4ed14d864323a6c3e10559534e5729e38a9a9e30989778",
+          "sha1": "b8555307b48681c73b4fa87e0ca3e0ca49be9316",
+          "md5": "7416ab09baa60e1d941fe7acbd74b0ec"
         }
       ]
     },
