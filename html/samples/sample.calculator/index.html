@@ -32,7 +32,7 @@ if(savedDarkMode === true){
             </a>
     </div>
     <div>
-0.1.1    </div>
+0.3.0    </div>
     <div class="pull-right d-flex">
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
@@ -47,50 +47,6 @@ if(savedDarkMode === true){
   <div class="breadcrumbs"><a href="../../index.html">samples</a><span class="delimiter">/</span><a href="index.html">sample.calculator</a></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Package</span></span> <span>sample.</span><wbr></wbr><span>calculator</span></h1>
-    <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="sample-container"><div id="mermaid-container-3dv8jarnm1epa"></div></div><script>
-window.addEventListener('load', function() {
-  var graphDef =  `classDiagram
-  class BinaryIntCalculator {
-    <<class>>
-    +reg1 Int
-    +reg2 Int
-    +calculate(Function2) Int
-  }
-  click BinaryIntCalculator href \"../sample.calculator/-binary-int-calculator/index.html\"
-  class GenericFoo~T:Number~ {
-    <<interface>>
-    +add(T) Unit
-  }
-  click GenericFoo~T:Number~ href \"../sample.calculator/-generic-foo/index.html\"`;
-  var container = document.getElementById('mermaid-container-3dv8jarnm1epa');
-  container.innerHTML = '<div id="mermaid-target-3dv8jarnm1epa"></div>';
-  var cb3dv8jarnm1epa = function(svgGraph) {
-    container.innerHTML = svgGraph;
-    // Trick to make the graph takes only the required height.
-    document.getElementById('mermaid-target-3dv8jarnm1epa').removeAttribute('height')
-  };
-  var updateGraph3dv8jarnm1epa = function() {
-    // setTimeout required or else the 1st render could be done before mermaid.initialize() has applied the theme.
-    // Also required because we can't listen to localStorage events reliably, and it's changed on the same click event...
-    setTimeout(() => {
-      var dokkaDarkModeItem = localStorage.getItem("dokka-dark-mode");
-      var isDarkMode = dokkaDarkModeItem ? JSON.parse(dokkaDarkModeItem) : false
-      var theme = 'default';
-      if (isDarkMode === true) {
-        theme = 'dark';
-      }
-      mermaid.initialize({'theme': theme});
-      mermaid.mermaidAPI.render('mermaid-target-3dv8jarnm1epa', graphDef, cb3dv8jarnm1epa);
-    }, 0);
-  }
-  updateGraph3dv8jarnm1epa();
-  
-  var themeToggleButton = document.getElementById('theme-toggle-button');
-  themeToggleButton.addEventListener('click', () => {
-    // This detection mechanism is shitty, please tell me if you know better.
-    updateGraph3dv8jarnm1epa();
-  });
-});</script></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button></div>

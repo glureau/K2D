@@ -32,7 +32,7 @@ if(savedDarkMode === true){
             </a>
     </div>
     <div>
-0.1.1    </div>
+0.3.0    </div>
     <div class="pull-right d-flex">
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
@@ -47,57 +47,6 @@ if(savedDarkMode === true){
   <div class="breadcrumbs"><a href="../../index.html">samples</a><span class="delimiter">/</span><a href="index.html">sample.enums</a></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Package</span></span> <span>sample.</span><wbr></wbr><span>enums</span></h1>
-    <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="sample-container"><div id="mermaid-container-13l6k52so6ra7"></div></div><script>
-window.addEventListener('load', function() {
-  var graphDef =  `classDiagram
-  class Direction {
-    <<enum>>
-    [[ UP ]]
-    [[ DOWN ]]
-    [[ LEFT ]]
-    [[ RIGHT ]]
-  }
-  click Direction href \"../sample.enums/-direction/index.html\"
-  class DeviceKind {
-    <<enum>>
-    +userAgent String
-    +index Int
-    [[ Smartphone ]]
-    [[ Computer ]]
-    [[ Tablet ]]
-    [[ Smartwatches ]]
-    [[ Chromebook ]]
-  }
-  click DeviceKind href \"../sample.enums/-device-kind/index.html\"`;
-  var container = document.getElementById('mermaid-container-13l6k52so6ra7');
-  container.innerHTML = '<div id="mermaid-target-13l6k52so6ra7"></div>';
-  var cb13l6k52so6ra7 = function(svgGraph) {
-    container.innerHTML = svgGraph;
-    // Trick to make the graph takes only the required height.
-    document.getElementById('mermaid-target-13l6k52so6ra7').removeAttribute('height')
-  };
-  var updateGraph13l6k52so6ra7 = function() {
-    // setTimeout required or else the 1st render could be done before mermaid.initialize() has applied the theme.
-    // Also required because we can't listen to localStorage events reliably, and it's changed on the same click event...
-    setTimeout(() => {
-      var dokkaDarkModeItem = localStorage.getItem("dokka-dark-mode");
-      var isDarkMode = dokkaDarkModeItem ? JSON.parse(dokkaDarkModeItem) : false
-      var theme = 'default';
-      if (isDarkMode === true) {
-        theme = 'dark';
-      }
-      mermaid.initialize({'theme': theme});
-      mermaid.mermaidAPI.render('mermaid-target-13l6k52so6ra7', graphDef, cb13l6k52so6ra7);
-    }, 0);
-  }
-  updateGraph13l6k52so6ra7();
-  
-  var themeToggleButton = document.getElementById('theme-toggle-button');
-  themeToggleButton.addEventListener('click', () => {
-    // This detection mechanism is shitty, please tell me if you know better.
-    updateGraph13l6k52so6ra7();
-  });
-});</script></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button></div>

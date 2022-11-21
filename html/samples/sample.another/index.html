@@ -32,7 +32,7 @@ if(savedDarkMode === true){
             </a>
     </div>
     <div>
-0.1.1    </div>
+0.3.0    </div>
     <div class="pull-right d-flex">
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
@@ -47,66 +47,6 @@ if(savedDarkMode === true){
   <div class="breadcrumbs"><a href="../../index.html">samples</a><span class="delimiter">/</span><a href="index.html">sample.another</a></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Package</span></span> <span>sample.</span><wbr></wbr><span>another</span></h1>
-    <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="sample-container"><div id="mermaid-container-3b3kifl6op7fg"></div></div><script>
-window.addEventListener('load', function() {
-  var graphDef =  `classDiagram
-  class Oval {
-    <<data class>>
-    +centerOne Position
-    +centerTwo Position
-    +distanceBetweenPoints Float
-    +angle Float
-    +radius Float
-  }
-  Shape <|-- Oval : implements
-  Oval ..* Position : has
-  Oval ..* Position : has
-  click Oval href \"../sample.another/-oval/index.html\"
-  class InnerOval {
-    <<class>>
-    +square Square
-  }
-  InnerOval ..* Square : has
-  click InnerOval href \"../sample.another/-inner-oval/index.html\"
-  class Builder {
-    <<object>>
-    +build() Oval
-  }
-  click Builder href \"../sample.another/-builder/index.html\"
-  class TheTrap {
-    <<class>>
-    +foo Int
-  }
-  click TheTrap href \"../sample.another/-the-trap/index.html\"`;
-  var container = document.getElementById('mermaid-container-3b3kifl6op7fg');
-  container.innerHTML = '<div id="mermaid-target-3b3kifl6op7fg"></div>';
-  var cb3b3kifl6op7fg = function(svgGraph) {
-    container.innerHTML = svgGraph;
-    // Trick to make the graph takes only the required height.
-    document.getElementById('mermaid-target-3b3kifl6op7fg').removeAttribute('height')
-  };
-  var updateGraph3b3kifl6op7fg = function() {
-    // setTimeout required or else the 1st render could be done before mermaid.initialize() has applied the theme.
-    // Also required because we can't listen to localStorage events reliably, and it's changed on the same click event...
-    setTimeout(() => {
-      var dokkaDarkModeItem = localStorage.getItem("dokka-dark-mode");
-      var isDarkMode = dokkaDarkModeItem ? JSON.parse(dokkaDarkModeItem) : false
-      var theme = 'default';
-      if (isDarkMode === true) {
-        theme = 'dark';
-      }
-      mermaid.initialize({'theme': theme});
-      mermaid.mermaidAPI.render('mermaid-target-3b3kifl6op7fg', graphDef, cb3b3kifl6op7fg);
-    }, 0);
-  }
-  updateGraph3b3kifl6op7fg();
-  
-  var themeToggleButton = document.getElementById('theme-toggle-button');
-  themeToggleButton.addEventListener('click', () => {
-    // This detection mechanism is shitty, please tell me if you know better.
-    updateGraph3b3kifl6op7fg();
-  });
-});</script></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button></div>
@@ -122,7 +62,7 @@ window.addEventListener('load', function() {
                 </span></span></div>
             <div>
               <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-oval/index.html">Oval</a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>originPosition<span class="token operator">: </span><a href="../sample/-position/index.html">Position</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>distanceBetweenPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>angle<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>radius<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span> : <a href="../sample/-shape/index.html">Shape</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":samples:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-oval/index.html">Oval</a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>originPosition<span class="token operator">: </span><a href="../sample/-position/index.html">Position</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>distanceBetweenPoints<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>angle<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>radius<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span> : <a href="../sample/-shape/index.html">Shape</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Please check <a href="https://en.wikipedia.org/wiki/Oval">this link</a> for reference</p></div></div></div>
               </div>
             </div>
           </div>
