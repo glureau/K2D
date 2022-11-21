@@ -68,10 +68,10 @@
           "name": "lib-watchosarm64-0.3.0-metadata.jar",
           "url": "lib-watchosarm64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "efbce2a2570e0b121917a9239a8a39fa0900d085caabe920b35b88274ef8c97d359dc757ce5f39ed969c553e52aa5464b8bc9e4ce6e5d2e75eac1de8659653e3",
-          "sha256": "97975c0e52193ed97de7ea7238a641bacc99f560e8d0cd430b09381ed215277c",
-          "sha1": "a8b463236e1ad9b3ecec854bc2994ad42dc05f6d",
-          "md5": "536d60e615cdf7638baa4a31469728a1"
+          "sha512": "9582ea60474d758f445dd8b1abfc9ca9d04d1dda40dab098fd974a19cd1b6fa13e0e26e1c8e9287db2b6eeccce35bbc0613a828480d9159cee8ed69ca6c4b798",
+          "sha256": "1cd94d3c25f96bdfbbe48ac81c63c4f5a1d195142f08c1de91b3c835d3060e97",
+          "sha1": "9f7588014bd5218a56239ee32ecee4895974af97",
+          "md5": "3708c260ae075e93f201b000093d35b5"
         }
       ]
     }

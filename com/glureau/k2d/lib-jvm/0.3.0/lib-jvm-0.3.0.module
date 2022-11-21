@@ -44,10 +44,10 @@
           "name": "lib-jvm-0.3.0.jar",
           "url": "lib-jvm-0.3.0.jar",
           "size": 5286,
-          "sha512": "db6e44623f9b4387a5dd9fb8b7f272bb96fb8e53d3bc6aa3cafb9bf3877012015e77a185dba4b162b999def99504a1f296b0044cde7732a6fec28829c05a5a2c",
-          "sha256": "7d8d7b3873349310d54a2584f6c52df1dc67393a2c977e3baee6b79acff0d6c5",
-          "sha1": "7081e44c5d5fa3c0056e550f3f549349ed150395",
-          "md5": "4316c20b0eab36c516714567db87fe50"
+          "sha512": "3bf376fbf8179fb9db3e9a547b4a1ebfc4a05c20e551bfd91ef2a47a377d2a2401eafd549ffe89a64bcb3d88c331681828e80f16437cf85f7068e4a3a36a3227",
+          "sha256": "3bfa4e80bccdc69da7e97189fbcc5e114502a689690cc3dd3df16c67ca8ee3d8",
+          "sha1": "4eca8bf939a21ed38c196a467c2aa229eee5521a",
+          "md5": "c28752354671972b113ee81365f76f7e"
         }
       ]
     },
@@ -80,10 +80,10 @@
           "name": "lib-jvm-0.3.0.jar",
           "url": "lib-jvm-0.3.0.jar",
           "size": 5286,
-          "sha512": "db6e44623f9b4387a5dd9fb8b7f272bb96fb8e53d3bc6aa3cafb9bf3877012015e77a185dba4b162b999def99504a1f296b0044cde7732a6fec28829c05a5a2c",
-          "sha256": "7d8d7b3873349310d54a2584f6c52df1dc67393a2c977e3baee6b79acff0d6c5",
-          "sha1": "7081e44c5d5fa3c0056e550f3f549349ed150395",
-          "md5": "4316c20b0eab36c516714567db87fe50"
+          "sha512": "3bf376fbf8179fb9db3e9a547b4a1ebfc4a05c20e551bfd91ef2a47a377d2a2401eafd549ffe89a64bcb3d88c331681828e80f16437cf85f7068e4a3a36a3227",
+          "sha256": "3bfa4e80bccdc69da7e97189fbcc5e114502a689690cc3dd3df16c67ca8ee3d8",
+          "sha1": "4eca8bf939a21ed38c196a467c2aa229eee5521a",
+          "md5": "c28752354671972b113ee81365f76f7e"
         }
       ]
     }
