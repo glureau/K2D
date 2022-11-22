@@ -11,7 +11,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.1"
+      "version": "7.5"
     }
   },
   "variants": [
@@ -44,10 +44,10 @@
           "name": "lib-jvm-0.3.0.jar",
           "url": "lib-jvm-0.3.0.jar",
           "size": 5286,
-          "sha512": "b49198df390e68d2c7ae7f34730afb81130ea483d875586f20a4844b52126df7fca341beabdcdccfa3bdef42290ced24951c07f04c7382cc18caf4c5f745298c",
-          "sha256": "fa0cfa16e2b5f4d6b03f8f8cf306304ca086a2327b1d8c7c5aeac38c6c06b2d3",
-          "sha1": "36c99b8d75524e8668507fe4c1159de656e3e2bc",
-          "md5": "ffcef91084583f18e98069380ee00aed"
+          "sha512": "d9839be0511cc690c22a75800146b4bbc8520c2b07a9d618c85f4dc1c28d705a79c27bef5556b9d8b007c1eb8ee32c012ef237efc24852877429aa04f49fc47c",
+          "sha256": "34afcd5fbe7f929da03aeee0ae406cef3c869480b4234cfc42254ade1d9068c2",
+          "sha1": "5dffb3528f12fbe3d612a6b876309a7130176cd0",
+          "md5": "a8108f4432ea3967c1291f1122c2b4a9"
         }
       ]
     },
@@ -80,10 +80,10 @@
           "name": "lib-jvm-0.3.0.jar",
           "url": "lib-jvm-0.3.0.jar",
           "size": 5286,
-          "sha512": "b49198df390e68d2c7ae7f34730afb81130ea483d875586f20a4844b52126df7fca341beabdcdccfa3bdef42290ced24951c07f04c7382cc18caf4c5f745298c",
-          "sha256": "fa0cfa16e2b5f4d6b03f8f8cf306304ca086a2327b1d8c7c5aeac38c6c06b2d3",
-          "sha1": "36c99b8d75524e8668507fe4c1159de656e3e2bc",
-          "md5": "ffcef91084583f18e98069380ee00aed"
+          "sha512": "d9839be0511cc690c22a75800146b4bbc8520c2b07a9d618c85f4dc1c28d705a79c27bef5556b9d8b007c1eb8ee32c012ef237efc24852877429aa04f49fc47c",
+          "sha256": "34afcd5fbe7f929da03aeee0ae406cef3c869480b4234cfc42254ade1d9068c2",
+          "sha1": "5dffb3528f12fbe3d612a6b876309a7130176cd0",
+          "md5": "a8108f4432ea3967c1291f1122c2b4a9"
         }
       ]
     }

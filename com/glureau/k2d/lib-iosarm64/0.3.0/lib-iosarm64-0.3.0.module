@@ -11,7 +11,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.1"
+      "version": "7.5"
     }
   },
   "variants": [
@@ -68,10 +68,10 @@
           "name": "lib-iosarm64-0.3.0-metadata.jar",
           "url": "lib-iosarm64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "903e890da332c21801902bbe6f092c13c4270a6bf6086381974748095277b179d25ac12471057d2819d774c65d0158e26469dd05bf3017fd5b1973873bc8acf9",
-          "sha256": "0b8759d74ff23ac68b8d98d5ae431e3ae32db3cd4bf8ae32bf107ed967546915",
-          "sha1": "f0d076b0f338253dc27c59a9243e6254137e572e",
-          "md5": "ffd615a2da9a6db5f9bccc5b24fdfe36"
+          "sha512": "c914663b14630b00bd7b61ee027786ecd15ebf81085415be6ef4860095e9a942be1d3207cb6a43f5246368acbf99c3822ce5e64f1ec2c9332dbdd75a82931ac1",
+          "sha256": "b3927f839acb3473e7c774d84cbd76e895e70a94cc424c7d6bd61234643354e4",
+          "sha1": "22365bc705634efa166ac704285dab5daa22e348",
+          "md5": "11b44716a093a7ef98f466fb62700c65"
         }
       ]
     }

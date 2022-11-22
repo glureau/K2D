@@ -11,7 +11,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.1"
+      "version": "7.5"
     }
   },
   "variants": [
@@ -68,10 +68,10 @@
           "name": "lib-watchosx64-0.3.0-metadata.jar",
           "url": "lib-watchosx64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "d0056601dfba3f4c8a438db4d8a99ce20023340d99ea0ccc608509e425f55c9c8546bd0c64b59fcd5fa3d0ab5b8aeb5e4ab968864b6d969f1b87f39054dc1bb1",
-          "sha256": "ce2c162ce1a8aacde701e2c4f6a7a758ff269478436e82595030b70f588f7f62",
-          "sha1": "5c9587f0b58ad6a8698a7ffa505e2915071232d1",
-          "md5": "a0fdfb9b6122fe9ddbaf8526b10476a3"
+          "sha512": "e4e3f1585e02174fc00620d4cf06b22116c8a2b0f1e65f0f7214585ba49a4b858a821c522fa6bcb858124ed02338e81c49cc6c320f3861ea4a2ceafdacf1db9f",
+          "sha256": "3cbd7df5f3e51433ec719fdf8be91838553970d3e9b2d96ec98e8cbc7c3d0751",
+          "sha1": "24cff9b82ee0167c159a53d5107e4ea370ea3393",
+          "md5": "1e6ccc09f4258167246a8761c5c4e4cb"
         }
       ]
     }

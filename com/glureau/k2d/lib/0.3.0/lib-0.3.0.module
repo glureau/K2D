@@ -10,7 +10,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.1"
+      "version": "7.5"
     }
   },
   "variants": [
@@ -34,13 +34,71 @@
         {
           "name": "lib-metadata-0.3.0.jar",
           "url": "lib-0.3.0.jar",
-          "size": 4220,
-          "sha512": "6ffa40ac892af1baac5de212ba7f71383ebec81cb899970f7102407b82ca83eeb045bc2c89a165995e1c0e35630a7bda7083b59f1eb34d74057169a790ab9fe3",
-          "sha256": "e9f713777946c2ce50cf0bd642bc8311c1d1b09520c93297836c4cb210a16f15",
-          "sha1": "6f56e3c645bef9385d4d8216774a898937891129",
-          "md5": "a6dd04782935dcb1e29c9116792fa512"
+          "size": 4241,
+          "sha512": "f73d268e9208036ec73ddb75fda8f68ec4aaef705c074979061e28f23a26b2d8ed871e5baed6030f8da119ce1abd008a3d58a18993e5bee2d2f52d2224eae30d",
+          "sha256": "6a55ed2e34a8e82a027854bb224b928ae39553998a84f16c75913aee9d70fb4c",
+          "sha1": "e9f4b6c83cfb5c6487941911663c2649ed8350b8",
+          "md5": "f9eb2953debc5d3df153cdcbfe9d6a95"
         }
       ]
+    },
+    {
+      "name": "debugApiElements-published",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "debug",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../lib-android-debug/0.3.0/lib-android-debug-0.3.0.module",
+        "group": "com.glureau.k2d",
+        "module": "lib-android-debug",
+        "version": "0.3.0"
+      }
+    },
+    {
+      "name": "debugRuntimeElements-published",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "debug",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../lib-android-debug/0.3.0/lib-android-debug-0.3.0.module",
+        "group": "com.glureau.k2d",
+        "module": "lib-android-debug",
+        "version": "0.3.0"
+      }
+    },
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../lib-android/0.3.0/lib-android-0.3.0.module",
+        "group": "com.glureau.k2d",
+        "module": "lib-android",
+        "version": "0.3.0"
+      }
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../lib-android/0.3.0/lib-android-0.3.0.module",
+        "group": "com.glureau.k2d",
+        "module": "lib-android",
+        "version": "0.3.0"
+      }
     },
     {
       "name": "iosArm64ApiElements-published",

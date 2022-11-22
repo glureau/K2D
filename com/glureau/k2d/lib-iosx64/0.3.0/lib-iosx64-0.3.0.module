@@ -11,7 +11,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.1"
+      "version": "7.5"
     }
   },
   "variants": [
@@ -68,10 +68,10 @@
           "name": "lib-iosx64-0.3.0-metadata.jar",
           "url": "lib-iosx64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "903e890da332c21801902bbe6f092c13c4270a6bf6086381974748095277b179d25ac12471057d2819d774c65d0158e26469dd05bf3017fd5b1973873bc8acf9",
-          "sha256": "0b8759d74ff23ac68b8d98d5ae431e3ae32db3cd4bf8ae32bf107ed967546915",
-          "sha1": "f0d076b0f338253dc27c59a9243e6254137e572e",
-          "md5": "ffd615a2da9a6db5f9bccc5b24fdfe36"
+          "sha512": "b01d9bd2228d264f51fa68f5a7fe4068e57fcdea9eefae6b92403a399b0d0202458d20ce30cc4d7241c8262381fb6823f0adeee0c541707e16d8845e260a15c7",
+          "sha256": "9791b2c779a3019ae8026dc96d5ae761b901002e17ca2e1064abdccd1bd17655",
+          "sha1": "2b33ee28532d42140577db7de84242024d051622",
+          "md5": "680a4ebe4b3be45aaa360494a61d5b4e"
         }
       ]
     }

@@ -10,7 +10,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.1"
+      "version": "7.5"
     }
   },
   "variants": [
@@ -46,10 +46,10 @@
           "name": "compiler-0.3.0.jar",
           "url": "compiler-0.3.0.jar",
           "size": 159907,
-          "sha512": "73af51572802ba1d407c26204f5a33b27342f44d98dcc2be0dff85823143ad1ec254ab95086cdcfe9aa38d2e42404fb71d6eac3f4cf5dded1d9de6b2f08f821b",
-          "sha256": "d506f8fddcc8234357099dc5570cbaac73a20e5c4b8a706e2428b5f98e3b1faa",
-          "sha1": "13e66e1c4818b49877434ffee172fadc42113317",
-          "md5": "552c8fa3bb402b16bbf051b7555dc591"
+          "sha512": "25e7ccf5431fb3e20154887a8829ed766dfadc5e6e8ad6f1639b3aa4959ccdfe75a424e3ac7b7c6ee0223bc137a2c7ee7edfd413e09c42816cddb1a78a2c6055",
+          "sha256": "117242724cde0f3fb2e3a39dfaa61940ad592e1d7f4ad307d19b849783f606c9",
+          "sha1": "af32a9c85bf480f93e39b0be5b6ce88c7fae8f36",
+          "md5": "afa6b152576c1c7400e5df09660ea6da"
         }
       ]
     },
@@ -133,10 +133,10 @@
           "name": "compiler-0.3.0.jar",
           "url": "compiler-0.3.0.jar",
           "size": 159907,
-          "sha512": "73af51572802ba1d407c26204f5a33b27342f44d98dcc2be0dff85823143ad1ec254ab95086cdcfe9aa38d2e42404fb71d6eac3f4cf5dded1d9de6b2f08f821b",
-          "sha256": "d506f8fddcc8234357099dc5570cbaac73a20e5c4b8a706e2428b5f98e3b1faa",
-          "sha1": "13e66e1c4818b49877434ffee172fadc42113317",
-          "md5": "552c8fa3bb402b16bbf051b7555dc591"
+          "sha512": "25e7ccf5431fb3e20154887a8829ed766dfadc5e6e8ad6f1639b3aa4959ccdfe75a424e3ac7b7c6ee0223bc137a2c7ee7edfd413e09c42816cddb1a78a2c6055",
+          "sha256": "117242724cde0f3fb2e3a39dfaa61940ad592e1d7f4ad307d19b849783f606c9",
+          "sha1": "af32a9c85bf480f93e39b0be5b6ce88c7fae8f36",
+          "md5": "afa6b152576c1c7400e5df09660ea6da"
         }
       ]
     }

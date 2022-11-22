@@ -11,7 +11,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.1"
+      "version": "7.5"
     }
   },
   "variants": [
@@ -68,10 +68,10 @@
           "name": "lib-macosarm64-0.3.0-metadata.jar",
           "url": "lib-macosarm64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "9ff62b17ca353cc716f33401535ecec0d5befdd748bf2711e31238b3c479c8e8028e9913711e224a111240edeb6a4d277be3c278b1424c1d288aa2a4ac3f16fa",
-          "sha256": "2ebfa0a792a5ac89ae4ad0f817f961f72182b27cbafb6bf0ca5bf0b9b3e584a7",
-          "sha1": "756c9036382dbd6efeb63ea75aedc318aef8cbcc",
-          "md5": "a4679be8c044590a9ace222bfa87e579"
+          "sha512": "ff0375913ad05b4946c0e88176b1402933a0ca55dae5c67eaabe32326e34a57155d7a2faf71e78a30bd7f2d45af861d27770ed4a35f65acd4d343edeec7a6687",
+          "sha256": "df36d39588687cf062deefe5071fabf338bb9f3a97187334eddb8d4de26a37dd",
+          "sha1": "794ced59c2d5ffe3abc9bd943b59702aa010bf60",
+          "md5": "e160d9ce11075982ad78b37cd5e7e71a"
         }
       ]
     }

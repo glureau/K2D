@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1.0",
   "buildSystem": "Gradle",
-  "buildSystemVersion": "7.1",
+  "buildSystemVersion": "7.5",
   "buildPlugin": "org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper",
   "buildPluginVersion": "1.7.10",
   "projectSettings": {
@@ -10,6 +10,16 @@
     "isKPMEnabled": false
   },
   "projectTargets": [
+    {
+      "target": "org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget",
+      "platformType": "androidJvm",
+      "extras": {
+        "android": {
+          "sourceCompatibility": "1.8",
+          "targetCompatibility": "1.8"
+        }
+      }
+    },
     {
       "target": "org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget",
       "platformType": "native",

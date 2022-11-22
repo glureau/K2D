@@ -11,7 +11,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.1"
+      "version": "7.5"
     }
   },
   "variants": [
@@ -68,10 +68,10 @@
           "name": "lib-tvosarm64-0.3.0-metadata.jar",
           "url": "lib-tvosarm64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "c544c8d91c77da922fb5de1ffb8f0b743a50dc4ed964ab03662a12be65706243d7cf95e785dc40a59f5f818b9f5450023e4717250cec4eb1193b73d736991ba1",
-          "sha256": "d3559b7e5bbc39c264ccdf0b674dd46dd836dbe6b0082c3fbcfb11c3a9b17770",
-          "sha1": "95791929f442f98ea739e4546e2dd0a0320147c7",
-          "md5": "a27fc8ccd078db32da35a9082a7a0b5e"
+          "sha512": "f6331daba2c897e01d001eec2db1f2261996d708d5e6b31e83fe66a8c516a9322f813a31393567106299e068fa05f6b53d98272cf8e76232108af99271a72fac",
+          "sha256": "b5944e7adba91ba0e1a468f4a2494420f25d267f1fbc67f422572ff5a5e0f38a",
+          "sha1": "7e2cc8acc5b4bb9fdad9160857d5c4bb22c75c44",
+          "md5": "337ab37aeb55452156edda365c1c7eab"
         }
       ]
     }

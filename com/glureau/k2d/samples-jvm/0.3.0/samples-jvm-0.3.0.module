@@ -1,0 +1,84 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../samples/0.3.0/samples-0.3.0.module",
+    "group": "com.glureau.k2d",
+    "module": "samples",
+    "version": "0.3.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "jvmApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.7.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "samples-jvm-0.3.0.jar",
+          "url": "samples-jvm-0.3.0.jar",
+          "size": 20255,
+          "sha512": "b95ac477de20acb7b26fab8073b8195497406e1f3e980f6b0012f063ffa42d54351c582292e18a3e18be58e940fd98d0bc2dc680a76d89f1d7c65bc4bb84b4f2",
+          "sha256": "08e9b28f5a173bb533d8f43d2cd282b6b6c1023d40a7df442b3a8502b33131ad",
+          "sha1": "80d5aadd2087ecb23fcddc3320ee1394e6e5bab8",
+          "md5": "bdbc64a660c714a1fff10336dc754656"
+        }
+      ]
+    },
+    {
+      "name": "jvmRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.7.10"
+          }
+        },
+        {
+          "group": "com.glureau.k2d",
+          "module": "lib",
+          "version": {
+            "requires": "0.3.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "samples-jvm-0.3.0.jar",
+          "url": "samples-jvm-0.3.0.jar",
+          "size": 20255,
+          "sha512": "b95ac477de20acb7b26fab8073b8195497406e1f3e980f6b0012f063ffa42d54351c582292e18a3e18be58e940fd98d0bc2dc680a76d89f1d7c65bc4bb84b4f2",
+          "sha256": "08e9b28f5a173bb533d8f43d2cd282b6b6c1023d40a7df442b3a8502b33131ad",
+          "sha1": "80d5aadd2087ecb23fcddc3320ee1394e6e5bab8",
+          "md5": "bdbc64a660c714a1fff10336dc754656"
+        }
+      ]
+    }
+  ]
+}

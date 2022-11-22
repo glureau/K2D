@@ -11,7 +11,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.1"
+      "version": "7.5"
     }
   },
   "variants": [
@@ -44,10 +44,10 @@
           "name": "lib-js-0.3.0.klib",
           "url": "lib-js-0.3.0.klib",
           "size": 7880,
-          "sha512": "a924df626bcfe21677d3a69a3eaa33108da2400c9b5ec42a363ad7314d52287bb26d33e5a1510da5fd220395c65b7f503ca7436e65178221118787150fcabd46",
-          "sha256": "0e228fc699e01d23fdf8fb8d392f9719aa2ea5d28349b0e6a267ef2275c48d8c",
-          "sha1": "57b0134d10a3f4ccd8172cff51fc83ae07854381",
-          "md5": "0b09de1c483c1c1a068ef36766c7a063"
+          "sha512": "81cfeb12d93eb9e11245929e83198fe4e833219b90b72fc7df3edfff9d8d242a3e2be646ad874db19dde7600214caf35cded6665683767400aca10c3df3fb2f7",
+          "sha256": "6974eb5e41a56eccdb7c6fec4271e35cb16593f9d5ab8dcb71bf39e5f8d1b31e",
+          "sha1": "fac88a1ad846b5936e454a526efe37a6983eafa0",
+          "md5": "d56d9edaf430e3d45bde04112300f663"
         }
       ]
     },
@@ -80,10 +80,10 @@
           "name": "lib-js-0.3.0.klib",
           "url": "lib-js-0.3.0.klib",
           "size": 7880,
-          "sha512": "a924df626bcfe21677d3a69a3eaa33108da2400c9b5ec42a363ad7314d52287bb26d33e5a1510da5fd220395c65b7f503ca7436e65178221118787150fcabd46",
-          "sha256": "0e228fc699e01d23fdf8fb8d392f9719aa2ea5d28349b0e6a267ef2275c48d8c",
-          "sha1": "57b0134d10a3f4ccd8172cff51fc83ae07854381",
-          "md5": "0b09de1c483c1c1a068ef36766c7a063"
+          "sha512": "81cfeb12d93eb9e11245929e83198fe4e833219b90b72fc7df3edfff9d8d242a3e2be646ad874db19dde7600214caf35cded6665683767400aca10c3df3fb2f7",
+          "sha256": "6974eb5e41a56eccdb7c6fec4271e35cb16593f9d5ab8dcb71bf39e5f8d1b31e",
+          "sha1": "fac88a1ad846b5936e454a526efe37a6983eafa0",
+          "md5": "d56d9edaf430e3d45bde04112300f663"
         }
       ]
     }
