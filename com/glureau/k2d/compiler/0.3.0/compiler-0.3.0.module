@@ -46,10 +46,10 @@
           "name": "compiler-0.3.0.jar",
           "url": "compiler-0.3.0.jar",
           "size": 159907,
-          "sha512": "afdd8378e940a342aee1396b9fca5bd410705051bf5479ee1837c3bf001a26069d5b82fa59c59f717c14701627299ac59a7b164aac630f3d4572b336dbad460e",
-          "sha256": "0d0bb395364e4b0c02a29a3cba0f8f1e1c1ee7d06bebce64d02ad85ecab8346b",
-          "sha1": "18271317977b75a3e49c997b787f635263706347",
-          "md5": "e0e3e3fb35c06404352ab0ea18f06a64"
+          "sha512": "4bc3b16de4343700552a74549eada2ee5f27a5a7cdb38d6cf31d3aca997447248bdc787e7d5d16a1b9fb664c9e9898fa77f359edffd0dbc6de1f9fdbaf0155de",
+          "sha256": "6340c8e7ca29a2f189d49253f7feded5c0d0b6435b42640d8107d676b25ba3df",
+          "sha1": "91f8a6502a0db695892fa7faa0976e24f64955dc",
+          "md5": "2d258c63e2e9c86268fce26c013cafd6"
         }
       ]
     },
@@ -133,10 +133,10 @@
           "name": "compiler-0.3.0.jar",
           "url": "compiler-0.3.0.jar",
           "size": 159907,
-          "sha512": "afdd8378e940a342aee1396b9fca5bd410705051bf5479ee1837c3bf001a26069d5b82fa59c59f717c14701627299ac59a7b164aac630f3d4572b336dbad460e",
-          "sha256": "0d0bb395364e4b0c02a29a3cba0f8f1e1c1ee7d06bebce64d02ad85ecab8346b",
-          "sha1": "18271317977b75a3e49c997b787f635263706347",
-          "md5": "e0e3e3fb35c06404352ab0ea18f06a64"
+          "sha512": "4bc3b16de4343700552a74549eada2ee5f27a5a7cdb38d6cf31d3aca997447248bdc787e7d5d16a1b9fb664c9e9898fa77f359edffd0dbc6de1f9fdbaf0155de",
+          "sha256": "6340c8e7ca29a2f189d49253f7feded5c0d0b6435b42640d8107d676b25ba3df",
+          "sha1": "91f8a6502a0db695892fa7faa0976e24f64955dc",
+          "md5": "2d258c63e2e9c86268fce26c013cafd6"
         }
       ]
     }

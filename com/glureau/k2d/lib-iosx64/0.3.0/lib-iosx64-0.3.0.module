@@ -68,10 +68,10 @@
           "name": "lib-iosx64-0.3.0-metadata.jar",
           "url": "lib-iosx64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "a7215686cc68821465e9b940acdf15b7ab26e325889d1c1edf99b59bda1c9510dca5947de3a5b00c8a537ba58fe74b29cf23b78e572dda6d0548a81f71b723df",
-          "sha256": "2ea74a9fedf351499aa8645eeae82b19da775a5b689732cd07a7bef1359638d7",
-          "sha1": "059ff7bcc50adcb6a1ce7d481e47689978cc1048",
-          "md5": "3915c7102a01e13b4a6a600be2df456c"
+          "sha512": "587ddb0aea9f3ee4d073b62f8e6664cdb4477be96b93531adf43a7cb6ef362d52e71054c0f2bedebb605ca8df9434a1a5bc4924b6cebafad29ae148e66c6c2e3",
+          "sha256": "0f2875d7039cb6e07fa7e17c6b91ac662392134c4fbc4bb96916d501d0a8e1f3",
+          "sha1": "e5e2a828666dc967e446eee048fc591671e3a5ae",
+          "md5": "808b63c9a87025e011592454c09680dd"
         }
       ]
     }

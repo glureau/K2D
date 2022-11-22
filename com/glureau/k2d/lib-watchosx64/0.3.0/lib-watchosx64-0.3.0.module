@@ -68,10 +68,10 @@
           "name": "lib-watchosx64-0.3.0-metadata.jar",
           "url": "lib-watchosx64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "3413f3f5a2cb9fc6246aec613610b50fe6fe75b5c40d036c8a2ffc449b3752b15184e19f2a97d53b249550cc21a6bb9093564a7a64dc1023cdf4c6831f6852ec",
-          "sha256": "351fc06540133cef5741d69ccec3181f9b4ce26393252fb419494583e9181260",
-          "sha1": "5ba3a7c4796df12d590e1dc0afa9b5e46c9d232c",
-          "md5": "efe590a3aed31cd8f0c0e1ca998228e3"
+          "sha512": "4421993c7745793d421c82e514100014eb7519657386eb0cc0507b342fbe404eb03898cfa5ea2c841d46f6328953a8a40e8d8a6fae7aad7de30b1358fdd13454",
+          "sha256": "473412fe135efff5db0953ce39bfee4d90038c16a0148e8ce9061b70b733ad26",
+          "sha1": "adbbe87bdc4ad1fa4c51c93dcb75a529ad1b3ec0",
+          "md5": "088a327ccec72fe5a713cafe54b007bc"
         }
       ]
     }

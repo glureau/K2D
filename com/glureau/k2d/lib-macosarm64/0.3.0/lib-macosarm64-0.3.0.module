@@ -68,10 +68,10 @@
           "name": "lib-macosarm64-0.3.0-metadata.jar",
           "url": "lib-macosarm64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "35803811958ac8a70610382732564ca89a88c34d2b1e81b4dcc6227cd7cacb7919b36cd7efad1807dc66731ccae127b5cb58534072b513b13471e29e90265d83",
-          "sha256": "0c35df1166e7b51b21dbbb651559e67709b2b0adf2e03239beca38a3aa388b39",
-          "sha1": "1f2066ca0640fed79de807fc56bc7fd8bf12f754",
-          "md5": "c1e02a2cd85c74d26158270ac60c149f"
+          "sha512": "7f7457be6b5b4f7869c033afa8f938d929ee6314dcfb782616215d50590b54490503ecf175c6847d39c71f4d9249fab31580049033d7dc395209f3ed250cccfd",
+          "sha256": "bb5fbedea614a4e836b56e70b988e4f0ae7fff8de661b4010d1497577cc620d1",
+          "sha1": "134c330551fb559cd5be50afa44c91262c8eb93c",
+          "md5": "fee679cdab349fc3bda5ed20cb33d7bd"
         }
       ]
     }
