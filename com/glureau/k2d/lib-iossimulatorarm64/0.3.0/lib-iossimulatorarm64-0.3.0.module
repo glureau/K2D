@@ -68,10 +68,10 @@
           "name": "lib-iossimulatorarm64-0.3.0-metadata.jar",
           "url": "lib-iossimulatorarm64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "07613d893d4c845344f04b08140dafab87f1659b8ccf718a8c70c33be8fb8732c1d860a60fdf1e18e8eecb2e6fca59b6542b7426215b1363c47a6fccfabd8fcb",
-          "sha256": "fe88ee6b3a14ca506750f32cddff61e3993ad3daea996110e7f7ab2941d82c7d",
-          "sha1": "17b47991d061675bee4a931384146647ff5517ec",
-          "md5": "00e00f41c68a830b1c1aa5a65d9addc1"
+          "sha512": "a7215686cc68821465e9b940acdf15b7ab26e325889d1c1edf99b59bda1c9510dca5947de3a5b00c8a537ba58fe74b29cf23b78e572dda6d0548a81f71b723df",
+          "sha256": "2ea74a9fedf351499aa8645eeae82b19da775a5b689732cd07a7bef1359638d7",
+          "sha1": "059ff7bcc50adcb6a1ce7d481e47689978cc1048",
+          "md5": "3915c7102a01e13b4a6a600be2df456c"
         }
       ]
     }

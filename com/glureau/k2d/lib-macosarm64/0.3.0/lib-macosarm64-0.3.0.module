@@ -16,12 +16,12 @@
   },
   "variants": [
     {
-      "name": "watchosX64ApiElements-published",
+      "name": "macosArm64ApiElements-published",
       "attributes": {
         "artifactType": "org.jetbrains.kotlin.klib",
         "org.gradle.category": "library",
         "org.gradle.usage": "kotlin-api",
-        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
         "org.jetbrains.kotlin.platform.type": "native"
       },
       "dependencies": [
@@ -36,22 +36,22 @@
       "files": [
         {
           "name": "lib.klib",
-          "url": "lib-watchosx64-0.3.0.klib",
-          "size": 9094,
-          "sha512": "4951b76ea060e835551960e46729c42a9e866d196878c1e2a8fb3b89db30d465ff7ef3e56ce8a020136891ffca39059b226eae63d8e3754c9cec19412f80a385",
-          "sha256": "4a760a1310b8d652168ec83707667ac677dfb6761b58162031348e0efa292a2c",
-          "sha1": "ad022aa0827af33017df03f23e92ed1887f1c62f",
-          "md5": "197e8065f20626ae5810c3ddbf64a79d"
+          "url": "lib-macosarm64-0.3.0.klib",
+          "size": 9092,
+          "sha512": "e1608c979ab128f6e62f0276994a4fa18ef23d37db3f29d2648928a2fcca5d90002c6e1ea0ae14bafa8d6c2504c30bb804a985eaef0e861ea91432daae5ecf5c",
+          "sha256": "66266dcf438e7b6254516e58763799e937a03dfb3f6f0d498a03fb45cd98229f",
+          "sha1": "8198a7b47d1f6081011ac82900522e745b7fe555",
+          "md5": "b7eb7d4a3f26e903da6062482d582c99"
         }
       ]
     },
     {
-      "name": "watchosX64MetadataElements-published",
+      "name": "macosArm64MetadataElements-published",
       "attributes": {
         "artifactType": "org.jetbrains.kotlin.klib",
         "org.gradle.category": "library",
         "org.gradle.usage": "kotlin-metadata",
-        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
         "org.jetbrains.kotlin.platform.type": "native"
       },
       "dependencies": [
@@ -65,13 +65,13 @@
       ],
       "files": [
         {
-          "name": "lib-watchosx64-0.3.0-metadata.jar",
-          "url": "lib-watchosx64-0.3.0-metadata.jar",
+          "name": "lib-macosarm64-0.3.0-metadata.jar",
+          "url": "lib-macosarm64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "3413f3f5a2cb9fc6246aec613610b50fe6fe75b5c40d036c8a2ffc449b3752b15184e19f2a97d53b249550cc21a6bb9093564a7a64dc1023cdf4c6831f6852ec",
-          "sha256": "351fc06540133cef5741d69ccec3181f9b4ce26393252fb419494583e9181260",
-          "sha1": "5ba3a7c4796df12d590e1dc0afa9b5e46c9d232c",
-          "md5": "efe590a3aed31cd8f0c0e1ca998228e3"
+          "sha512": "35803811958ac8a70610382732564ca89a88c34d2b1e81b4dcc6227cd7cacb7919b36cd7efad1807dc66731ccae127b5cb58534072b513b13471e29e90265d83",
+          "sha256": "0c35df1166e7b51b21dbbb651559e67709b2b0adf2e03239beca38a3aa388b39",
+          "sha1": "1f2066ca0640fed79de807fc56bc7fd8bf12f754",
+          "md5": "c1e02a2cd85c74d26158270ac60c149f"
         }
       ]
     }

@@ -34,11 +34,11 @@
         {
           "name": "lib-metadata-0.3.0.jar",
           "url": "lib-0.3.0.jar",
-          "size": 4207,
-          "sha512": "6235f6ba9d4c73d3f667aa2258e8008b2df0cc23478fdf777098d7ead4408cf34ccbbaff41266764d2bcb795b05bc05613411790b0df15569aae18ae14d39a64",
-          "sha256": "a904822b7b30fd58df4ed14d864323a6c3e10559534e5729e38a9a9e30989778",
-          "sha1": "b8555307b48681c73b4fa87e0ca3e0ca49be9316",
-          "md5": "7416ab09baa60e1d941fe7acbd74b0ec"
+          "size": 4220,
+          "sha512": "65090b6af7b7a8e93254f7e8d1453ff4199aa819bc2837fd7fb10db666196562ad3c5538ae53c0f1507b5333c69a9627c5e8e2f6ad9a350fbbfb1c23820ecc6d",
+          "sha256": "53739611b430ef497c74d88ee4786773dae626aab54e4bf0f1467fb8c65c838d",
+          "sha1": "1dbbc63607429634d515ab1d13a996b0fcd5cb90",
+          "md5": "47aa85ebd8928d630844ef986dec9141"
         }
       ]
     },
@@ -195,6 +195,70 @@
         "url": "../../lib-jvm/0.3.0/lib-jvm-0.3.0.module",
         "group": "com.glureau.k2d",
         "module": "lib-jvm",
+        "version": "0.3.0"
+      }
+    },
+    {
+      "name": "macosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lib-macosarm64/0.3.0/lib-macosarm64-0.3.0.module",
+        "group": "com.glureau.k2d",
+        "module": "lib-macosarm64",
+        "version": "0.3.0"
+      }
+    },
+    {
+      "name": "macosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lib-macosarm64/0.3.0/lib-macosarm64-0.3.0.module",
+        "group": "com.glureau.k2d",
+        "module": "lib-macosarm64",
+        "version": "0.3.0"
+      }
+    },
+    {
+      "name": "macosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lib-macosx64/0.3.0/lib-macosx64-0.3.0.module",
+        "group": "com.glureau.k2d",
+        "module": "lib-macosx64",
+        "version": "0.3.0"
+      }
+    },
+    {
+      "name": "macosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lib-macosx64/0.3.0/lib-macosx64-0.3.0.module",
+        "group": "com.glureau.k2d",
+        "module": "lib-macosx64",
         "version": "0.3.0"
       }
     },

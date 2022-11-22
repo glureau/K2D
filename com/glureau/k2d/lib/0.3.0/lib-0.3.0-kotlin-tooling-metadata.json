@@ -63,6 +63,28 @@
       }
     },
     {
+      "target": "org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTargetWithHostTests",
+      "platformType": "native",
+      "extras": {
+        "native": {
+          "konanTarget": "macos_arm64",
+          "konanVersion": "1.7.10",
+          "konanAbiVersion": "1.7.0"
+        }
+      }
+    },
+    {
+      "target": "org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTargetWithHostTests",
+      "platformType": "native",
+      "extras": {
+        "native": {
+          "konanTarget": "macos_x64",
+          "konanVersion": "1.7.10",
+          "konanAbiVersion": "1.7.0"
+        }
+      }
+    },
+    {
       "target": "org.jetbrains.kotlin.gradle.plugin.mpp.KotlinMetadataTarget",
       "platformType": "common"
     },
