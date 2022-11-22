@@ -12,6 +12,8 @@ kotlin {
     iosSimulatorArm64()
     tvos()
     watchos()
+    macosArm64()
+    macosX64()
 
     sourceSets {
         all {

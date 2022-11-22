@@ -44,17 +44,103 @@ classDiagram
 
 ```
 
-File: sample/table_Square.md
+File: sample/Polygon_table.md
+#### Polygon
+
+
+ My documentation contains a list:
+ - with one element
+ - and another one
+ - and a last one!
+
+
+##### Properties
+
+
+| Name           | Type       | Comments |
+|----------------|------------|----------|
+| originPosition | [Position] |          |
+
+##### Functions
+
+
+| Name             | Return Type | Comments |
+|------------------|-------------|----------|
+| computeSurface() | Float       |          |
+| howMuchSides()   | Int         |          |
+
+
+File: sample/Circle_table.md
+#### Circle
+
+##### Properties
+
+
+| Name           | Type       | Comments |
+|----------------|------------|----------|
+| originPosition | [Position] |          |
+| radius         | [Float]    |          |
+
+##### Functions
+
+
+| Name             | Return Type | Comments |
+|------------------|-------------|----------|
+| computeSurface() | Float       |          |
+
+
+File: sample/calculator/GenericFoo_table.md
+#### GenericFoo
+
+##### Properties
+
+
+| Name         | Type                 | Comments |
+|--------------|----------------------|----------|
+| list         | [List&lt;T&gt;]      |          |
+| latestResult | [Result&lt;Int&gt;]  |          |
+| lambda       | [(String) -> Double] |          |
+
+##### Functions
+
+
+| Name            | Return Type       | Comments |
+|-----------------|-------------------|----------|
+| add(..)         | Unit              |          |
+| addAll(..)      | List&lt;T&gt;     |          |
+| computeResult() | Result&lt;Int&gt; |          |
+
+
+File: sample/calculator/BinaryIntCalculator_table.md
+#### BinaryIntCalculator
+
+##### Properties
+
+
+| Name | Type  | Comments |
+|------|-------|----------|
+| reg1 | [Int] |          |
+| reg2 | [Int] |          |
+
+##### Functions
+
+
+| Name          | Return Type | Comments |
+|---------------|-------------|----------|
+| calculate(..) | Int         |          |
+
+
+File: sample/Square_table.md
 #### Square
 
 ##### Properties
 
 
-| Name           | Type     | Comments |
-|----------------|----------|----------|
-| sideSize       | Float    |          |
-| computedValue  | Float    |          |
-| originPosition | Position |          |
+| Name           | Type       | Comments |
+|----------------|------------|----------|
+| sideSize       | [Float]    |          |
+| computedValue  | [Float]    |          |
+| originPosition | [Position] |          |
 
 ##### Functions
 
@@ -69,160 +155,28 @@ File: sample/table_Square.md
 | publicFun()      | Unit        |          |
 
 
-File: sample/table_Circle.Companion.md
+File: sample/Circle·Companion_table.md
 ##### Circle.Companion
 
 ###### Properties
 
 
-| Name | Type   | Comments |
-|------|--------|----------|
-| TAU  | Double |          |
+| Name | Type     | Comments |
+|------|----------|----------|
+| TAU  | [Double] |          |
 
 
-File: sample/calculator/table_BinaryIntCalculator.md
-#### BinaryIntCalculator
-
-##### Properties
-
-
-| Name | Type | Comments |
-|------|------|----------|
-| reg1 | Int  |          |
-| reg2 | Int  |          |
-
-##### Functions
-
-
-| Name          | Return Type | Comments |
-|---------------|-------------|----------|
-| calculate(..) | Int         |          |
-
-
-File: sample/calculator/table_GenericFoo.md
-#### GenericFoo
-
-##### Properties
-
-
-| Name         | Type               | Comments |
-|--------------|--------------------|----------|
-| list         | List&lt;T&gt;      |          |
-| latestResult | Result&lt;Int&gt;  |          |
-| lambda       | (String) -> Double |          |
-
-##### Functions
-
-
-| Name            | Return Type       | Comments |
-|-----------------|-------------------|----------|
-| add(..)         | Unit              |          |
-| addAll(..)      | List&lt;T&gt;     |          |
-| computeResult() | Result&lt;Int&gt; |          |
-
-
-File: sample/table_Polygon.md
-#### Polygon
-
-##### Properties
-
-
-| Name           | Type     | Comments |
-|----------------|----------|----------|
-| originPosition | Position |          |
-
-##### Functions
-
-
-| Name             | Return Type | Comments |
-|------------------|-------------|----------|
-| computeSurface() | Float       |          |
-| howMuchSides()   | Int         |          |
-
-
-File: sample/table_Position.md
-#### Position
-
-##### Properties
-
-
-| Name | Type  | Comments |
-|------|-------|----------|
-| x    | Float |          |
-| y    | Float |          |
-
-
-File: sample/enums/table_Direction.md
-#### Direction
-
-##### Properties
-
-
-| Name    | Type   | Comments |
-|---------|--------|----------|
-| name    | String |          |
-| ordinal | Int    |          |
-
-| Entry | Comments |
-|-------|----------|
-| UP    |          |
-| DOWN  |          |
-| LEFT  |          |
-| RIGHT |          |
-
-
-File: sample/enums/table_DeviceKind.md
-#### DeviceKind
-
-##### Properties
-
-
-| Name      | Type   | Comments |
-|-----------|--------|----------|
-| userAgent | String |          |
-| index     | Int    |          |
-| name      | String |          |
-| ordinal   | Int    |          |
-
-| Entry        | Comments |
-|--------------|----------|
-| Smartphone   |          |
-| Computer     |          |
-| Tablet       |          |
-| Smartwatches |          |
-| Chromebook   |          |
-
-
-File: sample/table_Circle.md
-#### Circle
-
-##### Properties
-
-
-| Name           | Type     | Comments |
-|----------------|----------|----------|
-| originPosition | Position |          |
-| radius         | Float    |          |
-
-##### Functions
-
-
-| Name             | Return Type | Comments |
-|------------------|-------------|----------|
-| computeSurface() | Float       |          |
-
-
-File: sample/table_Rectangle.md
+File: sample/Rectangle_table.md
 #### Rectangle
 
 ##### Properties
 
 
-| Name           | Type     | Comments |
-|----------------|----------|----------|
-| width          | Float    |          |
-| height         | Float    |          |
-| originPosition | Position |          |
+| Name           | Type       | Comments |
+|----------------|------------|----------|
+| width          | [Float]    |          |
+| height         | [Float]    |          |
+| originPosition | [Position] |          |
 
 ##### Functions
 
@@ -233,15 +187,56 @@ File: sample/table_Rectangle.md
 | rotate(..)       | Unit        |          |
 
 
-File: sample/table_Shape.md
+File: sample/enums/Direction_table.md
+#### Direction
+
+##### Properties
+
+
+| Name    | Type     | Comments |
+|---------|----------|----------|
+| name    | [String] |          |
+| ordinal | [Int]    |          |
+
+| Entry | Comments |
+|-------|----------|
+| UP    |          |
+| DOWN  |          |
+| LEFT  |          |
+| RIGHT |          |
+
+
+File: sample/enums/DeviceKind_table.md
+#### DeviceKind
+
+##### Properties
+
+
+| Name      | Type     | Comments |
+|-----------|----------|----------|
+| userAgent | [String] |          |
+| index     | [Int]    |          |
+| name      | [String] |          |
+| ordinal   | [Int]    |          |
+
+| Entry        | Comments |
+|--------------|----------|
+| Smartphone   |          |
+| Computer     |          |
+| Tablet       |          |
+| Smartwatches |          |
+| Chromebook   |          |
+
+
+File: sample/Shape_table.md
 #### Shape
 
 ##### Properties
 
 
-| Name           | Type     | Comments |
-|----------------|----------|----------|
-| originPosition | Position |          |
+| Name           | Type       | Comments |
+|----------------|------------|----------|
+| originPosition | [Position] |          |
 
 ##### Functions
 
@@ -251,29 +246,19 @@ File: sample/table_Shape.md
 | computeSurface() | Float       |          |
 
 
-File: sample/another/table_TheTrap.md
-#### TheTrap
+File: sample/Position_table.md
+#### Position
 
 ##### Properties
 
 
-| Name | Type | Comments |
-|------|------|----------|
-| foo  | Int  |          |
+| Name | Type    | Comments |
+|------|---------|----------|
+| x    | [Float] |          |
+| y    | [Float] |          |
 
 
-File: sample/another/table_Oval.InnerOval.md
-##### Oval.InnerOval
-
-###### Properties
-
-
-| Name   | Type   | Comments |
-|--------|--------|----------|
-| square | Square |          |
-
-
-File: sample/another/table_Oval.Builder.md
+File: sample/another/Oval·Builder_table.md
 ##### Oval.Builder
 
 ###### Functions
@@ -284,7 +269,7 @@ File: sample/another/table_Oval.Builder.md
 | build() | Oval        |          |
 
 
-File: sample/another/table_Oval.md
+File: sample/another/Oval_table.md
 #### Oval
 
 
@@ -294,14 +279,14 @@ File: sample/another/table_Oval.md
 ##### Properties
 
 
-| Name                  | Type     | Comments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-|-----------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| centerOne             | Position |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| centerTwo             | Position |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| originPosition        | Position | This is the original position use to originate the...                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| distanceBetweenPoints | Float    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| angle                 | Float    | In Euclidean geometry, an angle is the figure formed by two rays, called the sides of the angle, sharing a common endpoint, called the vertex of the angle.[1] Angles formed by two rays lie in the plane that contains the rays. Angles are also formed by the intersection of two planes. These are called dihedral angles. Two intersecting curves may also define an angle, which is the angle of the rays lying tangent to the respective curves at their point of intersection.<div></div><div></div> Angle is also used to designate the measure of an angle or of a rotation. This measure is the ratio of the length of a circular arc to its radius. In the case of a geometric angle, the arc is centered at the vertex and delimited by the sides. In the case of a rotation, the arc is centered at the center of the rotation and delimited by any other point and its image by the rotation. |
-| radius                | Float    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Name                  | Type       | Comments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|-----------------------|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| centerOne             | [Position] |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| centerTwo             | [Position] |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| originPosition        | [Position] | This is the original position use to originate the...                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| distanceBetweenPoints | [Float]    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| angle                 | [Float]    | In Euclidean geometry, an angle is the figure formed by two rays, called the sides of the angle, sharing a common endpoint, called the vertex of the angle.[1] Angles formed by two rays lie in the plane that contains the rays. Angles are also formed by the intersection of two planes. These are called dihedral angles. Two intersecting curves may also define an angle, which is the angle of the rays lying tangent to the respective curves at their point of intersection.<div></div><div></div> Angle is also used to designate the measure of an angle or of a rotation. This measure is the ratio of the length of a circular arc to its radius. In the case of a geometric angle, the arc is centered at the vertex and delimited by the sides. In the case of a rotation, the arc is centered at the center of the rotation and delimited by any other point and its image by the rotation. |
+| radius                | [Float]    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ##### Functions
 
@@ -309,5 +294,27 @@ File: sample/another/table_Oval.md
 | Name             | Return Type | Comments |
 |------------------|-------------|----------|
 | computeSurface() | Float       |          |
+
+
+File: sample/another/TheTrap_table.md
+#### TheTrap
+
+##### Properties
+
+
+| Name | Type  | Comments |
+|------|-------|----------|
+| foo  | [Int] |          |
+
+
+File: sample/another/Oval·InnerOval_table.md
+##### Oval.InnerOval
+
+###### Properties
+
+
+| Name   | Type     | Comments |
+|--------|----------|----------|
+| square | [Square] |          |
 
 

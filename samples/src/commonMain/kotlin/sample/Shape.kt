@@ -18,6 +18,12 @@ interface Rectangle : Shape {
     fun rotate(angle: Float)
 }
 
+/**
+ * My documentation contains a list:
+ * - with one element
+ * - and another one
+ * - and a last one!
+ */
 interface Polygon : Shape {
     fun howMuchSides(): Int
 }

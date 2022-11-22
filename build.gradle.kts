@@ -2,6 +2,7 @@ buildscript {
     val kotlinVersion: String by project
     repositories {
         mavenCentral()
+        maven(url = "https://raw.githubusercontent.com/glureau/K2D/mvn-repo")
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
