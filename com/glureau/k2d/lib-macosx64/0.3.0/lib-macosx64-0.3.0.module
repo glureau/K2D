@@ -68,10 +68,10 @@
           "name": "lib-macosx64-0.3.0-metadata.jar",
           "url": "lib-macosx64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "c7dcd27539d21505492610d79f5e630d1d1a86c0ad981a368bcf3b85d1aa417b03264a154dd8e8bd8c40695f3df2fe0610270bcb317d0c66d61a82719583338c",
-          "sha256": "762baa33e197c73094e46ba0c69f82c0473b68ed619341fe6f6234304805e161",
-          "sha1": "2044ba0da903f22aae05459a2b9c459e145d95df",
-          "md5": "53608d471442dd896f2813c183e3c0e7"
+          "sha512": "421c2f88dabad88dc6ee161c532b493c412c10f305343002c25cd2fbed089aac074c72ac07a760004247cb82687bc5870dbb42bfd4a0cb437882a2d7717f9b9a",
+          "sha256": "81f4ec5c53928f246070a2ca7728a77d0716d7cd3b735c669b8fafbfde1014fa",
+          "sha1": "adf29bf88bb0a52914d39722a386fa0e401d0eb2",
+          "md5": "3871363ea59e94f27594a1081a4c5095"
         }
       ]
     }

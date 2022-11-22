@@ -68,10 +68,10 @@
           "name": "lib-tvosx64-0.3.0-metadata.jar",
           "url": "lib-tvosx64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "a14eeeed085439bd4a886dc4861b98237d6707494dbe2b22dce8463de5980face8a59612dd2e81eba430518ecaf4bf5b9c9addea1756956a6144eb896ac6b5c0",
-          "sha256": "7e4afbd685ee8cea72d0e93b5040d2cb0c47e368f18141db96c8792b50b3902e",
-          "sha1": "1e016192da7e5c2a43420ba6ee19b75cbe89a7cd",
-          "md5": "7c73b719aab8c868e6cec41883239425"
+          "sha512": "f1ebe4eabc183585083f658db2fe153b1ed25e3006125e0fc07426c590cf55f99c7f1648044cdbddaa10aae740d6ac867017afe65cbff2dd2b20508023ee8320",
+          "sha256": "9dd3d889a2813a18770532ac2e60bb7bd8f0de55a4b99ebea6bc0801d132158b",
+          "sha1": "0137a2704bb20d8d390a932a946fe818d814bfa7",
+          "md5": "095d4fac744d99a5921e394a0185e89a"
         }
       ]
     }

@@ -68,10 +68,10 @@
           "name": "lib-tvosarm64-0.3.0-metadata.jar",
           "url": "lib-tvosarm64-0.3.0-metadata.jar",
           "size": 261,
-          "sha512": "a14eeeed085439bd4a886dc4861b98237d6707494dbe2b22dce8463de5980face8a59612dd2e81eba430518ecaf4bf5b9c9addea1756956a6144eb896ac6b5c0",
-          "sha256": "7e4afbd685ee8cea72d0e93b5040d2cb0c47e368f18141db96c8792b50b3902e",
-          "sha1": "1e016192da7e5c2a43420ba6ee19b75cbe89a7cd",
-          "md5": "7c73b719aab8c868e6cec41883239425"
+          "sha512": "c544c8d91c77da922fb5de1ffb8f0b743a50dc4ed964ab03662a12be65706243d7cf95e785dc40a59f5f818b9f5450023e4717250cec4eb1193b73d736991ba1",
+          "sha256": "d3559b7e5bbc39c264ccdf0b674dd46dd836dbe6b0082c3fbcfb11c3a9b17770",
+          "sha1": "95791929f442f98ea739e4546e2dd0a0320147c7",
+          "md5": "a27fc8ccd078db32da35a9082a7a0b5e"
         }
       ]
     }
