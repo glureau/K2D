@@ -59,7 +59,7 @@
       "extras": {
         "js": {
           "isBrowserConfigured": true,
-          "isNodejsConfigured": false
+          "isNodejsConfigured": true
         }
       }
     },
