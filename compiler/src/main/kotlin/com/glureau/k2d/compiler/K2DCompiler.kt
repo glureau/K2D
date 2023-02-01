@@ -40,13 +40,10 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
 
         val configuration = if (!configParamB64.isNullOrBlank() && configParamB64 != "null") {
             val configJson = Base64.getDecoder().decode(configParamB64)
-            Logger.warn("PARAM=" + configJson.decodeToString())
             Json.decodeFromString(configJson.decodeToString())
         } else {
             K2DConfiguration()
         }
-
-        Logger.warn("config = $configuration")
 
         val nodeSequence: Sequence<KSNode> = resolver.getNewFiles()
         val aggregatorClassVisitor = AggregatorClassVisitor()
@@ -75,7 +72,6 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
 
 
             val files = filtered.values.mapNotNull { it.originFile }
-            environment.logger.warn("Rendering markdown $name.md")
             environment.writeMarkdown(content, "", name, files)
 
         }
@@ -98,7 +94,6 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
                         .toByteArray()
 
                 if (content.isNotEmpty()) {
-                    Logger.warn("Rendering table ${gClass.symbolName}.md")
                     environment.writeMarkdown(
                         content = content,
                         packageName = gClass.packageName,

@@ -40,7 +40,6 @@ class DokkaModuleMermaidRenderer(
 
         val files = classes.values.mapNotNull { it.originFile }
 
-        environment.logger.warn("Rendering module markdown $moduleName")
         environment.writeMarkdown(content, "", "module", files)
     }
 }

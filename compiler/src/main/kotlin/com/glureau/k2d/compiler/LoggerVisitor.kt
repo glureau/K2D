@@ -9,6 +9,7 @@ import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSClassifierReference
 import com.google.devtools.ksp.symbol.KSDeclaration
 import com.google.devtools.ksp.symbol.KSDeclarationContainer
+import com.google.devtools.ksp.symbol.KSDefNonNullReference
 import com.google.devtools.ksp.symbol.KSDynamicReference
 import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
@@ -70,6 +71,10 @@ class LoggerVisitor(private val environment: SymbolProcessorEnvironment) : KSVis
 
     override fun visitDeclarationContainer(declarationContainer: KSDeclarationContainer, data: Unit) {
         log("visitDeclarationContainer: $declarationContainer $data")
+    }
+
+    override fun visitDefNonNullReference(reference: KSDefNonNullReference, data: Unit) {
+        log("visitDefNonNullReference: $reference $data")
     }
 
     override fun visitDynamicReference(reference: KSDynamicReference, data: Unit) {

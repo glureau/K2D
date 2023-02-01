@@ -48,7 +48,6 @@ class DemoMarkdownRenderer(private val environment: SymbolProcessorEnvironment) 
 
         val content = stringBuilder.toString().toByteArray()
 
-        environment.logger.warn("Rendering markdown $fileName")
         environment.writeMarkdown(content, "", fileName, files)
     }
 }

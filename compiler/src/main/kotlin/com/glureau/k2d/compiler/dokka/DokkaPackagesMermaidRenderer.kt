@@ -22,7 +22,6 @@ class DokkaPackagesMermaidRenderer(
                 val content = DokkaPackageMermaidRenderer(configuration).render(data, packageName).toByteArray()
                 val files = classes.values.mapNotNull { it.originFile }
 
-                environment.logger.warn("Rendering package markdown $packageName")
                 environment.writeMarkdown(content, packageName, "package", files)
             }
     }

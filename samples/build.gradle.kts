@@ -5,9 +5,8 @@ plugins {
     id("org.ajoberstar.grgit")
     id("com.google.devtools.ksp")
     id("org.jetbrains.kotlinx.knit") version "0.4.0" // TESTING...
-    id("com.glureau.k2d") version "0.3.0"
+    id("com.glureau.k2d") version "0.4.0"
 }
-
 
 repositories {
     maven(url = "https://raw.githubusercontent.com/glureau/K2D/mvn-repo")
