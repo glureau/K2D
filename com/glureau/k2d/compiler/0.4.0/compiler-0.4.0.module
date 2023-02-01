@@ -1,0 +1,144 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.glureau.k2d",
+    "module": "compiler",
+    "version": "0.4.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.4.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "compiler-0.4.0.jar",
+          "url": "compiler-0.4.0.jar",
+          "size": 160844,
+          "sha512": "b638e4bec6fd10f077d10ee1814ea88e7dd782124a250cbd55207cc42883546226ea90d26a5f09892cfec96f226c14029e6647ab9d5b62ce0025f5c6a3e51118",
+          "sha256": "49a68500addfaf8cfc8c6ad5c73607813fbf99327d6568340695192196ff8e88",
+          "sha1": "fedac10b3e692a11352c144970a283b1dad33ccd",
+          "md5": "fd1a9c2a5ae8805fdab584ca3ce432e7"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.glureau.k2d",
+          "module": "lib",
+          "version": {
+            "requires": "0.4.0"
+          }
+        },
+        {
+          "group": "com.squareup",
+          "module": "kotlinpoet",
+          "version": {
+            "requires": "1.10.2"
+          },
+          "excludes": [
+            {
+              "group": "*",
+              "module": "kotlin-reflect"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-reflect",
+          "version": {
+            "requires": "1.8.0"
+          }
+        },
+        {
+          "group": "com.squareup",
+          "module": "kotlinpoet-ksp",
+          "version": {
+            "requires": "1.10.2"
+          }
+        },
+        {
+          "group": "com.google.devtools.ksp",
+          "module": "symbol-processing",
+          "version": {
+            "requires": "1.8.0-1.0.9"
+          }
+        },
+        {
+          "group": "com.google.devtools.ksp",
+          "module": "symbol-processing-api",
+          "version": {
+            "requires": "1.8.0-1.0.9"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.4.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "compiler-0.4.0.jar",
+          "url": "compiler-0.4.0.jar",
+          "size": 160844,
+          "sha512": "b638e4bec6fd10f077d10ee1814ea88e7dd782124a250cbd55207cc42883546226ea90d26a5f09892cfec96f226c14029e6647ab9d5b62ce0025f5c6a3e51118",
+          "sha256": "49a68500addfaf8cfc8c6ad5c73607813fbf99327d6568340695192196ff8e88",
+          "sha1": "fedac10b3e692a11352c144970a283b1dad33ccd",
+          "md5": "fd1a9c2a5ae8805fdab584ca3ce432e7"
+        }
+      ]
+    }
+  ]
+}

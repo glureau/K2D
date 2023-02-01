@@ -1,0 +1,79 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../lib/0.4.0/lib-0.4.0.module",
+    "group": "com.glureau.k2d",
+    "module": "lib",
+    "version": "0.4.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "macosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lib.klib",
+          "url": "lib-macosx64-0.4.0.klib",
+          "size": 9087,
+          "sha512": "64ef7f317ca8826b1e74a682510771cf6b89ef4420b39048122ca34af5d4c222b86043034ae03acfcc78c7c9bf897b82d7f09d6cb7234343d8ce06b459fda22e",
+          "sha256": "e523a3b5177c8b61322067a42fd1961d3af6896fe13ded58655dabec7b2057bc",
+          "sha1": "309a386a6d6a2256c4188630761e158df67048ca",
+          "md5": "266384fc1e8742efedf33e1841ab4dc2"
+        }
+      ]
+    },
+    {
+      "name": "macosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lib-macosx64-0.4.0-metadata.jar",
+          "url": "lib-macosx64-0.4.0-metadata.jar",
+          "size": 261,
+          "sha512": "3bd4f73ffc6e81b1624648ceee2c22b8254ed98cedebb6214dcec5d3934384a138a01936ac8b9d9d696a2477311a867151fa3c2711c293aeca02e263299df01e",
+          "sha256": "188a2aa91688e126b4e051aede62cd59c8816dfb0dc74472ab47962fac7cbfbe",
+          "sha1": "6016354a197c6e27a45e436998e726ba54e4e023",
+          "md5": "487754a0ef4add56b0617cd99d860116"
+        }
+      ]
+    }
+  ]
+}
