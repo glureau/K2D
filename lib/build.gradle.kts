@@ -13,6 +13,11 @@ android {
         minSdk = 21
         targetSdk = 33
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 kotlin {
@@ -21,13 +26,20 @@ kotlin {
         nodejs()
     }
     android { publishLibraryVariants("release", "debug") }
-    jvm()
+    jvm {
+        val main by compilations.getting {
+            compilerOptions.configure {
+                jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8)
+            }
+        }
+    }
     ios()
     iosSimulatorArm64()
     tvos()
     watchos()
     macosArm64()
     macosX64()
+
 
     sourceSets {
         all {
@@ -44,3 +56,8 @@ kotlin {
         }
     }
 }
+/*
+// For when nodejs.org is down...
+rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
+    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().nodeVersion = "18.13.0"
+}*/

@@ -23,10 +23,8 @@ import com.google.devtools.ksp.getAnnotationsByType
 import com.google.devtools.ksp.getVisibility
 import com.google.devtools.ksp.isAbstract
 import com.google.devtools.ksp.symbol.*
-import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 
 @OptIn(KspExperimental::class)
-@KotlinPoetKspPreview
 class AggregatorClassVisitor : KSVisitorVoid() {
     val classes = mutableMapOf<String, GClass>()
     val basics = mutableMapOf<String, Basic>()

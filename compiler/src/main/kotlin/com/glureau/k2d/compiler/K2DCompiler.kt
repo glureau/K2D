@@ -16,7 +16,6 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSNode
-import com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.util.*
@@ -28,7 +27,6 @@ internal lateinit var sharedLogger: KSPLogger
 internal object Logger : KSPLogger by sharedLogger
 
 @OptIn(KspExperimental::class)
-@KotlinPoetKspPreview
 class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolProcessor {
 
     init {
@@ -168,7 +166,6 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
     }
 }
 
-@KotlinPoetKspPreview
 class K2DCompilerProvider : SymbolProcessorProvider {
     override fun create(environment: SymbolProcessorEnvironment) =
         K2DCompiler(environment)
