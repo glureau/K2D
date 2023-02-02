@@ -68,6 +68,7 @@
       "platformType": "jvm",
       "extras": {
         "jvm": {
+          "jvmTarget": "1.8",
           "withJavaEnabled": false
         }
       }
