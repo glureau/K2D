@@ -11,7 +11,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.5"
+      "version": "7.6"
     }
   },
   "variants": [
@@ -42,11 +42,11 @@
         {
           "name": "lib-release.aar",
           "url": "lib-android-0.4.0.aar",
-          "size": 5120,
-          "sha512": "face0933a3bf8472d3b6688c4d86c927b6f8963ac6ff5b5a588a3857d82eb1e4bba30491ed7695ddab1ac447b5cdb553700bd46a44ef5bb83e93070694b0770c",
-          "sha256": "8d436169c84be3703f8289605fb51c021c1fae164f251f260122d792a4f0313e",
-          "sha1": "1c23d1ec40dfed4d7420640b6d87dc1a95e379c9",
-          "md5": "c066d87dc71cd0bb6e6a32e96abeb957"
+          "size": 5217,
+          "sha512": "2f5e8fa31986c65134e5cedc632e156098c3fc5248c2d25e124186892475b36be271ce48faf432b11e96ac06679faa2ca5d7c2004d8c6569414d40918e6c637d",
+          "sha256": "e899051ea370f98cd187bb3d833421e4db8a83da513c75734202c151ffd17894",
+          "sha1": "79f73db4d800798af3184bd2aa479624fd4f21fd",
+          "md5": "1810928a639859db870105c82f7c8125"
         }
       ]
     },
@@ -105,11 +105,11 @@
         {
           "name": "lib-release.aar",
           "url": "lib-android-0.4.0.aar",
-          "size": 5120,
-          "sha512": "face0933a3bf8472d3b6688c4d86c927b6f8963ac6ff5b5a588a3857d82eb1e4bba30491ed7695ddab1ac447b5cdb553700bd46a44ef5bb83e93070694b0770c",
-          "sha256": "8d436169c84be3703f8289605fb51c021c1fae164f251f260122d792a4f0313e",
-          "sha1": "1c23d1ec40dfed4d7420640b6d87dc1a95e379c9",
-          "md5": "c066d87dc71cd0bb6e6a32e96abeb957"
+          "size": 5217,
+          "sha512": "2f5e8fa31986c65134e5cedc632e156098c3fc5248c2d25e124186892475b36be271ce48faf432b11e96ac06679faa2ca5d7c2004d8c6569414d40918e6c637d",
+          "sha256": "e899051ea370f98cd187bb3d833421e4db8a83da513c75734202c151ffd17894",
+          "sha1": "79f73db4d800798af3184bd2aa479624fd4f21fd",
+          "md5": "1810928a639859db870105c82f7c8125"
         }
       ]
     }

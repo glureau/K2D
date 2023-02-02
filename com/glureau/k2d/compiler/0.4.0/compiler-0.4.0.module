@@ -10,7 +10,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.5"
+      "version": "7.6"
     }
   },
   "variants": [
@@ -45,11 +45,11 @@
         {
           "name": "compiler-0.4.0.jar",
           "url": "compiler-0.4.0.jar",
-          "size": 160844,
-          "sha512": "65b054203b2ef3c08f4b2fccde3489af15f54255bd760ff448db31d66270566cbdf9090ea5790b27103a039d76c762e317c795dd22322c470ee362f9681b84dc",
-          "sha256": "c8dced290be6c16d0a8861527ecae97a7c69d921bcafd2706e8573fda12a9c4b",
-          "sha1": "b58d3385f2772439aef0b406de4df3e2b62cc467",
-          "md5": "06643e7f4b0598a88516ce509cb7bf98"
+          "size": 160723,
+          "sha512": "f07a79212cffaf6f4ecff1bb7c03a01be692464db7fc6e868a82ffc6a93a7a3151441802e1e537a9c3f0cfe7cfc76e7fd7ac148c787ee0e0ca492ab723c4a178",
+          "sha256": "9a203d830b5513e612564b87204a0764ce8be4fbe9f920fba010d116d743adeb",
+          "sha1": "ce2db033e7471fd117904c9686ac0b7567d7da7e",
+          "md5": "7e5cf07183526b8450a09a482cb13c7a"
         }
       ]
     },
@@ -96,7 +96,7 @@
           "group": "com.squareup",
           "module": "kotlinpoet-ksp",
           "version": {
-            "requires": "1.10.2"
+            "requires": "1.12.0"
           }
         },
         {
@@ -132,11 +132,11 @@
         {
           "name": "compiler-0.4.0.jar",
           "url": "compiler-0.4.0.jar",
-          "size": 160844,
-          "sha512": "65b054203b2ef3c08f4b2fccde3489af15f54255bd760ff448db31d66270566cbdf9090ea5790b27103a039d76c762e317c795dd22322c470ee362f9681b84dc",
-          "sha256": "c8dced290be6c16d0a8861527ecae97a7c69d921bcafd2706e8573fda12a9c4b",
-          "sha1": "b58d3385f2772439aef0b406de4df3e2b62cc467",
-          "md5": "06643e7f4b0598a88516ce509cb7bf98"
+          "size": 160723,
+          "sha512": "f07a79212cffaf6f4ecff1bb7c03a01be692464db7fc6e868a82ffc6a93a7a3151441802e1e537a9c3f0cfe7cfc76e7fd7ac148c787ee0e0ca492ab723c4a178",
+          "sha256": "9a203d830b5513e612564b87204a0764ce8be4fbe9f920fba010d116d743adeb",
+          "sha1": "ce2db033e7471fd117904c9686ac0b7567d7da7e",
+          "md5": "7e5cf07183526b8450a09a482cb13c7a"
         }
       ]
     }

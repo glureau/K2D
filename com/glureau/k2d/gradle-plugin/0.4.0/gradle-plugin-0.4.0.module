@@ -10,7 +10,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.5"
+      "version": "7.6"
     }
   },
   "variants": [
@@ -46,10 +46,10 @@
           "name": "gradle-plugin-0.4.0.jar",
           "url": "gradle-plugin-0.4.0.jar",
           "size": 7161,
-          "sha512": "6af48297ce1636e6b5bd7e185e9ab9192d63b513f29429ff52b59babf0001fc2dd26b545b66acc85aef8db51fdeebfa1590eee9543e333520b41c2be1a3e351d",
-          "sha256": "86e99b6fda83433cdd659ef4f6056a4220e03306f1ce30c8b20fe0887f1f08b3",
-          "sha1": "82ad9f6bd99e09958c8bb3943a678ab59831d1fd",
-          "md5": "9a66ef66e36c029016c9cf551d88b3e3"
+          "sha512": "84e086930b4882e8c4ab7536771c826a0ca3716eeb36486dc5e41c16706a41de0fc5ad92c65b29635926e0460085b777551fde3327fbbc7cc75348bd493f1fa6",
+          "sha256": "87c65e79c7f3f8d4d4fe21f637be71da257d5f72f5a327331653d652d90391c7",
+          "sha1": "cf0bb80b978d58eee589e3dbad4ee244268e2cc8",
+          "md5": "f74fcc58696a5759e7771ff878507fa1"
         }
       ]
     },
@@ -99,10 +99,10 @@
           "name": "gradle-plugin-0.4.0.jar",
           "url": "gradle-plugin-0.4.0.jar",
           "size": 7161,
-          "sha512": "6af48297ce1636e6b5bd7e185e9ab9192d63b513f29429ff52b59babf0001fc2dd26b545b66acc85aef8db51fdeebfa1590eee9543e333520b41c2be1a3e351d",
-          "sha256": "86e99b6fda83433cdd659ef4f6056a4220e03306f1ce30c8b20fe0887f1f08b3",
-          "sha1": "82ad9f6bd99e09958c8bb3943a678ab59831d1fd",
-          "md5": "9a66ef66e36c029016c9cf551d88b3e3"
+          "sha512": "84e086930b4882e8c4ab7536771c826a0ca3716eeb36486dc5e41c16706a41de0fc5ad92c65b29635926e0460085b777551fde3327fbbc7cc75348bd493f1fa6",
+          "sha256": "87c65e79c7f3f8d4d4fe21f637be71da257d5f72f5a327331653d652d90391c7",
+          "sha1": "cf0bb80b978d58eee589e3dbad4ee244268e2cc8",
+          "md5": "f74fcc58696a5759e7771ff878507fa1"
         }
       ]
     }

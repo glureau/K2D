@@ -11,7 +11,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.5"
+      "version": "7.6"
     }
   },
   "variants": [
@@ -68,10 +68,10 @@
           "name": "lib-macosx64-0.4.0-metadata.jar",
           "url": "lib-macosx64-0.4.0-metadata.jar",
           "size": 261,
-          "sha512": "3bd4f73ffc6e81b1624648ceee2c22b8254ed98cedebb6214dcec5d3934384a138a01936ac8b9d9d696a2477311a867151fa3c2711c293aeca02e263299df01e",
-          "sha256": "188a2aa91688e126b4e051aede62cd59c8816dfb0dc74472ab47962fac7cbfbe",
-          "sha1": "6016354a197c6e27a45e436998e726ba54e4e023",
-          "md5": "487754a0ef4add56b0617cd99d860116"
+          "sha512": "b2013d6dffaae7638dbcd447c7a633d5f1095b764d874bc92e51e1b01bcbd2866d9e00427f4a82407fb2fe46a626c7cfa249d0e774b79d96f95ba200b536d8d7",
+          "sha256": "b0fb28611899eb3e18a824bfd6ceb4b83ea6c4066bce86b9f08563ef6bf7f4ca",
+          "sha1": "5a894a20fd6eb2dab9a9e697b808b284adc9f89a",
+          "md5": "2d13c78bd9962ac79f376aa26b75c1cf"
         }
       ]
     }

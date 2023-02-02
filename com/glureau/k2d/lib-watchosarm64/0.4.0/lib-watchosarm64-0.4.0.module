@@ -11,7 +11,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.5"
+      "version": "7.6"
     }
   },
   "variants": [
@@ -68,10 +68,10 @@
           "name": "lib-watchosarm64-0.4.0-metadata.jar",
           "url": "lib-watchosarm64-0.4.0-metadata.jar",
           "size": 261,
-          "sha512": "c97d9758e1c1d4b16664f49fab1789fede157a0ae80222de4c5ef72cc40f3ecd888b5a71efe6083133eaa584c58e9e8b5cd931179a5923ce336167def5a483a9",
-          "sha256": "523045fb3a34bc34cb989ceb301ffee2ee54fc127a97347697fb5ecc202b4c0d",
-          "sha1": "8964e73bdd239d101e37de97ca2ec05e484e2112",
-          "md5": "96ec5119d9f9392977e9e070c49fe3b9"
+          "sha512": "288b6928500dce2b25fca125910a6dd3801beb83f01f8aaa9ea34b466dc363cf8b3e1181919f11413025ae046e60862c2416155465ed507abad7da0561e72406",
+          "sha256": "2906eff4ffa7057dbc91c9a243be2e953e314c7a5847ec18acd3553d543bfea4",
+          "sha1": "166e8663853e8358f4a8a2274276d090c67201cf",
+          "md5": "9322b30b2c6509814b4ceb19f20e595e"
         }
       ]
     }

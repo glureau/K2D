@@ -11,7 +11,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.5"
+      "version": "7.6"
     }
   },
   "variants": [
@@ -43,11 +43,11 @@
         {
           "name": "lib-debug.aar",
           "url": "lib-android-debug-0.4.0.aar",
-          "size": 5257,
-          "sha512": "990f0674d2c17323bbca5e0d0c52ae71ac68588c1f81ab0c712e66f7b1e4a5e784257f5c3de031e294aae410627092c6243593f816c365a0e71acee511b400cb",
-          "sha256": "43ed9dcac66e3b836bc9fef2ec1f2bed6030ece99a1d7aaccb33bab8b362dc5f",
-          "sha1": "9c10f47b1d9ff61e6384d9219e5529b353c00724",
-          "md5": "f68197b6b3d4d5a23828b16944b00038"
+          "size": 5354,
+          "sha512": "d4e7813f65467e35b4dba985baf8279e0a650bed62de0b52e149e69ae362606814abbd66cd41d5e212c04b0cebb78016be722c54d5acd41e5de6198bbdcd03e8",
+          "sha256": "db0ac84d4995752e866d6d4d41e0637147a62ae5c101e48222595af85df9f6a2",
+          "sha1": "11e5bd49489ef36375bec01acfdb49c669b05b85",
+          "md5": "ca414f016a4224bd88c78b708f64c991"
         }
       ]
     },
@@ -107,11 +107,11 @@
         {
           "name": "lib-debug.aar",
           "url": "lib-android-debug-0.4.0.aar",
-          "size": 5257,
-          "sha512": "990f0674d2c17323bbca5e0d0c52ae71ac68588c1f81ab0c712e66f7b1e4a5e784257f5c3de031e294aae410627092c6243593f816c365a0e71acee511b400cb",
-          "sha256": "43ed9dcac66e3b836bc9fef2ec1f2bed6030ece99a1d7aaccb33bab8b362dc5f",
-          "sha1": "9c10f47b1d9ff61e6384d9219e5529b353c00724",
-          "md5": "f68197b6b3d4d5a23828b16944b00038"
+          "size": 5354,
+          "sha512": "d4e7813f65467e35b4dba985baf8279e0a650bed62de0b52e149e69ae362606814abbd66cd41d5e212c04b0cebb78016be722c54d5acd41e5de6198bbdcd03e8",
+          "sha256": "db0ac84d4995752e866d6d4d41e0637147a62ae5c101e48222595af85df9f6a2",
+          "sha1": "11e5bd49489ef36375bec01acfdb49c669b05b85",
+          "md5": "ca414f016a4224bd88c78b708f64c991"
         }
       ]
     }

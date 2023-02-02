@@ -11,7 +11,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.5"
+      "version": "7.6"
     }
   },
   "variants": [
@@ -68,10 +68,10 @@
           "name": "lib-iossimulatorarm64-0.4.0-metadata.jar",
           "url": "lib-iossimulatorarm64-0.4.0-metadata.jar",
           "size": 261,
-          "sha512": "2361a28c694bba99c12b5fa4d6d4665e71b80d36b4e99e09e55526df0c2d050668c69b70352d9a517368948d46d25a9e4881a191abe08e21442739458ccd506d",
-          "sha256": "72af192f87655e26d0deeb0bbf675843209085bd8c75e1b55a2810fd4a4e8f29",
-          "sha1": "5bd7e8b2a433be950c8de00ff1ef72392e9f9795",
-          "md5": "a391d006357bf4254f62aa758b0c1e30"
+          "sha512": "8c6b21b7d16506adf9e67f8460b58f7fcee8d0d26ef175ca16e07f38a2e1f0565a84e2e42908ce54c3eba3c04d3ecee13e8a5b59b104db745a4a67ccb2a7e133",
+          "sha256": "6ef91e15f8710c1a4db5f7273dc2162a9c6dbc5bd0a94346df06a868fe8ec0ec",
+          "sha1": "9e72daf166e10a566484405e3d17ffb65e0a0a20",
+          "md5": "5413f796486b8491987e6298011873df"
         }
       ]
     }
