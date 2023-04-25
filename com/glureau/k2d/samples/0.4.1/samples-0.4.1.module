@@ -1,0 +1,76 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.glureau.k2d",
+    "module": "samples",
+    "version": "0.4.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "samples-metadata-0.4.1.jar",
+          "url": "samples-0.4.1.jar",
+          "size": 674,
+          "sha512": "32dd175b986a604d9742411729f85ae1d4254ed0826ffc9b990668091a3ef21eb5861a2eb1791cbed073ea9e180d91cc8516e0b07b8caeb4dc7f5a57f5458ef6",
+          "sha256": "99b0762540e4e9460c840b6a08e5b781bbef0f3679d9a5403cee26b87bc4510a",
+          "sha1": "c074d956789fe5a7dbf386b9ddb7e34d1618dbab",
+          "md5": "03f2975eb3804acca2633715c8bcb518"
+        }
+      ]
+    },
+    {
+      "name": "jvmApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../samples-jvm/0.4.1/samples-jvm-0.4.1.module",
+        "group": "com.glureau.k2d",
+        "module": "samples-jvm",
+        "version": "0.4.1"
+      }
+    },
+    {
+      "name": "jvmRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../samples-jvm/0.4.1/samples-jvm-0.4.1.module",
+        "group": "com.glureau.k2d",
+        "module": "samples-jvm",
+        "version": "0.4.1"
+      }
+    }
+  ]
+}

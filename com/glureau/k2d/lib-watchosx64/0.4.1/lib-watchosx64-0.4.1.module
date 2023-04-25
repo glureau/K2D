@@ -1,0 +1,79 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../lib/0.4.1/lib-0.4.1.module",
+    "group": "com.glureau.k2d",
+    "module": "lib",
+    "version": "0.4.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "watchosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lib.klib",
+          "url": "lib-watchosx64-0.4.1.klib",
+          "size": 9105,
+          "sha512": "659913c00241aafff3bf747226f0ed6f70a3c5d006f4b46bad6f173dcb270c8e1cc847cbef92174e7cb0ee773042f1e8a2373c7bdc3a8a6a7e146b44045a2b2a",
+          "sha256": "f6d3176793df3d5a610f6a4be50afd899d27095715054f562b2166686b363b67",
+          "sha1": "d2de4ded322d14c641d8e52f9b7b747efd6f02ea",
+          "md5": "de32ad260d1398719035edaf693eac66"
+        }
+      ]
+    },
+    {
+      "name": "watchosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lib-watchosx64-0.4.1-metadata.jar",
+          "url": "lib-watchosx64-0.4.1-metadata.jar",
+          "size": 261,
+          "sha512": "5fbb2cd78297b1696a18ba7118353b3562cb98522a7b011eb360c6be333d394049768ecfa1b63a3c95368c7b4487da0b0c86f13f6f1ef815bb8783071e9ac975",
+          "sha256": "260bcb3502d106f5e05e5f332bf65efd1d66e380e623aa8f440bef1f91d961cc",
+          "sha1": "d47661635ee6bf79dffa9a6fb780da6a0958c8fd",
+          "md5": "358e5155d0a37c2c638b22cbe4da52b7"
+        }
+      ]
+    }
+  ]
+}

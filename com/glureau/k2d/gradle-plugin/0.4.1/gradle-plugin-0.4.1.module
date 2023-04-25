@@ -1,0 +1,110 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.glureau.k2d",
+    "module": "gradle-plugin",
+    "version": "0.4.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.glureau.k2d",
+          "module": "compiler",
+          "version": {
+            "requires": "0.4.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "gradle-plugin-0.4.1.jar",
+          "url": "gradle-plugin-0.4.1.jar",
+          "size": 7161,
+          "sha512": "c9d6a37c38df391586c4aaf3014f5d699da3b03a36161e215806cacc84a567a38c9a09a3f65b4f452b63353145d42dbaff5f0b736cc478e754b73c422b59fafa",
+          "sha256": "13b29e59e8b47ac134872d4d6987b297d29ba163cf82fadc086734a71f10a07a",
+          "sha1": "13c79b5edbf2d8296f444b13b5b4ab26c40f29ca",
+          "md5": "546d2c828a7e7edc73adefe8cd13c205"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.devtools.ksp",
+          "module": "symbol-processing-gradle-plugin",
+          "version": {
+            "requires": "1.8.0-1.0.9"
+          }
+        },
+        {
+          "group": "com.glureau.k2d",
+          "module": "lib",
+          "version": {
+            "requires": "0.4.1"
+          }
+        },
+        {
+          "group": "com.glureau.k2d",
+          "module": "compiler",
+          "version": {
+            "requires": "0.4.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.8.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "gradle-plugin-0.4.1.jar",
+          "url": "gradle-plugin-0.4.1.jar",
+          "size": 7161,
+          "sha512": "c9d6a37c38df391586c4aaf3014f5d699da3b03a36161e215806cacc84a567a38c9a09a3f65b4f452b63353145d42dbaff5f0b736cc478e754b73c422b59fafa",
+          "sha256": "13b29e59e8b47ac134872d4d6987b297d29ba163cf82fadc086734a71f10a07a",
+          "sha1": "13c79b5edbf2d8296f444b13b5b4ab26c40f29ca",
+          "md5": "546d2c828a7e7edc73adefe8cd13c205"
+        }
+      ]
+    }
+  ]
+}
