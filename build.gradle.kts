@@ -18,8 +18,8 @@ val localProperties = java.util.Properties().apply {
 
 plugins {
     id("maven-publish")
-    id("org.ajoberstar.git-publish") version "3.0.1"
-    id("org.ajoberstar.grgit") version "4.1.1"
+    id("org.ajoberstar.git-publish") version "4.2.0"
+    id("org.ajoberstar.grgit") version "5.2.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
     id("com.glureau.grip") version "0.3.0"
     id("com.android.library") version "7.3.0" apply false
@@ -27,7 +27,7 @@ plugins {
 
 allprojects {
     group = "com.glureau.k2d"
-    version = "0.4.0"
+    version = "0.4.1"
 
     repositories {
         mavenLocal()

@@ -5,7 +5,7 @@ plugins {
     id("org.ajoberstar.grgit")
     id("com.google.devtools.ksp")
     id("org.jetbrains.kotlinx.knit") version "0.4.0" // TESTING...
-    id("com.glureau.k2d") version "0.4.0"
+    id("com.glureau.k2d") version "0.4.1"
 }
 
 repositories {
@@ -89,7 +89,6 @@ gitPublish {
 tasks["dokkaHtml"].dependsOn("generateMetadataFileForKotlinMultiplatformPublication")
 tasks["gitPublishCopy"].dependsOn("dokkaHtml")
 tasks["jvmTest"].dependsOn("compileCommonMainKotlinMetadata")
-
 
 k2d {
     dokka {
