@@ -77,6 +77,7 @@ afterEvaluate {
 }
 
 // Publish the sample documentation on branch "demo"
+/*
 gitPublish {
     repoUri.set("git@github.com:glureau/K2D.git")
     branch.set("demo")
@@ -84,7 +85,7 @@ gitPublish {
     preserve { include("**") }
     val head = grgit.head()
     commitMessage.set("${head.abbreviatedId}: ${project.version} : ${head.fullMessage}")
-}
+}*/
 
 tasks["dokkaHtml"].dependsOn("generateMetadataFileForKotlinMultiplatformPublication")
 tasks["gitPublishCopy"].dependsOn("dokkaHtml")
