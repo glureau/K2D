@@ -1,0 +1,79 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../lib/0.4.2/lib-0.4.2.module",
+    "group": "com.glureau.k2d",
+    "module": "lib",
+    "version": "0.4.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "macosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lib.klib",
+          "url": "lib-macosarm64-0.4.2.klib",
+          "size": 9104,
+          "sha512": "d9eb15e486014f991e40eda02d67e37e3b5eb23adedb17da4b1ab33aaa76b51b5bbae0ae43ea206a243c823b42403a63d9e8a30d365119b5e63606b97edbdfec",
+          "sha256": "ffd27233241110dfdcd3c6d8a882ef21ffaa9b52aa8838479b99f21bceff8aef",
+          "sha1": "88708b2e8bb8bec06eef4948499e8929e03265d6",
+          "md5": "f71c1fd45bfaf8c368c3158c997111a1"
+        }
+      ]
+    },
+    {
+      "name": "macosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lib-macosarm64-0.4.2-metadata.jar",
+          "url": "lib-macosarm64-0.4.2-metadata.jar",
+          "size": 261,
+          "sha512": "1dfc454f97eca31b51966b3232f8be786abda4c62a6780b0dac280d64e860c9da8746473724cd9de7c312b6160f30e28df7b366d18c28f6edf31c0ba4271fca4",
+          "sha256": "577737bb26b1f73cb17ee2bf0f43a1f1056c74e5566151da18b55e6b92ac46aa",
+          "sha1": "0b467ba7395346f6aa51b7b6802a11aa4c7048c1",
+          "md5": "860bba19bc48b4c1952033db4673d684"
+        }
+      ]
+    }
+  ]
+}

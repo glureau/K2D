@@ -1,0 +1,91 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../lib/0.4.2/lib-0.4.2.module",
+    "group": "com.glureau.k2d",
+    "module": "lib",
+    "version": "0.4.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "jvmApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.8.10"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lib-jvm-0.4.2.jar",
+          "url": "lib-jvm-0.4.2.jar",
+          "size": 5312,
+          "sha512": "8001c6536507ed8681bf61abcd4c1463d746ad3a4935f54778da2ff3835c48452e063703a2a1e580a64d7d5784c62a33acea1692995d57f7be538b0ebd48ca6b",
+          "sha256": "aa87cf46ecd28a489d6f29563f87e79320c0fcc8c25872b888f3819e2131447c",
+          "sha1": "3751544c95a3e575b37b8de5e401045e09c36da3",
+          "md5": "34a8cf16ee841aed64537081c7dd212c"
+        }
+      ]
+    },
+    {
+      "name": "jvmRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.8.10"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lib-jvm-0.4.2.jar",
+          "url": "lib-jvm-0.4.2.jar",
+          "size": 5312,
+          "sha512": "8001c6536507ed8681bf61abcd4c1463d746ad3a4935f54778da2ff3835c48452e063703a2a1e580a64d7d5784c62a33acea1692995d57f7be538b0ebd48ca6b",
+          "sha256": "aa87cf46ecd28a489d6f29563f87e79320c0fcc8c25872b888f3819e2131447c",
+          "sha1": "3751544c95a3e575b37b8de5e401045e09c36da3",
+          "md5": "34a8cf16ee841aed64537081c7dd212c"
+        }
+      ]
+    }
+  ]
+}
