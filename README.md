@@ -1,3 +1,5 @@
+(A huge rework is in progress on the [experimentation_k2d](https://github.com/glureau/K2D/tree/experimentation_k2d) branch, stay tuned...)
+
 # MermaidKsp
 
 Generate diagram sequences (mermaid format) based on the classes of each package. A graph is generated for each module and for each package.
