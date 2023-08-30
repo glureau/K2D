@@ -1,0 +1,79 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../lib/0.4.3/lib-0.4.3.module",
+    "group": "com.glureau.k2d",
+    "module": "lib",
+    "version": "0.4.3",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "iosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lib.klib",
+          "url": "lib-iosarm64-0.4.3.klib",
+          "size": 11195,
+          "sha512": "de85f8329de174b3e3b2521b32c1fa536f2145d59cd238de94e800a810c7591f64dbc6d76e613268dc4464e61b8621029510d925ea80251061132b88594bca4b",
+          "sha256": "364949ab0691e167a0f3e57cf54e5dda53a8a37766960b10dc11a6ff29b93607",
+          "sha1": "e5d8ae8031f5bc17d42c3ff883d57f53b85373de",
+          "md5": "8e448428bf09b56a40ee5e6e3cc91925"
+        }
+      ]
+    },
+    {
+      "name": "iosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lib-iosarm64-0.4.3-metadata.jar",
+          "url": "lib-iosarm64-0.4.3-metadata.jar",
+          "size": 261,
+          "sha512": "39c0f676446e3a78f43a1bb537a8acebac2c8011fdc804827a6d09aaafa1ee5551cd56c4b45a85e11436b03c5f2afaa94f4ba1924d62487e8197015e86a21e78",
+          "sha256": "18ccac52de5494d49041275e70450face3f25dfbd4bc9cb2f7507e7407eb3759",
+          "sha1": "16907de8c6c1ecfd1e0c14349be4cc3ffad4124e",
+          "md5": "c2be4a5861fd6b897024773645ec7d0b"
+        }
+      ]
+    }
+  ]
+}

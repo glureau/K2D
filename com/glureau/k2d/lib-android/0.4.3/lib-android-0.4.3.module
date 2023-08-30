@@ -1,0 +1,117 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../lib/0.4.3/lib-0.4.3.module",
+    "group": "com.glureau.k2d",
+    "module": "lib",
+    "version": "0.4.3",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.8.10"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lib-release.aar",
+          "url": "lib-android-0.4.3.aar",
+          "size": 6066,
+          "sha512": "595e0705a9e85831222ad28b83df71398ca5f347a1b65267afb5ce1f6dfbd3e8a3d98f783485f13ec89857d51ddd1c896abc0c7903b489bc5f93b4fc5e7d08bb",
+          "sha256": "4bbdf03ffc25f9439d771ecf00593312eb09acda40179c6378e30cbc66354c4b",
+          "sha1": "f8ef578b7330465b9a1109cc971f99d14e655576",
+          "md5": "cc2b785074f2c145c824259dd52dff62"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.8.10"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.10"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "lib-release.aar",
+          "url": "lib-android-0.4.3.aar",
+          "size": 6066,
+          "sha512": "595e0705a9e85831222ad28b83df71398ca5f347a1b65267afb5ce1f6dfbd3e8a3d98f783485f13ec89857d51ddd1c896abc0c7903b489bc5f93b4fc5e7d08bb",
+          "sha256": "4bbdf03ffc25f9439d771ecf00593312eb09acda40179c6378e30cbc66354c4b",
+          "sha1": "f8ef578b7330465b9a1109cc971f99d14e655576",
+          "md5": "cc2b785074f2c145c824259dd52dff62"
+        }
+      ]
+    }
+  ]
+}
