@@ -80,15 +80,17 @@ tasks.create<Sync>("copyMavenLocalArtifacts") {
 }
 
 gitPublish {
-    repoUri.set("git@github.com:glureau/K2D.git")
-    branch.set("mvn-repo")
-    contents.from("$buildDir/mvn-repo")
-    preserve { include("**") }
-    val head = grgit.head()
-    commitMessage.set("${head.abbreviatedId}: ${project.version} : ${head.fullMessage}")
+    publications.create("k2d") {
+        repoUri.set("git@github.com:glureau/K2D.git")
+        branch.set("mvn-repo")
+        contents.from("$buildDir/mvn-repo")
+        preserve { include("**") }
+        val head = grgit.head()
+        commitMessage.set("${head.abbreviatedId}: ${project.version} : ${head.fullMessage}")
+    }
 }
 tasks["copyMavenLocalArtifacts"].dependsOn("cleanMavenLocalArtifacts")
-tasks["gitPublishCopy"].dependsOn("copyMavenLocalArtifacts")
+tasks["gitPublishK2dCopy"].dependsOn("copyMavenLocalArtifacts")
 
 grip {
     files = fileTree(projectDir).apply {
