@@ -7,18 +7,24 @@ import com.glureau.k2d.compiler.dokka.DokkaModuleMermaidRenderer
 import com.glureau.k2d.compiler.dokka.DokkaPackagesMermaidRenderer
 import com.glureau.k2d.compiler.dokka.K2DDokkaConfig
 import com.glureau.k2d.compiler.markdown.appendMdMermaid
+import com.glureau.k2d.compiler.markdown.table.K2DMarkdownTableConfiguration
+import com.glureau.k2d.compiler.markdown.table.K2DMarkdownTableConfiguration.Companion.toDomain
 import com.glureau.k2d.compiler.markdown.table.MarkdownTableRenderer
 import com.glureau.k2d.compiler.mermaid.MermaidClassRenderer
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.getAnnotationsByType
-import com.google.devtools.ksp.processing.*
+import com.google.devtools.ksp.processing.KSPLogger
+import com.google.devtools.ksp.processing.Resolver
+import com.google.devtools.ksp.processing.SymbolProcessor
+import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
+import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSNode
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import java.util.*
+import java.util.Base64
 import kotlin.reflect.KClass
 
 // Trick to share the Logger everywhere without injecting the dependency everywhere
@@ -50,7 +56,7 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
 
         resolver.onFileAnnotation(K2DMermaidGraph::class) { annotation, rawAnnotation, packageName ->
             val name = annotation.name
-            val selectorAnnotation: KSAnnotation = rawAnnotation.getArg(K2DClassMembersTable::symbolSelector)
+            val selectorAnnotation: KSAnnotation = rawAnnotation.getArg(K2DMermaidGraph::symbolSelector)
             // TODO : This crash when using the SymbolSelector by default, see
             //  https://kotlinlang.slack.com/archives/C013BA8EQSE/p1668459386930549?thread_ts=1643275195.027000&cid=C013BA8EQSE
             val selector: K2DSymbolSelector = annotation.symbolSelector.symbolSelector(selectorAnnotation, packageName)
@@ -75,7 +81,15 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
         }
 
         resolver.onFileAnnotation(K2DClassMembersTable::class) { annotation, rawAnnotation, packageName ->
+            val name = annotation.name
             val selectorAnnotation: KSAnnotation = rawAnnotation.getArg(K2DClassMembersTable::symbolSelector)
+            val tableConfig = annotation.configuration.toDomain()
+            // TODO: check if defaults + merge to global config instead?
+            val finalConfig = if (tableConfig == K2DMarkdownTableConfiguration()) { // If default value, global config
+                configuration.defaultMarkdownTableConfiguration
+            } else {
+                tableConfig
+            }
             val selector = annotation.symbolSelector.symbolSelector(selectorAnnotation, packageName)
 
             // TODO: No need of the global config here, it's computed by
@@ -87,16 +101,14 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
                     Logger.info("Ignoring ${gClass.symbolName}")
                     return@forEach
                 }
-                val content =
-                    MarkdownTableRenderer(configuration.defaultMarkdownTableConfiguration).renderClassMembers(gClass)
-                        .toByteArray()
+                val content = MarkdownTableRenderer(finalConfig).renderClassMembers(gClass).toByteArray()
 
                 if (content.isNotEmpty()) {
                     environment.writeMarkdown(
                         content = content,
-                        packageName = gClass.packageName,
+                        packageName = if (name.isBlank()) gClass.packageName else "",
                         // Replacing "." by "·" allow a proper default order (main class then inner classes)
-                        fileName = gClass.symbolName.replace(".", "·") + "_table",
+                        fileName = name.ifBlank { gClass.symbolName.replace(".", "·") + "_table" },
                         dependencies = gClass.originFile?.let { listOf(it) } ?: emptyList())
                 }
             }
@@ -111,7 +123,7 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
 
     private fun <T : Annotation> Resolver.onFileAnnotation(
         klass: KClass<T>,
-        block: (T, rawAnnotation: KSAnnotation, packageName: String?) -> Unit
+        block: (T, rawAnnotation: KSAnnotation, packageName: String?) -> Unit,
     ) {
         getSymbolsWithAnnotation(
             annotationName = klass.qualifiedName!!,
@@ -132,7 +144,7 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
 
     private fun <T : Annotation> Resolver.onAnnotation(
         klass: KClass<T>,
-        block: (T) -> Unit
+        block: (T) -> Unit,
     ) {
         getSymbolsWithAnnotation(
             annotationName = klass.qualifiedName!!,
@@ -147,7 +159,7 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
     private fun generateDokka(
         aggregatorClassVisitor: AggregatorClassVisitor,
         dokkaConfig: K2DDokkaConfig,
-        configuration: K2DConfiguration
+        configuration: K2DConfiguration,
     ) {
         val data = aggregatorClassVisitor.classes
 

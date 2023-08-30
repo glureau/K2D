@@ -13,8 +13,20 @@
     )
 )
 
+@file:K2DClassMembersTable(
+    name = "Circle_no_functions",
+    symbolSelector = K2DSymbolSelectorAnnotation(
+        includesCurrentPackage = false,
+        includesClasses = [Circle::class],
+    ),
+    configuration = K2DClassMembersTableConfiguration(
+        showClassFunctions = false,
+    )
+)
+
 package sample
 
 import com.glureau.k2d.K2DClassMembersTable
+import com.glureau.k2d.K2DClassMembersTableConfiguration
 import com.glureau.k2d.K2DMermaidGraph
 import com.glureau.k2d.K2DSymbolSelectorAnnotation

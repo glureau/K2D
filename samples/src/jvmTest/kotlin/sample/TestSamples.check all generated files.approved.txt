@@ -44,6 +44,18 @@ classDiagram
 
 ```
 
+File: Circle_no_functions.md
+#### Circle
+
+##### Properties
+
+
+| Name           | Type       | Comments |
+|----------------|------------|----------|
+| originPosition | [Position] |          |
+| radius         | [Float]    |          |
+
+
 File: sample/Polygon_table.md
 #### Polygon
 

@@ -18,10 +18,10 @@ dependencies {
         exclude(module = "kotlin-reflect")
     }
     implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
-    implementation("com.squareup:kotlinpoet-ksp:1.12.0")
+    implementation("com.squareup:kotlinpoet-ksp:1.14.2")
     implementation("com.google.devtools.ksp:symbol-processing:$kspVersion")
     implementation("com.google.devtools.ksp:symbol-processing-api:$kspVersion")
-    api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+    api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
     testImplementation("com.github.tschuchortdev:kotlin-compile-testing-ksp:1.4.9")
     testImplementation("junit:junit:4.13.2")
@@ -33,6 +33,10 @@ dependencies {
 
 sourceSets.main {
     java.srcDirs("src/main/kotlin")
+}
+
+kotlin {
+    jvmToolchain(11)
 }
 
 java {
