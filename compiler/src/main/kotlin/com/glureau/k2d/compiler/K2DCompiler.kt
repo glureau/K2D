@@ -1,16 +1,18 @@
 package com.glureau.k2d.compiler
 
-import com.glureau.k2d.K2DClassMembersTable
+import com.glureau.k2d.K2DMarkdownClassTable
 import com.glureau.k2d.K2DMermaidGraph
 import com.glureau.k2d.compiler.K2DSymbolSelector.Companion.symbolSelector
 import com.glureau.k2d.compiler.dokka.DokkaModuleMermaidRenderer
 import com.glureau.k2d.compiler.dokka.DokkaPackagesMermaidRenderer
 import com.glureau.k2d.compiler.dokka.K2DDokkaConfig
 import com.glureau.k2d.compiler.markdown.appendMdMermaid
-import com.glureau.k2d.compiler.markdown.table.K2DMarkdownTableConfiguration
-import com.glureau.k2d.compiler.markdown.table.K2DMarkdownTableConfiguration.Companion.toDomain
+import com.glureau.k2d.compiler.markdown.table.MarkdownClassTableConfiguration
+import com.glureau.k2d.compiler.markdown.table.MarkdownClassTableConfiguration.Companion.toDomain
 import com.glureau.k2d.compiler.markdown.table.MarkdownTableRenderer
 import com.glureau.k2d.compiler.mermaid.MermaidClassRenderer
+import com.glureau.k2d.compiler.mermaid.MermaidRendererConfiguration
+import com.glureau.k2d.compiler.mermaid.MermaidRendererConfiguration.Companion.toDomain
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.getAnnotationsByType
 import com.google.devtools.ksp.processing.KSPLogger
@@ -22,7 +24,6 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSNode
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.util.Base64
 import kotlin.reflect.KClass
@@ -57,6 +58,13 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
         resolver.onFileAnnotation(K2DMermaidGraph::class) { annotation, rawAnnotation, packageName ->
             val name = annotation.name
             val selectorAnnotation: KSAnnotation = rawAnnotation.getArg(K2DMermaidGraph::symbolSelector)
+            val tableConfig = annotation.configuration.toDomain()
+            // TODO: check if defaults + merge to global config instead?
+            val finalConfig = if (tableConfig == MermaidRendererConfiguration()) { // If default value, global config
+                configuration.defaultMermaidConfiguration
+            } else {
+                tableConfig
+            }
             // TODO : This crash when using the SymbolSelector by default, see
             //  https://kotlinlang.slack.com/archives/C013BA8EQSE/p1668459386930549?thread_ts=1643275195.027000&cid=C013BA8EQSE
             val selector: K2DSymbolSelector = annotation.symbolSelector.symbolSelector(selectorAnnotation, packageName)
@@ -65,12 +73,9 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
             val filtered = aggregatorClassVisitor.classes
                 .filter { (_, gClass) -> selector.matches(gClass) }
 
-            // TODO: get MermaidRendererConfiguration from annotation
             val content = buildString {
                 appendMdMermaid(
-                    MermaidClassRenderer(configuration.defaultMermaidConfiguration).renderClassDiagram(
-                        filtered
-                    )
+                    MermaidClassRenderer(finalConfig).renderClassDiagram(filtered)
                 )
             }.toByteArray()
 
@@ -80,12 +85,12 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
 
         }
 
-        resolver.onFileAnnotation(K2DClassMembersTable::class) { annotation, rawAnnotation, packageName ->
+        resolver.onFileAnnotation(K2DMarkdownClassTable::class) { annotation, rawAnnotation, packageName ->
             val name = annotation.name
-            val selectorAnnotation: KSAnnotation = rawAnnotation.getArg(K2DClassMembersTable::symbolSelector)
+            val selectorAnnotation: KSAnnotation = rawAnnotation.getArg(K2DMarkdownClassTable::symbolSelector)
             val tableConfig = annotation.configuration.toDomain()
             // TODO: check if defaults + merge to global config instead?
-            val finalConfig = if (tableConfig == K2DMarkdownTableConfiguration()) { // If default value, global config
+            val finalConfig = if (tableConfig == MarkdownClassTableConfiguration()) { // If default value, global config
                 configuration.defaultMarkdownTableConfiguration
             } else {
                 tableConfig

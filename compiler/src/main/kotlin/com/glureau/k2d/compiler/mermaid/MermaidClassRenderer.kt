@@ -3,13 +3,15 @@ package com.glureau.k2d.compiler.mermaid
 import com.glureau.k2d.compiler.*
 
 class MermaidClassRenderer(
-    private val conf: K2DMermaidRendererConfiguration
+    private val conf: MermaidRendererConfiguration
 ) {
 
     fun renderClassDiagram(classes: Map<String, GClass>): String {
         val stringBuilder = StringBuilder()
         stringBuilder.append("classDiagram\n")
-        classes.values.forEach { c ->
+        val gClasses = classes.values
+        val classesQualifiedNames = gClasses.map { it.qualifiedName }
+        gClasses.forEach { c ->
             if (c.hide) return@forEach
             if (!conf.showCompanion && c.symbolName == "Companion" && c.classType == GClassType.Object) return@forEach
 
@@ -32,9 +34,9 @@ class MermaidClassRenderer(
                     // TODO: method to render lambdas can be shared (somewhere else)
                     val paramsString = f.parameters.joinToString { it.renderForMermaid() }
                     //val paramsString = f.parameters.joinToString { it.usedGenerics.joinToString("|") }
-                    var returnString = f.returnType?.renderForMermaid() ?: ""
-                    if (returnString == "Unit") returnString = "" // Ignore Unit
-                    stringBuilder.append("    ${f.visibility.asMermaid}${f.funcName}($paramsString) ${returnString}\n")
+                    var returnString = (" " +f.returnType?.renderForMermaid()) ?: ""
+                    if (returnString == " Unit") returnString = "" // Ignore Unit
+                    stringBuilder.append("    ${f.visibility.asMermaid}${f.funcName}($paramsString)${returnString}\n")
                 }
             }
             if (c.classType == GClassType.Enum) {
@@ -53,8 +55,7 @@ class MermaidClassRenderer(
             }
             if (conf.showHas) {
                 c.properties.forEach { p ->
-                    val shouldDisplay = p.shouldDisplay(c)
-                    if (p.type.type is GClass && shouldDisplay) {
+                    if (p.type.type is GClass && p.shouldDisplay(c) && classesQualifiedNames.contains(p.type.type.qualifiedName)) {
                         stringBuilder.append(
                             "  ${c.fullTypeName()} ${Relationship.Composition} ${
                                 p.type.renderForMermaid(

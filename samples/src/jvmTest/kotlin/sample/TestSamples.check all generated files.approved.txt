@@ -6,7 +6,6 @@ classDiagram
     +originPosition Position
     +computeSurface() Float
   }
-  Shape ..* Position : has
   click Shape href "./sample/-shape/index.html"
   class Rectangle {
     <<interface>>
@@ -55,6 +54,38 @@ File: Circle_no_functions.md
 | originPosition | [Position] |          |
 | radius         | [Float]    |          |
 
+
+File: Shape_inheritance.md
+```mermaid
+classDiagram
+  class Rectangle {
+    +width Float
+    +height Float
+    +rotate(Float)
+  }
+  Rectangle --|> Shape : implements
+  click Rectangle href "./sample/-rectangle/index.html"
+  class Polygon {
+    +howMuchSides() Int
+  }
+  Polygon --|> Shape : implements
+  click Polygon href "./sample/-polygon/index.html"
+  class Circle {
+    +radius Float
+  }
+  Circle --|> Shape : implements
+  click Circle href "./sample/-circle/index.html"
+  class Oval {
+    +centerOne Position
+    +centerTwo Position
+    +distanceBetweenPoints Float
+    +angle Float
+    +radius Float
+  }
+  Oval --|> Shape : implements
+  click Oval href "./sample.another/-oval/index.html"
+
+```
 
 File: sample/Polygon_table.md
 #### Polygon

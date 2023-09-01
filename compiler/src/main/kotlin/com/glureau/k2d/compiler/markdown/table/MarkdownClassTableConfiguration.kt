@@ -1,11 +1,10 @@
 package com.glureau.k2d.compiler.markdown.table
 
-import com.glureau.k2d.K2DClassMembersTableConfiguration
+import com.glureau.k2d.K2DMarkdownClassTableConfiguration
 import kotlinx.serialization.Serializable
 
-// TODO: make it accessible from annotations
 @Serializable
-data class K2DMarkdownTableConfiguration(
+data class MarkdownClassTableConfiguration(
     var markdownClassNameLevel: Int = 4, // Because why not...
     var showClassName: Boolean = true,
     var showSectionName: Boolean = true, // Display "Properties" and "Functions" headers
@@ -19,8 +18,8 @@ data class K2DMarkdownTableConfiguration(
     var showSealedClass: Boolean = true,
 ) {
     companion object {
-        fun K2DClassMembersTableConfiguration.toDomain() =
-            K2DMarkdownTableConfiguration(
+        fun K2DMarkdownClassTableConfiguration.toDomain() =
+            MarkdownClassTableConfiguration(
                 markdownClassNameLevel = markdownClassNameLevel,
                 showClassName = showClassName,
                 showSectionName = showSectionName,
@@ -30,7 +29,8 @@ data class K2DMarkdownTableConfiguration(
                 showClassFunctions = showClassFunctions,
                 showCompanion = showCompanion,
                 showInterface = showInterface,
-                showAbstract = showAbstract
+                showAbstract = showAbstract,
+                showSealedClass = showSealedClass,
             )
     }
 }

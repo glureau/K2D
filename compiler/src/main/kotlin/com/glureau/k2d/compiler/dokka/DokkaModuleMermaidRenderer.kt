@@ -5,13 +5,13 @@ import com.glureau.k2d.compiler.markdown.appendMdH1
 import com.glureau.k2d.compiler.markdown.appendMdMermaid
 import com.glureau.k2d.compiler.mermaid.MermaidClassRenderer
 import com.glureau.k2d.compiler.writeMarkdown
-import com.glureau.k2d.compiler.mermaid.K2DMermaidRendererConfiguration
+import com.glureau.k2d.compiler.mermaid.MermaidRendererConfiguration
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import java.io.File
 
 class DokkaModuleMermaidRenderer(
     private val environment: SymbolProcessorEnvironment,
-    private val configuration: K2DMermaidRendererConfiguration,
+    private val configuration: MermaidRendererConfiguration,
 ) {
 
     fun render(data: MutableMap<String, GClass>, moduleClasses: MutableSet<String>) {

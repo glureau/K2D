@@ -2,12 +2,12 @@ package com.glureau.k2d.compiler.dokka
 
 import com.glureau.k2d.compiler.GClass
 import com.glureau.k2d.compiler.writeMarkdown
-import com.glureau.k2d.compiler.mermaid.K2DMermaidRendererConfiguration
+import com.glureau.k2d.compiler.mermaid.MermaidRendererConfiguration
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 
 class DokkaPackagesMermaidRenderer(
     private val environment: SymbolProcessorEnvironment,
-    private val configuration: K2DMermaidRendererConfiguration,
+    private val configuration: MermaidRendererConfiguration,
 ) {
 
     fun render(data: MutableMap<String, GClass>, moduleClasses: MutableSet<String>) {

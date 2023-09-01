@@ -3,8 +3,8 @@ package com.glureau.k2d
 import com.glureau.k2d.compiler.K2DConfiguration
 import com.glureau.k2d.compiler.K2DSymbolSelector
 import com.glureau.k2d.compiler.dokka.K2DDokkaConfig
-import com.glureau.k2d.compiler.markdown.table.K2DMarkdownTableConfiguration
-import com.glureau.k2d.compiler.mermaid.K2DMermaidRendererConfiguration
+import com.glureau.k2d.compiler.markdown.table.MarkdownClassTableConfiguration
+import com.glureau.k2d.compiler.mermaid.MermaidRendererConfiguration
 import org.gradle.api.Action
 import org.gradle.api.tasks.Nested
 
@@ -25,14 +25,14 @@ abstract class K2DExtension {
     }
 
     @Nested
-    private val defaultMarkdownTableConfiguration: K2DMarkdownTableConfiguration = K2DMarkdownTableConfiguration()
-    fun defaultMarkdownTableConfiguration(configure: Action<K2DMarkdownTableConfiguration>) {
+    private val defaultMarkdownTableConfiguration: MarkdownClassTableConfiguration = MarkdownClassTableConfiguration()
+    fun defaultMarkdownTableConfiguration(configure: Action<MarkdownClassTableConfiguration>) {
         defaultMarkdownTableConfiguration.apply(configure)
     }
 
     @Nested
-    private val defaultMermaidConfiguration: K2DMermaidRendererConfiguration = K2DMermaidRendererConfiguration()
-    fun defaultMermaidConfiguration(configure: Action<K2DMermaidRendererConfiguration>) {
+    private val defaultMermaidConfiguration: MermaidRendererConfiguration = MermaidRendererConfiguration()
+    fun defaultMermaidConfiguration(configure: Action<MermaidRendererConfiguration>) {
         defaultMermaidConfiguration.apply(configure)
     }
 
