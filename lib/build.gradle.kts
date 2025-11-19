@@ -1,17 +1,45 @@
 plugins {
     kotlin("multiplatform")
+    id("com.android.library")
     id("maven-publish")
 }
 
+android {
+    compileSdk = 33
+    buildToolsVersion = "33.0.0"
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+
+    defaultConfig {
+        minSdk = 21
+        targetSdk = 33
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+}
 kotlin {
+    jvmToolchain(11)
     js(IR) {
         browser()
+        nodejs()
     }
-    jvm()
+    android { publishLibraryVariants("release", "debug") }
+    jvm {
+        val main by compilations.getting {
+            compilerOptions.configure {
+                jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+            }
+        }
+    }
     ios()
     iosSimulatorArm64()
     tvos()
     watchos()
+    macosArm64()
+    macosX64()
+
 
     sourceSets {
         all {
@@ -28,3 +56,13 @@ kotlin {
         }
     }
 }
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+/*
+// For when nodejs.org is down...
+rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
+    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().nodeVersion = "18.13.0"
+}*/

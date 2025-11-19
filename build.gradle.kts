@@ -2,6 +2,7 @@ buildscript {
     val kotlinVersion: String by project
     repositories {
         mavenCentral()
+        maven(url = "https://raw.githubusercontent.com/glureau/K2D/mvn-repo")
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
@@ -17,14 +18,16 @@ val localProperties = java.util.Properties().apply {
 
 plugins {
     id("maven-publish")
-    id("org.ajoberstar.git-publish") version "3.0.1"
-    id("org.ajoberstar.grgit") version "4.1.1"
+    id("org.ajoberstar.git-publish") version "4.2.0"
+    id("org.ajoberstar.grgit") version "5.2.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
+    id("com.glureau.grip") version "0.3.0"
+    id("com.android.library") version "7.3.0" apply false
 }
 
 allprojects {
-    group = "com.glureau.mermaidksp"
-    version = "0.1.1"
+    group = "com.glureau.k2d"
+    version = "0.4.4"
 
     repositories {
         mavenLocal()
@@ -63,7 +66,7 @@ tasks.create<Delete>("cleanMavenLocalArtifacts") {
 
 tasks.create<Sync>("copyMavenLocalArtifacts") {
     group = "publishing"
-    dependsOn(":compiler:publishToMavenLocal", ":lib:publishToMavenLocal")
+    dependsOn(":compiler:publishToMavenLocal", ":lib:publishToMavenLocal", ":gradle-plugin:publishToMavenLocal")
 
     val userHome = System.getProperty("user.home")
     val groupDir = project.group.toString().replace('.', '/')
@@ -77,12 +80,20 @@ tasks.create<Sync>("copyMavenLocalArtifacts") {
 }
 
 gitPublish {
-    repoUri.set("git@github.com:glureau/MermaidKsp.git")
-    branch.set("mvn-repo")
-    contents.from("$buildDir/mvn-repo")
-    preserve { include("**") }
-    val head = grgit.head()
-    commitMessage.set("${head.abbreviatedId}: ${project.version} : ${head.fullMessage}")
+    publications.create("k2d") {
+        repoUri.set("git@github.com:glureau/K2D.git")
+        branch.set("mvn-repo")
+        contents.from("$buildDir/mvn-repo")
+        preserve { include("**") }
+        val head = grgit.head()
+        commitMessage.set("${head.abbreviatedId}: ${project.version} : ${head.fullMessage}")
+    }
 }
 tasks["copyMavenLocalArtifacts"].dependsOn("cleanMavenLocalArtifacts")
-tasks["gitPublishCopy"].dependsOn("copyMavenLocalArtifacts")
+tasks["gitPublishK2dCopy"].dependsOn("copyMavenLocalArtifacts")
+
+grip {
+    files = fileTree(projectDir).apply {
+        include("README.md")
+    }
+}

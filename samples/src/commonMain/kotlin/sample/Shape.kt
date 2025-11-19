@@ -1,13 +1,10 @@
 package sample
 
-import MermaidGraph
-import sample.another.Oval
+import com.glureau.k2d.K2DHide
 
 data class Position(val x: Float, val y: Float)
 
 
-@MermaidGraph("Shapes", [Shape::class, Polygon::class, Circle::class, Rectangle::class, Oval::class])
-@MermaidGraph("SquareToShape", [Shape::class, Polygon::class, Square::class])
 interface Shape {
     val originPosition: Position
     fun computeSurface(): Float {
@@ -21,12 +18,25 @@ interface Rectangle : Shape {
     fun rotate(angle: Float)
 }
 
+/**
+ * My documentation contains a list:
+ * - with one element
+ * - and another one
+ * - and a last one!
+ */
 interface Polygon : Shape {
     fun howMuchSides(): Int
 }
 
 class Square(override val originPosition: Position) : Polygon {
     val sideSize: Float = 1f
+
+    @K2DHide
+    val hiddenValue: Float = 2f
+
+    // A computed value has no backing fields
+    val computedValue: Float get() = sideSize
+
     override fun howMuchSides(): Int = TODO() // Ignored (override)
     public fun publicFun() = Unit // Reported
     private fun privateFun() = Unit // Ignored (visibility)
@@ -35,4 +45,11 @@ class Square(override val originPosition: Position) : Polygon {
     override fun computeSurface(): Float = TODO() // Ignored (override)
 }
 
-data class Circle(override val originPosition: Position, val radius: Float) : Shape
+data class Circle(override val originPosition: Position, val radius: Float) : Shape {
+    companion object {
+        const val TAU: Double = kotlin.math.PI * 2
+    }
+}
+
+@K2DHide
+data class InternalWeirdShape(override val originPosition: Position, val radius: Float) : Shape

@@ -1,20 +1,11 @@
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/module.md
-# Module samples
-
+File: Shapes23.md
 ```mermaid
 classDiagram
-  class Position {
-    <<data class>>
-    +x Float
-    +y Float
-  }
-  click Position href "./sample/-position/index.html"
   class Shape {
     <<interface>>
     +originPosition Position
     +computeSurface() Float
   }
-  Shape ..* Position : has
   click Shape href "./sample/-shape/index.html"
   class Rectangle {
     <<interface>>
@@ -33,6 +24,7 @@ classDiagram
   class Square {
     <<class>>
     +sideSize Float
+    +computedValue Float
     +publicFun() 
   }
   Polygon <|-- Square : implements
@@ -43,206 +35,329 @@ classDiagram
   }
   Shape <|-- Circle : implements
   click Circle href "./sample/-circle/index.html"
-  class Oval {
-    <<data class>>
-    +centerOne Position
-    +centerTwo Position
-    +distanceBetweenPoints Float
-    +angle Float
-    +radius Float
-  }
-  Shape <|-- Oval : implements
-  Oval ..* Position : has
-  Oval ..* Position : has
-  click Oval href "./sample.another/-oval/index.html"
-  class InnerOval {
-    <<class>>
-    +square Square
-  }
-  InnerOval ..* Square : has
-  click InnerOval href "./sample.another/-inner-oval/index.html"
-  class Builder {
+  class Circle_Companion {
     <<object>>
-    +build() Oval
+    +TAU Double
   }
-  click Builder href "./sample.another/-builder/index.html"
-  class TheTrap {
-    <<class>>
-    +foo Int
-  }
-  click TheTrap href "./sample.another/-the-trap/index.html"
-  class BinaryIntCalculator {
-    <<class>>
-    +reg1 Int
-    +reg2 Int
-    +calculate((Int, () -> Int)-> Int) Int
-  }
-  click BinaryIntCalculator href "./sample.calculator/-binary-int-calculator/index.html"
-  class GenericFoo~T:Number~ {
-    <<interface>>
-    +list List~T~
-    +latestResult Result~Int~
-    +lambda ⟮String⟯-> Double
-    +add(T) 
-    +addAll(List~T~) List~T~
-    +computeResult() Result~Int~
-  }
-  click GenericFoo~T:Number~ href "./sample.calculator/-generic-foo/index.html"
-  class Direction {
-    <<enum>>
-    [[ UP ]]
-    [[ DOWN ]]
-    [[ LEFT ]]
-    [[ RIGHT ]]
-  }
-  click Direction href "./sample.enums/-direction/index.html"
-  class DeviceKind {
-    <<enum>>
-    +userAgent String
-    +index Int
-    [[ Smartphone ]]
-    [[ Computer ]]
-    [[ Tablet ]]
-    [[ Smartwatches ]]
-    [[ Chromebook ]]
-  }
-  click DeviceKind href "./sample.enums/-device-kind/index.html"
+  click Circle_Companion href "./sample/-circle.-companion/index.html"
 
 ```
 
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/calculator/package.md
-# Package sample.calculator
+File: Circle_no_functions.md
+#### Circle
 
+##### Properties
+
+
+| Name           | Type       | Comments |
+|----------------|------------|----------|
+| originPosition | [Position] |          |
+| radius         | [Float]    |          |
+
+
+File: Shape_inheritance.md
 ```mermaid
 classDiagram
-  class BinaryIntCalculator {
-    <<class>>
-    +reg1 Int
-    +reg2 Int
-    +calculate((Int, () -> Int)-> Int) Int
-  }
-  click BinaryIntCalculator href "../sample.calculator/-binary-int-calculator/index.html"
-  class GenericFoo~T:Number~ {
-    <<interface>>
-    +list List~T~
-    +latestResult Result~Int~
-    +lambda ⟮String⟯-> Double
-    +add(T) 
-    +addAll(List~T~) List~T~
-    +computeResult() Result~Int~
-  }
-  click GenericFoo~T:Number~ href "../sample.calculator/-generic-foo/index.html"
-
-```
-
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/enums/package.md
-# Package sample.enums
-
-```mermaid
-classDiagram
-  class Direction {
-    <<enum>>
-    [[ UP ]]
-    [[ DOWN ]]
-    [[ LEFT ]]
-    [[ RIGHT ]]
-  }
-  click Direction href "../sample.enums/-direction/index.html"
-  class DeviceKind {
-    <<enum>>
-    +userAgent String
-    +index Int
-    [[ Smartphone ]]
-    [[ Computer ]]
-    [[ Tablet ]]
-    [[ Smartwatches ]]
-    [[ Chromebook ]]
-  }
-  click DeviceKind href "../sample.enums/-device-kind/index.html"
-
-```
-
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/package.md
-# Package sample
-
-```mermaid
-classDiagram
-  class Position {
-    <<data class>>
-    +x Float
-    +y Float
-  }
-  click Position href "../sample/-position/index.html"
-  class Shape {
-    <<interface>>
-    +originPosition Position
-    +computeSurface() Float
-  }
-  Shape ..* Position : has
-  click Shape href "../sample/-shape/index.html"
   class Rectangle {
-    <<interface>>
     +width Float
     +height Float
-    +rotate(Float) 
+    +rotate(Float)
   }
-  Shape <|-- Rectangle : implements
-  click Rectangle href "../sample/-rectangle/index.html"
+  Rectangle --|> Shape : implements
+  click Rectangle href "./sample/-rectangle/index.html"
   class Polygon {
-    <<interface>>
     +howMuchSides() Int
   }
-  Shape <|-- Polygon : implements
-  click Polygon href "../sample/-polygon/index.html"
-  class Square {
-    <<class>>
-    +sideSize Float
-    +publicFun() 
-  }
-  Polygon <|-- Square : implements
-  click Square href "../sample/-square/index.html"
+  Polygon --|> Shape : implements
+  click Polygon href "./sample/-polygon/index.html"
   class Circle {
-    <<data class>>
     +radius Float
   }
-  Shape <|-- Circle : implements
-  click Circle href "../sample/-circle/index.html"
-
-```
-
-File: /Users/glureau/Projects/MermaidKsp/samples/build/generated/ksp/metadata/commonMain/resources/sample/another/package.md
-# Package sample.another
-
-```mermaid
-classDiagram
+  Circle --|> Shape : implements
+  click Circle href "./sample/-circle/index.html"
   class Oval {
-    <<data class>>
     +centerOne Position
     +centerTwo Position
     +distanceBetweenPoints Float
     +angle Float
     +radius Float
   }
-  Shape <|-- Oval : implements
-  Oval ..* Position : has
-  Oval ..* Position : has
-  click Oval href "../sample.another/-oval/index.html"
-  class InnerOval {
-    <<class>>
-    +square Square
-  }
-  InnerOval ..* Square : has
-  click InnerOval href "../sample.another/-inner-oval/index.html"
-  class Builder {
-    <<object>>
-    +build() Oval
-  }
-  click Builder href "../sample.another/-builder/index.html"
-  class TheTrap {
-    <<class>>
-    +foo Int
-  }
-  click TheTrap href "../sample.another/-the-trap/index.html"
+  Oval --|> Shape : implements
+  click Oval href "./sample.another/-oval/index.html"
 
 ```
+
+File: sample/Polygon_table.md
+#### Polygon
+
+
+ My documentation contains a list:
+ - with one element
+ - and another one
+ - and a last one!
+
+
+##### Properties
+
+
+| Name           | Type       | Comments |
+|----------------|------------|----------|
+| originPosition | [Position] |          |
+
+##### Functions
+
+
+| Name             | Return Type | Comments |
+|------------------|-------------|----------|
+| computeSurface() | Float       |          |
+| howMuchSides()   | Int         |          |
+
+
+File: sample/Circle_table.md
+#### Circle
+
+##### Properties
+
+
+| Name           | Type       | Comments |
+|----------------|------------|----------|
+| originPosition | [Position] |          |
+| radius         | [Float]    |          |
+
+##### Functions
+
+
+| Name             | Return Type | Comments |
+|------------------|-------------|----------|
+| computeSurface() | Float       |          |
+
+
+File: sample/calculator/GenericFoo_table.md
+#### GenericFoo
+
+##### Properties
+
+
+| Name         | Type                 | Comments |
+|--------------|----------------------|----------|
+| list         | [List&lt;T&gt;]      |          |
+| latestResult | [Result&lt;Int&gt;]  |          |
+| lambda       | [(String) -> Double] |          |
+
+##### Functions
+
+
+| Name            | Return Type       | Comments |
+|-----------------|-------------------|----------|
+| add(..)         | Unit              |          |
+| addAll(..)      | List&lt;T&gt;     |          |
+| computeResult() | Result&lt;Int&gt; |          |
+
+
+File: sample/calculator/BinaryIntCalculator_table.md
+#### BinaryIntCalculator
+
+##### Properties
+
+
+| Name | Type  | Comments |
+|------|-------|----------|
+| reg1 | [Int] |          |
+| reg2 | [Int] |          |
+
+##### Functions
+
+
+| Name          | Return Type | Comments |
+|---------------|-------------|----------|
+| calculate(..) | Int         |          |
+
+
+File: sample/Square_table.md
+#### Square
+
+##### Properties
+
+
+| Name           | Type       | Comments |
+|----------------|------------|----------|
+| sideSize       | [Float]    |          |
+| computedValue  | [Float]    |          |
+| originPosition | [Position] |          |
+
+##### Functions
+
+
+| Name             | Return Type | Comments |
+|------------------|-------------|----------|
+| computeSurface() | Float       |          |
+| howMuchSides()   | Int         |          |
+| internalFun()    | Unit        |          |
+| privateFun()     | Unit        |          |
+| protectedFun()   | Unit        |          |
+| publicFun()      | Unit        |          |
+
+
+File: sample/Circle·Companion_table.md
+##### Circle.Companion
+
+###### Properties
+
+
+| Name | Type     | Comments |
+|------|----------|----------|
+| TAU  | [Double] |          |
+
+
+File: sample/Rectangle_table.md
+#### Rectangle
+
+##### Properties
+
+
+| Name           | Type       | Comments |
+|----------------|------------|----------|
+| width          | [Float]    |          |
+| height         | [Float]    |          |
+| originPosition | [Position] |          |
+
+##### Functions
+
+
+| Name             | Return Type | Comments |
+|------------------|-------------|----------|
+| computeSurface() | Float       |          |
+| rotate(..)       | Unit        |          |
+
+
+File: sample/enums/Direction_table.md
+#### Direction
+
+##### Properties
+
+
+| Name    | Type     | Comments |
+|---------|----------|----------|
+| name    | [String] |          |
+| ordinal | [Int]    |          |
+
+| Entry | Comments |
+|-------|----------|
+| UP    |          |
+| DOWN  |          |
+| LEFT  |          |
+| RIGHT |          |
+
+
+File: sample/enums/DeviceKind_table.md
+#### DeviceKind
+
+##### Properties
+
+
+| Name      | Type     | Comments |
+|-----------|----------|----------|
+| userAgent | [String] |          |
+| index     | [Int]    |          |
+| name      | [String] |          |
+| ordinal   | [Int]    |          |
+
+| Entry        | Comments |
+|--------------|----------|
+| Smartphone   |          |
+| Computer     |          |
+| Tablet       |          |
+| Smartwatches |          |
+| Chromebook   |          |
+
+
+File: sample/Shape_table.md
+#### Shape
+
+##### Properties
+
+
+| Name           | Type       | Comments |
+|----------------|------------|----------|
+| originPosition | [Position] |          |
+
+##### Functions
+
+
+| Name             | Return Type | Comments |
+|------------------|-------------|----------|
+| computeSurface() | Float       |          |
+
+
+File: sample/Position_table.md
+#### Position
+
+##### Properties
+
+
+| Name | Type    | Comments |
+|------|---------|----------|
+| x    | [Float] |          |
+| y    | [Float] |          |
+
+
+File: sample/another/Oval·Builder_table.md
+##### Oval.Builder
+
+###### Functions
+
+
+| Name    | Return Type | Comments |
+|---------|-------------|----------|
+| build() | Oval        |          |
+
+
+File: sample/another/Oval_table.md
+#### Oval
+
+
+ Please check [this link](https://en.wikipedia.org/wiki/Oval) for reference
+
+
+##### Properties
+
+
+| Name                  | Type       | Comments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|-----------------------|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| centerOne             | [Position] |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| centerTwo             | [Position] |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| originPosition        | [Position] | This is the original position use to originate the...                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| distanceBetweenPoints | [Float]    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| angle                 | [Float]    | In Euclidean geometry, an angle is the figure formed by two rays, called the sides of the angle, sharing a common endpoint, called the vertex of the angle.[1] Angles formed by two rays lie in the plane that contains the rays. Angles are also formed by the intersection of two planes. These are called dihedral angles. Two intersecting curves may also define an angle, which is the angle of the rays lying tangent to the respective curves at their point of intersection.<div></div><div></div> Angle is also used to designate the measure of an angle or of a rotation. This measure is the ratio of the length of a circular arc to its radius. In the case of a geometric angle, the arc is centered at the vertex and delimited by the sides. In the case of a rotation, the arc is centered at the center of the rotation and delimited by any other point and its image by the rotation. |
+| radius                | [Float]    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+
+##### Functions
+
+
+| Name             | Return Type | Comments |
+|------------------|-------------|----------|
+| computeSurface() | Float       |          |
+
+
+File: sample/another/TheTrap_table.md
+#### TheTrap
+
+##### Properties
+
+
+| Name | Type  | Comments |
+|------|-------|----------|
+| foo  | [Int] |          |
+
+
+File: sample/another/Oval·InnerOval_table.md
+##### Oval.InnerOval
+
+###### Properties
+
+
+| Name   | Type     | Comments |
+|--------|----------|----------|
+| square | [Square] |          |
+
 
