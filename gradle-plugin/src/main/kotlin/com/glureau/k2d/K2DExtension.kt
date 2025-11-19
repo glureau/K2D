@@ -13,27 +13,27 @@ abstract class K2DExtension {
     private var dokkaConfig: K2DDokkaConfig? = null
     fun dokka(configure: Action<K2DDokkaConfig>) {
         if (dokkaConfig == null) dokkaConfig = K2DDokkaConfig()
-        dokkaConfig?.apply(configure)
+        dokkaConfig?.apply { configure.execute(this) }
     }
 
     @Nested
     private var customMermaidConfigs: MutableList<K2DSymbolSelector> = mutableListOf()
     fun customMermaid(configure: Action<K2DSymbolSelector>) {
         customMermaidConfigs.add(
-            K2DSymbolSelector().apply(configure)
+            K2DSymbolSelector().apply { configure.execute(this) }
         )
     }
 
     @Nested
     private val defaultMarkdownTableConfiguration: MarkdownClassTableConfiguration = MarkdownClassTableConfiguration()
     fun defaultMarkdownTableConfiguration(configure: Action<MarkdownClassTableConfiguration>) {
-        defaultMarkdownTableConfiguration.apply(configure)
+        defaultMarkdownTableConfiguration.apply { configure.execute(this) }
     }
 
     @Nested
     private val defaultMermaidConfiguration: MermaidRendererConfiguration = MermaidRendererConfiguration()
     fun defaultMermaidConfiguration(configure: Action<MermaidRendererConfiguration>) {
-        defaultMermaidConfiguration.apply(configure)
+        defaultMermaidConfiguration.apply { configure.execute(this) }
     }
 
     internal fun fullConfiguration() = K2DConfiguration(
@@ -43,5 +43,3 @@ abstract class K2DExtension {
         defaultMermaidConfiguration = this.defaultMermaidConfiguration,
     )
 }
-
-fun <T> T.apply(configure: Action<T>): T = apply { configure.execute(this) }

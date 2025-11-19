@@ -4,7 +4,7 @@ plugins {
     kotlin("multiplatform")
     id("org.jetbrains.dokka") version "2.1.0"
     id("com.google.devtools.ksp")
-    id("com.glureau.k2d") version "0.4.5"
+    id("com.glureau.k2d") version "0.4.6"
     id("com.glureau.grip") version "0.4.5"
 }
 
