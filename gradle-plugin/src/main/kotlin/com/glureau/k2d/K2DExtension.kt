@@ -44,4 +44,4 @@ abstract class K2DExtension {
     )
 }
 
-fun <T> T.apply(configure: Action<T>) = apply { configure.execute(this) }
+fun <T> T.apply(configure: Action<T>): T = apply { configure.execute(this) }

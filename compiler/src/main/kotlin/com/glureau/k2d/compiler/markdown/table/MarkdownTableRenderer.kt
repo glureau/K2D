@@ -58,7 +58,7 @@ class MarkdownTableRenderer(
             .filter { config.showClassFunctions }
             .filter { !it.hide }
             // methods from `kotlin.Any` are, 99.9% of the time not relevant
-            .filter { it.funcName !in listOf("equals", "hashCode", "toString") }
+            .filter { it.funcName !in listOf("equals", "hashCode", "toString", "describeConstable", "finalize", "getDeclaringClass") }
             // Kotlin enums provide clone and compareTo methods by default, not really relevant for documentation
             .filter { klass.classType != GClassType.Enum || it.funcName !in listOf("clone", "compareTo") }
         if (printableFunctions.isNotEmpty()) {

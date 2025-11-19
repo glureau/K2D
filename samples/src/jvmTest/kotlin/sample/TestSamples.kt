@@ -11,7 +11,7 @@ class TestSamples {
 
     @Test
     fun `check all generated files`() {
-        val resourcePath = "build/generated/ksp/metadata/commonMain/resources"
+        val resourcePath = "build/generated/ksp/jvm/jvmMain/resources"
         val generatedDir = File(resourcePath)
         println(generatedDir.absolutePath)
         var allMarkdownGenerated = ""

@@ -24,7 +24,7 @@ plugins {
     id("maven-publish")
     id("org.jlleitschuh.gradle.ktlint") version "14.0.1"
     id("com.glureau.grip") version "0.4.5"
-    id("com.android.library") version "8.7.1" apply false
+    id("com.android.library") version "8.9.0" apply false
 }
 
 allprojects {

@@ -6,8 +6,7 @@ plugins {
 
 android {
     namespace = "com.glureau.k2d.lib"
-    compileSdk = 36
-    buildToolsVersion = "33.0.0"
+    compileSdk = 35
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 
     defaultConfig {
@@ -39,7 +38,7 @@ kotlin {
     watchosSimulatorArm64()
     macosArm64()
     macosX64()
-
+    withSourcesJar()
 
     sourceSets {
         all {
@@ -60,9 +59,3 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
-
-/*
-// For when nodejs.org is down...
-rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
-    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().nodeVersion = "18.13.0"
-}*/
