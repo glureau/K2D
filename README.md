@@ -2,7 +2,7 @@
 
 Generate diagram sequences (mermaid format), markdown tables and more based on your code directly.
 
-Current version: <!--$ GRADLE_PROPERTIES version -->0.4.6<!-- END $-->
+Current version: <!--$ GRADLE_PROPERTIES version -->0.4.7<!-- END $-->
 
 ## [DEMO for Dokka](https://www.glureau.com/K2D/html/)
 
@@ -114,7 +114,8 @@ will generate
 | 0.4.3     | 1.8.10-1.0.9  | 11   |
 | 0.4.4     | 1.8.10-1.0.9  | 11   |
 | ~~0.4.5~~ | 2.0.21-1.0.27 | 17   |
-| 0.4.6     | 2.0.21-1.0.27 | 17   |
+| ~~0.4.6~~ | 2.0.21-1.0.27 | 17   |
+| 0.4.7     | 2.0.21-1.0.27 | 17   |
 
 # Installation
 
