@@ -6,8 +6,6 @@ plugins {
 
 dependencies {
     val kspVersion: String by project
-    //implementation("com.google.devtools.ksp:symbol-processing:$kspVersion")
-    //implementation("com.google.devtools.ksp:symbol-processing-api:$kspVersion")
     implementation("com.google.devtools.ksp:symbol-processing-gradle-plugin:$kspVersion")
     implementation(project(":lib"))
     api(project(":compiler"))
@@ -29,13 +27,14 @@ gradlePlugin {
 }
 
 kotlin {
-    jvmToolchain(11)
+    jvmToolchain(17)
 }
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
+/*
 publishing {
     publications {
         create<MavenPublication>("maven") {
@@ -45,3 +44,5 @@ publishing {
         }
     }
 }
+
+*/

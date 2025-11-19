@@ -5,38 +5,38 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    namespace = "com.glureau.k2d.lib"
+    compileSdk = 36
     buildToolsVersion = "33.0.0"
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 33
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 kotlin {
-    jvmToolchain(11)
+    jvmToolchain(17)
     js(IR) {
         browser()
         nodejs()
     }
-    android { publishLibraryVariants("release", "debug") }
-    jvm {
-        val main by compilations.getting {
-            compilerOptions.configure {
-                jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
-            }
-        }
-    }
-    ios()
+    androidTarget { publishLibraryVariants("release", "debug") }
+    jvm()
+    iosArm64()
+    iosX64()
     iosSimulatorArm64()
-    tvos()
-    watchos()
+    tvosArm64()
+    tvosX64()
+    tvosSimulatorArm64()
+    watchosArm32()
+    watchosArm64()
+    watchosX64()
+    watchosSimulatorArm64()
     macosArm64()
     macosX64()
 
@@ -57,8 +57,8 @@ kotlin {
     }
 }
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 /*

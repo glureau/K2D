@@ -3,6 +3,7 @@ package com.glureau.k2d
 import kotlin.reflect.KClass
 
 // By default, we include all classes that starts with the same package that the file containing the annotation
+@Retention(AnnotationRetention.SOURCE)
 annotation class K2DSymbolSelectorAnnotation(
     val includesCurrentPackage: Boolean = true,
     val includesFqnRegex: String = NO_MATCH_REGEX, // field is used as a Regex

@@ -9,6 +9,7 @@ annotation class K2DMarkdownClassTable(
     val configuration: K2DMarkdownClassTableConfiguration = K2DMarkdownClassTableConfiguration(),
 )
 
+@Retention(AnnotationRetention.SOURCE)
 annotation class K2DMarkdownClassTableConfiguration(
     val markdownClassNameLevel: Int = 4, // Because why not...
     val showClassName: Boolean = true,

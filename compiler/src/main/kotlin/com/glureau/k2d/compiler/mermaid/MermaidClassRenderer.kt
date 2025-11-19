@@ -1,9 +1,14 @@
 package com.glureau.k2d.compiler.mermaid
 
-import com.glureau.k2d.compiler.*
+import com.glureau.k2d.compiler.GClass
+import com.glureau.k2d.compiler.GClassOrBasic
+import com.glureau.k2d.compiler.GClassType
+import com.glureau.k2d.compiler.GFunction
+import com.glureau.k2d.compiler.GProperty
+import com.glureau.k2d.compiler.GVisibility
 
 class MermaidClassRenderer(
-    private val conf: MermaidRendererConfiguration
+    private val conf: MermaidRendererConfiguration,
 ) {
 
     fun renderClassDiagram(classes: Map<String, GClass>): String {
@@ -34,7 +39,7 @@ class MermaidClassRenderer(
                     // TODO: method to render lambdas can be shared (somewhere else)
                     val paramsString = f.parameters.joinToString { it.renderForMermaid() }
                     //val paramsString = f.parameters.joinToString { it.usedGenerics.joinToString("|") }
-                    var returnString = (" " +f.returnType?.renderForMermaid()) ?: ""
+                    var returnString = (" " + f.returnType?.renderForMermaid())
                     if (returnString == " Unit") returnString = "" // Ignore Unit
                     stringBuilder.append("    ${f.visibility.asMermaid}${f.funcName}($paramsString)${returnString}\n")
                 }

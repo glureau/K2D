@@ -1,11 +1,9 @@
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.dokka") version "1.6.21"
-    id("org.ajoberstar.git-publish")
-    id("org.ajoberstar.grgit")
     id("com.google.devtools.ksp")
     id("org.jetbrains.kotlinx.knit") version "0.4.0" // TESTING...
-    id("com.glureau.k2d") version "0.4.1"
+    // id("com.glureau.k2d") version "0.4.1"
 }
 
 repositories {
@@ -77,6 +75,7 @@ afterEvaluate {
 }
 
 // Publish the sample documentation on branch "demo"
+/*
 gitPublish {
     publications.create("demo") {
         repoUri.set("git@github.com:glureau/K2D.git")
@@ -87,11 +86,13 @@ gitPublish {
         commitMessage.set("${head.abbreviatedId}: ${project.version} : ${head.fullMessage}")
     }
 }
+*/
 
 tasks["dokkaHtml"].dependsOn("generateMetadataFileForKotlinMultiplatformPublication")
-tasks["gitPublishDemoCopy"].dependsOn("dokkaHtml")
-tasks["jvmTest"].dependsOn("compileCommonMainKotlinMetadata")
+//tasks["gitPublishDemoCopy"].dependsOn("dokkaHtml")
+//tasks["jvmTest"].dependsOn("compileCommonMainKotlinMetadata")
 
+/*
 k2d {
     dokka {
         generateMermaidOnModules = false
@@ -102,3 +103,4 @@ k2d {
     defaultMarkdownTableConfiguration {
     }
 }
+*/

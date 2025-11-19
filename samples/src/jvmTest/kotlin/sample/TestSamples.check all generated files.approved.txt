@@ -11,7 +11,7 @@ classDiagram
     <<interface>>
     +width Float
     +height Float
-    +rotate(Float) 
+    +rotate(Float)
   }
   Shape <|-- Rectangle : implements
   click Rectangle href "./sample/-rectangle/index.html"
@@ -25,7 +25,7 @@ classDiagram
     <<class>>
     +sideSize Float
     +computedValue Float
-    +publicFun() 
+    +publicFun()
   }
   Polygon <|-- Square : implements
   click Square href "./sample/-square/index.html"

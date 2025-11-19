@@ -9,6 +9,7 @@ annotation class K2DMermaidGraph(
     val configuration: K2DMermaidRendererConfiguration = K2DMermaidRendererConfiguration(),
 )
 
+@Retention(AnnotationRetention.SOURCE)
 annotation class K2DMermaidRendererConfiguration(
     val showClassType: Boolean = true,
 
