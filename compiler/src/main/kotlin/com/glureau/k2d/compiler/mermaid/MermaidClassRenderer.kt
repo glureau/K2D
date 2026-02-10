@@ -104,6 +104,10 @@ class MermaidClassRenderer(
 
     private fun GFunction.shouldDisplay(): Boolean {
         if (hide) return false
+        if (funcName in listOf("equals", "hashCode", "toString", "describeConstable", "finalize", "getDeclaringClass")) {
+            // methods from `kotlin.Any` are, 99.9% of the time not relevant
+            return false
+        }
         return when (visibility) {
             GVisibility.Public -> conf.showPublic
             GVisibility.Private -> conf.showPrivate

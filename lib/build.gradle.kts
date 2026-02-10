@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.glureau.k2d.lib"
-    compileSdk = 35
+    compileSdk = 36
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 
     defaultConfig {
@@ -37,7 +37,6 @@ kotlin {
     watchosX64()
     watchosSimulatorArm64()
     macosArm64()
-    macosX64()
     withSourcesJar()
 
     sourceSets {
@@ -47,12 +46,8 @@ kotlin {
         }
     }
 
-    targets.all {
-        compilations.all {
-            // Cannot enable rn due to native issue (stdlib included more than once)
-            // may be related to https://youtrack.jetbrains.com/issue/KT-46636
-            kotlinOptions.allWarningsAsErrors = false
-        }
+    compilerOptions {
+        allWarningsAsErrors.set(true)
     }
 }
 java {
