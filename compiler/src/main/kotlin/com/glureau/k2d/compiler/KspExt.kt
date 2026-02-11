@@ -44,5 +44,7 @@ fun KSAnnotation.argFrom(kProp: KProperty1<*, *>): KSValueArgument =
     }
 
 @Suppress("UNCHECKED_CAST")
-fun KSAnnotation.classesFrom(kProp: KProperty1<*, *>): List<KSType> =
-    (argFrom(kProp).value as? List<KSType>).orEmpty()
+fun KSAnnotation.classesFrom(kProp: KProperty1<*, *>, defaultValue: List<KSType> = emptyList()): List<KSType> =
+    runCatching { (argFrom(kProp).value as? List<KSType>).orEmpty() }
+        // If no value passed as parameters, K2 requires to re-define the default value...
+        .getOrElse { defaultValue }

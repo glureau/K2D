@@ -14,11 +14,11 @@ val kspVersion: String by project
 dependencies {
 
     implementation(project(":lib"))
-    implementation("com.squareup:kotlinpoet:1.10.2") {
+    implementation("com.squareup:kotlinpoet:2.2.0") {
         exclude(module = "kotlin-reflect")
     }
     implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
-    implementation("com.squareup:kotlinpoet-ksp:1.18.1")
+    implementation("com.squareup:kotlinpoet-ksp:2.2.0")
     implementation("com.google.devtools.ksp:symbol-processing:$kspVersion")
     implementation("com.google.devtools.ksp:symbol-processing-api:$kspVersion")
     api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")

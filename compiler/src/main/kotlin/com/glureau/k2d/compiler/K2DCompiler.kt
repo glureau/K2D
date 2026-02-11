@@ -15,17 +15,13 @@ import com.glureau.k2d.compiler.mermaid.MermaidRendererConfiguration
 import com.glureau.k2d.compiler.mermaid.MermaidRendererConfiguration.Companion.toDomain
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.getAnnotationsByType
-import com.google.devtools.ksp.processing.KSPLogger
-import com.google.devtools.ksp.processing.Resolver
-import com.google.devtools.ksp.processing.SymbolProcessor
-import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
-import com.google.devtools.ksp.processing.SymbolProcessorProvider
+import com.google.devtools.ksp.processing.*
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSNode
 import kotlinx.serialization.json.Json
-import java.util.Base64
+import java.util.*
 import kotlin.reflect.KClass
 
 // Trick to share the Logger everywhere without injecting the dependency everywhere
@@ -86,12 +82,18 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
         }
 
         resolver.onFileAnnotation(K2DMarkdownClassTable::class) { annotation, rawAnnotation, packageName ->
-            val name = annotation.name
+            val name = runCatching { annotation.name }
+                // If no value passed as parameters, K2 requires to re-define the default value...
+                .getOrElse { "" }
             val selectorAnnotation: KSAnnotation = rawAnnotation.getArg(K2DMarkdownClassTable::symbolSelector)
-            val tableConfig = annotation.configuration.toDomain()
+            val tableConfig = runCatching { annotation.configuration.toDomain() }
+                // If no value passed as parameters, K2 requires to re-define the default value...
+                .getOrElse { MarkdownClassTableConfiguration() }
             // TODO: check if defaults + merge to global config instead?
             val finalConfig = if (tableConfig == MarkdownClassTableConfiguration()) { // If default value, global config
-                configuration.defaultMarkdownTableConfiguration
+                runCatching { configuration.defaultMarkdownTableConfiguration }
+                    // If no value passed as parameters, K2 requires to re-define the default value...
+                    .getOrElse { MarkdownClassTableConfiguration() }
             } else {
                 tableConfig
             }
@@ -103,7 +105,7 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
 
             filtered.forEach { (_, gClass) ->
                 if (gClass.hide) {
-                    Logger.info("Ignoring ${gClass.symbolName}")
+                    Logger.info("[K2D] Ignoring ${gClass.symbolName}")
                     return@forEach
                 }
                 val content = MarkdownTableRenderer(finalConfig).renderClassMembers(gClass).toByteArray()
@@ -142,6 +144,8 @@ class K2DCompiler(private val environment: SymbolProcessorEnvironment) : SymbolP
                         val rawAnnotation = annotated.annotations
                             .filter { it.annotationType.resolve().declaration.qualifiedName?.asString() == klass.qualifiedName }
                             .toList()[index]
+
+                        Logger.info("[K2D] onFileAnnotation $klass => rawAnnotation=$rawAnnotation")
                         block(annotation, rawAnnotation, (annotated as? KSFile)?.packageName?.asString())
                     }
             }

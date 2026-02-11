@@ -35,12 +35,14 @@ class AggregatorClassVisitor : KSVisitorVoid() {
     }
 
     override fun visitClassDeclaration(classDeclaration: KSClassDeclaration, data: Unit) {
-        scan(classDeclaration)
+        val gclass = scan(classDeclaration)
         classDeclaration.declarations.forEach { it.accept(this, Unit) }
-        moduleClasses.add(classDeclaration.qualifiedName!!.asString()) // TODO: null to be handled later
+        gclass?.qualifiedName?.let {
+            moduleClasses.add(it)
+        }
     }
 
-    private fun scan(classDeclaration: KSClassDeclaration): GClass {
+    private fun scan(classDeclaration: KSClassDeclaration): GClass? = runCatching {
         val qualifiedName = classDeclaration.qualifiedName!!.asString() // TODO: null to be handled later
         classes[qualifiedName]?.let { return it }
         val hide = classDeclaration.getAnnotationsByType(K2DHide::class).toList().isNotEmpty()
@@ -78,7 +80,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
             val foo = if (declaration is KSClassDeclaration) {
                 scan(declaration)
             } else null
-            Logger.warn("Class: ${klass.symbolName} => $foo", it)
+            Logger.warn("[K2D] Class: ${klass.symbolName} => $foo", it)
         }
          */
         // TODO: Apply same compute on other "generics" computation
@@ -90,6 +92,11 @@ class AggregatorClassVisitor : KSVisitorVoid() {
         }*/
         return klass
     }
+        .onFailure {
+            Logger.info("[K2D] Cannot scan ${classDeclaration.qualifiedName?.asString() ?: classDeclaration.simpleName.asString()}")
+            // Logger.warn("[K2D] Cannot scan ${classDeclaration.qualifiedName?.asString() ?: classDeclaration.simpleName.asString()}: " + it.stackTraceToString())
+        }
+        .getOrNull()
 
     fun KSDeclaration.generics(): List<Generics> {
         return typeParameters.map {
@@ -118,7 +125,7 @@ class AggregatorClassVisitor : KSVisitorVoid() {
                 generics = decl.generics()
 
                 if (symbolName == "List") {
-                    //Logger.error("XXX - " + this.toString(), this@toMermaidProperty)
+                    //Logger.error("[K2D] XXX - " + this.toString(), this@toMermaidProperty)
                 }
             }
         } else {

@@ -4,7 +4,7 @@ plugins {
     kotlin("multiplatform")
     id("org.jetbrains.dokka") version "2.1.0"
     id("com.google.devtools.ksp")
-    id("com.glureau.k2d") version "0.4.6"
+    id("com.glureau.k2d") version "0.4.7"
     id("com.glureau.grip") version "0.4.5"
 }
 
@@ -15,7 +15,6 @@ repositories {
 
 dependencies {
     dokkaPlugin("com.glureau:html-mermaid-dokka-plugin:0.6.0")
-    ksp(project(":compiler"))
     kspCommonMainMetadata(project(":compiler"))
 }
 
@@ -41,9 +40,9 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
-                implementation("org.junit.platform:junit-platform-runner:1.14.1")
-                implementation("org.junit.jupiter:junit-jupiter:6.0.1")
-                implementation("com.approvaltests:approvaltests:25.7.0")
+                implementation("org.junit.platform:junit-platform-runner:1.14.2")
+                implementation("org.junit.jupiter:junit-jupiter:6.0.2")
+                implementation("com.approvaltests:approvaltests:26.7.1")
             }
         }
     }
@@ -57,12 +56,10 @@ afterEvaluate {
     val tree = fileTree(projectDir.absolutePath)
     // tree.include("/build/generated/ksp/**/*.md")
     tree.include("/build/grip/**/*.md")
-    println("GREG - FILES ${tree.files}")
     dokka {
         dokkaSourceSets.commonMain {
             includes.from(tree.files)
             includes.from(tasks["grip"].outputs.files.asFileTree)
-            println("GREG - INCLUDED ${tasks["grip"].outputs.files}")
         }
     }
 

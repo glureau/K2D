@@ -34,7 +34,7 @@ class LoggerVisitor(private val environment: SymbolProcessorEnvironment) : KSVis
 
     private fun log(str: String) {
         debugFile.appendText(str)
-        environment.logger.warn(str)
+        environment.logger.warn("[K2D] $str")
     }
 
     override fun visitPropertyDeclaration(property: KSPropertyDeclaration, data: Unit) {

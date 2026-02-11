@@ -29,7 +29,7 @@ plugins {
 
 allprojects {
     group = "com.glureau.k2d"
-    version = "0.4.8"
+    version = "0.4.9"
 
     repositories {
         mavenLocal()

@@ -36,13 +36,17 @@ data class K2DSymbolSelector(
             fun KSType.qualifiedName() = declaration.qualifiedName?.asString()
 
             return K2DSymbolSelector(
-                includesCurrentPackage = includesCurrentPackage,
-                includesFqnRegex = includesFqnRegex,
+                // If no value passed as parameters, K2 requires to re-define the default value...
+                includesCurrentPackage = runCatching { includesCurrentPackage }.getOrElse { true },
+                // If no value passed as parameters, K2 requires to re-define the default value...
+                includesFqnRegex = runCatching { includesFqnRegex }.getOrElse { NO_MATCH_REGEX },
                 includesClasses = includesClasses.mapNotNull { it.qualifiedName() },
                 includesClassesInheritingFrom = includesClassesInheritingFrom.mapNotNull { it.qualifiedName() },
 
-                excludesCurrentPackage = excludesCurrentPackage,
-                excludesFqnRegex = excludesFqnRegex,
+                // If no value passed as parameters, K2 requires to re-define the default value...
+                excludesCurrentPackage = runCatching { excludesCurrentPackage }.getOrElse { false },
+                // If no value passed as parameters, K2 requires to re-define the default value...
+                excludesFqnRegex = runCatching { excludesFqnRegex }.getOrElse { NO_MATCH_REGEX },
                 excludesClasses = excludesClasses.mapNotNull { it.qualifiedName() },
                 excludesClassesInheritingFrom = excludesClassesInheritingFrom.mapNotNull { it.qualifiedName() },
             ).also {

@@ -2,7 +2,7 @@
 
 Generate diagram sequences (mermaid format), markdown tables and more based on your code directly.
 
-Current version: <!--$ GRADLE_PROPERTIES version -->0.4.7<!-- END $-->
+Current version: <!--$ GRADLE_PROPERTIES version -->0.4.8<!-- END $-->
 
 ## [DEMO for Dokka](https://www.glureau.com/K2D/html/)
 
@@ -116,6 +116,7 @@ will generate
 | ~~0.4.5~~ | 2.0.21-1.0.27 | 17   |
 | ~~0.4.6~~ | 2.0.21-1.0.27 | 17   |
 | 0.4.7     | 2.0.21-1.0.27 | 17   |
+| 0.4.8     | 2.2.21-2.0.5  | 17   |
 
 # Installation
 
@@ -123,7 +124,7 @@ Add the K2D plugin to your `build.gradle.kts`:
 
 ```kotlin
 plugins {
-    id("com.glureau.k2d") version "0.1.2"
+    id("com.glureau.k2d") version "0.4.8"
 }
 ```
 
@@ -131,7 +132,7 @@ Then, in the module where you want to generate diagrams or tables, add the KSP d
 
 ```kotlin
 dependencies {
-    ksp("com.glureau.k2d:k2d-processor:0.1.2")
+    kspCommonMainMetadata("com.glureau.k2d:compiler:0.4.8")
 }
 ```
 
